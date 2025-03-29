@@ -7,65 +7,44 @@ from dataclasses import dataclass
 import logging
 import argparse
 
-# Configure logging
+
+SERVICE_TYPE = "service"
+SERVICE_TRAIT = "aws.api#service"
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s.%(msecs)03d - %(levelname)s - %(message)s',
+    format="%(asctime)s.%(msecs)03d - %(levelname)s - %(message)s",
     datefmt="%Y-%m-%dT%H:%M:%S",
 )
 
-# Type Definitions
-class ServiceTrait(TypedDict):
-    sdkId: str
-
-class BaseTrait(TypedDict, total=False):
-    pass
-
-class BaseShape(TypedDict):
-    type: str
-    traits: Dict[str, BaseTrait]
-
-class ServiceShape(BaseShape):
-    type: Literal['service']
-    version: str
-    traits: Dict[str, ServiceTrait]
-
-class Model(TypedDict):
-    shapes: Dict[str, BaseShape | ServiceShape]
-
 @dataclass
-class Model:
-    json: dict
-    sdk_id: str
-    service_version: str
+class ModelInfo:
+    model: dict
+    sdk_id: str # the sdk-id from the model
+    service: tuple[str, dict] # the service shape id and service shape
 
-
-# Constants
-SERVICE_TYPE = 'service'
-SERVICE_TRAIT = 'aws.api#service'
-
-def is_service_shape(shape: Optional[BaseShape]) -> bool:
-    """Check if the shape is a service shape."""
-    return shape is not None and shape.get('type') == SERVICE_TYPE
 
 def sanitize_sdk_id(sdk_id: str) -> str:
     """Sanitize the SDK ID by removing service/client/api suffixes."""
-    for suffix in ['service', 'client', 'api']:
+    for suffix in ["service", "client", "api"]:
         if sdk_id.lower().endswith(suffix.lower()):
-            sdk_id = sdk_id[:-len(suffix)]
+            sdk_id = sdk_id[: -len(suffix)]
     return sdk_id.strip()
 
+
 def sanitize_service_shape_id(shape_id: str, sdk_id: str) -> str:
-    """Transform the service shape ID using the SDK ID."""
-    service_name = ''.join(
-        word.capitalize() 
-        for word in sdk_id.split()
-    )
+    """Transform the sdkId to (roughly) PascalCase, the sdk id should contain only alphanumeric characters and spaces."""
+
+    # If no spaces, assume already in PascalCase
+    if " " not in sdk_id:
+        return shape_id
+
+    service_name = "".join(word[0] + word[1:] for word in sdk_id.split(" "))
 
     if not service_name:
         logger.error(f"Failed to determine service name from SDK ID: {sdk_id}")
-        raise ValueError(f"Could not determine serviceName from '{sdk_id}'")
+        raise ValueError(f"Could not determine service name from '{sdk_id}'")
 
     try:
         namespace, _ = shape_id.split("#")
@@ -75,10 +54,11 @@ def sanitize_service_shape_id(shape_id: str, sdk_id: str) -> str:
 
     return f"{namespace}#{service_name}"
 
+
 def load_overrides(override_path: Optional[Path]) -> Dict[str, dict]:
     """
     Load JSON overrides from a file.
-    
+
     The override file should be structured as:
     {
         "<sdkId>": {
@@ -86,7 +66,7 @@ def load_overrides(override_path: Optional[Path]) -> Dict[str, dict]:
             ...
         }
     }
-    
+
     Args:
         override_path: Path to JSON file containing overrides
     Returns:
@@ -94,23 +74,25 @@ def load_overrides(override_path: Optional[Path]) -> Dict[str, dict]:
     """
     if not override_path or not override_path.is_file:
         return {}
-        
+
     try:
-        return json.loads(override_path.read_text(encoding='utf-8'))
+        return json.loads(override_path.read_text(encoding="utf-8"))
     except Exception as e:
         logger.error(f"Failed to load overrides from {override_path}: {str(e)}")
         raise
 
+
 def apply_overrides(model_json: dict, overrides: dict) -> dict:
     """
     Apply overrides to the model JSON by deep merging.
-    
+
     Args:
         model_json: Original model JSON
         overrides: Override values to apply
     Returns:
         Updated model JSON with overrides applied
     """
+
     def deep_merge(base: dict, update: dict) -> dict:
         for key, value in update.items():
             if key in base and isinstance(base[key], dict) and isinstance(value, dict):
@@ -118,13 +100,14 @@ def apply_overrides(model_json: dict, overrides: dict) -> dict:
             else:
                 base[key] = value
         return base
-    
+
     return deep_merge(model_json.copy(), overrides)
 
-def handle_model(model_path: Path, overrides: Dict[str, dict] = None) -> Model:
+
+def handle_model(model_path: Path, overrides: Dict[str, dict] = None) -> ModelInfo:
     """
     Parse and process a model.json file.
-    
+
     Args:
         model_path: Path to the model.json file
         overrides: Optional dictionary of overrides keyed by SDK ID
@@ -132,42 +115,45 @@ def handle_model(model_path: Path, overrides: Dict[str, dict] = None) -> Model:
         Model with processed data
     """
     # Load and parse the model file
-    smithy_model_json = json.loads(model_path.read_text(encoding='utf-8'))
-    
+    smithy_model_json = json.loads(model_path.read_text(encoding="utf-8"))
+
     # Find the service shape
     service_shape = None
     sdk_id = None
-    
-    for shape_id, shape in smithy_model_json.get('shapes', {}).items():
-        if shape.get('type') == 'service':
+
+    for shape_id, shape in smithy_model_json.get("shapes", {}).items():
+        if shape.get("type") == "service":
             service_shape = shape
-            sdk_id = shape.get('traits', {}).get('aws.api#service', {}).get('sdkId')
+            service_shape_id = shape_id
+            sdk_id = shape.get("traits", {}).get("aws.api#service", {}).get("sdkId")
             break
-    
-    if not service_shape or not sdk_id:
+
+    if None in (service_shape, service_shape_id, sdk_id):
         raise ValueError("Could not find service shape with sdkId in model")
-        
+
     # Apply any overrides for this service
     if overrides and sdk_id in overrides:
         logger.info(f"  Applying overrides for SDK ID: {sdk_id}")
         smithy_model_json = apply_overrides(smithy_model_json, overrides[sdk_id])
-            
+
         # Re-fetch service shape as it might have been modified
-        for shape_id, shape in smithy_model_json.get('shapes', {}).items():
-            if shape.get('type') == 'service':
+        for shape_id, shape in smithy_model_json.get("shapes", {}).items():
+            if shape.get("type") == "service":
                 service_shape = shape
+                service_shape_id = shape_id
                 break
-    
-    return Model(
-        json=smithy_model_json,
-        sdk_id=sdk_id,
-        service_version=service_shape['version']
+
+    return ModelInfo(
+        model=smithy_model_json, sdk_id=sdk_id, service=(service_shape_id, service_shape)
     )
 
-def process_models(source_dir: Path, dest_dir: Path, override_path: Optional[Path] = None) -> None:
+
+def process_models(
+    source_dir: Path, dest_dir: Path, override_path: Optional[Path] = None
+) -> None:
     """
     Walk through source directory and process all model.json files.
-    
+
     Args:
         source_dir: Path to directory containing source models
         dest_dir: Path to directory where transformed models should be written
@@ -182,7 +168,7 @@ def process_models(source_dir: Path, dest_dir: Path, override_path: Optional[Pat
         logger.info(f"Loaded overrides for services: {', '.join(overrides.keys())}")
 
     # Ensure source directory exists
-    if not source_dir.exists():
+    if not source_dir.is_dir():
         logger.error(f"Source directory does not exist: {source_dir}")
         raise FileNotFoundError(f"Source directory not found: {source_dir}")
 
@@ -190,26 +176,28 @@ def process_models(source_dir: Path, dest_dir: Path, override_path: Optional[Pat
     processed = 0
     failed = 0
 
-    # Walk through the source directory
-    for model_path in source_dir.rglob('model.json'):
+    # Get all model.json files, there should be 1 per service
+    for model_path in source_dir.rglob("model.json"):
         try:
             logger.info(f"Processing {model_path}")
             process_model(model_path, dest_dir, overrides)
             processed += 1
-            
+
         except Exception as e:
             logger.error(f"Failed to process {model_path}: {str(e)}", exc_info=True)
             failed += 1
 
-    # Log summary
-    logger.info(f"Processing complete. Successfully processed: {processed}, Failed: {failed}")
+    logger.info(
+        f"Processing complete. Successfully processed: {processed}, Failed: {failed}"
+    )
     if failed > 0:
         logger.warning("Some models failed to process. Check logs for details.")
+
 
 def process_model(input_path: Path, dest_dir: Path, overrides: Dict[str, dict]) -> None:
     """
     Process a single model.json file and write the transformed version.
-    
+
     Args:
         input_path: Path to the input model.json file
         dest_dir: Path to destination directory
@@ -219,33 +207,43 @@ def process_model(input_path: Path, dest_dir: Path, overrides: Dict[str, dict]) 
 
     try:
         # Process the model with overrides
-        model = handle_model(input_path, overrides)
-        
+        modelInfo = handle_model(input_path, overrides)
+
+        # Get the service version from the service shape
+        service_shape_id, service_shape = modelInfo.service
+        service_version = service_shape["version"]
+
         # Create the service ID and file name
-        service_id = model.sdk_id.lower().replace(' ', '-')
-        file_name = f"{service_id}-{model.service_version}.json"
-        
+        sanitized_sdk_id = sanitize_sdk_id(modelInfo.sdk_id)
+        service_id = sanitized_sdk_id.lower().replace(" ", "-")
+        file_name = f"{service_id}-{service_version}.json"
+
         # Create the new directory structure and file path
-        output_path = dest_dir / service_id / 'service' / model.service_version / file_name
-        
+        output_path = (
+            dest_dir / service_id / "service" / service_version / file_name
+        )
+
         # Ensure output directory exists
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        
+
+        # Update the service shape id with the sanitized service shape id
+        sanitized_service_shape_id = sanitize_service_shape_id(service_shape_id, sanitized_sdk_id)
+        modelInfo.model["shapes"].pop(service_shape_id)
+        modelInfo.model["shapes"].update({sanitized_service_shape_id: service_shape})
+
         # Write the transformed model
-        output_path.write_text(
-            json.dumps(model.json, indent=2),
-            encoding='utf-8'
-        )
-        
-        logger.info(f"  SDK ID: {model.sdk_id}")
-        logger.info(f"  Service Version: {model.service_version}")
+        output_path.write_text(json.dumps(modelInfo.model, indent=2), encoding="utf-8")
+
+        logger.info(f"  SDK ID: {modelInfo.sdk_id}")
+        logger.info(f"  Service Version: {service_version}")
         logger.info(f"  Output: {output_path}")
         logger.info("=" * 80)
-        
+
     except Exception as e:
         logger.error(f"  Failed to process model: {str(e)}", exc_info=True)
         logger.info("=" * 80)
         raise
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -257,23 +255,23 @@ if __name__ == "__main__":
         "-s",
         type=Path,
         required=True,
-        help="Source directory containing model.json files"
+        help="Source directory containing model.json files",
     )
-    
+
     parser.add_argument(
         "--dest-dir",
         "-d",
         type=Path,
         required=True,
-        help="Destination directory for transformed models"
+        help="Destination directory for transformed models",
     )
-    
+
     parser.add_argument(
         "--overrides",
         "-o",
         type=Path,
-        help="JSON file containing model overrides (keyed by `Sdk ID`)"
+        help="JSON file containing model overrides (keyed by `Sdk ID`)",
     )
     args = parser.parse_args()
-    
+
     process_models(args.source_dir, args.dest_dir, args.overrides)
