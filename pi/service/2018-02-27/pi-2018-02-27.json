@@ -1897,420 +1897,7 @@
         "smithy.api#documentation": "<p>This data type helps to determine Performance Insights metric to render for the insight.</p>"
       }
     },
-    "com.amazonaws.pi#PeriodAlignment": {
-      "type": "enum",
-      "members": {
-        "END_TIME": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "END_TIME"
-          }
-        },
-        "START_TIME": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "START_TIME"
-          }
-        }
-      }
-    },
-    "com.amazonaws.pi#Recommendation": {
-      "type": "structure",
-      "members": {
-        "RecommendationId": {
-          "target": "com.amazonaws.pi#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier for the recommendation.</p>"
-          }
-        },
-        "RecommendationDescription": {
-          "target": "com.amazonaws.pi#MarkdownString",
-          "traits": {
-            "smithy.api#documentation": "<p>The recommendation details to help resolve the performance issue. For example, \n            <code>Investigate the following SQLs that contributed to 100% of the total DBLoad during that time period: sql-id</code>\n         </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The list of recommendations for the insight.</p>"
-      }
-    },
-    "com.amazonaws.pi#RecommendationList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pi#Recommendation"
-      }
-    },
-    "com.amazonaws.pi#RequestString": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        },
-        "smithy.api#pattern": "\\S"
-      }
-    },
-    "com.amazonaws.pi#RequestedDimensionList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pi#SanitizedString"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 10
-        }
-      }
-    },
-    "com.amazonaws.pi#ResponsePartitionKey": {
-      "type": "structure",
-      "members": {
-        "Dimensions": {
-          "target": "com.amazonaws.pi#DimensionMap",
-          "traits": {
-            "smithy.api#documentation": "<p>A dimension map that contains the dimensions for this partition.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>If <code>PartitionBy</code> was specified in a <code>DescribeDimensionKeys</code>\n      request, the dimensions are returned in an array. Each element in the array specifies one\n      dimension. </p>"
-      }
-    },
-    "com.amazonaws.pi#ResponsePartitionKeyList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pi#ResponsePartitionKey"
-      }
-    },
-    "com.amazonaws.pi#ResponseResourceMetric": {
-      "type": "structure",
-      "members": {
-        "Metric": {
-          "target": "com.amazonaws.pi#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The full name of the metric.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.pi#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the metric.</p>"
-          }
-        },
-        "Unit": {
-          "target": "com.amazonaws.pi#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The unit of the metric.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>An object that contains the full name, description, and unit of a metric.\n      </p>"
-      }
-    },
-    "com.amazonaws.pi#ResponseResourceMetricKey": {
-      "type": "structure",
-      "members": {
-        "Metric": {
-          "target": "com.amazonaws.pi#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of a Performance Insights metric to be measured.</p>\n         <p>Valid values for <code>Metric</code> are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db.load.avg</code> - A scaled representation of the number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sampledload.avg</code> - The raw number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                        operating system counters</a> in the <i>Amazon Aurora User Guide</i>.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                    operating system counters</a> in the <i>Amazon RDS User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and \n          <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than the \n          internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the scaled values, \n          <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less \n          than <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only.\n      </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Dimensions": {
-          "target": "com.amazonaws.pi#DimensionMap",
-          "traits": {
-            "smithy.api#documentation": "<p>The valid dimensions for the metric.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>An object describing a Performance Insights metric and one or more dimensions for that metric.</p>"
-      }
-    },
-    "com.amazonaws.pi#ResponseResourceMetricList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pi#ResponseResourceMetric"
-      }
-    },
-    "com.amazonaws.pi#SanitizedString": {
-      "type": "string",
-      "traits": {
-        "smithy.api#documentation": "A generic string type that forbids characters that could expose our service (or services downstream)\n    to security risks around injections.",
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        },
-        "smithy.api#pattern": "^[a-zA-Z0-9-_\\.:/*)( ]+$"
-      }
-    },
-    "com.amazonaws.pi#SanitizedStringList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pi#SanitizedString"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 10
-        }
-      }
-    },
-    "com.amazonaws.pi#ServiceType": {
-      "type": "enum",
-      "members": {
-        "RDS": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "RDS"
-          }
-        },
-        "DOCDB": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "DOCDB"
-          }
-        }
-      }
-    },
-    "com.amazonaws.pi#Severity": {
-      "type": "enum",
-      "members": {
-        "LOW": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "LOW"
-          }
-        },
-        "MEDIUM": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "MEDIUM"
-          }
-        },
-        "HIGH": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "HIGH"
-          }
-        }
-      }
-    },
-    "com.amazonaws.pi#String": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        },
-        "smithy.api#pattern": "\\S"
-      }
-    },
-    "com.amazonaws.pi#Tag": {
-      "type": "structure",
-      "members": {
-        "Key": {
-          "target": "com.amazonaws.pi#TagKey",
-          "traits": {
-            "smithy.api#documentation": "<p>A key is the required name of the tag. The string value can be from 1 to 128 Unicode \n            characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>. \n            The string can only contain only the set of Unicode letters, digits, \n            white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: <code>\"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\"</code>).</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Value": {
-          "target": "com.amazonaws.pi#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>A value is the optional value of the tag. The string value can be from 1 to 256 \n            Unicode characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>. \n            The string can only contain only the set of Unicode letters, digits, \n            white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>"
-      }
-    },
-    "com.amazonaws.pi#TagKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        },
-        "smithy.api#pattern": "^.*$"
-      }
-    },
-    "com.amazonaws.pi#TagKeyList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pi#TagKey"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.pi#TagList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.pi#Tag"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.pi#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.pi#TagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.pi#TagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.pi#InternalServiceError"
-        },
-        {
-          "target": "com.amazonaws.pi#InvalidArgumentException"
-        },
-        {
-          "target": "com.amazonaws.pi#NotAuthorizedException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Adds metadata tags to the Amazon RDS Performance Insights resource.</p>"
-      }
-    },
-    "com.amazonaws.pi#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ServiceType": {
-          "target": "com.amazonaws.pi#ServiceType",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ResourceARN": {
-          "target": "com.amazonaws.pi#AmazonResourceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about  \n            creating an ARN, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">\n                Constructing an RDS Amazon Resource Name (ARN)</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.pi#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.pi#TagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.pi#TagValue": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        },
-        "smithy.api#pattern": "^.*$"
-      }
-    },
-    "com.amazonaws.pi#TextFormat": {
-      "type": "enum",
-      "members": {
-        "PLAIN_TEXT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "PLAIN_TEXT"
-          }
-        },
-        "MARKDOWN": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "MARKDOWN"
-          }
-        }
-      }
-    },
-    "com.amazonaws.pi#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.pi#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.pi#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.pi#InternalServiceError"
-        },
-        {
-          "target": "com.amazonaws.pi#InvalidArgumentException"
-        },
-        {
-          "target": "com.amazonaws.pi#NotAuthorizedException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Deletes the metadata tags from the Amazon RDS Performance Insights resource.</p>"
-      }
-    },
-    "com.amazonaws.pi#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ServiceType": {
-          "target": "com.amazonaws.pi#ServiceType",
-          "traits": {
-            "smithy.api#documentation": "<p>List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ResourceARN": {
-          "target": "com.amazonaws.pi#AmazonResourceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about  \n            creating an ARN, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">\n                Constructing an RDS Amazon Resource Name (ARN)</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.pi#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The metadata assigned to an Amazon RDS Performance Insights resource consisting of a key-value pair.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.pi#UntagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.pi#PI": {
+    "com.amazonaws.pi#PerformanceInsightsv20180227": {
       "type": "service",
       "version": "2018-02-27",
       "operations": [
@@ -3272,6 +2859,419 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.pi#PeriodAlignment": {
+      "type": "enum",
+      "members": {
+        "END_TIME": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "END_TIME"
+          }
+        },
+        "START_TIME": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "START_TIME"
+          }
+        }
+      }
+    },
+    "com.amazonaws.pi#Recommendation": {
+      "type": "structure",
+      "members": {
+        "RecommendationId": {
+          "target": "com.amazonaws.pi#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier for the recommendation.</p>"
+          }
+        },
+        "RecommendationDescription": {
+          "target": "com.amazonaws.pi#MarkdownString",
+          "traits": {
+            "smithy.api#documentation": "<p>The recommendation details to help resolve the performance issue. For example, \n            <code>Investigate the following SQLs that contributed to 100% of the total DBLoad during that time period: sql-id</code>\n         </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The list of recommendations for the insight.</p>"
+      }
+    },
+    "com.amazonaws.pi#RecommendationList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.pi#Recommendation"
+      }
+    },
+    "com.amazonaws.pi#RequestString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        },
+        "smithy.api#pattern": "\\S"
+      }
+    },
+    "com.amazonaws.pi#RequestedDimensionList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.pi#SanitizedString"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.pi#ResponsePartitionKey": {
+      "type": "structure",
+      "members": {
+        "Dimensions": {
+          "target": "com.amazonaws.pi#DimensionMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A dimension map that contains the dimensions for this partition.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>If <code>PartitionBy</code> was specified in a <code>DescribeDimensionKeys</code>\n      request, the dimensions are returned in an array. Each element in the array specifies one\n      dimension. </p>"
+      }
+    },
+    "com.amazonaws.pi#ResponsePartitionKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.pi#ResponsePartitionKey"
+      }
+    },
+    "com.amazonaws.pi#ResponseResourceMetric": {
+      "type": "structure",
+      "members": {
+        "Metric": {
+          "target": "com.amazonaws.pi#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The full name of the metric.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.pi#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the metric.</p>"
+          }
+        },
+        "Unit": {
+          "target": "com.amazonaws.pi#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unit of the metric.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that contains the full name, description, and unit of a metric.\n      </p>"
+      }
+    },
+    "com.amazonaws.pi#ResponseResourceMetricKey": {
+      "type": "structure",
+      "members": {
+        "Metric": {
+          "target": "com.amazonaws.pi#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a Performance Insights metric to be measured.</p>\n         <p>Valid values for <code>Metric</code> are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db.load.avg</code> - A scaled representation of the number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db.sampledload.avg</code> - The raw number of active sessions for the database engine.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                        operating system counters</a> in the <i>Amazon Aurora User Guide</i>.</p>\n            </li>\n            <li>\n               <p>The counter metrics listed in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights_Counters.html#USER_PerfInsights_Counters.OS\">Performance Insights\n                    operating system counters</a> in the <i>Amazon RDS User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the number of active sessions is less than an internal Performance Insights threshold, <code>db.load.avg</code> and \n          <code>db.sampledload.avg</code> are the same value. If the number of active sessions is greater than the \n          internal threshold, Performance Insights samples the active sessions, with <code>db.load.avg</code> showing the scaled values, \n          <code>db.sampledload.avg</code> showing the raw values, and <code>db.sampledload.avg</code> less \n          than <code>db.load.avg</code>. For most use cases, you can query <code>db.load.avg</code> only.\n      </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Dimensions": {
+          "target": "com.amazonaws.pi#DimensionMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The valid dimensions for the metric.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object describing a Performance Insights metric and one or more dimensions for that metric.</p>"
+      }
+    },
+    "com.amazonaws.pi#ResponseResourceMetricList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.pi#ResponseResourceMetric"
+      }
+    },
+    "com.amazonaws.pi#SanitizedString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "A generic string type that forbids characters that could expose our service (or services downstream)\n    to security risks around injections.",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9-_\\.:/*)( ]+$"
+      }
+    },
+    "com.amazonaws.pi#SanitizedStringList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.pi#SanitizedString"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.pi#ServiceType": {
+      "type": "enum",
+      "members": {
+        "RDS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "RDS"
+          }
+        },
+        "DOCDB": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DOCDB"
+          }
+        }
+      }
+    },
+    "com.amazonaws.pi#Severity": {
+      "type": "enum",
+      "members": {
+        "LOW": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "LOW"
+          }
+        },
+        "MEDIUM": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MEDIUM"
+          }
+        },
+        "HIGH": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "HIGH"
+          }
+        }
+      }
+    },
+    "com.amazonaws.pi#String": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        },
+        "smithy.api#pattern": "\\S"
+      }
+    },
+    "com.amazonaws.pi#Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "target": "com.amazonaws.pi#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>A key is the required name of the tag. The string value can be from 1 to 128 Unicode \n            characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>. \n            The string can only contain only the set of Unicode letters, digits, \n            white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: <code>\"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\"</code>).</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.pi#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>A value is the optional value of the tag. The string value can be from 1 to 256 \n            Unicode characters in length and can't be prefixed with <code>aws:</code> or <code>rds:</code>. \n            The string can only contain only the set of Unicode letters, digits, \n            white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>"
+      }
+    },
+    "com.amazonaws.pi#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^.*$"
+      }
+    },
+    "com.amazonaws.pi#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.pi#TagKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.pi#TagList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.pi#Tag"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.pi#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.pi#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.pi#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.pi#InternalServiceError"
+        },
+        {
+          "target": "com.amazonaws.pi#InvalidArgumentException"
+        },
+        {
+          "target": "com.amazonaws.pi#NotAuthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds metadata tags to the Amazon RDS Performance Insights resource.</p>"
+      }
+    },
+    "com.amazonaws.pi#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ServiceType": {
+          "target": "com.amazonaws.pi#ServiceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceARN": {
+          "target": "com.amazonaws.pi#AmazonResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about  \n            creating an ARN, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">\n                Constructing an RDS Amazon Resource Name (ARN)</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.pi#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.pi#TagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.pi#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        },
+        "smithy.api#pattern": "^.*$"
+      }
+    },
+    "com.amazonaws.pi#TextFormat": {
+      "type": "enum",
+      "members": {
+        "PLAIN_TEXT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "PLAIN_TEXT"
+          }
+        },
+        "MARKDOWN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MARKDOWN"
+          }
+        }
+      }
+    },
+    "com.amazonaws.pi#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.pi#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.pi#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.pi#InternalServiceError"
+        },
+        {
+          "target": "com.amazonaws.pi#InvalidArgumentException"
+        },
+        {
+          "target": "com.amazonaws.pi#NotAuthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the metadata tags from the Amazon RDS Performance Insights resource.</p>"
+      }
+    },
+    "com.amazonaws.pi#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ServiceType": {
+          "target": "com.amazonaws.pi#ServiceType",
+          "traits": {
+            "smithy.api#documentation": "<p>List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is <code>RDS</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceARN": {
+          "target": "com.amazonaws.pi#AmazonResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about  \n            creating an ARN, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\">\n                Constructing an RDS Amazon Resource Name (ARN)</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.pi#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The metadata assigned to an Amazon RDS Performance Insights resource consisting of a key-value pair.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.pi#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
       }
     }
   }

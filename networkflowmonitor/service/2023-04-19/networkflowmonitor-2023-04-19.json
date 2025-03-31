@@ -2230,6 +2230,411 @@
         "target": "com.amazonaws.networkflowmonitor#MonitorTopContributorsRow"
       }
     },
+    "com.amazonaws.networkflowmonitor#NetworkFlowMonitor": {
+      "type": "service",
+      "version": "2023-04-19",
+      "operations": [
+        {
+          "target": "com.amazonaws.networkflowmonitor#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.networkflowmonitor#TagResource"
+        },
+        {
+          "target": "com.amazonaws.networkflowmonitor#UntagResource"
+        }
+      ],
+      "resources": [
+        {
+          "target": "com.amazonaws.networkflowmonitor#MonitorResource"
+        },
+        {
+          "target": "com.amazonaws.networkflowmonitor#ScopeResource"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "NetworkFlowMonitor",
+          "arnNamespace": "networkflowmonitor",
+          "cloudTrailEventSource": "networkflowmonitor.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "networkflowmonitor"
+        },
+        "aws.endpoints#dualStackOnlyEndpoints": {},
+        "aws.endpoints#standardRegionalEndpoints": {},
+        "aws.iam#defineConditionKeys": {
+          "aws:ResourceTag/${TagKey}": {
+            "type": "String",
+            "documentation": "Filters access by the tag key-value pairs attached to the resource",
+            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
+          },
+          "aws:RequestTag/${TagKey}": {
+            "type": "String",
+            "documentation": "Filters access by the tag key-value pairs in the request",
+            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
+          },
+          "aws:TagKeys": {
+            "type": "ArrayOfString",
+            "documentation": "Filters access by the tag keys in the request",
+            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+          }
+        },
+        "aws.iam#supportedPrincipalTypes": [
+          "Root",
+          "IAMUser",
+          "IAMRole",
+          "FederatedUser"
+        ],
+        "aws.protocols#restJson1": {},
+        "smithy.api#cors": {
+          "additionalAllowedHeaders": [
+            "Content-Type",
+            "X-Amz-Requested-Operation"
+          ]
+        },
+        "smithy.api#documentation": "<p>Network Flow Monitor is a feature of Amazon CloudWatch Network Monitoring that provides visibility into the performance of \n\t  \t\tnetwork flows for your Amazon Web Services workloads, between instances in subnets, as well as to and\n\t  \t\tfrom Amazon Web Services. Lightweight agents that you install on the instances capture performance metrics\n\t  \t\tfor your network flows, such as packet loss and latency, and send them to the Network Flow Monitor backend. Then, you can\n\t  \t\tview and analyze metrics from the top contributors for each metric type, to help troubleshoot issues.</p>\n         <p>In addition, when you create a monitor, Network Flow Monitor provides a network health indicator (NHI) \n\t  \t\tthat informs you whether there were Amazon Web Services network issues for one or more of the network flows \n\t  \t\ttracked by a monitor, during a time period that you choose. By using this value, you can independently determine \n\t  \t\tif the Amazon Web Services network is impacting your workload during a specific time frame, to help you focus \n\t  \t\ttroubleshooting efforts.</p>\n         <p>To learn more about Network Flow Monitor, see the \n\t  \t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-NetworkFlowMonitor.html\">Network Flow Monitor User Guide</a>\n\t\t\t\tin the Amazon CloudWatch User Guide.</p>",
+        "smithy.api#title": "Network Flow Monitor",
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "Boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "String"
+            },
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "String"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "endpoint": {
+                    "url": {
+                      "ref": "Endpoint"
+                    },
+                    "properties": {},
+                    "headers": {}
+                  },
+                  "type": "endpoint"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "isSet",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ]
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "aws.partition",
+                          "argv": [
+                            {
+                              "ref": "Region"
+                            }
+                          ],
+                          "assign": "PartitionResult"
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "ref": "UseFIPS"
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "endpoint": {
+                            "url": "https://networkflowmonitor-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                            "properties": {},
+                            "headers": {}
+                          },
+                          "type": "endpoint"
+                        },
+                        {
+                          "conditions": [],
+                          "endpoint": {
+                            "url": "https://networkflowmonitor.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                            "properties": {},
+                            "headers": {}
+                          },
+                          "type": "endpoint"
+                        }
+                      ],
+                      "type": "tree"
+                    }
+                  ],
+                  "type": "tree"
+                },
+                {
+                  "conditions": [],
+                  "error": "Invalid Configuration: Missing Region",
+                  "type": "error"
+                }
+              ],
+              "type": "tree"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "For custom endpoint with region not set and fips disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "Endpoint": "https://example.com",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips enabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Endpoint": "https://example.com",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor.cn-northwest-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor-fips.us-gov-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor.us-gov-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor-fips.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor-fips.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                }
+              },
+              "params": {
+                "Region": "eu-isoe-west-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor.eu-isoe-west-1.cloud.adc-e.uk"
+                }
+              },
+              "params": {
+                "Region": "eu-isoe-west-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor-fips.us-isof-south-1.csp.hci.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isof-south-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://networkflowmonitor.us-isof-south-1.csp.hci.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isof-south-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "Missing region",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              }
+            }
+          ],
+          "version": "1.0"
+        }
+      }
+    },
     "com.amazonaws.networkflowmonitor#QueryStatus": {
       "type": "enum",
       "members": {
@@ -3728,411 +4133,6 @@
       "type": "list",
       "member": {
         "target": "smithy.api#Double"
-      }
-    },
-    "com.amazonaws.networkflowmonitor#NetworkFlowMonitor": {
-      "type": "service",
-      "version": "2023-04-19",
-      "operations": [
-        {
-          "target": "com.amazonaws.networkflowmonitor#ListTagsForResource"
-        },
-        {
-          "target": "com.amazonaws.networkflowmonitor#TagResource"
-        },
-        {
-          "target": "com.amazonaws.networkflowmonitor#UntagResource"
-        }
-      ],
-      "resources": [
-        {
-          "target": "com.amazonaws.networkflowmonitor#MonitorResource"
-        },
-        {
-          "target": "com.amazonaws.networkflowmonitor#ScopeResource"
-        }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "NetworkFlowMonitor",
-          "arnNamespace": "networkflowmonitor",
-          "cloudTrailEventSource": "networkflowmonitor.amazonaws.com"
-        },
-        "aws.auth#sigv4": {
-          "name": "networkflowmonitor"
-        },
-        "aws.endpoints#dualStackOnlyEndpoints": {},
-        "aws.endpoints#standardRegionalEndpoints": {},
-        "aws.iam#defineConditionKeys": {
-          "aws:ResourceTag/${TagKey}": {
-            "type": "String",
-            "documentation": "Filters access by the tag key-value pairs attached to the resource",
-            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
-          },
-          "aws:RequestTag/${TagKey}": {
-            "type": "String",
-            "documentation": "Filters access by the tag key-value pairs in the request",
-            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
-          },
-          "aws:TagKeys": {
-            "type": "ArrayOfString",
-            "documentation": "Filters access by the tag keys in the request",
-            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
-          }
-        },
-        "aws.iam#supportedPrincipalTypes": [
-          "Root",
-          "IAMUser",
-          "IAMRole",
-          "FederatedUser"
-        ],
-        "aws.protocols#restJson1": {},
-        "smithy.api#cors": {
-          "additionalAllowedHeaders": [
-            "Content-Type",
-            "X-Amz-Requested-Operation"
-          ]
-        },
-        "smithy.api#documentation": "<p>Network Flow Monitor is a feature of Amazon CloudWatch Network Monitoring that provides visibility into the performance of \n\t  \t\tnetwork flows for your Amazon Web Services workloads, between instances in subnets, as well as to and\n\t  \t\tfrom Amazon Web Services. Lightweight agents that you install on the instances capture performance metrics\n\t  \t\tfor your network flows, such as packet loss and latency, and send them to the Network Flow Monitor backend. Then, you can\n\t  \t\tview and analyze metrics from the top contributors for each metric type, to help troubleshoot issues.</p>\n         <p>In addition, when you create a monitor, Network Flow Monitor provides a network health indicator (NHI) \n\t  \t\tthat informs you whether there were Amazon Web Services network issues for one or more of the network flows \n\t  \t\ttracked by a monitor, during a time period that you choose. By using this value, you can independently determine \n\t  \t\tif the Amazon Web Services network is impacting your workload during a specific time frame, to help you focus \n\t  \t\ttroubleshooting efforts.</p>\n         <p>To learn more about Network Flow Monitor, see the \n\t  \t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-NetworkFlowMonitor.html\">Network Flow Monitor User Guide</a>\n\t\t\t\tin the Amazon CloudWatch User Guide.</p>",
-        "smithy.api#title": "Network Flow Monitor",
-        "smithy.rules#endpointRuleSet": {
-          "version": "1.0",
-          "parameters": {
-            "UseFIPS": {
-              "builtIn": "AWS::UseFIPS",
-              "required": true,
-              "default": false,
-              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-              "type": "Boolean"
-            },
-            "Endpoint": {
-              "builtIn": "SDK::Endpoint",
-              "required": false,
-              "documentation": "Override the endpoint used to send this request",
-              "type": "String"
-            },
-            "Region": {
-              "builtIn": "AWS::Region",
-              "required": false,
-              "documentation": "The AWS region used to dispatch the request.",
-              "type": "String"
-            }
-          },
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "fn": "isSet",
-                  "argv": [
-                    {
-                      "ref": "Endpoint"
-                    }
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "booleanEquals",
-                      "argv": [
-                        {
-                          "ref": "UseFIPS"
-                        },
-                        true
-                      ]
-                    }
-                  ],
-                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                  "type": "error"
-                },
-                {
-                  "conditions": [],
-                  "endpoint": {
-                    "url": {
-                      "ref": "Endpoint"
-                    },
-                    "properties": {},
-                    "headers": {}
-                  },
-                  "type": "endpoint"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "isSet",
-                      "argv": [
-                        {
-                          "ref": "Region"
-                        }
-                      ]
-                    }
-                  ],
-                  "rules": [
-                    {
-                      "conditions": [
-                        {
-                          "fn": "aws.partition",
-                          "argv": [
-                            {
-                              "ref": "Region"
-                            }
-                          ],
-                          "assign": "PartitionResult"
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                {
-                                  "ref": "UseFIPS"
-                                },
-                                true
-                              ]
-                            }
-                          ],
-                          "endpoint": {
-                            "url": "https://networkflowmonitor-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                            "properties": {},
-                            "headers": {}
-                          },
-                          "type": "endpoint"
-                        },
-                        {
-                          "conditions": [],
-                          "endpoint": {
-                            "url": "https://networkflowmonitor.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                            "properties": {},
-                            "headers": {}
-                          },
-                          "type": "endpoint"
-                        }
-                      ],
-                      "type": "tree"
-                    }
-                  ],
-                  "type": "tree"
-                },
-                {
-                  "conditions": [],
-                  "error": "Invalid Configuration: Missing Region",
-                  "type": "error"
-                }
-              ],
-              "type": "tree"
-            }
-          ]
-        },
-        "smithy.rules#endpointTests": {
-          "testCases": [
-            {
-              "documentation": "For custom endpoint with region not set and fips disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://example.com"
-                }
-              },
-              "params": {
-                "Endpoint": "https://example.com",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For custom endpoint with fips enabled",
-              "expect": {
-                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-              },
-              "params": {
-                "Endpoint": "https://example.com",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor-fips.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor-fips.cn-northwest-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-northwest-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor.cn-northwest-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-northwest-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor-fips.us-gov-west-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor.us-gov-west-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor-fips.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor-fips.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor-fips.eu-isoe-west-1.cloud.adc-e.uk"
-                }
-              },
-              "params": {
-                "Region": "eu-isoe-west-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor.eu-isoe-west-1.cloud.adc-e.uk"
-                }
-              },
-              "params": {
-                "Region": "eu-isoe-west-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor-fips.us-isof-south-1.csp.hci.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isof-south-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://networkflowmonitor.us-isof-south-1.csp.hci.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isof-south-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "Missing region",
-              "expect": {
-                "error": "Invalid Configuration: Missing Region"
-              }
-            }
-          ],
-          "version": "1.0"
-        }
       }
     }
   }

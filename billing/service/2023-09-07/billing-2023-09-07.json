@@ -1,6 +1,524 @@
 {
   "smithy": "2.0",
   "shapes": {
+    "com.amazonaws.billing#AWSBilling": {
+      "type": "service",
+      "version": "2023-09-07",
+      "operations": [
+        {
+          "target": "com.amazonaws.billing#CreateBillingView"
+        },
+        {
+          "target": "com.amazonaws.billing#DeleteBillingView"
+        },
+        {
+          "target": "com.amazonaws.billing#GetBillingView"
+        },
+        {
+          "target": "com.amazonaws.billing#GetResourcePolicy"
+        },
+        {
+          "target": "com.amazonaws.billing#ListBillingViews"
+        },
+        {
+          "target": "com.amazonaws.billing#ListSourceViewsForBillingView"
+        },
+        {
+          "target": "com.amazonaws.billing#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.billing#TagResource"
+        },
+        {
+          "target": "com.amazonaws.billing#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.billing#UpdateBillingView"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "Billing",
+          "endpointPrefix": "billing",
+          "arnNamespace": "billing",
+          "cloudTrailEventSource": "billing.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "billing"
+        },
+        "aws.endpoints#dualStackOnlyEndpoints": {},
+        "aws.endpoints#standardPartitionalEndpoints": {
+          "endpointPatternType": "service_region_dnsSuffix"
+        },
+        "aws.protocols#awsJson1_0": {},
+        "smithy.api#documentation": "<p>\n        You can use the Billing API to programatically list the billing views available to you for a given time period. A billing view represents a set of billing data.\n      </p>\n         <p>The Billing API provides the following endpoint:</p>\n         <p>\n            <code>https://billing.us-east-1.api.aws</code>\n         </p>",
+        "smithy.api#title": "AWS Billing",
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "Boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "String"
+            },
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "String"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "endpoint": {
+                    "url": {
+                      "ref": "Endpoint"
+                    },
+                    "properties": {},
+                    "headers": {}
+                  },
+                  "type": "endpoint"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "isSet",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ]
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "aws.partition",
+                          "argv": [
+                            {
+                              "ref": "Region"
+                            }
+                          ],
+                          "assign": "PartitionResult"
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "ref": "UseFIPS"
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "endpoint": {
+                            "url": "https://billing-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                            "properties": {
+                              "authSchemes": [
+                                {
+                                  "name": "sigv4",
+                                  "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                }
+                              ]
+                            },
+                            "headers": {}
+                          },
+                          "type": "endpoint"
+                        },
+                        {
+                          "conditions": [],
+                          "endpoint": {
+                            "url": "https://billing.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                            "properties": {
+                              "authSchemes": [
+                                {
+                                  "name": "sigv4",
+                                  "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                }
+                              ]
+                            },
+                            "headers": {}
+                          },
+                          "type": "endpoint"
+                        }
+                      ],
+                      "type": "tree"
+                    }
+                  ],
+                  "type": "tree"
+                },
+                {
+                  "conditions": [],
+                  "error": "Invalid Configuration: Missing Region",
+                  "type": "error"
+                }
+              ],
+              "type": "tree"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "For custom endpoint with region not set and fips disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "Endpoint": "https://example.com",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips enabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Endpoint": "https://example.com",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "cn-northwest-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "cn-northwest-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing.cn-northwest-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-gov-west-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing-fips.us-gov-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-gov-west-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing.us-gov-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-iso-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing-fips.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-iso-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-isob-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing-fips.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-isob-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "eu-isoe-west-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                }
+              },
+              "params": {
+                "Region": "eu-isoe-west-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "eu-isoe-west-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing.eu-isoe-west-1.cloud.adc-e.uk"
+                }
+              },
+              "params": {
+                "Region": "eu-isoe-west-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-isof-south-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing-fips.us-isof-south-1.csp.hci.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isof-south-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-isof-south-1"
+                      }
+                    ]
+                  },
+                  "url": "https://billing.us-isof-south-1.csp.hci.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isof-south-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "Missing region",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              }
+            }
+          ],
+          "version": "1.0"
+        }
+      }
+    },
     "com.amazonaws.billing#AccessDeniedException": {
       "type": "structure",
       "members": {
@@ -1674,524 +2192,6 @@
         "smithy.api#length": {
           "min": 1,
           "max": 200
-        }
-      }
-    },
-    "com.amazonaws.billing#Billing": {
-      "type": "service",
-      "version": "2023-09-07",
-      "operations": [
-        {
-          "target": "com.amazonaws.billing#CreateBillingView"
-        },
-        {
-          "target": "com.amazonaws.billing#DeleteBillingView"
-        },
-        {
-          "target": "com.amazonaws.billing#GetBillingView"
-        },
-        {
-          "target": "com.amazonaws.billing#GetResourcePolicy"
-        },
-        {
-          "target": "com.amazonaws.billing#ListBillingViews"
-        },
-        {
-          "target": "com.amazonaws.billing#ListSourceViewsForBillingView"
-        },
-        {
-          "target": "com.amazonaws.billing#ListTagsForResource"
-        },
-        {
-          "target": "com.amazonaws.billing#TagResource"
-        },
-        {
-          "target": "com.amazonaws.billing#UntagResource"
-        },
-        {
-          "target": "com.amazonaws.billing#UpdateBillingView"
-        }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "Billing",
-          "endpointPrefix": "billing",
-          "arnNamespace": "billing",
-          "cloudTrailEventSource": "billing.amazonaws.com"
-        },
-        "aws.auth#sigv4": {
-          "name": "billing"
-        },
-        "aws.endpoints#dualStackOnlyEndpoints": {},
-        "aws.endpoints#standardPartitionalEndpoints": {
-          "endpointPatternType": "service_region_dnsSuffix"
-        },
-        "aws.protocols#awsJson1_0": {},
-        "smithy.api#documentation": "<p>\n        You can use the Billing API to programatically list the billing views available to you for a given time period. A billing view represents a set of billing data.\n      </p>\n         <p>The Billing API provides the following endpoint:</p>\n         <p>\n            <code>https://billing.us-east-1.api.aws</code>\n         </p>",
-        "smithy.api#title": "AWS Billing",
-        "smithy.rules#endpointRuleSet": {
-          "version": "1.0",
-          "parameters": {
-            "UseFIPS": {
-              "builtIn": "AWS::UseFIPS",
-              "required": true,
-              "default": false,
-              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-              "type": "Boolean"
-            },
-            "Endpoint": {
-              "builtIn": "SDK::Endpoint",
-              "required": false,
-              "documentation": "Override the endpoint used to send this request",
-              "type": "String"
-            },
-            "Region": {
-              "builtIn": "AWS::Region",
-              "required": false,
-              "documentation": "The AWS region used to dispatch the request.",
-              "type": "String"
-            }
-          },
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "fn": "isSet",
-                  "argv": [
-                    {
-                      "ref": "Endpoint"
-                    }
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "booleanEquals",
-                      "argv": [
-                        {
-                          "ref": "UseFIPS"
-                        },
-                        true
-                      ]
-                    }
-                  ],
-                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                  "type": "error"
-                },
-                {
-                  "conditions": [],
-                  "endpoint": {
-                    "url": {
-                      "ref": "Endpoint"
-                    },
-                    "properties": {},
-                    "headers": {}
-                  },
-                  "type": "endpoint"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "isSet",
-                      "argv": [
-                        {
-                          "ref": "Region"
-                        }
-                      ]
-                    }
-                  ],
-                  "rules": [
-                    {
-                      "conditions": [
-                        {
-                          "fn": "aws.partition",
-                          "argv": [
-                            {
-                              "ref": "Region"
-                            }
-                          ],
-                          "assign": "PartitionResult"
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                {
-                                  "ref": "UseFIPS"
-                                },
-                                true
-                              ]
-                            }
-                          ],
-                          "endpoint": {
-                            "url": "https://billing-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
-                            "properties": {
-                              "authSchemes": [
-                                {
-                                  "name": "sigv4",
-                                  "signingRegion": "{PartitionResult#implicitGlobalRegion}"
-                                }
-                              ]
-                            },
-                            "headers": {}
-                          },
-                          "type": "endpoint"
-                        },
-                        {
-                          "conditions": [],
-                          "endpoint": {
-                            "url": "https://billing.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
-                            "properties": {
-                              "authSchemes": [
-                                {
-                                  "name": "sigv4",
-                                  "signingRegion": "{PartitionResult#implicitGlobalRegion}"
-                                }
-                              ]
-                            },
-                            "headers": {}
-                          },
-                          "type": "endpoint"
-                        }
-                      ],
-                      "type": "tree"
-                    }
-                  ],
-                  "type": "tree"
-                },
-                {
-                  "conditions": [],
-                  "error": "Invalid Configuration: Missing Region",
-                  "type": "error"
-                }
-              ],
-              "type": "tree"
-            }
-          ]
-        },
-        "smithy.rules#endpointTests": {
-          "testCases": [
-            {
-              "documentation": "For custom endpoint with region not set and fips disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://example.com"
-                }
-              },
-              "params": {
-                "Endpoint": "https://example.com",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For custom endpoint with fips enabled",
-              "expect": {
-                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-              },
-              "params": {
-                "Endpoint": "https://example.com",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing-fips.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "cn-northwest-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing-fips.cn-northwest-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-northwest-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "cn-northwest-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing.cn-northwest-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-northwest-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-gov-west-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing-fips.us-gov-west-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-gov-west-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing.us-gov-west-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-iso-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing-fips.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-iso-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-isob-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing-fips.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-isob-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "eu-isoe-west-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing-fips.eu-isoe-west-1.cloud.adc-e.uk"
-                }
-              },
-              "params": {
-                "Region": "eu-isoe-west-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "eu-isoe-west-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing.eu-isoe-west-1.cloud.adc-e.uk"
-                }
-              },
-              "params": {
-                "Region": "eu-isoe-west-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-isof-south-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing-fips.us-isof-south-1.csp.hci.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isof-south-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-isof-south-1"
-                      }
-                    ]
-                  },
-                  "url": "https://billing.us-isof-south-1.csp.hci.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isof-south-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "Missing region",
-              "expect": {
-                "error": "Invalid Configuration: Missing Region"
-              }
-            }
-          ],
-          "version": "1.0"
         }
       }
     }

@@ -4656,6 +4656,418 @@
         "smithy.api#sensitive": {}
       }
     },
+    "com.amazonaws.iotmanagedintegrations#IotManagedIntegrations": {
+      "type": "service",
+      "version": "2025-03-03",
+      "operations": [
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#GetCustomEndpoint"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#RegisterCustomEndpoint"
+        }
+      ],
+      "resources": [
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#CredentialLockerResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#DestinationResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#DeviceDiscoveryResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#EventLogConfigurationResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#HubConfigurationResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#KmsKeyAssociationResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#ManagedThingCommandResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#ManagedThingResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#ManagedThingStateResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#NotificationConfigurationResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#OtaTaskConfigurationResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#OtaTaskResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#RuntimeLogConfigurationResource"
+        },
+        {
+          "target": "com.amazonaws.iotmanagedintegrations#SchemaVersionResource"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "IoT Managed Integrations",
+          "arnNamespace": "iotmanagedintegrations",
+          "endpointPrefix": "api.iotmanagedintegrations"
+        },
+        "aws.auth#sigv4": {
+          "name": "iotmanagedintegrations"
+        },
+        "aws.endpoints#dualStackOnlyEndpoints": {},
+        "aws.endpoints#standardRegionalEndpoints": {},
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "Managed integrations is a feature of AWS IoT Device Management that enables developers to quickly build innovative IoT solutions. Customers can use managed integrations to automate device setup workflows and support interoperability across many devices, regardless of device vendor or connectivity protocol. This allows developers to use a single user-interface to control, manage, and operate a range of devices.",
+        "smithy.api#title": "Managed integrations for AWS IoT Device Management",
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "Boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "String"
+            },
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "String"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "endpoint": {
+                    "url": {
+                      "ref": "Endpoint"
+                    },
+                    "properties": {},
+                    "headers": {}
+                  },
+                  "type": "endpoint"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "isSet",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ]
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "aws.partition",
+                          "argv": [
+                            {
+                              "ref": "Region"
+                            }
+                          ],
+                          "assign": "PartitionResult"
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "ref": "UseFIPS"
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "endpoint": {
+                            "url": "https://api.iotmanagedintegrations-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                            "properties": {},
+                            "headers": {}
+                          },
+                          "type": "endpoint"
+                        },
+                        {
+                          "conditions": [],
+                          "endpoint": {
+                            "url": "https://api.iotmanagedintegrations.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                            "properties": {},
+                            "headers": {}
+                          },
+                          "type": "endpoint"
+                        }
+                      ],
+                      "type": "tree"
+                    }
+                  ],
+                  "type": "tree"
+                },
+                {
+                  "conditions": [],
+                  "error": "Invalid Configuration: Missing Region",
+                  "type": "error"
+                }
+              ],
+              "type": "tree"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "For custom endpoint with region not set and fips disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "Endpoint": "https://example.com",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips enabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Endpoint": "https://example.com",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations.cn-northwest-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations-fips.us-gov-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations.us-gov-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations-fips.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations-fips.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                }
+              },
+              "params": {
+                "Region": "eu-isoe-west-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations.eu-isoe-west-1.cloud.adc-e.uk"
+                }
+              },
+              "params": {
+                "Region": "eu-isoe-west-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations-fips.us-isof-south-1.csp.hci.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isof-south-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://api.iotmanagedintegrations.us-isof-south-1.csp.hci.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isof-south-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "Missing region",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              }
+            }
+          ],
+          "version": "1.0"
+        }
+      }
+    },
     "com.amazonaws.iotmanagedintegrations#KmsKeyArn": {
       "type": "string",
       "traits": {
@@ -8595,418 +9007,6 @@
     },
     "com.amazonaws.iotmanagedintegrations#ValidationSchema": {
       "type": "document"
-    },
-    "com.amazonaws.iotmanagedintegrations#IoTManagedIntegrations": {
-      "type": "service",
-      "version": "2025-03-03",
-      "operations": [
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#GetCustomEndpoint"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#RegisterCustomEndpoint"
-        }
-      ],
-      "resources": [
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#CredentialLockerResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#DestinationResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#DeviceDiscoveryResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#EventLogConfigurationResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#HubConfigurationResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#KmsKeyAssociationResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#ManagedThingCommandResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#ManagedThingResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#ManagedThingStateResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#NotificationConfigurationResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#OtaTaskConfigurationResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#OtaTaskResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#RuntimeLogConfigurationResource"
-        },
-        {
-          "target": "com.amazonaws.iotmanagedintegrations#SchemaVersionResource"
-        }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "IoT Managed Integrations",
-          "arnNamespace": "iotmanagedintegrations",
-          "endpointPrefix": "api.iotmanagedintegrations"
-        },
-        "aws.auth#sigv4": {
-          "name": "iotmanagedintegrations"
-        },
-        "aws.endpoints#dualStackOnlyEndpoints": {},
-        "aws.endpoints#standardRegionalEndpoints": {},
-        "aws.protocols#restJson1": {},
-        "smithy.api#documentation": "Managed integrations is a feature of AWS IoT Device Management that enables developers to quickly build innovative IoT solutions. Customers can use managed integrations to automate device setup workflows and support interoperability across many devices, regardless of device vendor or connectivity protocol. This allows developers to use a single user-interface to control, manage, and operate a range of devices.",
-        "smithy.api#title": "Managed integrations for AWS IoT Device Management",
-        "smithy.rules#endpointRuleSet": {
-          "version": "1.0",
-          "parameters": {
-            "UseFIPS": {
-              "builtIn": "AWS::UseFIPS",
-              "required": true,
-              "default": false,
-              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-              "type": "Boolean"
-            },
-            "Endpoint": {
-              "builtIn": "SDK::Endpoint",
-              "required": false,
-              "documentation": "Override the endpoint used to send this request",
-              "type": "String"
-            },
-            "Region": {
-              "builtIn": "AWS::Region",
-              "required": false,
-              "documentation": "The AWS region used to dispatch the request.",
-              "type": "String"
-            }
-          },
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "fn": "isSet",
-                  "argv": [
-                    {
-                      "ref": "Endpoint"
-                    }
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "booleanEquals",
-                      "argv": [
-                        {
-                          "ref": "UseFIPS"
-                        },
-                        true
-                      ]
-                    }
-                  ],
-                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                  "type": "error"
-                },
-                {
-                  "conditions": [],
-                  "endpoint": {
-                    "url": {
-                      "ref": "Endpoint"
-                    },
-                    "properties": {},
-                    "headers": {}
-                  },
-                  "type": "endpoint"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "isSet",
-                      "argv": [
-                        {
-                          "ref": "Region"
-                        }
-                      ]
-                    }
-                  ],
-                  "rules": [
-                    {
-                      "conditions": [
-                        {
-                          "fn": "aws.partition",
-                          "argv": [
-                            {
-                              "ref": "Region"
-                            }
-                          ],
-                          "assign": "PartitionResult"
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                {
-                                  "ref": "UseFIPS"
-                                },
-                                true
-                              ]
-                            }
-                          ],
-                          "endpoint": {
-                            "url": "https://api.iotmanagedintegrations-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                            "properties": {},
-                            "headers": {}
-                          },
-                          "type": "endpoint"
-                        },
-                        {
-                          "conditions": [],
-                          "endpoint": {
-                            "url": "https://api.iotmanagedintegrations.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                            "properties": {},
-                            "headers": {}
-                          },
-                          "type": "endpoint"
-                        }
-                      ],
-                      "type": "tree"
-                    }
-                  ],
-                  "type": "tree"
-                },
-                {
-                  "conditions": [],
-                  "error": "Invalid Configuration: Missing Region",
-                  "type": "error"
-                }
-              ],
-              "type": "tree"
-            }
-          ]
-        },
-        "smithy.rules#endpointTests": {
-          "testCases": [
-            {
-              "documentation": "For custom endpoint with region not set and fips disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://example.com"
-                }
-              },
-              "params": {
-                "Endpoint": "https://example.com",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For custom endpoint with fips enabled",
-              "expect": {
-                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-              },
-              "params": {
-                "Endpoint": "https://example.com",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations-fips.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations-fips.cn-northwest-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-northwest-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations.cn-northwest-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-northwest-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations-fips.us-gov-west-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations.us-gov-west-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations-fips.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations-fips.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations-fips.eu-isoe-west-1.cloud.adc-e.uk"
-                }
-              },
-              "params": {
-                "Region": "eu-isoe-west-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations.eu-isoe-west-1.cloud.adc-e.uk"
-                }
-              },
-              "params": {
-                "Region": "eu-isoe-west-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations-fips.us-isof-south-1.csp.hci.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isof-south-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://api.iotmanagedintegrations.us-isof-south-1.csp.hci.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isof-south-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "Missing region",
-              "expect": {
-                "error": "Invalid Configuration: Missing Region"
-              }
-            }
-          ],
-          "version": "1.0"
-        }
-      }
     }
   }
 }

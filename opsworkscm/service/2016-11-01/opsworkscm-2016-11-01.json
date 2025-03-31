@@ -1511,812 +1511,7 @@
         "smithy.api#pattern": "^[\\-\\p{Alnum}_:.]+$"
       }
     },
-    "com.amazonaws.opsworkscm#ResourceAlreadyExistsException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Error or informational message in response to a CreateServer request that a resource cannot be created because it already exists.\n    </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The requested resource cannot be created because it already exists.\n    </p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.opsworkscm#ResourceNotFoundException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Error or informational message that can contain more detail about problems locating or accessing a resource.\n    </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The requested resource does not exist, or access was denied.\n    </p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.opsworkscm#RestoreServer": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.opsworkscm#RestoreServerRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.opsworkscm#RestoreServerResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.opsworkscm#InvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>\n      Restores a backup to a server that is in a <code>CONNECTION_LOST</code>, <code>HEALTHY</code>, <code>RUNNING</code>, <code>UNHEALTHY</code>, or <code>TERMINATED</code> state.\n      When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains\n      the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.\n    </p>\n         <p>Restoring from a backup is performed by creating a new EC2 instance. If restoration is successful, and the server is in a <code>HEALTHY</code> state, \n      AWS OpsWorks CM switches traffic over to the new instance. After restoration is finished, the old EC2 instance is maintained in a \n      <code>Running</code> or <code>Stopped</code> state, but is eventually terminated.</p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      An <code>InvalidStateException</code> is thrown when the server is not in a valid state. A <code>ResourceNotFoundException</code> is thrown\n      when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>"
-      }
-    },
-    "com.amazonaws.opsworkscm#RestoreServerRequest": {
-      "type": "structure",
-      "members": {
-        "BackupId": {
-          "target": "com.amazonaws.opsworkscm#BackupId",
-          "traits": {
-            "smithy.api#documentation": "<p> The ID of the backup that you want to use to restore a server.\n    </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ServerName": {
-          "target": "com.amazonaws.opsworkscm#ServerName",
-          "traits": {
-            "smithy.api#documentation": "<p> The name of the server that you want to restore.\n    </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "InstanceType": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p> The type of instance to restore. Valid values must be specified in the following format: <code>^([cm][34]|t2).*</code>\n      For example, <code>m5.large</code>. Valid values are <code>m5.large</code>, <code>r5.xlarge</code>, and <code>r5.2xlarge</code>. If you do not specify this parameter,\n      RestoreServer uses the instance type from the specified backup.\n    </p>"
-          }
-        },
-        "KeyPair": {
-          "target": "com.amazonaws.opsworkscm#KeyPair",
-          "traits": {
-            "smithy.api#documentation": "<p> The name of the key pair to set on the new EC2 instance. This can be helpful\n      if the administrator no longer has the SSH key.\n    </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#RestoreServerResponse": {
-      "type": "structure",
-      "members": {
-        "Server": {
-          "target": "com.amazonaws.opsworkscm#Server"
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#Server": {
-      "type": "structure",
-      "members": {
-        "AssociatePublicIpAddress": {
-          "target": "com.amazonaws.opsworkscm#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Associate a public IP address with a server that you are launching.\n    </p>"
-          }
-        },
-        "BackupRetentionCount": {
-          "target": "com.amazonaws.opsworkscm#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of automated backups to keep.\n    </p>"
-          }
-        },
-        "ServerName": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the server.\n    </p>"
-          }
-        },
-        "CreatedAt": {
-          "target": "com.amazonaws.opsworkscm#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>Time stamp of server creation. Example <code>2016-07-29T13:38:47.520Z</code>\n         </p>"
-          }
-        },
-        "CloudFormationStackArn": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the CloudFormation stack that was used to create the server.\n    </p>"
-          }
-        },
-        "CustomDomain": {
-          "target": "com.amazonaws.opsworkscm#CustomDomain",
-          "traits": {
-            "smithy.api#documentation": "<p>An optional public endpoint of a server, such as <code>https://aws.my-company.com</code>. \n      You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified.</p>"
-          }
-        },
-        "DisableAutomatedBackup": {
-          "target": "com.amazonaws.opsworkscm#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Disables automated backups. The number of stored backups is dependent on the value of PreferredBackupCount.\n    </p>"
-          }
-        },
-        "Endpoint": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>\n      A DNS name that can be used to access the engine. Example: <code>myserver-asdfghjkl.us-east-1.opsworks.io</code>. \n      You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified.\n    </p>"
-          }
-        },
-        "Engine": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The engine type of the server. Valid values in this release include <code>ChefAutomate</code> and <code>Puppet</code>.\n    </p>"
-          }
-        },
-        "EngineModel": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The engine model of the server. Valid values in this release include <code>Monolithic</code> for Puppet and <code>Single</code> for Chef.\n    </p>"
-          }
-        },
-        "EngineAttributes": {
-          "target": "com.amazonaws.opsworkscm#EngineAttributes",
-          "traits": {
-            "smithy.api#documentation": "<p>The response of a createServer() request returns the master\n    credential to access the server in EngineAttributes. These\n    credentials are not stored by AWS OpsWorks CM; they are returned only as part of the result of createServer().\n    </p>\n         <p class=\"title\">\n            <b>Attributes returned in a createServer response for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_AUTOMATE_PIVOTAL_KEY</code>: A base64-encoded RSA private key that is\n      generated by AWS OpsWorks for Chef Automate. This private key is required to access\n      the Chef API.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CHEF_STARTER_KIT</code>: A base64-encoded ZIP file.\n      The ZIP file contains a Chef starter kit, which includes a README, a\n      configuration file, and the required RSA private key. Save this file, unzip it,\n      and then change to the directory where you've unzipped the file contents.\n      From this directory, you can run Knife commands.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Attributes returned in a createServer response for Puppet</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUPPET_STARTER_KIT</code>: A base64-encoded ZIP file.\n        The ZIP file contains a Puppet starter kit, including a README and a\n        required private key. Save this file, unzip it,\n        and then change to the directory where you've unzipped the file contents.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUPPET_ADMIN_PASSWORD</code>: An administrator password that you can use to sign in to the Puppet Enterprise console after the server is online.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "EngineVersion": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The engine version of the server. For a Chef server, the valid value for EngineVersion is \n      currently <code>2</code>. For a Puppet server, specify either <code>2019</code> or <code>2017</code>.\n    </p>"
-          }
-        },
-        "InstanceProfileArn": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The instance profile ARN of the server.\n    </p>"
-          }
-        },
-        "InstanceType": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>\n      The instance type for the server, as specified in the CloudFormation stack. This might not be the same instance type that is shown in the EC2 console.\n    </p>"
-          }
-        },
-        "KeyPair": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The key pair associated with the server.\n    </p>"
-          }
-        },
-        "MaintenanceStatus": {
-          "target": "com.amazonaws.opsworkscm#MaintenanceStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the most recent server maintenance run. Shows <code>SUCCESS</code> or <code>FAILED</code>.\n    </p>"
-          }
-        },
-        "PreferredMaintenanceWindow": {
-          "target": "com.amazonaws.opsworkscm#TimeWindowDefinition",
-          "traits": {
-            "smithy.api#documentation": "<p>The preferred maintenance period specified for the server.\n    </p>"
-          }
-        },
-        "PreferredBackupWindow": {
-          "target": "com.amazonaws.opsworkscm#TimeWindowDefinition",
-          "traits": {
-            "smithy.api#documentation": "<p>The preferred backup period specified for the server.\n    </p>"
-          }
-        },
-        "SecurityGroupIds": {
-          "target": "com.amazonaws.opsworkscm#Strings",
-          "traits": {
-            "smithy.api#documentation": "<p>\n      The security group IDs for the server, as specified in the CloudFormation stack.\n      These might not be the same security groups that are shown in the EC2 console.\n    </p>"
-          }
-        },
-        "ServiceRoleArn": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The service role ARN used to create the server.\n    </p>"
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.opsworkscm#ServerStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>\n      The server's status. This field displays the states of actions in progress, such as creating, running, or backing up the server,\n      as well as the server's health state.\n    </p>"
-          }
-        },
-        "StatusReason": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>\n      Depending on the server status, this field has either a human-readable\n      message (such as a create or backup error), or an escaped block of JSON (used for health check results).\n    </p>"
-          }
-        },
-        "SubnetIds": {
-          "target": "com.amazonaws.opsworkscm#Strings",
-          "traits": {
-            "smithy.api#documentation": "<p>\n      The subnet IDs specified in a CreateServer request.\n    </p>"
-          }
-        },
-        "ServerArn": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the server.\n    </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Describes a configuration management server.\n    </p>"
-      }
-    },
-    "com.amazonaws.opsworkscm#ServerEvent": {
-      "type": "structure",
-      "members": {
-        "CreatedAt": {
-          "target": "com.amazonaws.opsworkscm#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time when the event occurred.\n    </p>"
-          }
-        },
-        "ServerName": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the server on or for which the event occurred.\n    </p>"
-          }
-        },
-        "Message": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A human-readable informational or status message.</p>"
-          }
-        },
-        "LogUrl": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 URL of the event's log file.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>An event that is related to the server, such as the start of maintenance or backup.\n    </p>"
-      }
-    },
-    "com.amazonaws.opsworkscm#ServerEvents": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.opsworkscm#ServerEvent"
-      }
-    },
-    "com.amazonaws.opsworkscm#ServerName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 40
-        },
-        "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9\\-]*$"
-      }
-    },
-    "com.amazonaws.opsworkscm#ServerStatus": {
-      "type": "enum",
-      "members": {
-        "BACKING_UP": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "BACKING_UP"
-          }
-        },
-        "CONNECTION_LOST": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "CONNECTION_LOST"
-          }
-        },
-        "CREATING": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "CREATING"
-          }
-        },
-        "DELETING": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "DELETING"
-          }
-        },
-        "MODIFYING": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "MODIFYING"
-          }
-        },
-        "FAILED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "FAILED"
-          }
-        },
-        "HEALTHY": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "HEALTHY"
-          }
-        },
-        "RUNNING": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "RUNNING"
-          }
-        },
-        "RESTORING": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "RESTORING"
-          }
-        },
-        "SETUP": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "SETUP"
-          }
-        },
-        "UNDER_MAINTENANCE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "UNDER_MAINTENANCE"
-          }
-        },
-        "UNHEALTHY": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "UNHEALTHY"
-          }
-        },
-        "TERMINATED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "TERMINATED"
-          }
-        }
-      }
-    },
-    "com.amazonaws.opsworkscm#Servers": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.opsworkscm#Server"
-      }
-    },
-    "com.amazonaws.opsworkscm#ServiceRoleArn": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 10000
-        },
-        "smithy.api#pattern": "^arn:aws:iam::[0-9]{12}:role/"
-      }
-    },
-    "com.amazonaws.opsworkscm#StartMaintenance": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.opsworkscm#StartMaintenanceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.opsworkscm#StartMaintenanceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.opsworkscm#InvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>\n      Manually starts server maintenance. This command can be useful if an earlier maintenance attempt failed, and the underlying\n      cause of maintenance failure has been resolved. The server is in an <code>UNDER_MAINTENANCE</code> state while maintenance is in progress.\n    </p>\n         <p>\n      Maintenance can only be started on servers in <code>HEALTHY</code> and <code>UNHEALTHY</code> states. Otherwise, an <code>InvalidStateException</code> is thrown.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>"
-      }
-    },
-    "com.amazonaws.opsworkscm#StartMaintenanceRequest": {
-      "type": "structure",
-      "members": {
-        "ServerName": {
-          "target": "com.amazonaws.opsworkscm#ServerName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the server on which to run maintenance.\n    </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "EngineAttributes": {
-          "target": "com.amazonaws.opsworkscm#EngineAttributes",
-          "traits": {
-            "smithy.api#documentation": "<p>Engine attributes that are specific to the server on which you want to run maintenance.</p>\n         <p class=\"title\">\n            <b>Attributes accepted in a StartMaintenance request for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_MAJOR_UPGRADE</code>: If a Chef Automate server is eligible for upgrade to Chef Automate 2, \n        add this engine attribute to a <code>StartMaintenance</code> request and set the value to <code>true</code> to upgrade the server to Chef Automate 2. For more information, see \n        <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html\">Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2</a>.\n      </p>\n            </li>\n         </ul>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#StartMaintenanceResponse": {
-      "type": "structure",
-      "members": {
-        "Server": {
-          "target": "com.amazonaws.opsworkscm#Server",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains the response to a <code>StartMaintenance</code> request.\n    </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#String": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 10000
-        },
-        "smithy.api#pattern": "^(?s)"
-      }
-    },
-    "com.amazonaws.opsworkscm#Strings": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.opsworkscm#String"
-      }
-    },
-    "com.amazonaws.opsworkscm#Tag": {
-      "type": "structure",
-      "members": {
-        "Key": {
-          "target": "com.amazonaws.opsworkscm#TagKey",
-          "traits": {
-            "smithy.api#documentation": "<p>A tag key, such as <code>Stage</code> or <code>Name</code>. A tag key cannot be empty. The key can be a maximum of 127 characters, \n      and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n         </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Value": {
-          "target": "com.amazonaws.opsworkscm#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>An optional tag value, such as <code>Production</code> or <code>test-owcm-server</code>. The value can be a maximum of 255 characters, \n      and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n         </p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to an AWS OpsWorks for Chef Automate \n      or AWS OpsWorks for Puppet Enterprise server. Leading and trailing white spaces are trimmed from both the key and value. \n      A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.</p>"
-      }
-    },
-    "com.amazonaws.opsworkscm#TagKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        },
-        "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
-      }
-    },
-    "com.amazonaws.opsworkscm#TagKeyList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.opsworkscm#TagKey"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.opsworkscm#TagList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.opsworkscm#Tag"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.opsworkscm#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.opsworkscm#TagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.opsworkscm#TagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.opsworkscm#InvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server, or to server backups.</p>"
-      }
-    },
-    "com.amazonaws.opsworkscm#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.opsworkscm#AWSOpsWorksCMResourceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of a resource to which you want to apply tags. For example, \n      <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.opsworkscm#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to AWS OpsWorks-CM servers or backups.</p>\n         <ul>\n            <li>\n               <p>The key cannot be empty.</p>\n            </li>\n            <li>\n               <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>Leading and trailing white spaces are trimmed from both the key and value.</p>\n            </li>\n            <li>\n               <p>A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server or backup.</p>\n            </li>\n         </ul>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#TagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#TagValue": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        },
-        "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
-      }
-    },
-    "com.amazonaws.opsworkscm#TimeWindowDefinition": {
-      "type": "string",
-      "traits": {
-        "smithy.api#documentation": "<p>\n            <code>DDD:HH:MM</code> (weekly start time) or\n    <code>HH:MM</code> (daily start time).\n    </p>\n         <p>\n      Time windows always use coordinated universal time (UTC). Valid strings for day of week (<code>DDD</code>) are: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>,\n      <code>Thr</code>, <code>Fri</code>, <code>Sat</code>, or <code>Sun</code>.</p>",
-        "smithy.api#length": {
-          "min": 0,
-          "max": 10000
-        },
-        "smithy.api#pattern": "^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$"
-      }
-    },
-    "com.amazonaws.opsworkscm#Timestamp": {
-      "type": "timestamp"
-    },
-    "com.amazonaws.opsworkscm#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.opsworkscm#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.opsworkscm#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.opsworkscm#InvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes specified tags from an AWS OpsWorks-CM server or backup.</p>"
-      }
-    },
-    "com.amazonaws.opsworkscm#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.opsworkscm#AWSOpsWorksCMResourceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of a resource from which you want to remove tags. For example, \n      <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.opsworkscm#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The keys of tags that you want to remove.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#UntagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#UpdateServer": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.opsworkscm#UpdateServerRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.opsworkscm#UpdateServerResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.opsworkscm#InvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>\n      Updates settings for a server.\n    </p>\n         <p>\n      This operation is synchronous.\n    </p>"
-      }
-    },
-    "com.amazonaws.opsworkscm#UpdateServerEngineAttributes": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.opsworkscm#UpdateServerEngineAttributesRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.opsworkscm#UpdateServerEngineAttributesResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.opsworkscm#InvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.opsworkscm#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>\n      Updates engine-specific attributes on a specified server. The server\n      enters the <code>MODIFYING</code> state when this operation\n      is in progress. Only one update can occur at a time.\n      You can use this command to reset a Chef server's public key (<code>CHEF_PIVOTAL_KEY</code>) or a Puppet server's \n      admin password (<code>PUPPET_ADMIN_PASSWORD</code>).\n    </p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      This operation can only be called for servers in <code>HEALTHY</code> or <code>UNHEALTHY</code> states. Otherwise, an <code>InvalidStateException</code> is raised.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>"
-      }
-    },
-    "com.amazonaws.opsworkscm#UpdateServerEngineAttributesRequest": {
-      "type": "structure",
-      "members": {
-        "ServerName": {
-          "target": "com.amazonaws.opsworkscm#ServerName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the server to update.\n    </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "AttributeName": {
-          "target": "com.amazonaws.opsworkscm#AttributeName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the engine attribute to update.\n    </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "AttributeValue": {
-          "target": "com.amazonaws.opsworkscm#AttributeValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The value to set for the attribute.\n    </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#UpdateServerEngineAttributesResponse": {
-      "type": "structure",
-      "members": {
-        "Server": {
-          "target": "com.amazonaws.opsworkscm#Server",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains the response to an <code>UpdateServerEngineAttributes</code> request.\n    </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#UpdateServerRequest": {
-      "type": "structure",
-      "members": {
-        "DisableAutomatedBackup": {
-          "target": "com.amazonaws.opsworkscm#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Setting DisableAutomatedBackup to <code>true</code> disables automated or scheduled backups. Automated backups are enabled by default.\n    </p>"
-          }
-        },
-        "BackupRetentionCount": {
-          "target": "com.amazonaws.opsworkscm#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>Sets the number of automated backups that you want to keep.\n      </p>"
-          }
-        },
-        "ServerName": {
-          "target": "com.amazonaws.opsworkscm#ServerName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the server to update.\n    </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "PreferredMaintenanceWindow": {
-          "target": "com.amazonaws.opsworkscm#TimeWindowDefinition"
-        },
-        "PreferredBackupWindow": {
-          "target": "com.amazonaws.opsworkscm#TimeWindowDefinition"
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#UpdateServerResponse": {
-      "type": "structure",
-      "members": {
-        "Server": {
-          "target": "com.amazonaws.opsworkscm#Server",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains the response to a <code>UpdateServer</code> request.\n    </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.opsworkscm#ValidationException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.opsworkscm#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Error or informational message that can contain more detail about a validation failure.\n    </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>One or more of the provided request parameters are not valid.\n    </p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.opsworkscm#OpsWorksCM": {
+    "com.amazonaws.opsworkscm#OpsWorksCM_V2016_11_01": {
       "type": "service",
       "version": "2016-11-01",
       "operations": [
@@ -3127,6 +2322,811 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.opsworkscm#ResourceAlreadyExistsException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Error or informational message in response to a CreateServer request that a resource cannot be created because it already exists.\n    </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The requested resource cannot be created because it already exists.\n    </p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.opsworkscm#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Error or informational message that can contain more detail about problems locating or accessing a resource.\n    </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The requested resource does not exist, or access was denied.\n    </p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.opsworkscm#RestoreServer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.opsworkscm#RestoreServerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.opsworkscm#RestoreServerResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.opsworkscm#InvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n      Restores a backup to a server that is in a <code>CONNECTION_LOST</code>, <code>HEALTHY</code>, <code>RUNNING</code>, <code>UNHEALTHY</code>, or <code>TERMINATED</code> state.\n      When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains\n      the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.\n    </p>\n         <p>Restoring from a backup is performed by creating a new EC2 instance. If restoration is successful, and the server is in a <code>HEALTHY</code> state, \n      AWS OpsWorks CM switches traffic over to the new instance. After restoration is finished, the old EC2 instance is maintained in a \n      <code>Running</code> or <code>Stopped</code> state, but is eventually terminated.</p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      An <code>InvalidStateException</code> is thrown when the server is not in a valid state. A <code>ResourceNotFoundException</code> is thrown\n      when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>"
+      }
+    },
+    "com.amazonaws.opsworkscm#RestoreServerRequest": {
+      "type": "structure",
+      "members": {
+        "BackupId": {
+          "target": "com.amazonaws.opsworkscm#BackupId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the backup that you want to use to restore a server.\n    </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ServerName": {
+          "target": "com.amazonaws.opsworkscm#ServerName",
+          "traits": {
+            "smithy.api#documentation": "<p> The name of the server that you want to restore.\n    </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "InstanceType": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The type of instance to restore. Valid values must be specified in the following format: <code>^([cm][34]|t2).*</code>\n      For example, <code>m5.large</code>. Valid values are <code>m5.large</code>, <code>r5.xlarge</code>, and <code>r5.2xlarge</code>. If you do not specify this parameter,\n      RestoreServer uses the instance type from the specified backup.\n    </p>"
+          }
+        },
+        "KeyPair": {
+          "target": "com.amazonaws.opsworkscm#KeyPair",
+          "traits": {
+            "smithy.api#documentation": "<p> The name of the key pair to set on the new EC2 instance. This can be helpful\n      if the administrator no longer has the SSH key.\n    </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#RestoreServerResponse": {
+      "type": "structure",
+      "members": {
+        "Server": {
+          "target": "com.amazonaws.opsworkscm#Server"
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#Server": {
+      "type": "structure",
+      "members": {
+        "AssociatePublicIpAddress": {
+          "target": "com.amazonaws.opsworkscm#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Associate a public IP address with a server that you are launching.\n    </p>"
+          }
+        },
+        "BackupRetentionCount": {
+          "target": "com.amazonaws.opsworkscm#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of automated backups to keep.\n    </p>"
+          }
+        },
+        "ServerName": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the server.\n    </p>"
+          }
+        },
+        "CreatedAt": {
+          "target": "com.amazonaws.opsworkscm#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>Time stamp of server creation. Example <code>2016-07-29T13:38:47.520Z</code>\n         </p>"
+          }
+        },
+        "CloudFormationStackArn": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the CloudFormation stack that was used to create the server.\n    </p>"
+          }
+        },
+        "CustomDomain": {
+          "target": "com.amazonaws.opsworkscm#CustomDomain",
+          "traits": {
+            "smithy.api#documentation": "<p>An optional public endpoint of a server, such as <code>https://aws.my-company.com</code>. \n      You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified.</p>"
+          }
+        },
+        "DisableAutomatedBackup": {
+          "target": "com.amazonaws.opsworkscm#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Disables automated backups. The number of stored backups is dependent on the value of PreferredBackupCount.\n    </p>"
+          }
+        },
+        "Endpoint": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n      A DNS name that can be used to access the engine. Example: <code>myserver-asdfghjkl.us-east-1.opsworks.io</code>. \n      You cannot access the server by using the <code>Endpoint</code> value if the server has a <code>CustomDomain</code> specified.\n    </p>"
+          }
+        },
+        "Engine": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The engine type of the server. Valid values in this release include <code>ChefAutomate</code> and <code>Puppet</code>.\n    </p>"
+          }
+        },
+        "EngineModel": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The engine model of the server. Valid values in this release include <code>Monolithic</code> for Puppet and <code>Single</code> for Chef.\n    </p>"
+          }
+        },
+        "EngineAttributes": {
+          "target": "com.amazonaws.opsworkscm#EngineAttributes",
+          "traits": {
+            "smithy.api#documentation": "<p>The response of a createServer() request returns the master\n    credential to access the server in EngineAttributes. These\n    credentials are not stored by AWS OpsWorks CM; they are returned only as part of the result of createServer().\n    </p>\n         <p class=\"title\">\n            <b>Attributes returned in a createServer response for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_AUTOMATE_PIVOTAL_KEY</code>: A base64-encoded RSA private key that is\n      generated by AWS OpsWorks for Chef Automate. This private key is required to access\n      the Chef API.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CHEF_STARTER_KIT</code>: A base64-encoded ZIP file.\n      The ZIP file contains a Chef starter kit, which includes a README, a\n      configuration file, and the required RSA private key. Save this file, unzip it,\n      and then change to the directory where you've unzipped the file contents.\n      From this directory, you can run Knife commands.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Attributes returned in a createServer response for Puppet</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUPPET_STARTER_KIT</code>: A base64-encoded ZIP file.\n        The ZIP file contains a Puppet starter kit, including a README and a\n        required private key. Save this file, unzip it,\n        and then change to the directory where you've unzipped the file contents.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUPPET_ADMIN_PASSWORD</code>: An administrator password that you can use to sign in to the Puppet Enterprise console after the server is online.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "EngineVersion": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The engine version of the server. For a Chef server, the valid value for EngineVersion is \n      currently <code>2</code>. For a Puppet server, specify either <code>2019</code> or <code>2017</code>.\n    </p>"
+          }
+        },
+        "InstanceProfileArn": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The instance profile ARN of the server.\n    </p>"
+          }
+        },
+        "InstanceType": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n      The instance type for the server, as specified in the CloudFormation stack. This might not be the same instance type that is shown in the EC2 console.\n    </p>"
+          }
+        },
+        "KeyPair": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The key pair associated with the server.\n    </p>"
+          }
+        },
+        "MaintenanceStatus": {
+          "target": "com.amazonaws.opsworkscm#MaintenanceStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the most recent server maintenance run. Shows <code>SUCCESS</code> or <code>FAILED</code>.\n    </p>"
+          }
+        },
+        "PreferredMaintenanceWindow": {
+          "target": "com.amazonaws.opsworkscm#TimeWindowDefinition",
+          "traits": {
+            "smithy.api#documentation": "<p>The preferred maintenance period specified for the server.\n    </p>"
+          }
+        },
+        "PreferredBackupWindow": {
+          "target": "com.amazonaws.opsworkscm#TimeWindowDefinition",
+          "traits": {
+            "smithy.api#documentation": "<p>The preferred backup period specified for the server.\n    </p>"
+          }
+        },
+        "SecurityGroupIds": {
+          "target": "com.amazonaws.opsworkscm#Strings",
+          "traits": {
+            "smithy.api#documentation": "<p>\n      The security group IDs for the server, as specified in the CloudFormation stack.\n      These might not be the same security groups that are shown in the EC2 console.\n    </p>"
+          }
+        },
+        "ServiceRoleArn": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The service role ARN used to create the server.\n    </p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.opsworkscm#ServerStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>\n      The server's status. This field displays the states of actions in progress, such as creating, running, or backing up the server,\n      as well as the server's health state.\n    </p>"
+          }
+        },
+        "StatusReason": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n      Depending on the server status, this field has either a human-readable\n      message (such as a create or backup error), or an escaped block of JSON (used for health check results).\n    </p>"
+          }
+        },
+        "SubnetIds": {
+          "target": "com.amazonaws.opsworkscm#Strings",
+          "traits": {
+            "smithy.api#documentation": "<p>\n      The subnet IDs specified in a CreateServer request.\n    </p>"
+          }
+        },
+        "ServerArn": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the server.\n    </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a configuration management server.\n    </p>"
+      }
+    },
+    "com.amazonaws.opsworkscm#ServerEvent": {
+      "type": "structure",
+      "members": {
+        "CreatedAt": {
+          "target": "com.amazonaws.opsworkscm#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time when the event occurred.\n    </p>"
+          }
+        },
+        "ServerName": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the server on or for which the event occurred.\n    </p>"
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A human-readable informational or status message.</p>"
+          }
+        },
+        "LogUrl": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 URL of the event's log file.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An event that is related to the server, such as the start of maintenance or backup.\n    </p>"
+      }
+    },
+    "com.amazonaws.opsworkscm#ServerEvents": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.opsworkscm#ServerEvent"
+      }
+    },
+    "com.amazonaws.opsworkscm#ServerName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 40
+        },
+        "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9\\-]*$"
+      }
+    },
+    "com.amazonaws.opsworkscm#ServerStatus": {
+      "type": "enum",
+      "members": {
+        "BACKING_UP": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "BACKING_UP"
+          }
+        },
+        "CONNECTION_LOST": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CONNECTION_LOST"
+          }
+        },
+        "CREATING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CREATING"
+          }
+        },
+        "DELETING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DELETING"
+          }
+        },
+        "MODIFYING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MODIFYING"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        },
+        "HEALTHY": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "HEALTHY"
+          }
+        },
+        "RUNNING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "RUNNING"
+          }
+        },
+        "RESTORING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "RESTORING"
+          }
+        },
+        "SETUP": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SETUP"
+          }
+        },
+        "UNDER_MAINTENANCE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "UNDER_MAINTENANCE"
+          }
+        },
+        "UNHEALTHY": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "UNHEALTHY"
+          }
+        },
+        "TERMINATED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "TERMINATED"
+          }
+        }
+      }
+    },
+    "com.amazonaws.opsworkscm#Servers": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.opsworkscm#Server"
+      }
+    },
+    "com.amazonaws.opsworkscm#ServiceRoleArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 10000
+        },
+        "smithy.api#pattern": "^arn:aws:iam::[0-9]{12}:role/"
+      }
+    },
+    "com.amazonaws.opsworkscm#StartMaintenance": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.opsworkscm#StartMaintenanceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.opsworkscm#StartMaintenanceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.opsworkscm#InvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n      Manually starts server maintenance. This command can be useful if an earlier maintenance attempt failed, and the underlying\n      cause of maintenance failure has been resolved. The server is in an <code>UNDER_MAINTENANCE</code> state while maintenance is in progress.\n    </p>\n         <p>\n      Maintenance can only be started on servers in <code>HEALTHY</code> and <code>UNHEALTHY</code> states. Otherwise, an <code>InvalidStateException</code> is thrown.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>"
+      }
+    },
+    "com.amazonaws.opsworkscm#StartMaintenanceRequest": {
+      "type": "structure",
+      "members": {
+        "ServerName": {
+          "target": "com.amazonaws.opsworkscm#ServerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the server on which to run maintenance.\n    </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "EngineAttributes": {
+          "target": "com.amazonaws.opsworkscm#EngineAttributes",
+          "traits": {
+            "smithy.api#documentation": "<p>Engine attributes that are specific to the server on which you want to run maintenance.</p>\n         <p class=\"title\">\n            <b>Attributes accepted in a StartMaintenance request for Chef</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>CHEF_MAJOR_UPGRADE</code>: If a Chef Automate server is eligible for upgrade to Chef Automate 2, \n        add this engine attribute to a <code>StartMaintenance</code> request and set the value to <code>true</code> to upgrade the server to Chef Automate 2. For more information, see \n        <a href=\"https://docs.aws.amazon.com/opsworks/latest/userguide/opscm-a2upgrade.html\">Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2</a>.\n      </p>\n            </li>\n         </ul>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#StartMaintenanceResponse": {
+      "type": "structure",
+      "members": {
+        "Server": {
+          "target": "com.amazonaws.opsworkscm#Server",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains the response to a <code>StartMaintenance</code> request.\n    </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#String": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 10000
+        },
+        "smithy.api#pattern": "^(?s)"
+      }
+    },
+    "com.amazonaws.opsworkscm#Strings": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.opsworkscm#String"
+      }
+    },
+    "com.amazonaws.opsworkscm#Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "target": "com.amazonaws.opsworkscm#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>A tag key, such as <code>Stage</code> or <code>Name</code>. A tag key cannot be empty. The key can be a maximum of 127 characters, \n      and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.opsworkscm#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>An optional tag value, such as <code>Production</code> or <code>test-owcm-server</code>. The value can be a maximum of 255 characters, \n      and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to an AWS OpsWorks for Chef Automate \n      or AWS OpsWorks for Puppet Enterprise server. Leading and trailing white spaces are trimmed from both the key and value. \n      A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.</p>"
+      }
+    },
+    "com.amazonaws.opsworkscm#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+      }
+    },
+    "com.amazonaws.opsworkscm#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.opsworkscm#TagKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.opsworkscm#TagList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.opsworkscm#Tag"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.opsworkscm#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.opsworkscm#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.opsworkscm#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.opsworkscm#InvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server, or to server backups.</p>"
+      }
+    },
+    "com.amazonaws.opsworkscm#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.opsworkscm#AWSOpsWorksCMResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of a resource to which you want to apply tags. For example, \n      <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.opsworkscm#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to AWS OpsWorks-CM servers or backups.</p>\n         <ul>\n            <li>\n               <p>The key cannot be empty.</p>\n            </li>\n            <li>\n               <p>The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: <code>+ - = . _ : /</code>\n               </p>\n            </li>\n            <li>\n               <p>Leading and trailing white spaces are trimmed from both the key and value.</p>\n            </li>\n            <li>\n               <p>A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server or backup.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#TagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        },
+        "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+      }
+    },
+    "com.amazonaws.opsworkscm#TimeWindowDefinition": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>\n            <code>DDD:HH:MM</code> (weekly start time) or\n    <code>HH:MM</code> (daily start time).\n    </p>\n         <p>\n      Time windows always use coordinated universal time (UTC). Valid strings for day of week (<code>DDD</code>) are: <code>Mon</code>, <code>Tue</code>, <code>Wed</code>,\n      <code>Thr</code>, <code>Fri</code>, <code>Sat</code>, or <code>Sun</code>.</p>",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 10000
+        },
+        "smithy.api#pattern": "^((Mon|Tue|Wed|Thu|Fri|Sat|Sun):)?([0-1][0-9]|2[0-3]):[0-5][0-9]$"
+      }
+    },
+    "com.amazonaws.opsworkscm#Timestamp": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.opsworkscm#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.opsworkscm#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.opsworkscm#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.opsworkscm#InvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes specified tags from an AWS OpsWorks-CM server or backup.</p>"
+      }
+    },
+    "com.amazonaws.opsworkscm#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.opsworkscm#AWSOpsWorksCMResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of a resource from which you want to remove tags. For example, \n      <code>arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.opsworkscm#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The keys of tags that you want to remove.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#UpdateServer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.opsworkscm#UpdateServerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.opsworkscm#UpdateServerResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.opsworkscm#InvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n      Updates settings for a server.\n    </p>\n         <p>\n      This operation is synchronous.\n    </p>"
+      }
+    },
+    "com.amazonaws.opsworkscm#UpdateServerEngineAttributes": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.opsworkscm#UpdateServerEngineAttributesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.opsworkscm#UpdateServerEngineAttributesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.opsworkscm#InvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.opsworkscm#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n      Updates engine-specific attributes on a specified server. The server\n      enters the <code>MODIFYING</code> state when this operation\n      is in progress. Only one update can occur at a time.\n      You can use this command to reset a Chef server's public key (<code>CHEF_PIVOTAL_KEY</code>) or a Puppet server's \n      admin password (<code>PUPPET_ADMIN_PASSWORD</code>).\n    </p>\n         <p>\n      This operation is asynchronous.\n    </p>\n         <p>\n      This operation can only be called for servers in <code>HEALTHY</code> or <code>UNHEALTHY</code> states. Otherwise, an <code>InvalidStateException</code> is raised.\n      A <code>ResourceNotFoundException</code> is thrown when the server does not exist. A <code>ValidationException</code> is raised when parameters of the request are not valid.\n    </p>"
+      }
+    },
+    "com.amazonaws.opsworkscm#UpdateServerEngineAttributesRequest": {
+      "type": "structure",
+      "members": {
+        "ServerName": {
+          "target": "com.amazonaws.opsworkscm#ServerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the server to update.\n    </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AttributeName": {
+          "target": "com.amazonaws.opsworkscm#AttributeName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the engine attribute to update.\n    </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AttributeValue": {
+          "target": "com.amazonaws.opsworkscm#AttributeValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The value to set for the attribute.\n    </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#UpdateServerEngineAttributesResponse": {
+      "type": "structure",
+      "members": {
+        "Server": {
+          "target": "com.amazonaws.opsworkscm#Server",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains the response to an <code>UpdateServerEngineAttributes</code> request.\n    </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#UpdateServerRequest": {
+      "type": "structure",
+      "members": {
+        "DisableAutomatedBackup": {
+          "target": "com.amazonaws.opsworkscm#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Setting DisableAutomatedBackup to <code>true</code> disables automated or scheduled backups. Automated backups are enabled by default.\n    </p>"
+          }
+        },
+        "BackupRetentionCount": {
+          "target": "com.amazonaws.opsworkscm#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>Sets the number of automated backups that you want to keep.\n      </p>"
+          }
+        },
+        "ServerName": {
+          "target": "com.amazonaws.opsworkscm#ServerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the server to update.\n    </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PreferredMaintenanceWindow": {
+          "target": "com.amazonaws.opsworkscm#TimeWindowDefinition"
+        },
+        "PreferredBackupWindow": {
+          "target": "com.amazonaws.opsworkscm#TimeWindowDefinition"
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#UpdateServerResponse": {
+      "type": "structure",
+      "members": {
+        "Server": {
+          "target": "com.amazonaws.opsworkscm#Server",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains the response to a <code>UpdateServer</code> request.\n    </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.opsworkscm#ValidationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.opsworkscm#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Error or informational message that can contain more detail about a validation failure.\n    </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>One or more of the provided request parameters are not valid.\n    </p>",
+        "smithy.api#error": "client"
       }
     }
   }

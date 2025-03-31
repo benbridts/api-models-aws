@@ -1318,300 +1318,6 @@
         "smithy.api#documentation": "<p>Contains OpenID Connect (OIDC) parameters for use with Microsoft Intune. For more information about using Connector for SCEP for Microsoft Intune, see <a href=\"https://docs.aws.amazon.com/privateca/latest/userguide/scep-connector.htmlconnector-for-scep-intune.html\">Using Connector for SCEP for Microsoft Intune</a>.</p>"
       }
     },
-    "com.amazonaws.pcaconnectorscep#ResourceNotFoundException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "ResourceId": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of the Amazon Web Services resource.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ResourceType": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The resource type, which can be either <code>Connector</code> or <code>Challenge</code>.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The operation tried to access a nonexistent resource. The resource might be incorrectly specified, or it might have a status other than <code>ACTIVE</code>.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 404
-      }
-    },
-    "com.amazonaws.pcaconnectorscep#SensitiveString": {
-      "type": "string",
-      "traits": {
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.pcaconnectorscep#ServiceQuotaExceededException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "ResourceType": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The resource type, which can be either <code>Connector</code> or <code>Challenge</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ServiceCode": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the originating service.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "QuotaCode": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The quota identifier.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request would cause a service quota to be exceeded.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 402
-      }
-    },
-    "com.amazonaws.pcaconnectorscep#TagKeyList": {
-      "type": "list",
-      "member": {
-        "target": "smithy.api#String"
-      }
-    },
-    "com.amazonaws.pcaconnectorscep#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.pcaconnectorscep#TagResourceRequest"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.pcaconnectorscep#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.pcaconnectorscep#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.pcaconnectorscep#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.pcaconnectorscep#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.pcaconnectorscep#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Adds one or more tags to your resource.</p>",
-        "smithy.api#http": {
-          "code": 204,
-          "method": "POST",
-          "uri": "/tags/{ResourceArn}"
-        }
-      }
-    },
-    "com.amazonaws.pcaconnectorscep#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "smithy.api#String",
-          "traits": {
-            "aws.api#data": "tagging",
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.pcaconnectorscep#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The key-value pairs to associate with the resource.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.pcaconnectorscep#Tags": {
-      "type": "map",
-      "key": {
-        "target": "smithy.api#String"
-      },
-      "value": {
-        "target": "smithy.api#String"
-      }
-    },
-    "com.amazonaws.pcaconnectorscep#ThrottlingException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The limit on the number of requests per second was exceeded.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429,
-        "smithy.api#retryable": {
-          "throttling": true
-        }
-      }
-    },
-    "com.amazonaws.pcaconnectorscep#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.pcaconnectorscep#UntagResourceRequest"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.pcaconnectorscep#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.pcaconnectorscep#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.pcaconnectorscep#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.pcaconnectorscep#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.pcaconnectorscep#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes one or more tags from your resource.</p>",
-        "smithy.api#http": {
-          "code": 204,
-          "method": "DELETE",
-          "uri": "/tags/{ResourceArn}"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.pcaconnectorscep#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "smithy.api#String",
-          "traits": {
-            "aws.api#data": "tagging",
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.pcaconnectorscep#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies a list of tag keys that you want to remove from the specified resources.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.pcaconnectorscep#ValidationException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "Reason": {
-          "target": "com.amazonaws.pcaconnectorscep#ValidationExceptionReason",
-          "traits": {
-            "smithy.api#documentation": "<p>The reason for the validation error, if available. The service doesn't return a reason for every validation exception.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>An input validation error occurred. For example, invalid characters in a name tag, or an invalid pagination token.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.pcaconnectorscep#ValidationExceptionReason": {
-      "type": "enum",
-      "members": {
-        "CA_CERT_VALIDITY_TOO_SHORT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "CA_CERT_VALIDITY_TOO_SHORT"
-          }
-        },
-        "INVALID_CA_USAGE_MODE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "INVALID_CA_USAGE_MODE"
-          }
-        },
-        "INVALID_CONNECTOR_TYPE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "INVALID_CONNECTOR_TYPE"
-          }
-        },
-        "INVALID_STATE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "INVALID_STATE"
-          }
-        },
-        "NO_CLIENT_TOKEN": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "NO_CLIENT_TOKEN"
-          }
-        },
-        "UNKNOWN_OPERATION": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "UNKNOWN_OPERATION"
-          }
-        },
-        "OTHER": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "OTHER"
-          }
-        }
-      }
-    },
     "com.amazonaws.pcaconnectorscep#PcaConnectorScep": {
       "type": "service",
       "version": "2018-05-10",
@@ -2327,6 +2033,300 @@
             }
           ],
           "version": "1.0"
+        }
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the Amazon Web Services resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceType": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource type, which can be either <code>Connector</code> or <code>Challenge</code>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The operation tried to access a nonexistent resource. The resource might be incorrectly specified, or it might have a status other than <code>ACTIVE</code>.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#SensitiveString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceType": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource type, which can be either <code>Connector</code> or <code>Challenge</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ServiceCode": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the originating service.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "QuotaCode": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The quota identifier.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request would cause a service quota to be exceeded.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.pcaconnectorscep#TagResourceRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.pcaconnectorscep#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.pcaconnectorscep#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.pcaconnectorscep#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.pcaconnectorscep#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.pcaconnectorscep#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds one or more tags to your resource.</p>",
+        "smithy.api#http": {
+          "code": 204,
+          "method": "POST",
+          "uri": "/tags/{ResourceArn}"
+        }
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "aws.api#data": "tagging",
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.pcaconnectorscep#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>The key-value pairs to associate with the resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#Tags": {
+      "type": "map",
+      "key": {
+        "target": "smithy.api#String"
+      },
+      "value": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The limit on the number of requests per second was exceeded.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429,
+        "smithy.api#retryable": {
+          "throttling": true
+        }
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.pcaconnectorscep#UntagResourceRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.pcaconnectorscep#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.pcaconnectorscep#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.pcaconnectorscep#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.pcaconnectorscep#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.pcaconnectorscep#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes one or more tags from your resource.</p>",
+        "smithy.api#http": {
+          "code": 204,
+          "method": "DELETE",
+          "uri": "/tags/{ResourceArn}"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "aws.api#data": "tagging",
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.pcaconnectorscep#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies a list of tag keys that you want to remove from the specified resources.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#ValidationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "Reason": {
+          "target": "com.amazonaws.pcaconnectorscep#ValidationExceptionReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason for the validation error, if available. The service doesn't return a reason for every validation exception.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An input validation error occurred. For example, invalid characters in a name tag, or an invalid pagination token.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.pcaconnectorscep#ValidationExceptionReason": {
+      "type": "enum",
+      "members": {
+        "CA_CERT_VALIDITY_TOO_SHORT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CA_CERT_VALIDITY_TOO_SHORT"
+          }
+        },
+        "INVALID_CA_USAGE_MODE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "INVALID_CA_USAGE_MODE"
+          }
+        },
+        "INVALID_CONNECTOR_TYPE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "INVALID_CONNECTOR_TYPE"
+          }
+        },
+        "INVALID_STATE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "INVALID_STATE"
+          }
+        },
+        "NO_CLIENT_TOKEN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "NO_CLIENT_TOKEN"
+          }
+        },
+        "UNKNOWN_OPERATION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "UNKNOWN_OPERATION"
+          }
+        },
+        "OTHER": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "OTHER"
+          }
         }
       }
     }

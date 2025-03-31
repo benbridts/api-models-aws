@@ -3454,223 +3454,6 @@
         "smithy.api#sensitive": {}
       }
     },
-    "com.amazonaws.taxsettings#TurkeyAdditionalInfo": {
-      "type": "structure",
-      "members": {
-        "taxOffice": {
-          "target": "com.amazonaws.taxsettings#TaxOffice",
-          "traits": {
-            "smithy.api#documentation": "<p>The tax office where you're registered. You can enter this information as a string. The Tax Settings API will add this information to your invoice. This parameter is required for business-to-business (B2B) and business-to-government customers. It's not required for business-to-consumer (B2C) customers.</p>"
-          }
-        },
-        "kepEmailId": {
-          "target": "com.amazonaws.taxsettings#KepEmailId",
-          "traits": {
-            "smithy.api#documentation": "<p>The Registered Electronic Mail (REM) that is used to send notarized communication. This parameter is optional for business-to-business (B2B) and business-to-government (B2G) customers. It's not required for business-to-consumer (B2C) customers.</p>"
-          }
-        },
-        "secondaryTaxId": {
-          "target": "com.amazonaws.taxsettings#SecondaryTaxId",
-          "traits": {
-            "smithy.api#documentation": "<p>\n      Secondary tax ID (\u201charcama birimi VKN\u201dsi\u201d). If one isn't provided, we will use your VKN as the secondary ID.\n    </p>"
-          }
-        },
-        "industries": {
-          "target": "com.amazonaws.taxsettings#Industries",
-          "traits": {
-            "smithy.api#documentation": "<p>The industry information that tells the Tax Settings API if you're subject to additional\n      withholding taxes. This information required for business-to-business (B2B) customers. This\n      information is conditionally mandatory for B2B customers who are subject to KDV tax.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Additional tax information associated with your TRN in Turkey.</p>"
-      }
-    },
-    "com.amazonaws.taxsettings#UkraineAdditionalInfo": {
-      "type": "structure",
-      "members": {
-        "ukraineTrnType": {
-          "target": "com.amazonaws.taxsettings#UkraineTrnType",
-          "traits": {
-            "smithy.api#documentation": "<p>\n      The tax registration type.\n    </p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>\n      Additional tax information associated with your TRN in Ukraine.\n    </p>"
-      }
-    },
-    "com.amazonaws.taxsettings#UkraineTrnType": {
-      "type": "enum",
-      "members": {
-        "BUSINESS": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "Business"
-          }
-        },
-        "INDIVIDUAL": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "Individual"
-          }
-        }
-      }
-    },
-    "com.amazonaws.taxsettings#UniqueIdentificationNumber": {
-      "type": "string",
-      "traits": {
-        "smithy.api#pattern": "^[a-zA-Z0-9]{39}$"
-      }
-    },
-    "com.amazonaws.taxsettings#Url": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 200
-        },
-        "smithy.api#pattern": "^https.*\\S.*$"
-      }
-    },
-    "com.amazonaws.taxsettings#ValidationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.taxsettings#ErrorMessage",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "errorCode": {
-          "target": "com.amazonaws.taxsettings#ValidationExceptionErrorCode",
-          "traits": {
-            "smithy.api#documentation": "<p>400</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "fieldList": {
-          "target": "com.amazonaws.taxsettings#ValidationExceptionFieldList",
-          "traits": {
-            "smithy.api#documentation": "<p>400</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The exception when the input doesn't pass validation for at least one of the input\n      parameters. </p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.taxsettings#ValidationExceptionErrorCode": {
-      "type": "enum",
-      "members": {
-        "MALFORMED_TOKEN": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "MalformedToken"
-          }
-        },
-        "EXPIRED_TOKEN": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "ExpiredToken"
-          }
-        },
-        "INVALID_TOKEN": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "InvalidToken"
-          }
-        },
-        "FIELD_VALIDATION_FAILED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "FieldValidationFailed"
-          }
-        },
-        "MISSING_INPUT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "MissingInput"
-          }
-        }
-      }
-    },
-    "com.amazonaws.taxsettings#ValidationExceptionField": {
-      "type": "structure",
-      "members": {
-        "name": {
-          "target": "com.amazonaws.taxsettings#FieldName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the parameter that caused a <code>ValidationException</code> error.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The information about the specified parameter in the request that caused an error.</p>"
-      }
-    },
-    "com.amazonaws.taxsettings#ValidationExceptionFieldList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.taxsettings#ValidationExceptionField"
-      }
-    },
-    "com.amazonaws.taxsettings#VerificationDetails": {
-      "type": "structure",
-      "members": {
-        "dateOfBirth": {
-          "target": "com.amazonaws.taxsettings#DateOfBirth",
-          "traits": {
-            "smithy.api#documentation": "<p>Date of birth to verify your submitted TRN. Use the <code>YYYY-MM-DD</code> format.</p>"
-          }
-        },
-        "taxRegistrationDocuments": {
-          "target": "com.amazonaws.taxsettings#TaxRegistrationDocuments",
-          "traits": {
-            "smithy.api#documentation": "<p>The tax registration document, which is required for specific countries such as Bangladesh, Kenya, South Korea and Spain.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Required information to verify your TRN.</p>"
-      }
-    },
-    "com.amazonaws.taxsettings#VietnamAdditionalInfo": {
-      "type": "structure",
-      "members": {
-        "enterpriseIdentificationNumber": {
-          "target": "com.amazonaws.taxsettings#EnterpriseIdentificationNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The enterprise identification number for tax registration. This field must be provided for successful API operation.</p>"
-          }
-        },
-        "electronicTransactionCodeNumber": {
-          "target": "com.amazonaws.taxsettings#ElectronicTransactionCodeNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The electronic transaction code number on the tax return document. This field must be provided for successful API operation.</p>"
-          }
-        },
-        "paymentVoucherNumber": {
-          "target": "com.amazonaws.taxsettings#PaymentVoucherNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The payment voucher number on the tax return payment document. This field must be provided for successful API operation.</p>"
-          }
-        },
-        "paymentVoucherNumberDate": {
-          "target": "com.amazonaws.taxsettings#DateString",
-          "traits": {
-            "smithy.api#documentation": "<p>The date on the tax return payment document. This field must be provided for successful API operation.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Vietnam.</p>"
-      }
-    },
     "com.amazonaws.taxsettings#TaxSettings": {
       "type": "service",
       "version": "2018-05-10",
@@ -4676,6 +4459,223 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.taxsettings#TurkeyAdditionalInfo": {
+      "type": "structure",
+      "members": {
+        "taxOffice": {
+          "target": "com.amazonaws.taxsettings#TaxOffice",
+          "traits": {
+            "smithy.api#documentation": "<p>The tax office where you're registered. You can enter this information as a string. The Tax Settings API will add this information to your invoice. This parameter is required for business-to-business (B2B) and business-to-government customers. It's not required for business-to-consumer (B2C) customers.</p>"
+          }
+        },
+        "kepEmailId": {
+          "target": "com.amazonaws.taxsettings#KepEmailId",
+          "traits": {
+            "smithy.api#documentation": "<p>The Registered Electronic Mail (REM) that is used to send notarized communication. This parameter is optional for business-to-business (B2B) and business-to-government (B2G) customers. It's not required for business-to-consumer (B2C) customers.</p>"
+          }
+        },
+        "secondaryTaxId": {
+          "target": "com.amazonaws.taxsettings#SecondaryTaxId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n      Secondary tax ID (\u201charcama birimi VKN\u201dsi\u201d). If one isn't provided, we will use your VKN as the secondary ID.\n    </p>"
+          }
+        },
+        "industries": {
+          "target": "com.amazonaws.taxsettings#Industries",
+          "traits": {
+            "smithy.api#documentation": "<p>The industry information that tells the Tax Settings API if you're subject to additional\n      withholding taxes. This information required for business-to-business (B2B) customers. This\n      information is conditionally mandatory for B2B customers who are subject to KDV tax.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Additional tax information associated with your TRN in Turkey.</p>"
+      }
+    },
+    "com.amazonaws.taxsettings#UkraineAdditionalInfo": {
+      "type": "structure",
+      "members": {
+        "ukraineTrnType": {
+          "target": "com.amazonaws.taxsettings#UkraineTrnType",
+          "traits": {
+            "smithy.api#documentation": "<p>\n      The tax registration type.\n    </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n      Additional tax information associated with your TRN in Ukraine.\n    </p>"
+      }
+    },
+    "com.amazonaws.taxsettings#UkraineTrnType": {
+      "type": "enum",
+      "members": {
+        "BUSINESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Business"
+          }
+        },
+        "INDIVIDUAL": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Individual"
+          }
+        }
+      }
+    },
+    "com.amazonaws.taxsettings#UniqueIdentificationNumber": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^[a-zA-Z0-9]{39}$"
+      }
+    },
+    "com.amazonaws.taxsettings#Url": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 200
+        },
+        "smithy.api#pattern": "^https.*\\S.*$"
+      }
+    },
+    "com.amazonaws.taxsettings#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.taxsettings#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "errorCode": {
+          "target": "com.amazonaws.taxsettings#ValidationExceptionErrorCode",
+          "traits": {
+            "smithy.api#documentation": "<p>400</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "fieldList": {
+          "target": "com.amazonaws.taxsettings#ValidationExceptionFieldList",
+          "traits": {
+            "smithy.api#documentation": "<p>400</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The exception when the input doesn't pass validation for at least one of the input\n      parameters. </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.taxsettings#ValidationExceptionErrorCode": {
+      "type": "enum",
+      "members": {
+        "MALFORMED_TOKEN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MalformedToken"
+          }
+        },
+        "EXPIRED_TOKEN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ExpiredToken"
+          }
+        },
+        "INVALID_TOKEN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "InvalidToken"
+          }
+        },
+        "FIELD_VALIDATION_FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FieldValidationFailed"
+          }
+        },
+        "MISSING_INPUT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MissingInput"
+          }
+        }
+      }
+    },
+    "com.amazonaws.taxsettings#ValidationExceptionField": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.taxsettings#FieldName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the parameter that caused a <code>ValidationException</code> error.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The information about the specified parameter in the request that caused an error.</p>"
+      }
+    },
+    "com.amazonaws.taxsettings#ValidationExceptionFieldList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.taxsettings#ValidationExceptionField"
+      }
+    },
+    "com.amazonaws.taxsettings#VerificationDetails": {
+      "type": "structure",
+      "members": {
+        "dateOfBirth": {
+          "target": "com.amazonaws.taxsettings#DateOfBirth",
+          "traits": {
+            "smithy.api#documentation": "<p>Date of birth to verify your submitted TRN. Use the <code>YYYY-MM-DD</code> format.</p>"
+          }
+        },
+        "taxRegistrationDocuments": {
+          "target": "com.amazonaws.taxsettings#TaxRegistrationDocuments",
+          "traits": {
+            "smithy.api#documentation": "<p>The tax registration document, which is required for specific countries such as Bangladesh, Kenya, South Korea and Spain.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Required information to verify your TRN.</p>"
+      }
+    },
+    "com.amazonaws.taxsettings#VietnamAdditionalInfo": {
+      "type": "structure",
+      "members": {
+        "enterpriseIdentificationNumber": {
+          "target": "com.amazonaws.taxsettings#EnterpriseIdentificationNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The enterprise identification number for tax registration. This field must be provided for successful API operation.</p>"
+          }
+        },
+        "electronicTransactionCodeNumber": {
+          "target": "com.amazonaws.taxsettings#ElectronicTransactionCodeNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The electronic transaction code number on the tax return document. This field must be provided for successful API operation.</p>"
+          }
+        },
+        "paymentVoucherNumber": {
+          "target": "com.amazonaws.taxsettings#PaymentVoucherNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The payment voucher number on the tax return payment document. This field must be provided for successful API operation.</p>"
+          }
+        },
+        "paymentVoucherNumberDate": {
+          "target": "com.amazonaws.taxsettings#DateString",
+          "traits": {
+            "smithy.api#documentation": "<p>The date on the tax return payment document. This field must be provided for successful API operation.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Additional tax information to specify for a TRN in Vietnam.</p>"
       }
     }
   }

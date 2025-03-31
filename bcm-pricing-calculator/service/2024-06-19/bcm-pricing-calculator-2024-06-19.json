@@ -1,6 +1,562 @@
 {
   "smithy": "2.0",
   "shapes": {
+    "com.amazonaws.bcmpricingcalculator#AWSBCMPricingCalculator": {
+      "type": "service",
+      "version": "2024-06-19",
+      "operations": [
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#GetPreferences"
+        },
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#TagResource"
+        },
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#UpdatePreferences"
+        }
+      ],
+      "resources": [
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#BillEstimate"
+        },
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#BillScenario"
+        },
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#WorkloadEstimate"
+        }
+      ],
+      "errors": [
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.bcmpricingcalculator#ValidationException"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "BCM Pricing Calculator",
+          "arnNamespace": "bcm-pricing-calculator"
+        },
+        "aws.api#tagEnabled": {},
+        "aws.auth#sigv4": {
+          "name": "bcm-pricing-calculator"
+        },
+        "aws.endpoints#dualStackOnlyEndpoints": {},
+        "aws.endpoints#standardPartitionalEndpoints": {
+          "endpointPatternType": "service_region_dnsSuffix"
+        },
+        "aws.iam#defineConditionKeys": {
+          "aws:RequestTag/${TagKey}": {
+            "type": "String",
+            "documentation": "Filters access by the tags that are passed in the request",
+            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
+          },
+          "aws:ResourceTag/${TagKey}": {
+            "type": "String",
+            "documentation": "Filters access by the tags associated with the resource",
+            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
+          },
+          "aws:TagKeys": {
+            "type": "ArrayOfString",
+            "documentation": "Filters access by the tag keys that are passed in the request",
+            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+          }
+        },
+        "aws.iam#supportedPrincipalTypes": [
+          "Root",
+          "IAMUser",
+          "IAMRole",
+          "FederatedUser"
+        ],
+        "aws.protocols#awsJson1_0": {},
+        "smithy.api#documentation": "<p>\n                        You can use the Pricing Calculator API to programmatically create estimates for your planned cloud use. You can model usage and commitments such as Savings Plans and \n                        Reserved Instances, and generate estimated costs using your discounts and benefit sharing preferences.\n                </p>\n         <p>The Pricing Calculator API provides the following endpoint:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>https://bcm-pricing-calculator.us-east-1.api.aws</code>\n               </p>\n            </li>\n         </ul>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults",
+          "items": "items"
+        },
+        "smithy.api#title": "AWS Billing and Cost Management Pricing Calculator",
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "Boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "String"
+            },
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "String"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "endpoint": {
+                    "url": {
+                      "ref": "Endpoint"
+                    },
+                    "properties": {},
+                    "headers": {}
+                  },
+                  "type": "endpoint"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "isSet",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ]
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "aws.partition",
+                          "argv": [
+                            {
+                              "ref": "Region"
+                            }
+                          ],
+                          "assign": "PartitionResult"
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "ref": "UseFIPS"
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "endpoint": {
+                            "url": "https://bcm-pricing-calculator-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                            "properties": {
+                              "authSchemes": [
+                                {
+                                  "name": "sigv4",
+                                  "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                }
+                              ]
+                            },
+                            "headers": {}
+                          },
+                          "type": "endpoint"
+                        },
+                        {
+                          "conditions": [],
+                          "endpoint": {
+                            "url": "https://bcm-pricing-calculator.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                            "properties": {
+                              "authSchemes": [
+                                {
+                                  "name": "sigv4",
+                                  "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                }
+                              ]
+                            },
+                            "headers": {}
+                          },
+                          "type": "endpoint"
+                        }
+                      ],
+                      "type": "tree"
+                    }
+                  ],
+                  "type": "tree"
+                },
+                {
+                  "conditions": [],
+                  "error": "Invalid Configuration: Missing Region",
+                  "type": "error"
+                }
+              ],
+              "type": "tree"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "For custom endpoint with region not set and fips disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "Endpoint": "https://example.com",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips enabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Endpoint": "https://example.com",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "cn-northwest-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "cn-northwest-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator.cn-northwest-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-gov-west-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator-fips.us-gov-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-gov-west-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator.us-gov-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-iso-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator-fips.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-iso-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-isob-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator-fips.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-isob-east-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "eu-isoe-west-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                }
+              },
+              "params": {
+                "Region": "eu-isoe-west-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "eu-isoe-west-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator.eu-isoe-west-1.cloud.adc-e.uk"
+                }
+              },
+              "params": {
+                "Region": "eu-isoe-west-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-isof-south-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator-fips.us-isof-south-1.csp.hci.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isof-south-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "name": "sigv4",
+                        "signingRegion": "us-isof-south-1"
+                      }
+                    ]
+                  },
+                  "url": "https://bcm-pricing-calculator.us-isof-south-1.csp.hci.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isof-south-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "Missing region",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              }
+            }
+          ],
+          "version": "1.0"
+        }
+      }
+    },
     "com.amazonaws.bcmpricingcalculator#AccessDeniedException": {
       "type": "structure",
       "members": {
@@ -6576,562 +7132,6 @@
       },
       "traits": {
         "smithy.api#documentation": "<p>\n        Represents a usage quantity for a workload estimate.\n        </p>"
-      }
-    },
-    "com.amazonaws.bcmpricingcalculator#BCMPricingCalculator": {
-      "type": "service",
-      "version": "2024-06-19",
-      "operations": [
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#GetPreferences"
-        },
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#ListTagsForResource"
-        },
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#TagResource"
-        },
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#UntagResource"
-        },
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#UpdatePreferences"
-        }
-      ],
-      "resources": [
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#BillEstimate"
-        },
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#BillScenario"
-        },
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#WorkloadEstimate"
-        }
-      ],
-      "errors": [
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.bcmpricingcalculator#ValidationException"
-        }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "BCM Pricing Calculator",
-          "arnNamespace": "bcm-pricing-calculator"
-        },
-        "aws.api#tagEnabled": {},
-        "aws.auth#sigv4": {
-          "name": "bcm-pricing-calculator"
-        },
-        "aws.endpoints#dualStackOnlyEndpoints": {},
-        "aws.endpoints#standardPartitionalEndpoints": {
-          "endpointPatternType": "service_region_dnsSuffix"
-        },
-        "aws.iam#defineConditionKeys": {
-          "aws:RequestTag/${TagKey}": {
-            "type": "String",
-            "documentation": "Filters access by the tags that are passed in the request",
-            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
-          },
-          "aws:ResourceTag/${TagKey}": {
-            "type": "String",
-            "documentation": "Filters access by the tags associated with the resource",
-            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
-          },
-          "aws:TagKeys": {
-            "type": "ArrayOfString",
-            "documentation": "Filters access by the tag keys that are passed in the request",
-            "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
-          }
-        },
-        "aws.iam#supportedPrincipalTypes": [
-          "Root",
-          "IAMUser",
-          "IAMRole",
-          "FederatedUser"
-        ],
-        "aws.protocols#awsJson1_0": {},
-        "smithy.api#documentation": "<p>\n                        You can use the Pricing Calculator API to programmatically create estimates for your planned cloud use. You can model usage and commitments such as Savings Plans and \n                        Reserved Instances, and generate estimated costs using your discounts and benefit sharing preferences.\n                </p>\n         <p>The Pricing Calculator API provides the following endpoint:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>https://bcm-pricing-calculator.us-east-1.api.aws</code>\n               </p>\n            </li>\n         </ul>",
-        "smithy.api#paginated": {
-          "inputToken": "nextToken",
-          "outputToken": "nextToken",
-          "pageSize": "maxResults",
-          "items": "items"
-        },
-        "smithy.api#title": "AWS Billing and Cost Management Pricing Calculator",
-        "smithy.rules#endpointRuleSet": {
-          "version": "1.0",
-          "parameters": {
-            "UseFIPS": {
-              "builtIn": "AWS::UseFIPS",
-              "required": true,
-              "default": false,
-              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-              "type": "Boolean"
-            },
-            "Endpoint": {
-              "builtIn": "SDK::Endpoint",
-              "required": false,
-              "documentation": "Override the endpoint used to send this request",
-              "type": "String"
-            },
-            "Region": {
-              "builtIn": "AWS::Region",
-              "required": false,
-              "documentation": "The AWS region used to dispatch the request.",
-              "type": "String"
-            }
-          },
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "fn": "isSet",
-                  "argv": [
-                    {
-                      "ref": "Endpoint"
-                    }
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "booleanEquals",
-                      "argv": [
-                        {
-                          "ref": "UseFIPS"
-                        },
-                        true
-                      ]
-                    }
-                  ],
-                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                  "type": "error"
-                },
-                {
-                  "conditions": [],
-                  "endpoint": {
-                    "url": {
-                      "ref": "Endpoint"
-                    },
-                    "properties": {},
-                    "headers": {}
-                  },
-                  "type": "endpoint"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "isSet",
-                      "argv": [
-                        {
-                          "ref": "Region"
-                        }
-                      ]
-                    }
-                  ],
-                  "rules": [
-                    {
-                      "conditions": [
-                        {
-                          "fn": "aws.partition",
-                          "argv": [
-                            {
-                              "ref": "Region"
-                            }
-                          ],
-                          "assign": "PartitionResult"
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                {
-                                  "ref": "UseFIPS"
-                                },
-                                true
-                              ]
-                            }
-                          ],
-                          "endpoint": {
-                            "url": "https://bcm-pricing-calculator-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
-                            "properties": {
-                              "authSchemes": [
-                                {
-                                  "name": "sigv4",
-                                  "signingRegion": "{PartitionResult#implicitGlobalRegion}"
-                                }
-                              ]
-                            },
-                            "headers": {}
-                          },
-                          "type": "endpoint"
-                        },
-                        {
-                          "conditions": [],
-                          "endpoint": {
-                            "url": "https://bcm-pricing-calculator.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
-                            "properties": {
-                              "authSchemes": [
-                                {
-                                  "name": "sigv4",
-                                  "signingRegion": "{PartitionResult#implicitGlobalRegion}"
-                                }
-                              ]
-                            },
-                            "headers": {}
-                          },
-                          "type": "endpoint"
-                        }
-                      ],
-                      "type": "tree"
-                    }
-                  ],
-                  "type": "tree"
-                },
-                {
-                  "conditions": [],
-                  "error": "Invalid Configuration: Missing Region",
-                  "type": "error"
-                }
-              ],
-              "type": "tree"
-            }
-          ]
-        },
-        "smithy.rules#endpointTests": {
-          "testCases": [
-            {
-              "documentation": "For custom endpoint with region not set and fips disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://example.com"
-                }
-              },
-              "params": {
-                "Endpoint": "https://example.com",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For custom endpoint with fips enabled",
-              "expect": {
-                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-              },
-              "params": {
-                "Endpoint": "https://example.com",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator-fips.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "cn-northwest-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator-fips.cn-northwest-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-northwest-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "cn-northwest-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator.cn-northwest-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-northwest-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-gov-west-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator-fips.us-gov-west-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-gov-west-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator.us-gov-west-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-iso-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator-fips.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-iso-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-isob-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator-fips.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-isob-east-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "eu-isoe-west-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator-fips.eu-isoe-west-1.cloud.adc-e.uk"
-                }
-              },
-              "params": {
-                "Region": "eu-isoe-west-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "eu-isoe-west-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator.eu-isoe-west-1.cloud.adc-e.uk"
-                }
-              },
-              "params": {
-                "Region": "eu-isoe-west-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-isof-south-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator-fips.us-isof-south-1.csp.hci.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isof-south-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "name": "sigv4",
-                        "signingRegion": "us-isof-south-1"
-                      }
-                    ]
-                  },
-                  "url": "https://bcm-pricing-calculator.us-isof-south-1.csp.hci.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isof-south-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "Missing region",
-              "expect": {
-                "error": "Invalid Configuration: Missing Region"
-              }
-            }
-          ],
-          "version": "1.0"
-        }
       }
     }
   }

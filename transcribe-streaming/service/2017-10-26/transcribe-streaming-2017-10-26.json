@@ -3480,239 +3480,7 @@
         "target": "com.amazonaws.transcribestreaming#TimestampRange"
       }
     },
-    "com.amazonaws.transcribestreaming#Transcript": {
-      "type": "structure",
-      "members": {
-        "Results": {
-          "target": "com.amazonaws.transcribestreaming#ResultList",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains a set of transcription results from one or more audio segments, along with additional \n      information per your request parameters. This can include information relating to alternative\n      transcriptions, channel identification, partial result stabilization, language identification, and other\n      transcription-related data.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The <code>Transcript</code> associated with a \n      <code></code>.</p>\n         <p>\n            <code>Transcript</code> contains <code>Results</code>, which contains a set of transcription\n      results from one or more audio segments, along with additional information per your request \n      parameters.</p>"
-      }
-    },
-    "com.amazonaws.transcribestreaming#TranscriptEvent": {
-      "type": "structure",
-      "members": {
-        "Transcript": {
-          "target": "com.amazonaws.transcribestreaming#Transcript",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains <code>Results</code>, which contains a set of transcription results from one or\n      more audio segments, along with additional information per your request parameters. This can\n      include information relating to alternative transcriptions, channel identification, partial\n      result stabilization, language identification, and other transcription-related data.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The <code>TranscriptEvent</code> associated with a \n      <code>TranscriptResultStream</code>.</p>\n         <p>Contains a set of transcription results from one or more audio segments, along with additional \n      information per your request parameters.</p>"
-      }
-    },
-    "com.amazonaws.transcribestreaming#TranscriptResultStream": {
-      "type": "union",
-      "members": {
-        "TranscriptEvent": {
-          "target": "com.amazonaws.transcribestreaming#TranscriptEvent",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains <code>Transcript</code>, which contains <code>Results</code>. The \n      <code></code> object contains a set of transcription \n      results from one or more audio segments, along with additional information per your request \n      parameters.</p>"
-          }
-        },
-        "BadRequestException": {
-          "target": "com.amazonaws.transcribestreaming#BadRequestException",
-          "traits": {
-            "smithy.api#documentation": "<p>A client error occurred when the stream was created. Check the parameters of the request\n      and try your request again.</p>"
-          }
-        },
-        "LimitExceededException": {
-          "target": "com.amazonaws.transcribestreaming#LimitExceededException",
-          "traits": {
-            "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length\n      limit. Break your audio stream into smaller chunks and try your request again.</p>"
-          }
-        },
-        "InternalFailureException": {
-          "target": "com.amazonaws.transcribestreaming#InternalFailureException",
-          "traits": {
-            "smithy.api#documentation": "<p>A problem occurred while processing the audio. Amazon Transcribe terminated \n      processing.</p>"
-          }
-        },
-        "ConflictException": {
-          "target": "com.amazonaws.transcribestreaming#ConflictException",
-          "traits": {
-            "smithy.api#documentation": "<p>A new stream started with the same session ID. The current stream has been\n      terminated.</p>"
-          }
-        },
-        "ServiceUnavailableException": {
-          "target": "com.amazonaws.transcribestreaming#ServiceUnavailableException",
-          "traits": {
-            "smithy.api#documentation": "<p>The service is currently unavailable. Try your request later.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains detailed information about your streaming session.</p>",
-        "smithy.api#streaming": {}
-      }
-    },
-    "com.amazonaws.transcribestreaming#Type": {
-      "type": "enum",
-      "members": {
-        "CONVERSATION": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "CONVERSATION"
-          }
-        },
-        "DICTATION": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "DICTATION"
-          }
-        }
-      }
-    },
-    "com.amazonaws.transcribestreaming#Uri": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 2000
-        },
-        "smithy.api#pattern": "^(s3://|http(s*)://).+$"
-      }
-    },
-    "com.amazonaws.transcribestreaming#UtteranceEvent": {
-      "type": "structure",
-      "members": {
-        "UtteranceId": {
-          "target": "com.amazonaws.transcribestreaming#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier that is associated with the specified <code>UtteranceEvent</code>.</p>"
-          }
-        },
-        "IsPartial": {
-          "target": "com.amazonaws.transcribestreaming#Boolean",
-          "traits": {
-            "smithy.api#default": false,
-            "smithy.api#documentation": "<p>Indicates whether the segment in the <code>UtteranceEvent</code> is complete \n      (<code>FALSE</code>) or partial (<code>TRUE</code>).</p>"
-          }
-        },
-        "ParticipantRole": {
-          "target": "com.amazonaws.transcribestreaming#ParticipantRole",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides the role of the speaker for each audio channel, either <code>CUSTOMER</code> or \n      <code>AGENT</code>.</p>"
-          }
-        },
-        "BeginOffsetMillis": {
-          "target": "com.amazonaws.transcribestreaming#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The time, in milliseconds, from the beginning of the audio stream to the start of the\n      <code>UtteranceEvent</code>.</p>"
-          }
-        },
-        "EndOffsetMillis": {
-          "target": "com.amazonaws.transcribestreaming#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The time, in milliseconds, from the beginning of the audio stream to the start of the \n      <code>UtteranceEvent</code>.</p>"
-          }
-        },
-        "Transcript": {
-          "target": "com.amazonaws.transcribestreaming#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains transcribed text.</p>"
-          }
-        },
-        "Items": {
-          "target": "com.amazonaws.transcribestreaming#CallAnalyticsItemList",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains words, phrases, or punctuation marks that are associated with the specified \n      <code>UtteranceEvent</code>.</p>"
-          }
-        },
-        "Entities": {
-          "target": "com.amazonaws.transcribestreaming#CallAnalyticsEntityList",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains entities identified as personally identifiable information (PII) in your transcription \n      output.</p>"
-          }
-        },
-        "Sentiment": {
-          "target": "com.amazonaws.transcribestreaming#Sentiment",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides the sentiment that was detected in the specified segment.</p>"
-          }
-        },
-        "IssuesDetected": {
-          "target": "com.amazonaws.transcribestreaming#IssuesDetected",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides the issue that was detected in the specified segment.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains set of transcription results from one or more audio segments, along with additional \n      information about the parameters included in your request. For example, channel definitions, partial result \n      stabilization, sentiment, and issue detection.</p>"
-      }
-    },
-    "com.amazonaws.transcribestreaming#VocabularyFilterMethod": {
-      "type": "enum",
-      "members": {
-        "REMOVE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "remove"
-          }
-        },
-        "MASK": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "mask"
-          }
-        },
-        "TAG": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "tag"
-          }
-        }
-      }
-    },
-    "com.amazonaws.transcribestreaming#VocabularyFilterName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 200
-        },
-        "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
-      }
-    },
-    "com.amazonaws.transcribestreaming#VocabularyFilterNames": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 3000
-        },
-        "smithy.api#pattern": "^[a-zA-Z0-9,-._]+$"
-      }
-    },
-    "com.amazonaws.transcribestreaming#VocabularyName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 200
-        },
-        "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
-      }
-    },
-    "com.amazonaws.transcribestreaming#VocabularyNames": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 3000
-        },
-        "smithy.api#pattern": "^[a-zA-Z0-9,-._]+$"
-      }
-    },
-    "com.amazonaws.transcribestreaming#TranscribeStreaming": {
+    "com.amazonaws.transcribestreaming#Transcribe": {
       "type": "service",
       "version": "2017-10-26",
       "operations": [
@@ -4538,6 +4306,238 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.transcribestreaming#Transcript": {
+      "type": "structure",
+      "members": {
+        "Results": {
+          "target": "com.amazonaws.transcribestreaming#ResultList",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains a set of transcription results from one or more audio segments, along with additional \n      information per your request parameters. This can include information relating to alternative\n      transcriptions, channel identification, partial result stabilization, language identification, and other\n      transcription-related data.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>Transcript</code> associated with a \n      <code></code>.</p>\n         <p>\n            <code>Transcript</code> contains <code>Results</code>, which contains a set of transcription\n      results from one or more audio segments, along with additional information per your request \n      parameters.</p>"
+      }
+    },
+    "com.amazonaws.transcribestreaming#TranscriptEvent": {
+      "type": "structure",
+      "members": {
+        "Transcript": {
+          "target": "com.amazonaws.transcribestreaming#Transcript",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains <code>Results</code>, which contains a set of transcription results from one or\n      more audio segments, along with additional information per your request parameters. This can\n      include information relating to alternative transcriptions, channel identification, partial\n      result stabilization, language identification, and other transcription-related data.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>TranscriptEvent</code> associated with a \n      <code>TranscriptResultStream</code>.</p>\n         <p>Contains a set of transcription results from one or more audio segments, along with additional \n      information per your request parameters.</p>"
+      }
+    },
+    "com.amazonaws.transcribestreaming#TranscriptResultStream": {
+      "type": "union",
+      "members": {
+        "TranscriptEvent": {
+          "target": "com.amazonaws.transcribestreaming#TranscriptEvent",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains <code>Transcript</code>, which contains <code>Results</code>. The \n      <code></code> object contains a set of transcription \n      results from one or more audio segments, along with additional information per your request \n      parameters.</p>"
+          }
+        },
+        "BadRequestException": {
+          "target": "com.amazonaws.transcribestreaming#BadRequestException",
+          "traits": {
+            "smithy.api#documentation": "<p>A client error occurred when the stream was created. Check the parameters of the request\n      and try your request again.</p>"
+          }
+        },
+        "LimitExceededException": {
+          "target": "com.amazonaws.transcribestreaming#LimitExceededException",
+          "traits": {
+            "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length\n      limit. Break your audio stream into smaller chunks and try your request again.</p>"
+          }
+        },
+        "InternalFailureException": {
+          "target": "com.amazonaws.transcribestreaming#InternalFailureException",
+          "traits": {
+            "smithy.api#documentation": "<p>A problem occurred while processing the audio. Amazon Transcribe terminated \n      processing.</p>"
+          }
+        },
+        "ConflictException": {
+          "target": "com.amazonaws.transcribestreaming#ConflictException",
+          "traits": {
+            "smithy.api#documentation": "<p>A new stream started with the same session ID. The current stream has been\n      terminated.</p>"
+          }
+        },
+        "ServiceUnavailableException": {
+          "target": "com.amazonaws.transcribestreaming#ServiceUnavailableException",
+          "traits": {
+            "smithy.api#documentation": "<p>The service is currently unavailable. Try your request later.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains detailed information about your streaming session.</p>",
+        "smithy.api#streaming": {}
+      }
+    },
+    "com.amazonaws.transcribestreaming#Type": {
+      "type": "enum",
+      "members": {
+        "CONVERSATION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CONVERSATION"
+          }
+        },
+        "DICTATION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DICTATION"
+          }
+        }
+      }
+    },
+    "com.amazonaws.transcribestreaming#Uri": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2000
+        },
+        "smithy.api#pattern": "^(s3://|http(s*)://).+$"
+      }
+    },
+    "com.amazonaws.transcribestreaming#UtteranceEvent": {
+      "type": "structure",
+      "members": {
+        "UtteranceId": {
+          "target": "com.amazonaws.transcribestreaming#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier that is associated with the specified <code>UtteranceEvent</code>.</p>"
+          }
+        },
+        "IsPartial": {
+          "target": "com.amazonaws.transcribestreaming#Boolean",
+          "traits": {
+            "smithy.api#default": false,
+            "smithy.api#documentation": "<p>Indicates whether the segment in the <code>UtteranceEvent</code> is complete \n      (<code>FALSE</code>) or partial (<code>TRUE</code>).</p>"
+          }
+        },
+        "ParticipantRole": {
+          "target": "com.amazonaws.transcribestreaming#ParticipantRole",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides the role of the speaker for each audio channel, either <code>CUSTOMER</code> or \n      <code>AGENT</code>.</p>"
+          }
+        },
+        "BeginOffsetMillis": {
+          "target": "com.amazonaws.transcribestreaming#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in milliseconds, from the beginning of the audio stream to the start of the\n      <code>UtteranceEvent</code>.</p>"
+          }
+        },
+        "EndOffsetMillis": {
+          "target": "com.amazonaws.transcribestreaming#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in milliseconds, from the beginning of the audio stream to the start of the \n      <code>UtteranceEvent</code>.</p>"
+          }
+        },
+        "Transcript": {
+          "target": "com.amazonaws.transcribestreaming#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains transcribed text.</p>"
+          }
+        },
+        "Items": {
+          "target": "com.amazonaws.transcribestreaming#CallAnalyticsItemList",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains words, phrases, or punctuation marks that are associated with the specified \n      <code>UtteranceEvent</code>.</p>"
+          }
+        },
+        "Entities": {
+          "target": "com.amazonaws.transcribestreaming#CallAnalyticsEntityList",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains entities identified as personally identifiable information (PII) in your transcription \n      output.</p>"
+          }
+        },
+        "Sentiment": {
+          "target": "com.amazonaws.transcribestreaming#Sentiment",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides the sentiment that was detected in the specified segment.</p>"
+          }
+        },
+        "IssuesDetected": {
+          "target": "com.amazonaws.transcribestreaming#IssuesDetected",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides the issue that was detected in the specified segment.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains set of transcription results from one or more audio segments, along with additional \n      information about the parameters included in your request. For example, channel definitions, partial result \n      stabilization, sentiment, and issue detection.</p>"
+      }
+    },
+    "com.amazonaws.transcribestreaming#VocabularyFilterMethod": {
+      "type": "enum",
+      "members": {
+        "REMOVE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "remove"
+          }
+        },
+        "MASK": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "mask"
+          }
+        },
+        "TAG": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "tag"
+          }
+        }
+      }
+    },
+    "com.amazonaws.transcribestreaming#VocabularyFilterName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 200
+        },
+        "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+      }
+    },
+    "com.amazonaws.transcribestreaming#VocabularyFilterNames": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 3000
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9,-._]+$"
+      }
+    },
+    "com.amazonaws.transcribestreaming#VocabularyName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 200
+        },
+        "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+      }
+    },
+    "com.amazonaws.transcribestreaming#VocabularyNames": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 3000
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9,-._]+$"
       }
     }
   }

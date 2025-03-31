@@ -1727,325 +1727,6 @@
         "smithy.api#httpError": 402
       }
     },
-    "com.amazonaws.snowdevicemanagement#SoftwareInformation": {
-      "type": "structure",
-      "members": {
-        "installedVersion": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The version of the software currently installed on the device.</p>"
-          }
-        },
-        "installingVersion": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The version of the software being installed on the device.</p>"
-          }
-        },
-        "installState": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the software that is installed or that is being installed on the\n      device.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Information about the software on the device.</p>"
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#TagKeys": {
-      "type": "list",
-      "member": {
-        "target": "smithy.api#String"
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#TagMap": {
-      "type": "map",
-      "key": {
-        "target": "smithy.api#String"
-      },
-      "value": {
-        "target": "smithy.api#String"
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.snowdevicemanagement#TagResourceInput"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.snowdevicemanagement#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.snowdevicemanagement#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.snowdevicemanagement#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Adds or replaces tags on a device or task.</p>",
-        "smithy.api#http": {
-          "method": "POST",
-          "uri": "/tags/{resourceArn}"
-        }
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#TagResourceInput": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device or task.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.snowdevicemanagement#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can use tags to categorize a resource\n      in different ways, such as by purpose, owner, or environment.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#TargetList": {
-      "type": "list",
-      "member": {
-        "target": "smithy.api#String"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 10
-        }
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#Task": {
-      "type": "resource",
-      "identifiers": {
-        "taskId": {
-          "target": "com.amazonaws.snowdevicemanagement#TaskId"
-        }
-      },
-      "create": {
-        "target": "com.amazonaws.snowdevicemanagement#CreateTask"
-      },
-      "read": {
-        "target": "com.amazonaws.snowdevicemanagement#DescribeTask"
-      },
-      "list": {
-        "target": "com.amazonaws.snowdevicemanagement#ListTasks"
-      },
-      "operations": [
-        {
-          "target": "com.amazonaws.snowdevicemanagement#CancelTask"
-        }
-      ],
-      "resources": [
-        {
-          "target": "com.amazonaws.snowdevicemanagement#Execution"
-        }
-      ],
-      "traits": {
-        "aws.api#arn": {
-          "template": "task/{taskId}"
-        }
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#TaskDescriptionString": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        },
-        "smithy.api#pattern": "[A-Za-z0-9 _.,!#]*"
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#TaskId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 64
-        }
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#TaskState": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "IN_PROGRESS",
-            "name": "IN_PROGRESS"
-          },
-          {
-            "value": "CANCELED",
-            "name": "CANCELED"
-          },
-          {
-            "value": "COMPLETED",
-            "name": "COMPLETED"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#TaskSummary": {
-      "type": "structure",
-      "members": {
-        "taskId": {
-          "target": "com.amazonaws.snowdevicemanagement#TaskId",
-          "traits": {
-            "smithy.api#documentation": "<p>The task ID.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "taskArn": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task.</p>"
-          }
-        },
-        "state": {
-          "target": "com.amazonaws.snowdevicemanagement#TaskState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the task assigned to one or many devices.</p>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.snowdevicemanagement#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can use tags to categorize a resource\n      in different ways, such as by purpose, owner, or environment.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Information about the task assigned to one or many devices.</p>"
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#TaskSummaryList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.snowdevicemanagement#TaskSummary"
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#ThrottlingException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429,
-        "smithy.api#retryable": {
-          "throttling": true
-        }
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#Unlock": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#documentation": "<p>A structure used to unlock a device.</p>"
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#UnlockState": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "UNLOCKED",
-            "name": "UNLOCKED"
-          },
-          {
-            "value": "LOCKED",
-            "name": "LOCKED"
-          },
-          {
-            "value": "UNLOCKING",
-            "name": "UNLOCKING"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.snowdevicemanagement#UntagResourceInput"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.snowdevicemanagement#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.snowdevicemanagement#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.snowdevicemanagement#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes a tag from a device or task.</p>",
-        "smithy.api#http": {
-          "method": "DELETE",
-          "uri": "/tags/{resourceArn}"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#UntagResourceInput": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device or task.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "tagKeys": {
-          "target": "com.amazonaws.snowdevicemanagement#TagKeys",
-          "traits": {
-            "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can use tags to categorize a resource\n      in different ways, such as by purpose, owner, or environment.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.snowdevicemanagement#ValidationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
     "com.amazonaws.snowdevicemanagement#SnowDeviceManagement": {
       "type": "service",
       "version": "2021-08-04",
@@ -2708,6 +2389,325 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#SoftwareInformation": {
+      "type": "structure",
+      "members": {
+        "installedVersion": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the software currently installed on the device.</p>"
+          }
+        },
+        "installingVersion": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the software being installed on the device.</p>"
+          }
+        },
+        "installState": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the software that is installed or that is being installed on the\n      device.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about the software on the device.</p>"
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#TagKeys": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#TagMap": {
+      "type": "map",
+      "key": {
+        "target": "smithy.api#String"
+      },
+      "value": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowdevicemanagement#TagResourceInput"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowdevicemanagement#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.snowdevicemanagement#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.snowdevicemanagement#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds or replaces tags on a device or task.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/tags/{resourceArn}"
+        }
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#TagResourceInput": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device or task.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.snowdevicemanagement#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can use tags to categorize a resource\n      in different ways, such as by purpose, owner, or environment.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#TargetList": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#Task": {
+      "type": "resource",
+      "identifiers": {
+        "taskId": {
+          "target": "com.amazonaws.snowdevicemanagement#TaskId"
+        }
+      },
+      "create": {
+        "target": "com.amazonaws.snowdevicemanagement#CreateTask"
+      },
+      "read": {
+        "target": "com.amazonaws.snowdevicemanagement#DescribeTask"
+      },
+      "list": {
+        "target": "com.amazonaws.snowdevicemanagement#ListTasks"
+      },
+      "operations": [
+        {
+          "target": "com.amazonaws.snowdevicemanagement#CancelTask"
+        }
+      ],
+      "resources": [
+        {
+          "target": "com.amazonaws.snowdevicemanagement#Execution"
+        }
+      ],
+      "traits": {
+        "aws.api#arn": {
+          "template": "task/{taskId}"
+        }
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#TaskDescriptionString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "[A-Za-z0-9 _.,!#]*"
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#TaskId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        }
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#TaskState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "IN_PROGRESS",
+            "name": "IN_PROGRESS"
+          },
+          {
+            "value": "CANCELED",
+            "name": "CANCELED"
+          },
+          {
+            "value": "COMPLETED",
+            "name": "COMPLETED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#TaskSummary": {
+      "type": "structure",
+      "members": {
+        "taskId": {
+          "target": "com.amazonaws.snowdevicemanagement#TaskId",
+          "traits": {
+            "smithy.api#documentation": "<p>The task ID.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "taskArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task.</p>"
+          }
+        },
+        "state": {
+          "target": "com.amazonaws.snowdevicemanagement#TaskState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the task assigned to one or many devices.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.snowdevicemanagement#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can use tags to categorize a resource\n      in different ways, such as by purpose, owner, or environment.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about the task assigned to one or many devices.</p>"
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#TaskSummaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.snowdevicemanagement#TaskSummary"
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429,
+        "smithy.api#retryable": {
+          "throttling": true
+        }
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#Unlock": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>A structure used to unlock a device.</p>"
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#UnlockState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "UNLOCKED",
+            "name": "UNLOCKED"
+          },
+          {
+            "value": "LOCKED",
+            "name": "LOCKED"
+          },
+          {
+            "value": "UNLOCKING",
+            "name": "UNLOCKING"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowdevicemanagement#UntagResourceInput"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowdevicemanagement#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.snowdevicemanagement#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.snowdevicemanagement#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes a tag from a device or task.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/tags/{resourceArn}"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#UntagResourceInput": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the device or task.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tagKeys": {
+          "target": "com.amazonaws.snowdevicemanagement#TagKeys",
+          "traits": {
+            "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can use tags to categorize a resource\n      in different ways, such as by purpose, owner, or environment.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowdevicemanagement#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
       }
     }
   }

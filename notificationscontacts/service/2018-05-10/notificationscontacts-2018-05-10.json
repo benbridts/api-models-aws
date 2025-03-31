@@ -678,470 +678,6 @@
         "smithy.api#output": {}
       }
     },
-    "com.amazonaws.notificationscontacts#QuotaCode": {
-      "type": "string"
-    },
-    "com.amazonaws.notificationscontacts#ResourceId": {
-      "type": "string"
-    },
-    "com.amazonaws.notificationscontacts#ResourceNotFoundException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.notificationscontacts#ErrorMessage",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "resourceId": {
-          "target": "com.amazonaws.notificationscontacts#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the resource that wasn't found.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "resourceType": {
-          "target": "com.amazonaws.notificationscontacts#ResourceType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of resource that wasn't found.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Your request references a resource which does not exist. </p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 404
-      }
-    },
-    "com.amazonaws.notificationscontacts#ResourceType": {
-      "type": "string"
-    },
-    "com.amazonaws.notificationscontacts#SendActivationCode": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.notificationscontacts#SendActivationCodeRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.notificationscontacts#SendActivationCodeResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.notificationscontacts#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#ValidationException"
-        }
-      ],
-      "traits": {
-        "aws.api#controlPlane": {},
-        "aws.iam#iamAction": {
-          "documentation": "Grants permission to send an activation link to the email associated with the given ARN"
-        },
-        "smithy.api#documentation": "<p>Sends an activation email to the email address associated with the specified email contact.</p>\n         <note>\n            <p>It might take a few minutes for the activation email to arrive. If it doesn't arrive, check in your spam folder or try sending another activation email.</p>\n         </note>",
-        "smithy.api#http": {
-          "code": 200,
-          "method": "POST",
-          "uri": "/2022-10-31/emailcontacts/{arn}/activate/send"
-        }
-      }
-    },
-    "com.amazonaws.notificationscontacts#SendActivationCodeRequest": {
-      "type": "structure",
-      "members": {
-        "arn": {
-          "target": "com.amazonaws.notificationscontacts#EmailContactArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.notificationscontacts#SendActivationCodeResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.notificationscontacts#SensitiveEmailContactAddress": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 6,
-          "max": 254
-        },
-        "smithy.api#pattern": "^(.+)@(.+)$",
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.notificationscontacts#ServiceCode": {
-      "type": "string"
-    },
-    "com.amazonaws.notificationscontacts#ServiceQuotaExceededException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.notificationscontacts#ErrorMessage",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "resourceId": {
-          "target": "com.amazonaws.notificationscontacts#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the resource that exceeds the service quota.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "resourceType": {
-          "target": "com.amazonaws.notificationscontacts#ResourceType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the resource that exceeds the service quota.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "serviceCode": {
-          "target": "com.amazonaws.notificationscontacts#ServiceCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The code for the service quota exceeded in <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html\">Service Quotas</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "quotaCode": {
-          "target": "com.amazonaws.notificationscontacts#QuotaCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The code for the service quota in <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html\">Service Quotas</a>.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p> Request would cause a service quota to be exceeded.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 402
-      }
-    },
-    "com.amazonaws.notificationscontacts#TagKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#pattern": "^(?!aws:).{1,128}$"
-      }
-    },
-    "com.amazonaws.notificationscontacts#TagKeys": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.notificationscontacts#TagKey"
-      }
-    },
-    "com.amazonaws.notificationscontacts#TagMap": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.notificationscontacts#TagKey"
-      },
-      "value": {
-        "target": "com.amazonaws.notificationscontacts#TagValue"
-      },
-      "traits": {
-        "smithy.api#documentation": "Map of tags assigned to a resource",
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.notificationscontacts#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.notificationscontacts#TagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.notificationscontacts#TagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.notificationscontacts#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#ValidationException"
-        }
-      ],
-      "traits": {
-        "aws.api#controlPlane": {},
-        "aws.iam#iamAction": {
-          "documentation": "Grants permission to tag a resource"
-        },
-        "smithy.api#documentation": "<p>Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN). Taggable resources in AWS User Notifications Contacts include email contacts.</p>",
-        "smithy.api#http": {
-          "method": "POST",
-          "uri": "/tags/{arn}"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.notificationscontacts#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "arn": {
-          "target": "com.amazonaws.notificationscontacts#EmailContactArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the configuration.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.notificationscontacts#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of tags to apply to the configuration.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.notificationscontacts#TagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.notificationscontacts#TagValue": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        }
-      }
-    },
-    "com.amazonaws.notificationscontacts#ThrottlingException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.notificationscontacts#ErrorMessage",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "serviceCode": {
-          "target": "com.amazonaws.notificationscontacts#ServiceCode",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the service being throttled.</p>"
-          }
-        },
-        "quotaCode": {
-          "target": "com.amazonaws.notificationscontacts#QuotaCode",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the quota that is being throttled.</p>"
-          }
-        },
-        "retryAfterSeconds": {
-          "target": "smithy.api#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of seconds a client should wait before retrying the request.</p>",
-            "smithy.api#httpHeader": "Retry-After"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429,
-        "smithy.api#retryable": {
-          "throttling": true
-        }
-      }
-    },
-    "com.amazonaws.notificationscontacts#Token": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 7,
-          "max": 7
-        },
-        "smithy.api#pattern": "^[a-z0-9]{7}$",
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.notificationscontacts#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.notificationscontacts#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.notificationscontacts#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.notificationscontacts#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.notificationscontacts#ValidationException"
-        }
-      ],
-      "traits": {
-        "aws.api#controlPlane": {},
-        "aws.iam#iamAction": {
-          "documentation": "Grants permission to remove tags from a resource"
-        },
-        "smithy.api#documentation": "<p>Detaches a key-value pair from a resource, as identified by its Amazon Resource Name (ARN). Taggable resources in AWS User Notifications Contacts include email contacts..</p>",
-        "smithy.api#http": {
-          "method": "DELETE",
-          "uri": "/tags/{arn}"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.notificationscontacts#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "arn": {
-          "target": "com.amazonaws.notificationscontacts#EmailContactArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of the resource that will have the tag removed. An Amazon Resource Name (ARN) is an identifier for a specific AWS resource, such as a server, user, or role.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "tagKeys": {
-          "target": "com.amazonaws.notificationscontacts#TagKeys",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies a list of tag keys that you want to remove from the specified resources.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.notificationscontacts#UntagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.notificationscontacts#UpdateTime": {
-      "type": "timestamp",
-      "traits": {
-        "smithy.api#timestampFormat": "date-time"
-      }
-    },
-    "com.amazonaws.notificationscontacts#ValidationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.notificationscontacts#ErrorMessage",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "reason": {
-          "target": "com.amazonaws.notificationscontacts#ValidationExceptionReason",
-          "traits": {
-            "smithy.api#documentation": "<p>The reason why your input is considered invalid.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "fieldList": {
-          "target": "com.amazonaws.notificationscontacts#ValidationExceptionFieldList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of input fields that are invalid.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.notificationscontacts#ValidationExceptionField": {
-      "type": "structure",
-      "members": {
-        "name": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The field name where the invalid entry was detected.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A message with the reason for the validation exception error.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Stores information about a field passed inside a request that resulted in an exception.</p>"
-      }
-    },
-    "com.amazonaws.notificationscontacts#ValidationExceptionFieldList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.notificationscontacts#ValidationExceptionField"
-      }
-    },
-    "com.amazonaws.notificationscontacts#ValidationExceptionReason": {
-      "type": "enum",
-      "members": {
-        "FIELD_VALIDATION_FAILED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "fieldValidationFailed"
-          }
-        },
-        "OTHER": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "other"
-          }
-        }
-      }
-    },
     "com.amazonaws.notificationscontacts#NotificationsContacts": {
       "type": "service",
       "version": "2018-05-10",
@@ -1663,6 +1199,470 @@
             }
           ],
           "version": "1.0"
+        }
+      }
+    },
+    "com.amazonaws.notificationscontacts#QuotaCode": {
+      "type": "string"
+    },
+    "com.amazonaws.notificationscontacts#ResourceId": {
+      "type": "string"
+    },
+    "com.amazonaws.notificationscontacts#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.notificationscontacts#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "resourceId": {
+          "target": "com.amazonaws.notificationscontacts#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the resource that wasn't found.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.notificationscontacts#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of resource that wasn't found.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Your request references a resource which does not exist. </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.notificationscontacts#ResourceType": {
+      "type": "string"
+    },
+    "com.amazonaws.notificationscontacts#SendActivationCode": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.notificationscontacts#SendActivationCodeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.notificationscontacts#SendActivationCodeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.notificationscontacts#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#ValidationException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to send an activation link to the email associated with the given ARN"
+        },
+        "smithy.api#documentation": "<p>Sends an activation email to the email address associated with the specified email contact.</p>\n         <note>\n            <p>It might take a few minutes for the activation email to arrive. If it doesn't arrive, check in your spam folder or try sending another activation email.</p>\n         </note>",
+        "smithy.api#http": {
+          "code": 200,
+          "method": "POST",
+          "uri": "/2022-10-31/emailcontacts/{arn}/activate/send"
+        }
+      }
+    },
+    "com.amazonaws.notificationscontacts#SendActivationCodeRequest": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.notificationscontacts#EmailContactArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.notificationscontacts#SendActivationCodeResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.notificationscontacts#SensitiveEmailContactAddress": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 6,
+          "max": 254
+        },
+        "smithy.api#pattern": "^(.+)@(.+)$",
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.notificationscontacts#ServiceCode": {
+      "type": "string"
+    },
+    "com.amazonaws.notificationscontacts#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.notificationscontacts#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "resourceId": {
+          "target": "com.amazonaws.notificationscontacts#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the resource that exceeds the service quota.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.notificationscontacts#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the resource that exceeds the service quota.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "serviceCode": {
+          "target": "com.amazonaws.notificationscontacts#ServiceCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The code for the service quota exceeded in <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html\">Service Quotas</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "quotaCode": {
+          "target": "com.amazonaws.notificationscontacts#QuotaCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The code for the service quota in <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html\">Service Quotas</a>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> Request would cause a service quota to be exceeded.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402
+      }
+    },
+    "com.amazonaws.notificationscontacts#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^(?!aws:).{1,128}$"
+      }
+    },
+    "com.amazonaws.notificationscontacts#TagKeys": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.notificationscontacts#TagKey"
+      }
+    },
+    "com.amazonaws.notificationscontacts#TagMap": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.notificationscontacts#TagKey"
+      },
+      "value": {
+        "target": "com.amazonaws.notificationscontacts#TagValue"
+      },
+      "traits": {
+        "smithy.api#documentation": "Map of tags assigned to a resource",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.notificationscontacts#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.notificationscontacts#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.notificationscontacts#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.notificationscontacts#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#ValidationException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to tag a resource"
+        },
+        "smithy.api#documentation": "<p>Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN). Taggable resources in AWS User Notifications Contacts include email contacts.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/tags/{arn}"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.notificationscontacts#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.notificationscontacts#EmailContactArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the configuration.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.notificationscontacts#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of tags to apply to the configuration.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.notificationscontacts#TagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.notificationscontacts#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.notificationscontacts#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.notificationscontacts#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "serviceCode": {
+          "target": "com.amazonaws.notificationscontacts#ServiceCode",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the service being throttled.</p>"
+          }
+        },
+        "quotaCode": {
+          "target": "com.amazonaws.notificationscontacts#QuotaCode",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the quota that is being throttled.</p>"
+          }
+        },
+        "retryAfterSeconds": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of seconds a client should wait before retrying the request.</p>",
+            "smithy.api#httpHeader": "Retry-After"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429,
+        "smithy.api#retryable": {
+          "throttling": true
+        }
+      }
+    },
+    "com.amazonaws.notificationscontacts#Token": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 7,
+          "max": 7
+        },
+        "smithy.api#pattern": "^[a-z0-9]{7}$",
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.notificationscontacts#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.notificationscontacts#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.notificationscontacts#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.notificationscontacts#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.notificationscontacts#ValidationException"
+        }
+      ],
+      "traits": {
+        "aws.api#controlPlane": {},
+        "aws.iam#iamAction": {
+          "documentation": "Grants permission to remove tags from a resource"
+        },
+        "smithy.api#documentation": "<p>Detaches a key-value pair from a resource, as identified by its Amazon Resource Name (ARN). Taggable resources in AWS User Notifications Contacts include email contacts..</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/tags/{arn}"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.notificationscontacts#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.notificationscontacts#EmailContactArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of the resource that will have the tag removed. An Amazon Resource Name (ARN) is an identifier for a specific AWS resource, such as a server, user, or role.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tagKeys": {
+          "target": "com.amazonaws.notificationscontacts#TagKeys",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies a list of tag keys that you want to remove from the specified resources.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.notificationscontacts#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.notificationscontacts#UpdateTime": {
+      "type": "timestamp",
+      "traits": {
+        "smithy.api#timestampFormat": "date-time"
+      }
+    },
+    "com.amazonaws.notificationscontacts#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.notificationscontacts#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "reason": {
+          "target": "com.amazonaws.notificationscontacts#ValidationExceptionReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason why your input is considered invalid.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "fieldList": {
+          "target": "com.amazonaws.notificationscontacts#ValidationExceptionFieldList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of input fields that are invalid.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.notificationscontacts#ValidationExceptionField": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The field name where the invalid entry was detected.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A message with the reason for the validation exception error.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Stores information about a field passed inside a request that resulted in an exception.</p>"
+      }
+    },
+    "com.amazonaws.notificationscontacts#ValidationExceptionFieldList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.notificationscontacts#ValidationExceptionField"
+      }
+    },
+    "com.amazonaws.notificationscontacts#ValidationExceptionReason": {
+      "type": "enum",
+      "members": {
+        "FIELD_VALIDATION_FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "fieldValidationFailed"
+          }
+        },
+        "OTHER": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "other"
+          }
         }
       }
     }

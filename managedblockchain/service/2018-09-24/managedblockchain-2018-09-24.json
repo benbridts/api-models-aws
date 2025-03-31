@@ -3817,429 +3817,7 @@
         }
       }
     },
-    "com.amazonaws.managedblockchain#ThresholdComparator": {
-      "type": "enum",
-      "members": {
-        "GREATER_THAN": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "GREATER_THAN"
-          }
-        },
-        "GREATER_THAN_OR_EQUAL_TO": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
-          }
-        }
-      }
-    },
-    "com.amazonaws.managedblockchain#ThresholdPercentageInt": {
-      "type": "integer",
-      "traits": {
-        "smithy.api#range": {
-          "min": 0,
-          "max": 100
-        }
-      }
-    },
-    "com.amazonaws.managedblockchain#ThrottlingException": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#documentation": "<p>The request or operation couldn't be performed because a service is \n         throttling requests. The most common source of throttling errors is \n         creating resources that exceed your service limit for this resource type. \n         Request a limit increase or delete unused resources if possible.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429
-      }
-    },
-    "com.amazonaws.managedblockchain#Timestamp": {
-      "type": "timestamp",
-      "traits": {
-        "smithy.api#timestampFormat": "date-time"
-      }
-    },
-    "com.amazonaws.managedblockchain#TooManyTagsException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.managedblockchain#ExceptionMessage"
-        },
-        "ResourceName": {
-          "target": "com.amazonaws.managedblockchain#ArnString",
-          "traits": {
-            "smithy.api#documentation": "<p></p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p></p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.managedblockchain#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.managedblockchain#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.managedblockchain#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.managedblockchain#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#InvalidRequestException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#ResourceNotReadyException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes the specified tags from the Amazon Managed Blockchain resource.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>",
-        "smithy.api#http": {
-          "method": "DELETE",
-          "uri": "/tags/{ResourceArn}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.managedblockchain#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.managedblockchain#ArnString",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.managedblockchain#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tag keys.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.managedblockchain#UntagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.managedblockchain#UpdateMember": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.managedblockchain#UpdateMemberInput"
-      },
-      "output": {
-        "target": "com.amazonaws.managedblockchain#UpdateMemberOutput"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.managedblockchain#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#InvalidRequestException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#ThrottlingException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates a member configuration with new parameters.</p>\n         <p>Applies only to Hyperledger Fabric.</p>",
-        "smithy.api#http": {
-          "method": "PATCH",
-          "uri": "/networks/{NetworkId}/members/{MemberId}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.managedblockchain#UpdateMemberInput": {
-      "type": "structure",
-      "members": {
-        "NetworkId": {
-          "target": "com.amazonaws.managedblockchain#ResourceIdString",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of the Managed Blockchain network to which the member belongs.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "MemberId": {
-          "target": "com.amazonaws.managedblockchain#ResourceIdString",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of the member.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "LogPublishingConfiguration": {
-          "target": "com.amazonaws.managedblockchain#MemberLogPublishingConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Configuration properties for publishing to Amazon CloudWatch Logs.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.managedblockchain#UpdateMemberOutput": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.managedblockchain#UpdateNode": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.managedblockchain#UpdateNodeInput"
-      },
-      "output": {
-        "target": "com.amazonaws.managedblockchain#UpdateNodeOutput"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.managedblockchain#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#InvalidRequestException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#ThrottlingException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates a node configuration with new parameters.</p>\n         <p>Applies only to Hyperledger Fabric.</p>",
-        "smithy.api#http": {
-          "method": "PATCH",
-          "uri": "/networks/{NetworkId}/nodes/{NodeId}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.managedblockchain#UpdateNodeInput": {
-      "type": "structure",
-      "members": {
-        "NetworkId": {
-          "target": "com.amazonaws.managedblockchain#ResourceIdString",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of the network that the node is on.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "MemberId": {
-          "target": "com.amazonaws.managedblockchain#ResourceIdString",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of the member that owns the node.</p>\n         <p>Applies only to Hyperledger Fabric.</p>"
-          }
-        },
-        "NodeId": {
-          "target": "com.amazonaws.managedblockchain#ResourceIdString",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of the node.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "LogPublishingConfiguration": {
-          "target": "com.amazonaws.managedblockchain#NodeLogPublishingConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Configuration properties for publishing to Amazon CloudWatch Logs.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.managedblockchain#UpdateNodeOutput": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.managedblockchain#UsernameString": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 16
-        },
-        "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9]*$"
-      }
-    },
-    "com.amazonaws.managedblockchain#VoteCount": {
-      "type": "integer"
-    },
-    "com.amazonaws.managedblockchain#VoteOnProposal": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.managedblockchain#VoteOnProposalInput"
-      },
-      "output": {
-        "target": "com.amazonaws.managedblockchain#VoteOnProposalOutput"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.managedblockchain#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#IllegalActionException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#InvalidRequestException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.managedblockchain#ThrottlingException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Casts a vote for a specified <code>ProposalId</code> on behalf of a member. The member to vote as, specified by <code>VoterMemberId</code>, must be in the same Amazon Web Services account as the principal that calls the action.</p>\n         <p>Applies only to Hyperledger Fabric.</p>",
-        "smithy.api#http": {
-          "method": "POST",
-          "uri": "/networks/{NetworkId}/proposals/{ProposalId}/votes",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.managedblockchain#VoteOnProposalInput": {
-      "type": "structure",
-      "members": {
-        "NetworkId": {
-          "target": "com.amazonaws.managedblockchain#ResourceIdString",
-          "traits": {
-            "smithy.api#documentation": "<p>\n         The unique identifier of the network.\n      </p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "ProposalId": {
-          "target": "com.amazonaws.managedblockchain#ResourceIdString",
-          "traits": {
-            "smithy.api#documentation": "<p>\n         The unique identifier of the proposal.\n      </p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "VoterMemberId": {
-          "target": "com.amazonaws.managedblockchain#ResourceIdString",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of the member casting the vote.\n      </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Vote": {
-          "target": "com.amazonaws.managedblockchain#VoteValue",
-          "traits": {
-            "smithy.api#documentation": "<p>\n         The value of the vote.\n      </p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.managedblockchain#VoteOnProposalOutput": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.managedblockchain#VoteSummary": {
-      "type": "structure",
-      "members": {
-        "Vote": {
-          "target": "com.amazonaws.managedblockchain#VoteValue",
-          "traits": {
-            "smithy.api#documentation": "<p>\n         The vote value, either <code>YES</code> or <code>NO</code>.\n      </p>"
-          }
-        },
-        "MemberName": {
-          "target": "com.amazonaws.managedblockchain#NetworkMemberNameString",
-          "traits": {
-            "smithy.api#documentation": "<p>\n         The name of the member that cast the vote.\n      </p>"
-          }
-        },
-        "MemberId": {
-          "target": "com.amazonaws.managedblockchain#ResourceIdString",
-          "traits": {
-            "smithy.api#documentation": "<p>\n         The unique identifier of the member that cast the vote.\n      </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>\n         Properties of an individual vote that a member cast for a proposal.\n      </p>\n         <p>Applies only to Hyperledger Fabric.</p>"
-      }
-    },
-    "com.amazonaws.managedblockchain#VoteValue": {
-      "type": "enum",
-      "members": {
-        "YES": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "YES"
-          }
-        },
-        "NO": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "NO"
-          }
-        }
-      }
-    },
-    "com.amazonaws.managedblockchain#VotingPolicy": {
-      "type": "structure",
-      "members": {
-        "ApprovalThresholdPolicy": {
-          "target": "com.amazonaws.managedblockchain#ApprovalThresholdPolicy",
-          "traits": {
-            "smithy.api#documentation": "<p>Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>\n         The voting rules for the network to decide if a proposal is accepted\n      </p>\n         <p>Applies only to Hyperledger Fabric.</p>"
-      }
-    },
-    "com.amazonaws.managedblockchain#ManagedBlockchain": {
+    "com.amazonaws.managedblockchain#TaigaWebService": {
       "type": "service",
       "version": "2018-09-24",
       "operations": [
@@ -5032,6 +4610,428 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.managedblockchain#ThresholdComparator": {
+      "type": "enum",
+      "members": {
+        "GREATER_THAN": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "GREATER_THAN"
+          }
+        },
+        "GREATER_THAN_OR_EQUAL_TO": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL_TO"
+          }
+        }
+      }
+    },
+    "com.amazonaws.managedblockchain#ThresholdPercentageInt": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.managedblockchain#ThrottlingException": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>The request or operation couldn't be performed because a service is \n         throttling requests. The most common source of throttling errors is \n         creating resources that exceed your service limit for this resource type. \n         Request a limit increase or delete unused resources if possible.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.managedblockchain#Timestamp": {
+      "type": "timestamp",
+      "traits": {
+        "smithy.api#timestampFormat": "date-time"
+      }
+    },
+    "com.amazonaws.managedblockchain#TooManyTagsException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.managedblockchain#ExceptionMessage"
+        },
+        "ResourceName": {
+          "target": "com.amazonaws.managedblockchain#ArnString",
+          "traits": {
+            "smithy.api#documentation": "<p></p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.managedblockchain#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.managedblockchain#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.managedblockchain#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.managedblockchain#InternalServiceErrorException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#ResourceNotReadyException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes the specified tags from the Amazon Managed Blockchain resource.</p>\n         <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Ethereum Developer Guide</i>, or <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html\">Tagging Resources</a> in the <i>Amazon Managed Blockchain Hyperledger Fabric Developer Guide</i>.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/tags/{ResourceArn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.managedblockchain#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.managedblockchain#ArnString",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource. For more information about ARNs and their format, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.managedblockchain#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tag keys.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.managedblockchain#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.managedblockchain#UpdateMember": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.managedblockchain#UpdateMemberInput"
+      },
+      "output": {
+        "target": "com.amazonaws.managedblockchain#UpdateMemberOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.managedblockchain#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#InternalServiceErrorException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a member configuration with new parameters.</p>\n         <p>Applies only to Hyperledger Fabric.</p>",
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/networks/{NetworkId}/members/{MemberId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.managedblockchain#UpdateMemberInput": {
+      "type": "structure",
+      "members": {
+        "NetworkId": {
+          "target": "com.amazonaws.managedblockchain#ResourceIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the Managed Blockchain network to which the member belongs.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "MemberId": {
+          "target": "com.amazonaws.managedblockchain#ResourceIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the member.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "LogPublishingConfiguration": {
+          "target": "com.amazonaws.managedblockchain#MemberLogPublishingConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Configuration properties for publishing to Amazon CloudWatch Logs.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.managedblockchain#UpdateMemberOutput": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.managedblockchain#UpdateNode": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.managedblockchain#UpdateNodeInput"
+      },
+      "output": {
+        "target": "com.amazonaws.managedblockchain#UpdateNodeOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.managedblockchain#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#InternalServiceErrorException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a node configuration with new parameters.</p>\n         <p>Applies only to Hyperledger Fabric.</p>",
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/networks/{NetworkId}/nodes/{NodeId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.managedblockchain#UpdateNodeInput": {
+      "type": "structure",
+      "members": {
+        "NetworkId": {
+          "target": "com.amazonaws.managedblockchain#ResourceIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the network that the node is on.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "MemberId": {
+          "target": "com.amazonaws.managedblockchain#ResourceIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the member that owns the node.</p>\n         <p>Applies only to Hyperledger Fabric.</p>"
+          }
+        },
+        "NodeId": {
+          "target": "com.amazonaws.managedblockchain#ResourceIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the node.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "LogPublishingConfiguration": {
+          "target": "com.amazonaws.managedblockchain#NodeLogPublishingConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Configuration properties for publishing to Amazon CloudWatch Logs.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.managedblockchain#UpdateNodeOutput": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.managedblockchain#UsernameString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 16
+        },
+        "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9]*$"
+      }
+    },
+    "com.amazonaws.managedblockchain#VoteCount": {
+      "type": "integer"
+    },
+    "com.amazonaws.managedblockchain#VoteOnProposal": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.managedblockchain#VoteOnProposalInput"
+      },
+      "output": {
+        "target": "com.amazonaws.managedblockchain#VoteOnProposalOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.managedblockchain#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#IllegalActionException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#InternalServiceErrorException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.managedblockchain#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Casts a vote for a specified <code>ProposalId</code> on behalf of a member. The member to vote as, specified by <code>VoterMemberId</code>, must be in the same Amazon Web Services account as the principal that calls the action.</p>\n         <p>Applies only to Hyperledger Fabric.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/networks/{NetworkId}/proposals/{ProposalId}/votes",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.managedblockchain#VoteOnProposalInput": {
+      "type": "structure",
+      "members": {
+        "NetworkId": {
+          "target": "com.amazonaws.managedblockchain#ResourceIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>\n         The unique identifier of the network.\n      </p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "ProposalId": {
+          "target": "com.amazonaws.managedblockchain#ResourceIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>\n         The unique identifier of the proposal.\n      </p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "VoterMemberId": {
+          "target": "com.amazonaws.managedblockchain#ResourceIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the member casting the vote.\n      </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Vote": {
+          "target": "com.amazonaws.managedblockchain#VoteValue",
+          "traits": {
+            "smithy.api#documentation": "<p>\n         The value of the vote.\n      </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.managedblockchain#VoteOnProposalOutput": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.managedblockchain#VoteSummary": {
+      "type": "structure",
+      "members": {
+        "Vote": {
+          "target": "com.amazonaws.managedblockchain#VoteValue",
+          "traits": {
+            "smithy.api#documentation": "<p>\n         The vote value, either <code>YES</code> or <code>NO</code>.\n      </p>"
+          }
+        },
+        "MemberName": {
+          "target": "com.amazonaws.managedblockchain#NetworkMemberNameString",
+          "traits": {
+            "smithy.api#documentation": "<p>\n         The name of the member that cast the vote.\n      </p>"
+          }
+        },
+        "MemberId": {
+          "target": "com.amazonaws.managedblockchain#ResourceIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>\n         The unique identifier of the member that cast the vote.\n      </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n         Properties of an individual vote that a member cast for a proposal.\n      </p>\n         <p>Applies only to Hyperledger Fabric.</p>"
+      }
+    },
+    "com.amazonaws.managedblockchain#VoteValue": {
+      "type": "enum",
+      "members": {
+        "YES": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "YES"
+          }
+        },
+        "NO": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "NO"
+          }
+        }
+      }
+    },
+    "com.amazonaws.managedblockchain#VotingPolicy": {
+      "type": "structure",
+      "members": {
+        "ApprovalThresholdPolicy": {
+          "target": "com.amazonaws.managedblockchain#ApprovalThresholdPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n         The voting rules for the network to decide if a proposal is accepted\n      </p>\n         <p>Applies only to Hyperledger Fabric.</p>"
       }
     }
   }

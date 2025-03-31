@@ -6092,1003 +6092,6 @@
         "smithy.api#documentation": "<p>Contains <code>ToxicityCategories</code>, which is a required parameter if you \n            want to enable toxicity detection (<code>ToxicityDetection</code>) in your transcription \n            request.</p>"
       }
     },
-    "com.amazonaws.transcribe#TranscribeArn": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 1011
-        },
-        "smithy.api#pattern": "^arn:aws(-[^:]+)?:transcribe:[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z-]*/[0-9a-zA-Z._-]+$"
-      }
-    },
-    "com.amazonaws.transcribe#Transcript": {
-      "type": "structure",
-      "members": {
-        "TranscriptFileUri": {
-          "target": "com.amazonaws.transcribe#Uri",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 location of your transcript. You can use this URI to access or\n            download your transcript.</p>\n         <p>If you included <code>OutputBucketName</code> in your transcription job request, this\n            is the URI of that bucket. If you also included <code>OutputKey</code> in your request,\n            your output is located in the path you specified in your request.</p>\n         <p>If you didn't include <code>OutputBucketName</code> in your transcription job request,\n            your transcript is stored in a service-managed bucket, and\n                <code>TranscriptFileUri</code> provides you with a temporary URI you can use for\n            secure access to your transcript.</p>\n         <note>\n            <p>Temporary URIs for service-managed Amazon S3 buckets are only valid for 15\n                minutes. If you get an <code>AccesDenied</code> error, you can get a new temporary\n                URI by running a <code>GetTranscriptionJob</code> or\n                    <code>ListTranscriptionJob</code> request.</p>\n         </note>"
-          }
-        },
-        "RedactedTranscriptFileUri": {
-          "target": "com.amazonaws.transcribe#Uri",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 location of your redacted transcript. You can use this URI to\n            access or download your transcript.</p>\n         <p>If you included <code>OutputBucketName</code> in your transcription job request, this\n            is the URI of that bucket. If you also included <code>OutputKey</code> in your request,\n            your output is located in the path you specified in your request.</p>\n         <p>If you didn't include <code>OutputBucketName</code> in your transcription job request,\n            your transcript is stored in a service-managed bucket, and\n                <code>RedactedTranscriptFileUri</code> provides you with a temporary URI you can use\n            for secure access to your transcript.</p>\n         <note>\n            <p>Temporary URIs for service-managed Amazon S3 buckets are only valid for 15\n                minutes. If you get an <code>AccesDenied</code> error, you can get a new temporary\n                URI by running a <code>GetTranscriptionJob</code> or\n                    <code>ListTranscriptionJob</code> request.</p>\n         </note>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Provides you with the Amazon S3 URI you can use to access your\n            transcript.</p>"
-      }
-    },
-    "com.amazonaws.transcribe#TranscriptFilter": {
-      "type": "structure",
-      "members": {
-        "TranscriptFilterType": {
-          "target": "com.amazonaws.transcribe#TranscriptFilterType",
-          "traits": {
-            "smithy.api#documentation": "<p>Flag the presence or absence of an exact match to the phrases that you specify. For\n            example, if you specify the phrase \"speak to a manager\" as your <code>Targets</code>\n            value, only that exact phrase is flagged.</p>\n         <p>Note that semantic matching is not supported. For example, if your customer says\n            \"speak to <i>the</i> manager\", instead of \"speak to <i>a</i>\n            manager\", your content is not flagged.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "AbsoluteTimeRange": {
-          "target": "com.amazonaws.transcribe#AbsoluteTimeRange",
-          "traits": {
-            "smithy.api#documentation": "<p>Makes it possible to specify a time range (in milliseconds) in your audio, during\n            which you want to search for the specified key words or phrases. See  for more detail.</p>"
-          }
-        },
-        "RelativeTimeRange": {
-          "target": "com.amazonaws.transcribe#RelativeTimeRange",
-          "traits": {
-            "smithy.api#documentation": "<p>Makes it possible to specify a time range (in percentage) in your media file, during\n            which you want to search for the specified key words or phrases. See  for more detail.</p>"
-          }
-        },
-        "ParticipantRole": {
-          "target": "com.amazonaws.transcribe#ParticipantRole",
-          "traits": {
-            "smithy.api#documentation": "<p>Specify the participant that you want to flag. Omitting this parameter is equivalent\n            to specifying both participants.</p>"
-          }
-        },
-        "Negate": {
-          "target": "com.amazonaws.transcribe#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Set to <code>TRUE</code> to flag the absence of the phrase that you specified in your\n            request. Set to <code>FALSE</code> to flag the presence of the phrase that you specified\n            in your request.</p>"
-          }
-        },
-        "Targets": {
-          "target": "com.amazonaws.transcribe#StringTargetList",
-          "traits": {
-            "smithy.api#documentation": "<p>Specify the phrases that you want to flag.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Flag the presence or absence of specific words or phrases detected in your Call\n            Analytics transcription output.</p>\n         <p>Rules using <code>TranscriptFilter</code> are designed to match:</p>\n         <ul>\n            <li>\n               <p>Custom words or phrases spoken by the agent, the customer, or both</p>\n            </li>\n            <li>\n               <p>Custom words or phrases <b>not</b> spoken by the\n                    agent, the customer, or either</p>\n            </li>\n            <li>\n               <p>Custom words or phrases that occur at a specific time frame</p>\n            </li>\n         </ul>\n         <p>See <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch\">Rule criteria for post-call \n            categories</a> and <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html#tca-rules-stream\">Rule criteria for \n                streaming categories</a> for usage examples.</p>"
-      }
-    },
-    "com.amazonaws.transcribe#TranscriptFilterType": {
-      "type": "enum",
-      "members": {
-        "EXACT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "EXACT"
-          }
-        }
-      }
-    },
-    "com.amazonaws.transcribe#TranscriptionJob": {
-      "type": "structure",
-      "members": {
-        "TranscriptionJobName": {
-          "target": "com.amazonaws.transcribe#TranscriptionJobName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the transcription job. Job names are case sensitive and must be unique\n            within an Amazon Web Services account.</p>"
-          }
-        },
-        "TranscriptionJobStatus": {
-          "target": "com.amazonaws.transcribe#TranscriptionJobStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides the status of the specified transcription job.</p>\n         <p>If the status is <code>COMPLETED</code>, the job is finished and you can find the\n            results at the location specified in <code>TranscriptFileUri</code> (or\n                <code>RedactedTranscriptFileUri</code>, if you requested transcript redaction). If\n            the status is <code>FAILED</code>, <code>FailureReason</code> provides details on why\n            your transcription job failed.</p>"
-          }
-        },
-        "LanguageCode": {
-          "target": "com.amazonaws.transcribe#LanguageCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The language code used to create your transcription job. This parameter is used with\n            single-language identification. For multi-language identification requests, refer to the\n            plural version of this parameter, <code>LanguageCodes</code>.</p>"
-          }
-        },
-        "MediaSampleRateHertz": {
-          "target": "com.amazonaws.transcribe#MediaSampleRateHertz",
-          "traits": {
-            "smithy.api#documentation": "<p>The sample rate, in hertz, of the audio track in your input media file.</p>"
-          }
-        },
-        "MediaFormat": {
-          "target": "com.amazonaws.transcribe#MediaFormat",
-          "traits": {
-            "smithy.api#documentation": "<p>The format of the input media file.</p>"
-          }
-        },
-        "Media": {
-          "target": "com.amazonaws.transcribe#Media",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides the Amazon S3 location of the media file you used in your\n            request.</p>"
-          }
-        },
-        "Transcript": {
-          "target": "com.amazonaws.transcribe#Transcript",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides you with the Amazon S3 URI you can use to access your\n            transcript.</p>"
-          }
-        },
-        "StartTime": {
-          "target": "com.amazonaws.transcribe#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the specified transcription job began processing.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.789000-07:00</code> represents a transcription job\n            that started processing at 12:32 PM UTC-7 on May 4, 2022.</p>"
-          }
-        },
-        "CreationTime": {
-          "target": "com.amazonaws.transcribe#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the specified transcription job request was made.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents a transcription job\n            that started processing at 12:32 PM UTC-7 on May 4, 2022.</p>"
-          }
-        },
-        "CompletionTime": {
-          "target": "com.amazonaws.transcribe#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the specified transcription job finished processing.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:33:13.922000-07:00</code> represents a transcription job\n            that started processing at 12:33 PM UTC-7 on May 4, 2022.</p>"
-          }
-        },
-        "FailureReason": {
-          "target": "com.amazonaws.transcribe#FailureReason",
-          "traits": {
-            "smithy.api#documentation": "<p>If <code>TranscriptionJobStatus</code> is <code>FAILED</code>,\n                <code>FailureReason</code> contains information about why the transcription job\n            request failed.</p>\n         <p>The <code>FailureReason</code> field contains one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Unsupported media format</code>.</p>\n               <p>The media format specified in <code>MediaFormat</code> isn't valid. Refer to\n                    refer to the <code>MediaFormat</code> parameter for a list of supported\n                    formats.</p>\n            </li>\n            <li>\n               <p>\n                  <code>The media format provided does not match the detected media\n                        format</code>.</p>\n               <p>The media format specified in <code>MediaFormat</code> doesn't match the\n                    format of the input file. Check the media format of your media file and correct\n                    the specified value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Invalid sample rate for audio file</code>.</p>\n               <p>The sample rate specified in <code>MediaSampleRateHertz</code> isn't valid.\n                    The sample rate must be between 8,000 and 48,000 hertz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>The sample rate provided does not match the detected sample\n                    rate</code>.</p>\n               <p>The sample rate specified in <code>MediaSampleRateHertz</code> doesn't match\n                    the sample rate detected in your input media file. Check the sample rate of your\n                    media file and correct the specified value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Invalid file size: file size too large</code>.</p>\n               <p>The size of your media file is larger than what Amazon Transcribe can\n                    process. For more information, refer to <a href=\"https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe\">Service \n                        quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Invalid number of channels: number of channels too large</code>.</p>\n               <p>Your audio contains more channels than Amazon Transcribe is able to process.\n                    For more information, refer to <a href=\"https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe\">Service \n                        quotas</a>.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "Settings": {
-          "target": "com.amazonaws.transcribe#Settings",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides information on any additional settings that were included in your request.\n            Additional settings include channel identification, alternative transcriptions, speaker\n            partitioning, custom vocabularies, and custom vocabulary filters.</p>"
-          }
-        },
-        "ModelSettings": {
-          "target": "com.amazonaws.transcribe#ModelSettings",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides information on the custom language model you included in your request.</p>"
-          }
-        },
-        "JobExecutionSettings": {
-          "target": "com.amazonaws.transcribe#JobExecutionSettings",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides information about how your transcription job was processed. This parameter\n            shows if your request was queued and what data access role was used.</p>"
-          }
-        },
-        "ContentRedaction": {
-          "target": "com.amazonaws.transcribe#ContentRedaction",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether redaction was enabled in your transcript.</p>"
-          }
-        },
-        "IdentifyLanguage": {
-          "target": "com.amazonaws.transcribe#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether automatic language identification was enabled (<code>TRUE</code>)\n            for the specified transcription job.</p>"
-          }
-        },
-        "IdentifyMultipleLanguages": {
-          "target": "com.amazonaws.transcribe#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether automatic multi-language identification was enabled\n                (<code>TRUE</code>) for the specified transcription job.</p>"
-          }
-        },
-        "LanguageOptions": {
-          "target": "com.amazonaws.transcribe#LanguageOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides the language codes you specified in your request.</p>"
-          }
-        },
-        "IdentifiedLanguageScore": {
-          "target": "com.amazonaws.transcribe#IdentifiedLanguageScore",
-          "traits": {
-            "smithy.api#documentation": "<p>The confidence score associated with the language identified in your media\n            file.</p>\n         <p>Confidence scores are values between 0 and 1; a larger value indicates a higher\n            probability that the identified language correctly matches the language spoken in your\n            media.</p>"
-          }
-        },
-        "LanguageCodes": {
-          "target": "com.amazonaws.transcribe#LanguageCodeList",
-          "traits": {
-            "smithy.api#documentation": "<p>The language codes used to create your transcription job. This parameter is used with\n            multi-language identification. For single-language identification requests, refer to the\n            singular version of this parameter, <code>LanguageCode</code>.</p>"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.transcribe#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags, each in the form of a key:value pair, assigned to the specified\n            transcription job.</p>"
-          }
-        },
-        "Subtitles": {
-          "target": "com.amazonaws.transcribe#SubtitlesOutput",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether subtitles were generated with your transcription.</p>"
-          }
-        },
-        "LanguageIdSettings": {
-          "target": "com.amazonaws.transcribe#LanguageIdSettingsMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides the name and language of all custom language models, custom vocabularies, and\n            custom vocabulary filters that you included in your request.</p>"
-          }
-        },
-        "ToxicityDetection": {
-          "target": "com.amazonaws.transcribe#ToxicityDetection",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides information about the toxicity detection settings applied to your transcription.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Provides detailed information about a transcription job.</p>\n         <p>To view the status of the specified transcription job, check the\n                <code>TranscriptionJobStatus</code> field. If the status is <code>COMPLETED</code>,\n            the job is finished and you can find the results at the location specified in\n                <code>TranscriptFileUri</code>. If the status is <code>FAILED</code>,\n                <code>FailureReason</code> provides details on why your transcription job\n            failed.</p>\n         <p>If you enabled content redaction, the redacted transcript can be found at the location\n            specified in <code>RedactedTranscriptFileUri</code>.</p>"
-      }
-    },
-    "com.amazonaws.transcribe#TranscriptionJobName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 200
-        },
-        "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
-      }
-    },
-    "com.amazonaws.transcribe#TranscriptionJobStatus": {
-      "type": "enum",
-      "members": {
-        "QUEUED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "QUEUED"
-          }
-        },
-        "IN_PROGRESS": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "IN_PROGRESS"
-          }
-        },
-        "FAILED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "FAILED"
-          }
-        },
-        "COMPLETED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "COMPLETED"
-          }
-        }
-      }
-    },
-    "com.amazonaws.transcribe#TranscriptionJobSummaries": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.transcribe#TranscriptionJobSummary"
-      }
-    },
-    "com.amazonaws.transcribe#TranscriptionJobSummary": {
-      "type": "structure",
-      "members": {
-        "TranscriptionJobName": {
-          "target": "com.amazonaws.transcribe#TranscriptionJobName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the transcription job. Job names are case sensitive and must be unique\n            within an Amazon Web Services account.</p>"
-          }
-        },
-        "CreationTime": {
-          "target": "com.amazonaws.transcribe#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the specified transcription job request was made.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents a transcription job\n            that started processing at 12:32 PM UTC-7 on May 4, 2022.</p>"
-          }
-        },
-        "StartTime": {
-          "target": "com.amazonaws.transcribe#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time your transcription job began processing.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.789000-07:00</code> represents a transcription job\n            that started processing at 12:32 PM UTC-7 on May 4, 2022.</p>"
-          }
-        },
-        "CompletionTime": {
-          "target": "com.amazonaws.transcribe#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the specified transcription job finished processing.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:33:13.922000-07:00</code> represents a transcription job\n            that started processing at 12:33 PM UTC-7 on May 4, 2022.</p>"
-          }
-        },
-        "LanguageCode": {
-          "target": "com.amazonaws.transcribe#LanguageCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The language code used to create your transcription.</p>"
-          }
-        },
-        "TranscriptionJobStatus": {
-          "target": "com.amazonaws.transcribe#TranscriptionJobStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides the status of your transcription job.</p>\n         <p>If the status is <code>COMPLETED</code>, the job is finished and you can find the\n            results at the location specified in <code>TranscriptFileUri</code> (or\n                <code>RedactedTranscriptFileUri</code>, if you requested transcript redaction). If\n            the status is <code>FAILED</code>, <code>FailureReason</code> provides details on why\n            your transcription job failed.</p>"
-          }
-        },
-        "FailureReason": {
-          "target": "com.amazonaws.transcribe#FailureReason",
-          "traits": {
-            "smithy.api#documentation": "<p>If <code>TranscriptionJobStatus</code> is <code>FAILED</code>,\n                <code>FailureReason</code> contains information about why the transcription job\n            failed. See also: <a href=\"https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html\">Common Errors</a>.</p>"
-          }
-        },
-        "OutputLocationType": {
-          "target": "com.amazonaws.transcribe#OutputLocationType",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates where the specified transcription output is stored.</p>\n         <p>If the value is <code>CUSTOMER_BUCKET</code>, the location is the Amazon S3\n            bucket you specified using the <code>OutputBucketName</code> parameter in your  request. If you also included\n                <code>OutputKey</code> in your request, your output is located in the path you\n            specified in your request.</p>\n         <p>If the value is <code>SERVICE_BUCKET</code>, the location is a service-managed Amazon S3 bucket. To access a transcript stored in a service-managed bucket, use the\n            URI shown in the <code>TranscriptFileUri</code> or\n                <code>RedactedTranscriptFileUri</code> field.</p>"
-          }
-        },
-        "ContentRedaction": {
-          "target": "com.amazonaws.transcribe#ContentRedaction",
-          "traits": {
-            "smithy.api#documentation": "<p>The content redaction settings of the transcription job.</p>"
-          }
-        },
-        "ModelSettings": {
-          "target": "com.amazonaws.transcribe#ModelSettings"
-        },
-        "IdentifyLanguage": {
-          "target": "com.amazonaws.transcribe#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether automatic language identification was enabled (<code>TRUE</code>)\n            for the specified transcription job.</p>"
-          }
-        },
-        "IdentifyMultipleLanguages": {
-          "target": "com.amazonaws.transcribe#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether automatic multi-language identification was enabled\n                (<code>TRUE</code>) for the specified transcription job.</p>"
-          }
-        },
-        "IdentifiedLanguageScore": {
-          "target": "com.amazonaws.transcribe#IdentifiedLanguageScore",
-          "traits": {
-            "smithy.api#documentation": "<p>The confidence score associated with the language identified in your media\n            file.</p>\n         <p>Confidence scores are values between 0 and 1; a larger value indicates a higher\n            probability that the identified language correctly matches the language spoken in your\n            media.</p>"
-          }
-        },
-        "LanguageCodes": {
-          "target": "com.amazonaws.transcribe#LanguageCodeList",
-          "traits": {
-            "smithy.api#documentation": "<p>The language codes used to create your transcription job. This parameter is used with\n            multi-language identification. For single-language identification, the singular version\n            of this parameter, <code>LanguageCode</code>, is present.</p>"
-          }
-        },
-        "ToxicityDetection": {
-          "target": "com.amazonaws.transcribe#ToxicityDetection",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether toxicity detection was enabled for the specified transcription \n            job.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Provides detailed information about a specific transcription job.</p>"
-      }
-    },
-    "com.amazonaws.transcribe#Type": {
-      "type": "enum",
-      "members": {
-        "CONVERSATION": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "CONVERSATION"
-          }
-        },
-        "DICTATION": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "DICTATION"
-          }
-        }
-      }
-    },
-    "com.amazonaws.transcribe#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.transcribe#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.transcribe#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.transcribe#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#InternalFailureException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#LimitExceededException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes the specified tags from the specified Amazon Transcribe resource.</p>\n         <p>If you include <code>UntagResource</code> in your request, you must also include\n                <code>ResourceArn</code> and <code>TagKeys</code>.</p>",
-        "smithy.api#http": {
-          "method": "DELETE",
-          "uri": "/tags/{ResourceArn}",
-          "code": 204
-        }
-      }
-    },
-    "com.amazonaws.transcribe#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.transcribe#TranscribeArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to remove\n            tags from. ARNs have the format\n                <code>arn:partition:service:region:account-id:resource-type/resource-id</code>.</p>\n         <p>For example,\n                <code>arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name</code>.</p>\n         <p>Valid values for <code>resource-type</code> are: <code>transcription-job</code>,\n                <code>medical-transcription-job</code>, <code>vocabulary</code>,\n                <code>medical-vocabulary</code>, <code>vocabulary-filter</code>, and\n                <code>language-model</code>.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.transcribe#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>Removes the specified tag keys from the specified Amazon Transcribe resource.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.transcribe#UntagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.transcribe#UpdateCallAnalyticsCategory": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.transcribe#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#InternalFailureException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#LimitExceededException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates the specified Call Analytics category with new rules. Note that the\n                <code>UpdateCallAnalyticsCategory</code> operation overwrites all existing rules\n            contained in the specified category. You cannot append additional rules onto an existing\n            category.</p>\n         <p>To create a new category, see .</p>",
-        "smithy.api#http": {
-          "method": "PATCH",
-          "uri": "/callanalyticscategories/{CategoryName}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryRequest": {
-      "type": "structure",
-      "members": {
-        "CategoryName": {
-          "target": "com.amazonaws.transcribe#CategoryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Call Analytics category you want to update. Category names are case\n            sensitive.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "Rules": {
-          "target": "com.amazonaws.transcribe#RuleList",
-          "traits": {
-            "smithy.api#documentation": "<p>The rules used for the updated Call Analytics category. The rules you provide in this\n            field replace the ones that are currently being used in the specified category.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "InputType": {
-          "target": "com.amazonaws.transcribe#InputType",
-          "traits": {
-            "smithy.api#documentation": "<p>Choose whether you want to update a real-time or a post-call category. The \n            input type you specify must match the input type specified when the category was created. For\n            example, if you created a category with the <code>POST_CALL</code> input type, you must\n            use <code>POST_CALL</code> as the input type when updating this category.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryResponse": {
-      "type": "structure",
-      "members": {
-        "CategoryProperties": {
-          "target": "com.amazonaws.transcribe#CategoryProperties",
-          "traits": {
-            "smithy.api#documentation": "<p>Provides you with the properties of the Call Analytics category you specified in your\n                <code>UpdateCallAnalyticsCategory</code> request.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.transcribe#UpdateMedicalVocabulary": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.transcribe#UpdateMedicalVocabularyRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.transcribe#UpdateMedicalVocabularyResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.transcribe#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#InternalFailureException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#LimitExceededException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates an existing custom medical vocabulary with new values. This operation\n            overwrites all existing information with your new values; you cannot append new terms\n            onto an existing custom vocabulary.</p>",
-        "smithy.api#http": {
-          "method": "PATCH",
-          "uri": "/medicalvocabularies/{VocabularyName}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.transcribe#UpdateMedicalVocabularyRequest": {
-      "type": "structure",
-      "members": {
-        "VocabularyName": {
-          "target": "com.amazonaws.transcribe#VocabularyName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the custom medical vocabulary you want to update. Custom medical\n            vocabulary names are case sensitive.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "LanguageCode": {
-          "target": "com.amazonaws.transcribe#LanguageCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The language code that represents the language of the entries in the custom vocabulary\n            you want to update. US English (<code>en-US</code>) is the only language supported with\n                Amazon Transcribe Medical.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "VocabularyFileUri": {
-          "target": "com.amazonaws.transcribe#Uri",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 location of the text file that contains your custom medical\n            vocabulary. The URI must be located in the same Amazon Web Services Region as the\n            resource you're calling.</p>\n         <p>Here's an example URI path:\n            <code>s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt</code>\n         </p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.transcribe#UpdateMedicalVocabularyResponse": {
-      "type": "structure",
-      "members": {
-        "VocabularyName": {
-          "target": "com.amazonaws.transcribe#VocabularyName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the updated custom medical vocabulary.</p>"
-          }
-        },
-        "LanguageCode": {
-          "target": "com.amazonaws.transcribe#LanguageCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The language code you selected for your custom medical vocabulary. US English\n                (<code>en-US</code>) is the only language supported with Amazon Transcribe\n            Medical.</p>"
-          }
-        },
-        "LastModifiedTime": {
-          "target": "com.amazonaws.transcribe#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the specified custom medical vocabulary was last updated.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents 12:32 PM UTC-7 on May\n            4, 2022.</p>"
-          }
-        },
-        "VocabularyState": {
-          "target": "com.amazonaws.transcribe#VocabularyState",
-          "traits": {
-            "smithy.api#documentation": "<p>The processing state of your custom medical vocabulary. If the state is\n                <code>READY</code>, you can use the custom vocabulary in a\n                <code>StartMedicalTranscriptionJob</code> request.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.transcribe#UpdateVocabulary": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.transcribe#UpdateVocabularyRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.transcribe#UpdateVocabularyResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.transcribe#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#InternalFailureException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#LimitExceededException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates an existing custom vocabulary with new values. This operation overwrites all\n            existing information with your new values; you cannot append new terms onto an existing\n            custom vocabulary.</p>",
-        "smithy.api#http": {
-          "method": "PATCH",
-          "uri": "/vocabularies/{VocabularyName}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.transcribe#UpdateVocabularyFilter": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.transcribe#UpdateVocabularyFilterRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.transcribe#UpdateVocabularyFilterResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.transcribe#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#InternalFailureException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#LimitExceededException"
-        },
-        {
-          "target": "com.amazonaws.transcribe#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates an existing custom vocabulary filter with a new list of words. The new list\n            you provide overwrites all previous entries; you cannot append new terms onto an\n            existing custom vocabulary filter.</p>",
-        "smithy.api#http": {
-          "method": "PUT",
-          "uri": "/vocabularyFilters/{VocabularyFilterName}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.transcribe#UpdateVocabularyFilterRequest": {
-      "type": "structure",
-      "members": {
-        "VocabularyFilterName": {
-          "target": "com.amazonaws.transcribe#VocabularyFilterName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the custom vocabulary filter you want to update. Custom vocabulary filter\n            names are case sensitive.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "Words": {
-          "target": "com.amazonaws.transcribe#Words",
-          "traits": {
-            "smithy.api#documentation": "<p>Use this parameter if you want to update your custom vocabulary filter by including\n            all desired terms, as comma-separated values, within your request. The other option for\n            updating your vocabulary filter is to save your entries in a text file and upload them\n            to an Amazon S3 bucket, then specify the location of your file using the\n                <code>VocabularyFilterFileUri</code> parameter.</p>\n         <p>Note that if you include <code>Words</code> in your request, you cannot use\n                <code>VocabularyFilterFileUri</code>; you must choose one or the other.</p>\n         <p>Each language has a character set that contains all allowed characters for that\n            specific language. If you use unsupported characters, your custom vocabulary filter\n            request fails. Refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html\">Character Sets for Custom\n                Vocabularies</a> to get the character set for your language.</p>"
-          }
-        },
-        "VocabularyFilterFileUri": {
-          "target": "com.amazonaws.transcribe#Uri",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 location of the text file that contains your custom vocabulary\n            filter terms. The URI must be located in the same Amazon Web Services Region as the\n            resource you're calling.</p>\n         <p>Here's an example URI path:\n                <code>s3://DOC-EXAMPLE-BUCKET/my-vocab-filter-file.txt</code>\n         </p>\n         <p>Note that if you include <code>VocabularyFilterFileUri</code> in your request, you\n            cannot use <code>Words</code>; you must choose one or the other.</p>"
-          }
-        },
-        "DataAccessRoleArn": {
-          "target": "com.amazonaws.transcribe#DataAccessRoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that has permissions to\n            access the Amazon S3 bucket that contains your input files (in this case, your custom\n            vocabulary filter). If the role that you specify doesn\u2019t have the appropriate permissions to access\n            the specified Amazon S3 location, your request fails.</p>\n         <p>IAM role ARNs have the format\n            <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:\n            <code>arn:aws:iam::111122223333:role/Admin</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns\">IAM\n            ARNs</a>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.transcribe#UpdateVocabularyFilterResponse": {
-      "type": "structure",
-      "members": {
-        "VocabularyFilterName": {
-          "target": "com.amazonaws.transcribe#VocabularyFilterName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the updated custom vocabulary filter.</p>"
-          }
-        },
-        "LanguageCode": {
-          "target": "com.amazonaws.transcribe#LanguageCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The language code you selected for your custom vocabulary filter.</p>"
-          }
-        },
-        "LastModifiedTime": {
-          "target": "com.amazonaws.transcribe#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the specified custom vocabulary filter was last updated.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents 12:32 PM UTC-7 on May\n            4, 2022.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.transcribe#UpdateVocabularyRequest": {
-      "type": "structure",
-      "members": {
-        "VocabularyName": {
-          "target": "com.amazonaws.transcribe#VocabularyName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the custom vocabulary you want to update. Custom vocabulary names are case\n            sensitive.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "LanguageCode": {
-          "target": "com.amazonaws.transcribe#LanguageCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The language code that represents the language of the entries in the custom vocabulary\n            you want to update. Each custom vocabulary must contain terms in only one\n            language.</p>\n         <p>A custom vocabulary can only be used to transcribe files in the same language as the\n            custom vocabulary. For example, if you create a custom vocabulary using US English\n                (<code>en-US</code>), you can only apply this custom vocabulary to files that\n            contain English audio.</p>\n         <p>For a list of supported languages and their associated language codes, refer to the\n                <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported languages</a> table.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Phrases": {
-          "target": "com.amazonaws.transcribe#Phrases",
-          "traits": {
-            "smithy.api#documentation": "<p>Use this parameter if you want to update your custom vocabulary by including all\n            desired terms, as comma-separated values, within your request. The other option for\n            updating your custom vocabulary is to save your entries in a text file and upload them\n            to an Amazon S3 bucket, then specify the location of your file using the\n                <code>VocabularyFileUri</code> parameter.</p>\n         <p>Note that if you include <code>Phrases</code> in your request, you cannot use\n                <code>VocabularyFileUri</code>; you must choose one or the other.</p>\n         <p>Each language has a character set that contains all allowed characters for that\n            specific language. If you use unsupported characters, your custom vocabulary filter\n            request fails. Refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html\">Character Sets for Custom\n                Vocabularies</a> to get the character set for your language.</p>"
-          }
-        },
-        "VocabularyFileUri": {
-          "target": "com.amazonaws.transcribe#Uri",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon S3 location of the text file that contains your custom vocabulary.\n            The URI must be located in the same Amazon Web Services Region as the resource you're\n            calling.</p>\n         <p>Here's an example URI path:\n            <code>s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt</code>\n         </p>\n         <p>Note that if you include <code>VocabularyFileUri</code> in your request, you cannot\n            use the <code>Phrases</code> flag; you must choose one or the other.</p>"
-          }
-        },
-        "DataAccessRoleArn": {
-          "target": "com.amazonaws.transcribe#DataAccessRoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that has permissions to\n            access the Amazon S3 bucket that contains your input files (in this case, your custom\n            vocabulary). If the role that you specify doesn\u2019t have the appropriate permissions to access\n            the specified Amazon S3 location, your request fails.</p>\n         <p>IAM role ARNs have the format\n            <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:\n            <code>arn:aws:iam::111122223333:role/Admin</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns\">IAM\n            ARNs</a>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.transcribe#UpdateVocabularyResponse": {
-      "type": "structure",
-      "members": {
-        "VocabularyName": {
-          "target": "com.amazonaws.transcribe#VocabularyName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the updated custom vocabulary.</p>"
-          }
-        },
-        "LanguageCode": {
-          "target": "com.amazonaws.transcribe#LanguageCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The language code you selected for your custom vocabulary.</p>"
-          }
-        },
-        "LastModifiedTime": {
-          "target": "com.amazonaws.transcribe#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the specified custom vocabulary was last updated.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents 12:32 PM UTC-7 on May\n            4, 2022.</p>"
-          }
-        },
-        "VocabularyState": {
-          "target": "com.amazonaws.transcribe#VocabularyState",
-          "traits": {
-            "smithy.api#documentation": "<p>The processing state of your custom vocabulary. If the state is <code>READY</code>,\n            you can use the custom vocabulary in a <code>StartTranscriptionJob</code>\n            request.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.transcribe#Uri": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 2000
-        },
-        "smithy.api#pattern": "^(s3://|http(s*)://).+$"
-      }
-    },
-    "com.amazonaws.transcribe#Vocabularies": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.transcribe#VocabularyInfo"
-      }
-    },
-    "com.amazonaws.transcribe#VocabularyFilterInfo": {
-      "type": "structure",
-      "members": {
-        "VocabularyFilterName": {
-          "target": "com.amazonaws.transcribe#VocabularyFilterName",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique name, chosen by you, for your custom vocabulary filter. This name is case\n            sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account.</p>"
-          }
-        },
-        "LanguageCode": {
-          "target": "com.amazonaws.transcribe#LanguageCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The language code that represents the language of the entries in your vocabulary\n            filter. Each custom vocabulary filter must contain terms in only one language.</p>\n         <p>A custom vocabulary filter can only be used to transcribe files in the same language\n            as the filter. For example, if you create a custom vocabulary filter using US English\n                (<code>en-US</code>), you can only apply this filter to files that contain English\n            audio.</p>\n         <p>For a list of supported languages and their associated language codes, refer to the\n                <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported languages</a> table.</p>"
-          }
-        },
-        "LastModifiedTime": {
-          "target": "com.amazonaws.transcribe#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the specified custom vocabulary filter was last modified.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents 12:32 PM UTC-7 on May\n            4, 2022.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Provides information about a custom vocabulary filter, including the language of the\n            filter, when it was last modified, and its name.</p>"
-      }
-    },
-    "com.amazonaws.transcribe#VocabularyFilterMethod": {
-      "type": "enum",
-      "members": {
-        "REMOVE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "remove"
-          }
-        },
-        "MASK": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "mask"
-          }
-        },
-        "TAG": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "tag"
-          }
-        }
-      }
-    },
-    "com.amazonaws.transcribe#VocabularyFilterName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 200
-        },
-        "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
-      }
-    },
-    "com.amazonaws.transcribe#VocabularyFilters": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.transcribe#VocabularyFilterInfo"
-      }
-    },
-    "com.amazonaws.transcribe#VocabularyInfo": {
-      "type": "structure",
-      "members": {
-        "VocabularyName": {
-          "target": "com.amazonaws.transcribe#VocabularyName",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique name, chosen by you, for your custom vocabulary. This name is case sensitive,\n            cannot contain spaces, and must be unique within an Amazon Web Services account.</p>"
-          }
-        },
-        "LanguageCode": {
-          "target": "com.amazonaws.transcribe#LanguageCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The language code used to create your custom vocabulary. Each custom vocabulary must\n            contain terms in only one language.</p>\n         <p>A custom vocabulary can only be used to transcribe files in the same language as the\n            custom vocabulary. For example, if you create a custom vocabulary using US English\n                (<code>en-US</code>), you can only apply this custom vocabulary to files that\n            contain English audio.</p>"
-          }
-        },
-        "LastModifiedTime": {
-          "target": "com.amazonaws.transcribe#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the specified custom vocabulary was last modified.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents 12:32 PM UTC-7 on May\n            4, 2022.</p>"
-          }
-        },
-        "VocabularyState": {
-          "target": "com.amazonaws.transcribe#VocabularyState",
-          "traits": {
-            "smithy.api#documentation": "<p>The processing state of your custom vocabulary. If the state is <code>READY</code>,\n            you can use the custom vocabulary in a <code>StartTranscriptionJob</code>\n            request.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Provides information about a custom vocabulary, including the language of the custom\n            vocabulary, when it was last modified, its name, and the processing state.</p>"
-      }
-    },
-    "com.amazonaws.transcribe#VocabularyName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 200
-        },
-        "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
-      }
-    },
-    "com.amazonaws.transcribe#VocabularyState": {
-      "type": "enum",
-      "members": {
-        "PENDING": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "PENDING"
-          }
-        },
-        "READY": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "READY"
-          }
-        },
-        "FAILED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "FAILED"
-          }
-        }
-      }
-    },
-    "com.amazonaws.transcribe#Word": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 256
-        }
-      }
-    },
-    "com.amazonaws.transcribe#Words": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.transcribe#Word"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1
-        }
-      }
-    },
     "com.amazonaws.transcribe#Transcribe": {
       "type": "service",
       "version": "2017-10-26",
@@ -8277,6 +7280,1003 @@
             }
           ],
           "version": "1.0"
+        }
+      }
+    },
+    "com.amazonaws.transcribe#TranscribeArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1011
+        },
+        "smithy.api#pattern": "^arn:aws(-[^:]+)?:transcribe:[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z-]*/[0-9a-zA-Z._-]+$"
+      }
+    },
+    "com.amazonaws.transcribe#Transcript": {
+      "type": "structure",
+      "members": {
+        "TranscriptFileUri": {
+          "target": "com.amazonaws.transcribe#Uri",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 location of your transcript. You can use this URI to access or\n            download your transcript.</p>\n         <p>If you included <code>OutputBucketName</code> in your transcription job request, this\n            is the URI of that bucket. If you also included <code>OutputKey</code> in your request,\n            your output is located in the path you specified in your request.</p>\n         <p>If you didn't include <code>OutputBucketName</code> in your transcription job request,\n            your transcript is stored in a service-managed bucket, and\n                <code>TranscriptFileUri</code> provides you with a temporary URI you can use for\n            secure access to your transcript.</p>\n         <note>\n            <p>Temporary URIs for service-managed Amazon S3 buckets are only valid for 15\n                minutes. If you get an <code>AccesDenied</code> error, you can get a new temporary\n                URI by running a <code>GetTranscriptionJob</code> or\n                    <code>ListTranscriptionJob</code> request.</p>\n         </note>"
+          }
+        },
+        "RedactedTranscriptFileUri": {
+          "target": "com.amazonaws.transcribe#Uri",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 location of your redacted transcript. You can use this URI to\n            access or download your transcript.</p>\n         <p>If you included <code>OutputBucketName</code> in your transcription job request, this\n            is the URI of that bucket. If you also included <code>OutputKey</code> in your request,\n            your output is located in the path you specified in your request.</p>\n         <p>If you didn't include <code>OutputBucketName</code> in your transcription job request,\n            your transcript is stored in a service-managed bucket, and\n                <code>RedactedTranscriptFileUri</code> provides you with a temporary URI you can use\n            for secure access to your transcript.</p>\n         <note>\n            <p>Temporary URIs for service-managed Amazon S3 buckets are only valid for 15\n                minutes. If you get an <code>AccesDenied</code> error, you can get a new temporary\n                URI by running a <code>GetTranscriptionJob</code> or\n                    <code>ListTranscriptionJob</code> request.</p>\n         </note>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Provides you with the Amazon S3 URI you can use to access your\n            transcript.</p>"
+      }
+    },
+    "com.amazonaws.transcribe#TranscriptFilter": {
+      "type": "structure",
+      "members": {
+        "TranscriptFilterType": {
+          "target": "com.amazonaws.transcribe#TranscriptFilterType",
+          "traits": {
+            "smithy.api#documentation": "<p>Flag the presence or absence of an exact match to the phrases that you specify. For\n            example, if you specify the phrase \"speak to a manager\" as your <code>Targets</code>\n            value, only that exact phrase is flagged.</p>\n         <p>Note that semantic matching is not supported. For example, if your customer says\n            \"speak to <i>the</i> manager\", instead of \"speak to <i>a</i>\n            manager\", your content is not flagged.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AbsoluteTimeRange": {
+          "target": "com.amazonaws.transcribe#AbsoluteTimeRange",
+          "traits": {
+            "smithy.api#documentation": "<p>Makes it possible to specify a time range (in milliseconds) in your audio, during\n            which you want to search for the specified key words or phrases. See  for more detail.</p>"
+          }
+        },
+        "RelativeTimeRange": {
+          "target": "com.amazonaws.transcribe#RelativeTimeRange",
+          "traits": {
+            "smithy.api#documentation": "<p>Makes it possible to specify a time range (in percentage) in your media file, during\n            which you want to search for the specified key words or phrases. See  for more detail.</p>"
+          }
+        },
+        "ParticipantRole": {
+          "target": "com.amazonaws.transcribe#ParticipantRole",
+          "traits": {
+            "smithy.api#documentation": "<p>Specify the participant that you want to flag. Omitting this parameter is equivalent\n            to specifying both participants.</p>"
+          }
+        },
+        "Negate": {
+          "target": "com.amazonaws.transcribe#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Set to <code>TRUE</code> to flag the absence of the phrase that you specified in your\n            request. Set to <code>FALSE</code> to flag the presence of the phrase that you specified\n            in your request.</p>"
+          }
+        },
+        "Targets": {
+          "target": "com.amazonaws.transcribe#StringTargetList",
+          "traits": {
+            "smithy.api#documentation": "<p>Specify the phrases that you want to flag.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Flag the presence or absence of specific words or phrases detected in your Call\n            Analytics transcription output.</p>\n         <p>Rules using <code>TranscriptFilter</code> are designed to match:</p>\n         <ul>\n            <li>\n               <p>Custom words or phrases spoken by the agent, the customer, or both</p>\n            </li>\n            <li>\n               <p>Custom words or phrases <b>not</b> spoken by the\n                    agent, the customer, or either</p>\n            </li>\n            <li>\n               <p>Custom words or phrases that occur at a specific time frame</p>\n            </li>\n         </ul>\n         <p>See <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch\">Rule criteria for post-call \n            categories</a> and <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html#tca-rules-stream\">Rule criteria for \n                streaming categories</a> for usage examples.</p>"
+      }
+    },
+    "com.amazonaws.transcribe#TranscriptFilterType": {
+      "type": "enum",
+      "members": {
+        "EXACT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "EXACT"
+          }
+        }
+      }
+    },
+    "com.amazonaws.transcribe#TranscriptionJob": {
+      "type": "structure",
+      "members": {
+        "TranscriptionJobName": {
+          "target": "com.amazonaws.transcribe#TranscriptionJobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the transcription job. Job names are case sensitive and must be unique\n            within an Amazon Web Services account.</p>"
+          }
+        },
+        "TranscriptionJobStatus": {
+          "target": "com.amazonaws.transcribe#TranscriptionJobStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides the status of the specified transcription job.</p>\n         <p>If the status is <code>COMPLETED</code>, the job is finished and you can find the\n            results at the location specified in <code>TranscriptFileUri</code> (or\n                <code>RedactedTranscriptFileUri</code>, if you requested transcript redaction). If\n            the status is <code>FAILED</code>, <code>FailureReason</code> provides details on why\n            your transcription job failed.</p>"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe#LanguageCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The language code used to create your transcription job. This parameter is used with\n            single-language identification. For multi-language identification requests, refer to the\n            plural version of this parameter, <code>LanguageCodes</code>.</p>"
+          }
+        },
+        "MediaSampleRateHertz": {
+          "target": "com.amazonaws.transcribe#MediaSampleRateHertz",
+          "traits": {
+            "smithy.api#documentation": "<p>The sample rate, in hertz, of the audio track in your input media file.</p>"
+          }
+        },
+        "MediaFormat": {
+          "target": "com.amazonaws.transcribe#MediaFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The format of the input media file.</p>"
+          }
+        },
+        "Media": {
+          "target": "com.amazonaws.transcribe#Media",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides the Amazon S3 location of the media file you used in your\n            request.</p>"
+          }
+        },
+        "Transcript": {
+          "target": "com.amazonaws.transcribe#Transcript",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides you with the Amazon S3 URI you can use to access your\n            transcript.</p>"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.transcribe#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the specified transcription job began processing.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.789000-07:00</code> represents a transcription job\n            that started processing at 12:32 PM UTC-7 on May 4, 2022.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.transcribe#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the specified transcription job request was made.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents a transcription job\n            that started processing at 12:32 PM UTC-7 on May 4, 2022.</p>"
+          }
+        },
+        "CompletionTime": {
+          "target": "com.amazonaws.transcribe#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the specified transcription job finished processing.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:33:13.922000-07:00</code> represents a transcription job\n            that started processing at 12:33 PM UTC-7 on May 4, 2022.</p>"
+          }
+        },
+        "FailureReason": {
+          "target": "com.amazonaws.transcribe#FailureReason",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>TranscriptionJobStatus</code> is <code>FAILED</code>,\n                <code>FailureReason</code> contains information about why the transcription job\n            request failed.</p>\n         <p>The <code>FailureReason</code> field contains one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Unsupported media format</code>.</p>\n               <p>The media format specified in <code>MediaFormat</code> isn't valid. Refer to\n                    refer to the <code>MediaFormat</code> parameter for a list of supported\n                    formats.</p>\n            </li>\n            <li>\n               <p>\n                  <code>The media format provided does not match the detected media\n                        format</code>.</p>\n               <p>The media format specified in <code>MediaFormat</code> doesn't match the\n                    format of the input file. Check the media format of your media file and correct\n                    the specified value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Invalid sample rate for audio file</code>.</p>\n               <p>The sample rate specified in <code>MediaSampleRateHertz</code> isn't valid.\n                    The sample rate must be between 8,000 and 48,000 hertz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>The sample rate provided does not match the detected sample\n                    rate</code>.</p>\n               <p>The sample rate specified in <code>MediaSampleRateHertz</code> doesn't match\n                    the sample rate detected in your input media file. Check the sample rate of your\n                    media file and correct the specified value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Invalid file size: file size too large</code>.</p>\n               <p>The size of your media file is larger than what Amazon Transcribe can\n                    process. For more information, refer to <a href=\"https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe\">Service \n                        quotas</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Invalid number of channels: number of channels too large</code>.</p>\n               <p>Your audio contains more channels than Amazon Transcribe is able to process.\n                    For more information, refer to <a href=\"https://docs.aws.amazon.com/general/latest/gr/transcribe.html#limits-amazon-transcribe\">Service \n                        quotas</a>.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Settings": {
+          "target": "com.amazonaws.transcribe#Settings",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides information on any additional settings that were included in your request.\n            Additional settings include channel identification, alternative transcriptions, speaker\n            partitioning, custom vocabularies, and custom vocabulary filters.</p>"
+          }
+        },
+        "ModelSettings": {
+          "target": "com.amazonaws.transcribe#ModelSettings",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides information on the custom language model you included in your request.</p>"
+          }
+        },
+        "JobExecutionSettings": {
+          "target": "com.amazonaws.transcribe#JobExecutionSettings",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides information about how your transcription job was processed. This parameter\n            shows if your request was queued and what data access role was used.</p>"
+          }
+        },
+        "ContentRedaction": {
+          "target": "com.amazonaws.transcribe#ContentRedaction",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether redaction was enabled in your transcript.</p>"
+          }
+        },
+        "IdentifyLanguage": {
+          "target": "com.amazonaws.transcribe#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether automatic language identification was enabled (<code>TRUE</code>)\n            for the specified transcription job.</p>"
+          }
+        },
+        "IdentifyMultipleLanguages": {
+          "target": "com.amazonaws.transcribe#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether automatic multi-language identification was enabled\n                (<code>TRUE</code>) for the specified transcription job.</p>"
+          }
+        },
+        "LanguageOptions": {
+          "target": "com.amazonaws.transcribe#LanguageOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides the language codes you specified in your request.</p>"
+          }
+        },
+        "IdentifiedLanguageScore": {
+          "target": "com.amazonaws.transcribe#IdentifiedLanguageScore",
+          "traits": {
+            "smithy.api#documentation": "<p>The confidence score associated with the language identified in your media\n            file.</p>\n         <p>Confidence scores are values between 0 and 1; a larger value indicates a higher\n            probability that the identified language correctly matches the language spoken in your\n            media.</p>"
+          }
+        },
+        "LanguageCodes": {
+          "target": "com.amazonaws.transcribe#LanguageCodeList",
+          "traits": {
+            "smithy.api#documentation": "<p>The language codes used to create your transcription job. This parameter is used with\n            multi-language identification. For single-language identification requests, refer to the\n            singular version of this parameter, <code>LanguageCode</code>.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.transcribe#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags, each in the form of a key:value pair, assigned to the specified\n            transcription job.</p>"
+          }
+        },
+        "Subtitles": {
+          "target": "com.amazonaws.transcribe#SubtitlesOutput",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether subtitles were generated with your transcription.</p>"
+          }
+        },
+        "LanguageIdSettings": {
+          "target": "com.amazonaws.transcribe#LanguageIdSettingsMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides the name and language of all custom language models, custom vocabularies, and\n            custom vocabulary filters that you included in your request.</p>"
+          }
+        },
+        "ToxicityDetection": {
+          "target": "com.amazonaws.transcribe#ToxicityDetection",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides information about the toxicity detection settings applied to your transcription.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Provides detailed information about a transcription job.</p>\n         <p>To view the status of the specified transcription job, check the\n                <code>TranscriptionJobStatus</code> field. If the status is <code>COMPLETED</code>,\n            the job is finished and you can find the results at the location specified in\n                <code>TranscriptFileUri</code>. If the status is <code>FAILED</code>,\n                <code>FailureReason</code> provides details on why your transcription job\n            failed.</p>\n         <p>If you enabled content redaction, the redacted transcript can be found at the location\n            specified in <code>RedactedTranscriptFileUri</code>.</p>"
+      }
+    },
+    "com.amazonaws.transcribe#TranscriptionJobName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 200
+        },
+        "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+      }
+    },
+    "com.amazonaws.transcribe#TranscriptionJobStatus": {
+      "type": "enum",
+      "members": {
+        "QUEUED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "QUEUED"
+          }
+        },
+        "IN_PROGRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IN_PROGRESS"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        },
+        "COMPLETED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "COMPLETED"
+          }
+        }
+      }
+    },
+    "com.amazonaws.transcribe#TranscriptionJobSummaries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.transcribe#TranscriptionJobSummary"
+      }
+    },
+    "com.amazonaws.transcribe#TranscriptionJobSummary": {
+      "type": "structure",
+      "members": {
+        "TranscriptionJobName": {
+          "target": "com.amazonaws.transcribe#TranscriptionJobName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the transcription job. Job names are case sensitive and must be unique\n            within an Amazon Web Services account.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.transcribe#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the specified transcription job request was made.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents a transcription job\n            that started processing at 12:32 PM UTC-7 on May 4, 2022.</p>"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.transcribe#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time your transcription job began processing.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.789000-07:00</code> represents a transcription job\n            that started processing at 12:32 PM UTC-7 on May 4, 2022.</p>"
+          }
+        },
+        "CompletionTime": {
+          "target": "com.amazonaws.transcribe#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the specified transcription job finished processing.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:33:13.922000-07:00</code> represents a transcription job\n            that started processing at 12:33 PM UTC-7 on May 4, 2022.</p>"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe#LanguageCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The language code used to create your transcription.</p>"
+          }
+        },
+        "TranscriptionJobStatus": {
+          "target": "com.amazonaws.transcribe#TranscriptionJobStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides the status of your transcription job.</p>\n         <p>If the status is <code>COMPLETED</code>, the job is finished and you can find the\n            results at the location specified in <code>TranscriptFileUri</code> (or\n                <code>RedactedTranscriptFileUri</code>, if you requested transcript redaction). If\n            the status is <code>FAILED</code>, <code>FailureReason</code> provides details on why\n            your transcription job failed.</p>"
+          }
+        },
+        "FailureReason": {
+          "target": "com.amazonaws.transcribe#FailureReason",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>TranscriptionJobStatus</code> is <code>FAILED</code>,\n                <code>FailureReason</code> contains information about why the transcription job\n            failed. See also: <a href=\"https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html\">Common Errors</a>.</p>"
+          }
+        },
+        "OutputLocationType": {
+          "target": "com.amazonaws.transcribe#OutputLocationType",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates where the specified transcription output is stored.</p>\n         <p>If the value is <code>CUSTOMER_BUCKET</code>, the location is the Amazon S3\n            bucket you specified using the <code>OutputBucketName</code> parameter in your  request. If you also included\n                <code>OutputKey</code> in your request, your output is located in the path you\n            specified in your request.</p>\n         <p>If the value is <code>SERVICE_BUCKET</code>, the location is a service-managed Amazon S3 bucket. To access a transcript stored in a service-managed bucket, use the\n            URI shown in the <code>TranscriptFileUri</code> or\n                <code>RedactedTranscriptFileUri</code> field.</p>"
+          }
+        },
+        "ContentRedaction": {
+          "target": "com.amazonaws.transcribe#ContentRedaction",
+          "traits": {
+            "smithy.api#documentation": "<p>The content redaction settings of the transcription job.</p>"
+          }
+        },
+        "ModelSettings": {
+          "target": "com.amazonaws.transcribe#ModelSettings"
+        },
+        "IdentifyLanguage": {
+          "target": "com.amazonaws.transcribe#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether automatic language identification was enabled (<code>TRUE</code>)\n            for the specified transcription job.</p>"
+          }
+        },
+        "IdentifyMultipleLanguages": {
+          "target": "com.amazonaws.transcribe#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether automatic multi-language identification was enabled\n                (<code>TRUE</code>) for the specified transcription job.</p>"
+          }
+        },
+        "IdentifiedLanguageScore": {
+          "target": "com.amazonaws.transcribe#IdentifiedLanguageScore",
+          "traits": {
+            "smithy.api#documentation": "<p>The confidence score associated with the language identified in your media\n            file.</p>\n         <p>Confidence scores are values between 0 and 1; a larger value indicates a higher\n            probability that the identified language correctly matches the language spoken in your\n            media.</p>"
+          }
+        },
+        "LanguageCodes": {
+          "target": "com.amazonaws.transcribe#LanguageCodeList",
+          "traits": {
+            "smithy.api#documentation": "<p>The language codes used to create your transcription job. This parameter is used with\n            multi-language identification. For single-language identification, the singular version\n            of this parameter, <code>LanguageCode</code>, is present.</p>"
+          }
+        },
+        "ToxicityDetection": {
+          "target": "com.amazonaws.transcribe#ToxicityDetection",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether toxicity detection was enabled for the specified transcription \n            job.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Provides detailed information about a specific transcription job.</p>"
+      }
+    },
+    "com.amazonaws.transcribe#Type": {
+      "type": "enum",
+      "members": {
+        "CONVERSATION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "CONVERSATION"
+          }
+        },
+        "DICTATION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DICTATION"
+          }
+        }
+      }
+    },
+    "com.amazonaws.transcribe#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.transcribe#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.transcribe#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.transcribe#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes the specified tags from the specified Amazon Transcribe resource.</p>\n         <p>If you include <code>UntagResource</code> in your request, you must also include\n                <code>ResourceArn</code> and <code>TagKeys</code>.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/tags/{ResourceArn}",
+          "code": 204
+        }
+      }
+    },
+    "com.amazonaws.transcribe#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.transcribe#TranscribeArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to remove\n            tags from. ARNs have the format\n                <code>arn:partition:service:region:account-id:resource-type/resource-id</code>.</p>\n         <p>For example,\n                <code>arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name</code>.</p>\n         <p>Valid values for <code>resource-type</code> are: <code>transcription-job</code>,\n                <code>medical-transcription-job</code>, <code>vocabulary</code>,\n                <code>medical-vocabulary</code>, <code>vocabulary-filter</code>, and\n                <code>language-model</code>.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.transcribe#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>Removes the specified tag keys from the specified Amazon Transcribe resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.transcribe#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.transcribe#UpdateCallAnalyticsCategory": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.transcribe#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the specified Call Analytics category with new rules. Note that the\n                <code>UpdateCallAnalyticsCategory</code> operation overwrites all existing rules\n            contained in the specified category. You cannot append additional rules onto an existing\n            category.</p>\n         <p>To create a new category, see .</p>",
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/callanalyticscategories/{CategoryName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryRequest": {
+      "type": "structure",
+      "members": {
+        "CategoryName": {
+          "target": "com.amazonaws.transcribe#CategoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Call Analytics category you want to update. Category names are case\n            sensitive.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Rules": {
+          "target": "com.amazonaws.transcribe#RuleList",
+          "traits": {
+            "smithy.api#documentation": "<p>The rules used for the updated Call Analytics category. The rules you provide in this\n            field replace the ones that are currently being used in the specified category.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "InputType": {
+          "target": "com.amazonaws.transcribe#InputType",
+          "traits": {
+            "smithy.api#documentation": "<p>Choose whether you want to update a real-time or a post-call category. The \n            input type you specify must match the input type specified when the category was created. For\n            example, if you created a category with the <code>POST_CALL</code> input type, you must\n            use <code>POST_CALL</code> as the input type when updating this category.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryResponse": {
+      "type": "structure",
+      "members": {
+        "CategoryProperties": {
+          "target": "com.amazonaws.transcribe#CategoryProperties",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides you with the properties of the Call Analytics category you specified in your\n                <code>UpdateCallAnalyticsCategory</code> request.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.transcribe#UpdateMedicalVocabulary": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.transcribe#UpdateMedicalVocabularyRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.transcribe#UpdateMedicalVocabularyResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.transcribe#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates an existing custom medical vocabulary with new values. This operation\n            overwrites all existing information with your new values; you cannot append new terms\n            onto an existing custom vocabulary.</p>",
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/medicalvocabularies/{VocabularyName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.transcribe#UpdateMedicalVocabularyRequest": {
+      "type": "structure",
+      "members": {
+        "VocabularyName": {
+          "target": "com.amazonaws.transcribe#VocabularyName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the custom medical vocabulary you want to update. Custom medical\n            vocabulary names are case sensitive.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe#LanguageCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The language code that represents the language of the entries in the custom vocabulary\n            you want to update. US English (<code>en-US</code>) is the only language supported with\n                Amazon Transcribe Medical.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "VocabularyFileUri": {
+          "target": "com.amazonaws.transcribe#Uri",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 location of the text file that contains your custom medical\n            vocabulary. The URI must be located in the same Amazon Web Services Region as the\n            resource you're calling.</p>\n         <p>Here's an example URI path:\n            <code>s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.transcribe#UpdateMedicalVocabularyResponse": {
+      "type": "structure",
+      "members": {
+        "VocabularyName": {
+          "target": "com.amazonaws.transcribe#VocabularyName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the updated custom medical vocabulary.</p>"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe#LanguageCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The language code you selected for your custom medical vocabulary. US English\n                (<code>en-US</code>) is the only language supported with Amazon Transcribe\n            Medical.</p>"
+          }
+        },
+        "LastModifiedTime": {
+          "target": "com.amazonaws.transcribe#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the specified custom medical vocabulary was last updated.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents 12:32 PM UTC-7 on May\n            4, 2022.</p>"
+          }
+        },
+        "VocabularyState": {
+          "target": "com.amazonaws.transcribe#VocabularyState",
+          "traits": {
+            "smithy.api#documentation": "<p>The processing state of your custom medical vocabulary. If the state is\n                <code>READY</code>, you can use the custom vocabulary in a\n                <code>StartMedicalTranscriptionJob</code> request.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.transcribe#UpdateVocabulary": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.transcribe#UpdateVocabularyRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.transcribe#UpdateVocabularyResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.transcribe#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates an existing custom vocabulary with new values. This operation overwrites all\n            existing information with your new values; you cannot append new terms onto an existing\n            custom vocabulary.</p>",
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/vocabularies/{VocabularyName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.transcribe#UpdateVocabularyFilter": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.transcribe#UpdateVocabularyFilterRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.transcribe#UpdateVocabularyFilterResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.transcribe#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.transcribe#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates an existing custom vocabulary filter with a new list of words. The new list\n            you provide overwrites all previous entries; you cannot append new terms onto an\n            existing custom vocabulary filter.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/vocabularyFilters/{VocabularyFilterName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.transcribe#UpdateVocabularyFilterRequest": {
+      "type": "structure",
+      "members": {
+        "VocabularyFilterName": {
+          "target": "com.amazonaws.transcribe#VocabularyFilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the custom vocabulary filter you want to update. Custom vocabulary filter\n            names are case sensitive.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Words": {
+          "target": "com.amazonaws.transcribe#Words",
+          "traits": {
+            "smithy.api#documentation": "<p>Use this parameter if you want to update your custom vocabulary filter by including\n            all desired terms, as comma-separated values, within your request. The other option for\n            updating your vocabulary filter is to save your entries in a text file and upload them\n            to an Amazon S3 bucket, then specify the location of your file using the\n                <code>VocabularyFilterFileUri</code> parameter.</p>\n         <p>Note that if you include <code>Words</code> in your request, you cannot use\n                <code>VocabularyFilterFileUri</code>; you must choose one or the other.</p>\n         <p>Each language has a character set that contains all allowed characters for that\n            specific language. If you use unsupported characters, your custom vocabulary filter\n            request fails. Refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html\">Character Sets for Custom\n                Vocabularies</a> to get the character set for your language.</p>"
+          }
+        },
+        "VocabularyFilterFileUri": {
+          "target": "com.amazonaws.transcribe#Uri",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 location of the text file that contains your custom vocabulary\n            filter terms. The URI must be located in the same Amazon Web Services Region as the\n            resource you're calling.</p>\n         <p>Here's an example URI path:\n                <code>s3://DOC-EXAMPLE-BUCKET/my-vocab-filter-file.txt</code>\n         </p>\n         <p>Note that if you include <code>VocabularyFilterFileUri</code> in your request, you\n            cannot use <code>Words</code>; you must choose one or the other.</p>"
+          }
+        },
+        "DataAccessRoleArn": {
+          "target": "com.amazonaws.transcribe#DataAccessRoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that has permissions to\n            access the Amazon S3 bucket that contains your input files (in this case, your custom\n            vocabulary filter). If the role that you specify doesn\u2019t have the appropriate permissions to access\n            the specified Amazon S3 location, your request fails.</p>\n         <p>IAM role ARNs have the format\n            <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:\n            <code>arn:aws:iam::111122223333:role/Admin</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns\">IAM\n            ARNs</a>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.transcribe#UpdateVocabularyFilterResponse": {
+      "type": "structure",
+      "members": {
+        "VocabularyFilterName": {
+          "target": "com.amazonaws.transcribe#VocabularyFilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the updated custom vocabulary filter.</p>"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe#LanguageCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The language code you selected for your custom vocabulary filter.</p>"
+          }
+        },
+        "LastModifiedTime": {
+          "target": "com.amazonaws.transcribe#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the specified custom vocabulary filter was last updated.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents 12:32 PM UTC-7 on May\n            4, 2022.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.transcribe#UpdateVocabularyRequest": {
+      "type": "structure",
+      "members": {
+        "VocabularyName": {
+          "target": "com.amazonaws.transcribe#VocabularyName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the custom vocabulary you want to update. Custom vocabulary names are case\n            sensitive.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe#LanguageCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The language code that represents the language of the entries in the custom vocabulary\n            you want to update. Each custom vocabulary must contain terms in only one\n            language.</p>\n         <p>A custom vocabulary can only be used to transcribe files in the same language as the\n            custom vocabulary. For example, if you create a custom vocabulary using US English\n                (<code>en-US</code>), you can only apply this custom vocabulary to files that\n            contain English audio.</p>\n         <p>For a list of supported languages and their associated language codes, refer to the\n                <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported languages</a> table.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Phrases": {
+          "target": "com.amazonaws.transcribe#Phrases",
+          "traits": {
+            "smithy.api#documentation": "<p>Use this parameter if you want to update your custom vocabulary by including all\n            desired terms, as comma-separated values, within your request. The other option for\n            updating your custom vocabulary is to save your entries in a text file and upload them\n            to an Amazon S3 bucket, then specify the location of your file using the\n                <code>VocabularyFileUri</code> parameter.</p>\n         <p>Note that if you include <code>Phrases</code> in your request, you cannot use\n                <code>VocabularyFileUri</code>; you must choose one or the other.</p>\n         <p>Each language has a character set that contains all allowed characters for that\n            specific language. If you use unsupported characters, your custom vocabulary filter\n            request fails. Refer to <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html\">Character Sets for Custom\n                Vocabularies</a> to get the character set for your language.</p>"
+          }
+        },
+        "VocabularyFileUri": {
+          "target": "com.amazonaws.transcribe#Uri",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 location of the text file that contains your custom vocabulary.\n            The URI must be located in the same Amazon Web Services Region as the resource you're\n            calling.</p>\n         <p>Here's an example URI path:\n            <code>s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt</code>\n         </p>\n         <p>Note that if you include <code>VocabularyFileUri</code> in your request, you cannot\n            use the <code>Phrases</code> flag; you must choose one or the other.</p>"
+          }
+        },
+        "DataAccessRoleArn": {
+          "target": "com.amazonaws.transcribe#DataAccessRoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that has permissions to\n            access the Amazon S3 bucket that contains your input files (in this case, your custom\n            vocabulary). If the role that you specify doesn\u2019t have the appropriate permissions to access\n            the specified Amazon S3 location, your request fails.</p>\n         <p>IAM role ARNs have the format\n            <code>arn:partition:iam::account:role/role-name-with-path</code>. For example:\n            <code>arn:aws:iam::111122223333:role/Admin</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns\">IAM\n            ARNs</a>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.transcribe#UpdateVocabularyResponse": {
+      "type": "structure",
+      "members": {
+        "VocabularyName": {
+          "target": "com.amazonaws.transcribe#VocabularyName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the updated custom vocabulary.</p>"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe#LanguageCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The language code you selected for your custom vocabulary.</p>"
+          }
+        },
+        "LastModifiedTime": {
+          "target": "com.amazonaws.transcribe#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the specified custom vocabulary was last updated.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents 12:32 PM UTC-7 on May\n            4, 2022.</p>"
+          }
+        },
+        "VocabularyState": {
+          "target": "com.amazonaws.transcribe#VocabularyState",
+          "traits": {
+            "smithy.api#documentation": "<p>The processing state of your custom vocabulary. If the state is <code>READY</code>,\n            you can use the custom vocabulary in a <code>StartTranscriptionJob</code>\n            request.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.transcribe#Uri": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2000
+        },
+        "smithy.api#pattern": "^(s3://|http(s*)://).+$"
+      }
+    },
+    "com.amazonaws.transcribe#Vocabularies": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.transcribe#VocabularyInfo"
+      }
+    },
+    "com.amazonaws.transcribe#VocabularyFilterInfo": {
+      "type": "structure",
+      "members": {
+        "VocabularyFilterName": {
+          "target": "com.amazonaws.transcribe#VocabularyFilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique name, chosen by you, for your custom vocabulary filter. This name is case\n            sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account.</p>"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe#LanguageCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The language code that represents the language of the entries in your vocabulary\n            filter. Each custom vocabulary filter must contain terms in only one language.</p>\n         <p>A custom vocabulary filter can only be used to transcribe files in the same language\n            as the filter. For example, if you create a custom vocabulary filter using US English\n                (<code>en-US</code>), you can only apply this filter to files that contain English\n            audio.</p>\n         <p>For a list of supported languages and their associated language codes, refer to the\n                <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html\">Supported languages</a> table.</p>"
+          }
+        },
+        "LastModifiedTime": {
+          "target": "com.amazonaws.transcribe#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the specified custom vocabulary filter was last modified.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents 12:32 PM UTC-7 on May\n            4, 2022.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Provides information about a custom vocabulary filter, including the language of the\n            filter, when it was last modified, and its name.</p>"
+      }
+    },
+    "com.amazonaws.transcribe#VocabularyFilterMethod": {
+      "type": "enum",
+      "members": {
+        "REMOVE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "remove"
+          }
+        },
+        "MASK": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "mask"
+          }
+        },
+        "TAG": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "tag"
+          }
+        }
+      }
+    },
+    "com.amazonaws.transcribe#VocabularyFilterName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 200
+        },
+        "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+      }
+    },
+    "com.amazonaws.transcribe#VocabularyFilters": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.transcribe#VocabularyFilterInfo"
+      }
+    },
+    "com.amazonaws.transcribe#VocabularyInfo": {
+      "type": "structure",
+      "members": {
+        "VocabularyName": {
+          "target": "com.amazonaws.transcribe#VocabularyName",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique name, chosen by you, for your custom vocabulary. This name is case sensitive,\n            cannot contain spaces, and must be unique within an Amazon Web Services account.</p>"
+          }
+        },
+        "LanguageCode": {
+          "target": "com.amazonaws.transcribe#LanguageCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The language code used to create your custom vocabulary. Each custom vocabulary must\n            contain terms in only one language.</p>\n         <p>A custom vocabulary can only be used to transcribe files in the same language as the\n            custom vocabulary. For example, if you create a custom vocabulary using US English\n                (<code>en-US</code>), you can only apply this custom vocabulary to files that\n            contain English audio.</p>"
+          }
+        },
+        "LastModifiedTime": {
+          "target": "com.amazonaws.transcribe#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the specified custom vocabulary was last modified.</p>\n         <p>Timestamps are in the format <code>YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC</code>. For\n            example, <code>2022-05-04T12:32:58.761000-07:00</code> represents 12:32 PM UTC-7 on May\n            4, 2022.</p>"
+          }
+        },
+        "VocabularyState": {
+          "target": "com.amazonaws.transcribe#VocabularyState",
+          "traits": {
+            "smithy.api#documentation": "<p>The processing state of your custom vocabulary. If the state is <code>READY</code>,\n            you can use the custom vocabulary in a <code>StartTranscriptionJob</code>\n            request.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Provides information about a custom vocabulary, including the language of the custom\n            vocabulary, when it was last modified, its name, and the processing state.</p>"
+      }
+    },
+    "com.amazonaws.transcribe#VocabularyName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 200
+        },
+        "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+      }
+    },
+    "com.amazonaws.transcribe#VocabularyState": {
+      "type": "enum",
+      "members": {
+        "PENDING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "PENDING"
+          }
+        },
+        "READY": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "READY"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        }
+      }
+    },
+    "com.amazonaws.transcribe#Word": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.transcribe#Words": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.transcribe#Word"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1
         }
       }
     }

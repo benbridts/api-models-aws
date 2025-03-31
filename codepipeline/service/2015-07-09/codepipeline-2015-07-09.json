@@ -1806,6 +1806,1099 @@
     "com.amazonaws.codepipeline#Code": {
       "type": "string"
     },
+    "com.amazonaws.codepipeline#CodePipeline_20150709": {
+      "type": "service",
+      "version": "2015-07-09",
+      "operations": [
+        {
+          "target": "com.amazonaws.codepipeline#AcknowledgeJob"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#AcknowledgeThirdPartyJob"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#CreateCustomActionType"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#CreatePipeline"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#DeleteCustomActionType"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#DeletePipeline"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#DeleteWebhook"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#DeregisterWebhookWithThirdParty"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#DisableStageTransition"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#EnableStageTransition"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#GetActionType"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#GetJobDetails"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#GetPipeline"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#GetPipelineExecution"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#GetPipelineState"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#GetThirdPartyJobDetails"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#ListActionExecutions"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#ListActionTypes"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#ListPipelineExecutions"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#ListPipelines"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#ListRuleExecutions"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#ListRuleTypes"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#ListWebhooks"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#OverrideStageCondition"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#PollForJobs"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#PollForThirdPartyJobs"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#PutActionRevision"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#PutApprovalResult"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#PutJobFailureResult"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#PutJobSuccessResult"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#PutThirdPartyJobFailureResult"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#PutThirdPartyJobSuccessResult"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#PutWebhook"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#RegisterWebhookWithThirdParty"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#RetryStageExecution"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#RollbackStage"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#StartPipelineExecution"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#StopPipelineExecution"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#TagResource"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#UpdateActionType"
+        },
+        {
+          "target": "com.amazonaws.codepipeline#UpdatePipeline"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "CodePipeline",
+          "arnNamespace": "codepipeline",
+          "cloudFormationName": "CodePipeline",
+          "cloudTrailEventSource": "codepipeline.amazonaws.com",
+          "endpointPrefix": "codepipeline"
+        },
+        "aws.auth#sigv4": {
+          "name": "codepipeline"
+        },
+        "aws.protocols#awsJson1_1": {},
+        "smithy.api#documentation": "<fullname>CodePipeline</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>This is the CodePipeline API Reference. This guide provides descriptions\n            of the actions and data types for CodePipeline. Some functionality for your\n            pipeline can only be configured through the API. For more information, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html\">CodePipeline User Guide</a>.</p>\n         <p>You can use the CodePipeline API to work with pipelines, stages, actions,\n            and transitions.</p>\n         <p>\n            <i>Pipelines</i> are models of automated release processes. Each pipeline\n            is uniquely named, and consists of stages, actions, and transitions. </p>\n         <p>You can work with pipelines by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreatePipeline</a>, which creates a uniquely named\n                    pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeletePipeline</a>, which deletes the specified\n                    pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipeline</a>, which returns information about the pipeline\n                    structure and pipeline metadata, including the pipeline Amazon Resource Name\n                    (ARN).</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipelineExecution</a>, which returns information about a\n                    specific execution of a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipelineState</a>, which returns information about the current\n                    state of the stages and actions of a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListActionExecutions</a>, which returns action-level details\n                    for past executions. The details include full stage and action-level details,\n                    including individual action duration, status, any errors that occurred during\n                    the execution, and input and output artifact location details.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListPipelines</a>, which gets a summary of all of the pipelines\n                    associated with your account.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListPipelineExecutions</a>, which gets a summary of the most\n                    recent executions for a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartPipelineExecution</a>, which runs the most recent revision of\n                    an artifact through the pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopPipelineExecution</a>, which stops the specified pipeline\n                    execution from continuing through the pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdatePipeline</a>, which updates a pipeline with edits or changes\n                    to the structure of the pipeline.</p>\n            </li>\n         </ul>\n         <p>Pipelines include <i>stages</i>. Each stage contains one or more\n            actions that must complete before the next stage begins. A stage results in success or\n            failure. If a stage fails, the pipeline stops at that stage and remains stopped until\n            either a new version of an artifact appears in the source location, or a user takes\n            action to rerun the most recent artifact through the pipeline. You can call <a>GetPipelineState</a>, which displays the status of a pipeline, including the\n            status of stages in the pipeline, or <a>GetPipeline</a>, which returns the\n            entire structure of the pipeline, including the stages of that pipeline. For more\n            information about the structure of stages and actions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-structure.html\">CodePipeline\n                Pipeline Structure Reference</a>.</p>\n         <p>Pipeline stages include <i>actions</i> that are categorized into\n            categories such as source or build actions performed in a stage of a pipeline. For\n            example, you can use a source action to import artifacts into a pipeline from a source\n            such as Amazon S3. Like stages, you do not work with actions directly in most cases, but\n            you do define and interact with actions when working with pipeline operations such as\n                <a>CreatePipeline</a> and <a>GetPipelineState</a>. Valid\n            action categories are:</p>\n         <ul>\n            <li>\n               <p>Source</p>\n            </li>\n            <li>\n               <p>Build</p>\n            </li>\n            <li>\n               <p>Test</p>\n            </li>\n            <li>\n               <p>Deploy</p>\n            </li>\n            <li>\n               <p>Approval</p>\n            </li>\n            <li>\n               <p>Invoke</p>\n            </li>\n            <li>\n               <p>Compute</p>\n            </li>\n         </ul>\n         <p>Pipelines also include <i>transitions</i>, which allow the transition\n            of artifacts from one stage to the next in a pipeline after the actions in one stage\n            complete.</p>\n         <p>You can work with transitions by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DisableStageTransition</a>, which prevents artifacts from\n                    transitioning to the next stage in a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>EnableStageTransition</a>, which enables transition of artifacts\n                    between stages in a pipeline. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Using the API to integrate with CodePipeline</b>\n         </p>\n         <p>For third-party integrators or developers who want to create their own integrations\n            with CodePipeline, the expected sequence varies from the standard API user. To\n            integrate with CodePipeline, developers need to work with the following\n            items:</p>\n         <p>\n            <b>Jobs</b>, which are instances of an action. For\n            example, a job for a source action might import a revision of an artifact from a source. </p>\n         <p>You can work with jobs by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>AcknowledgeJob</a>, which confirms whether a job worker has\n                    received the specified job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetJobDetails</a>, which returns the details of a job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PollForJobs</a>, which determines whether there are any jobs to\n                    act on.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutJobFailureResult</a>, which provides details of a job failure.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <a>PutJobSuccessResult</a>, which provides details of a job\n                    success.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Third party jobs</b>, which are instances of an action\n            created by a partner action and integrated into CodePipeline. Partner actions are\n            created by members of the Amazon Web Services Partner Network.</p>\n         <p>You can work with third party jobs by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>AcknowledgeThirdPartyJob</a>, which confirms whether a job worker\n                    has received the specified job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetThirdPartyJobDetails</a>, which requests the details of a job\n                    for a partner action.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PollForThirdPartyJobs</a>, which determines whether there are any\n                    jobs to act on. </p>\n            </li>\n            <li>\n               <p>\n                  <a>PutThirdPartyJobFailureResult</a>, which provides details of a job\n                    failure.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutThirdPartyJobSuccessResult</a>, which provides details of a job\n                    success.</p>\n            </li>\n         </ul>",
+        "smithy.api#title": "AWS CodePipeline",
+        "smithy.api#xmlNamespace": {
+          "uri": "http://codepipeline.amazonaws.com/doc/2015-07-09/"
+        },
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "String"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "Boolean"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "Boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "String"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseDualStack"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "endpoint": {
+                    "url": {
+                      "ref": "Endpoint"
+                    },
+                    "properties": {},
+                    "headers": {}
+                  },
+                  "type": "endpoint"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Region"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "aws.partition",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ],
+                      "assign": "PartitionResult"
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        },
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://codepipeline-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://codepipeline-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS is enabled but this partition does not support FIPS",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [],
+                              "endpoint": {
+                                "url": "https://codepipeline.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "DualStack is enabled but this partition does not support DualStack",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [],
+                      "endpoint": {
+                        "url": "https://codepipeline.{Region}.{PartitionResult#dnsSuffix}",
+                        "properties": {},
+                        "headers": {}
+                      },
+                      "type": "endpoint"
+                    }
+                  ],
+                  "type": "tree"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.ap-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.ap-northeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-northeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.ap-northeast-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-northeast-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.ap-south-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.ap-southeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-southeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.ap-southeast-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ap-southeast-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.ca-central-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ca-central-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.ca-central-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "ca-central-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.eu-central-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-central-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.eu-north-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.eu-south-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-south-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.eu-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.eu-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.eu-west-3.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "eu-west-3",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.sa-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "sa-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.us-east-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.us-east-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-2",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.us-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.us-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-west-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.us-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.us-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.cn-northwest-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.cn-north-1.amazonaws.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.cn-north-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-north-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.us-gov-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.us-gov-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.us-gov-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.us-gov-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "Region": "us-gov-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "error": "DualStack is enabled but this partition does not support DualStack"
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline-fips.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "error": "DualStack is enabled but this partition does not support DualStack"
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://codepipeline.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "UseFIPS": false,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+              "expect": {
+                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true,
+                "Endpoint": "https://example.com"
+              }
+            },
+            {
+              "documentation": "Missing region",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              }
+            }
+          ],
+          "version": "1.0"
+        }
+      }
+    },
     "com.amazonaws.codepipeline#Command": {
       "type": "string",
       "traits": {
@@ -9106,1099 +10199,6 @@
         "smithy.api#length": {
           "min": 1,
           "max": 1000
-        }
-      }
-    },
-    "com.amazonaws.codepipeline#CodePipeline": {
-      "type": "service",
-      "version": "2015-07-09",
-      "operations": [
-        {
-          "target": "com.amazonaws.codepipeline#AcknowledgeJob"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#AcknowledgeThirdPartyJob"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#CreateCustomActionType"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#CreatePipeline"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#DeleteCustomActionType"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#DeletePipeline"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#DeleteWebhook"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#DeregisterWebhookWithThirdParty"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#DisableStageTransition"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#EnableStageTransition"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#GetActionType"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#GetJobDetails"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#GetPipeline"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#GetPipelineExecution"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#GetPipelineState"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#GetThirdPartyJobDetails"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#ListActionExecutions"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#ListActionTypes"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#ListPipelineExecutions"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#ListPipelines"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#ListRuleExecutions"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#ListRuleTypes"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#ListTagsForResource"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#ListWebhooks"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#OverrideStageCondition"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#PollForJobs"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#PollForThirdPartyJobs"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#PutActionRevision"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#PutApprovalResult"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#PutJobFailureResult"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#PutJobSuccessResult"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#PutThirdPartyJobFailureResult"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#PutThirdPartyJobSuccessResult"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#PutWebhook"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#RegisterWebhookWithThirdParty"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#RetryStageExecution"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#RollbackStage"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#StartPipelineExecution"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#StopPipelineExecution"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#TagResource"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#UntagResource"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#UpdateActionType"
-        },
-        {
-          "target": "com.amazonaws.codepipeline#UpdatePipeline"
-        }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "CodePipeline",
-          "arnNamespace": "codepipeline",
-          "cloudFormationName": "CodePipeline",
-          "cloudTrailEventSource": "codepipeline.amazonaws.com",
-          "endpointPrefix": "codepipeline"
-        },
-        "aws.auth#sigv4": {
-          "name": "codepipeline"
-        },
-        "aws.protocols#awsJson1_1": {},
-        "smithy.api#documentation": "<fullname>CodePipeline</fullname>\n         <p>\n            <b>Overview</b>\n         </p>\n         <p>This is the CodePipeline API Reference. This guide provides descriptions\n            of the actions and data types for CodePipeline. Some functionality for your\n            pipeline can only be configured through the API. For more information, see the <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html\">CodePipeline User Guide</a>.</p>\n         <p>You can use the CodePipeline API to work with pipelines, stages, actions,\n            and transitions.</p>\n         <p>\n            <i>Pipelines</i> are models of automated release processes. Each pipeline\n            is uniquely named, and consists of stages, actions, and transitions. </p>\n         <p>You can work with pipelines by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreatePipeline</a>, which creates a uniquely named\n                    pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeletePipeline</a>, which deletes the specified\n                    pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipeline</a>, which returns information about the pipeline\n                    structure and pipeline metadata, including the pipeline Amazon Resource Name\n                    (ARN).</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipelineExecution</a>, which returns information about a\n                    specific execution of a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetPipelineState</a>, which returns information about the current\n                    state of the stages and actions of a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListActionExecutions</a>, which returns action-level details\n                    for past executions. The details include full stage and action-level details,\n                    including individual action duration, status, any errors that occurred during\n                    the execution, and input and output artifact location details.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListPipelines</a>, which gets a summary of all of the pipelines\n                    associated with your account.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListPipelineExecutions</a>, which gets a summary of the most\n                    recent executions for a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StartPipelineExecution</a>, which runs the most recent revision of\n                    an artifact through the pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopPipelineExecution</a>, which stops the specified pipeline\n                    execution from continuing through the pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdatePipeline</a>, which updates a pipeline with edits or changes\n                    to the structure of the pipeline.</p>\n            </li>\n         </ul>\n         <p>Pipelines include <i>stages</i>. Each stage contains one or more\n            actions that must complete before the next stage begins. A stage results in success or\n            failure. If a stage fails, the pipeline stops at that stage and remains stopped until\n            either a new version of an artifact appears in the source location, or a user takes\n            action to rerun the most recent artifact through the pipeline. You can call <a>GetPipelineState</a>, which displays the status of a pipeline, including the\n            status of stages in the pipeline, or <a>GetPipeline</a>, which returns the\n            entire structure of the pipeline, including the stages of that pipeline. For more\n            information about the structure of stages and actions, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/pipeline-structure.html\">CodePipeline\n                Pipeline Structure Reference</a>.</p>\n         <p>Pipeline stages include <i>actions</i> that are categorized into\n            categories such as source or build actions performed in a stage of a pipeline. For\n            example, you can use a source action to import artifacts into a pipeline from a source\n            such as Amazon S3. Like stages, you do not work with actions directly in most cases, but\n            you do define and interact with actions when working with pipeline operations such as\n                <a>CreatePipeline</a> and <a>GetPipelineState</a>. Valid\n            action categories are:</p>\n         <ul>\n            <li>\n               <p>Source</p>\n            </li>\n            <li>\n               <p>Build</p>\n            </li>\n            <li>\n               <p>Test</p>\n            </li>\n            <li>\n               <p>Deploy</p>\n            </li>\n            <li>\n               <p>Approval</p>\n            </li>\n            <li>\n               <p>Invoke</p>\n            </li>\n            <li>\n               <p>Compute</p>\n            </li>\n         </ul>\n         <p>Pipelines also include <i>transitions</i>, which allow the transition\n            of artifacts from one stage to the next in a pipeline after the actions in one stage\n            complete.</p>\n         <p>You can work with transitions by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DisableStageTransition</a>, which prevents artifacts from\n                    transitioning to the next stage in a pipeline.</p>\n            </li>\n            <li>\n               <p>\n                  <a>EnableStageTransition</a>, which enables transition of artifacts\n                    between stages in a pipeline. </p>\n            </li>\n         </ul>\n         <p>\n            <b>Using the API to integrate with CodePipeline</b>\n         </p>\n         <p>For third-party integrators or developers who want to create their own integrations\n            with CodePipeline, the expected sequence varies from the standard API user. To\n            integrate with CodePipeline, developers need to work with the following\n            items:</p>\n         <p>\n            <b>Jobs</b>, which are instances of an action. For\n            example, a job for a source action might import a revision of an artifact from a source. </p>\n         <p>You can work with jobs by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>AcknowledgeJob</a>, which confirms whether a job worker has\n                    received the specified job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetJobDetails</a>, which returns the details of a job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PollForJobs</a>, which determines whether there are any jobs to\n                    act on.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutJobFailureResult</a>, which provides details of a job failure.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <a>PutJobSuccessResult</a>, which provides details of a job\n                    success.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Third party jobs</b>, which are instances of an action\n            created by a partner action and integrated into CodePipeline. Partner actions are\n            created by members of the Amazon Web Services Partner Network.</p>\n         <p>You can work with third party jobs by calling:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>AcknowledgeThirdPartyJob</a>, which confirms whether a job worker\n                    has received the specified job.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetThirdPartyJobDetails</a>, which requests the details of a job\n                    for a partner action.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PollForThirdPartyJobs</a>, which determines whether there are any\n                    jobs to act on. </p>\n            </li>\n            <li>\n               <p>\n                  <a>PutThirdPartyJobFailureResult</a>, which provides details of a job\n                    failure.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutThirdPartyJobSuccessResult</a>, which provides details of a job\n                    success.</p>\n            </li>\n         </ul>",
-        "smithy.api#title": "AWS CodePipeline",
-        "smithy.api#xmlNamespace": {
-          "uri": "http://codepipeline.amazonaws.com/doc/2015-07-09/"
-        },
-        "smithy.rules#endpointRuleSet": {
-          "version": "1.0",
-          "parameters": {
-            "Region": {
-              "builtIn": "AWS::Region",
-              "required": false,
-              "documentation": "The AWS region used to dispatch the request.",
-              "type": "String"
-            },
-            "UseDualStack": {
-              "builtIn": "AWS::UseDualStack",
-              "required": true,
-              "default": false,
-              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-              "type": "Boolean"
-            },
-            "UseFIPS": {
-              "builtIn": "AWS::UseFIPS",
-              "required": true,
-              "default": false,
-              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-              "type": "Boolean"
-            },
-            "Endpoint": {
-              "builtIn": "SDK::Endpoint",
-              "required": false,
-              "documentation": "Override the endpoint used to send this request",
-              "type": "String"
-            }
-          },
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "fn": "isSet",
-                  "argv": [
-                    {
-                      "ref": "Endpoint"
-                    }
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "booleanEquals",
-                      "argv": [
-                        {
-                          "ref": "UseFIPS"
-                        },
-                        true
-                      ]
-                    }
-                  ],
-                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                  "type": "error"
-                },
-                {
-                  "conditions": [
-                    {
-                      "fn": "booleanEquals",
-                      "argv": [
-                        {
-                          "ref": "UseDualStack"
-                        },
-                        true
-                      ]
-                    }
-                  ],
-                  "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                  "type": "error"
-                },
-                {
-                  "conditions": [],
-                  "endpoint": {
-                    "url": {
-                      "ref": "Endpoint"
-                    },
-                    "properties": {},
-                    "headers": {}
-                  },
-                  "type": "endpoint"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [
-                {
-                  "fn": "isSet",
-                  "argv": [
-                    {
-                      "ref": "Region"
-                    }
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "aws.partition",
-                      "argv": [
-                        {
-                          "ref": "Region"
-                        }
-                      ],
-                      "assign": "PartitionResult"
-                    }
-                  ],
-                  "rules": [
-                    {
-                      "conditions": [
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseFIPS"
-                            },
-                            true
-                          ]
-                        },
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseDualStack"
-                            },
-                            true
-                          ]
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                true,
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsFIPS"
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                true,
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsDualStack"
-                                  ]
-                                }
-                              ]
-                            }
-                          ],
-                          "rules": [
-                            {
-                              "conditions": [],
-                              "endpoint": {
-                                "url": "https://codepipeline-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                "properties": {},
-                                "headers": {}
-                              },
-                              "type": "endpoint"
-                            }
-                          ],
-                          "type": "tree"
-                        },
-                        {
-                          "conditions": [],
-                          "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                          "type": "error"
-                        }
-                      ],
-                      "type": "tree"
-                    },
-                    {
-                      "conditions": [
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseFIPS"
-                            },
-                            true
-                          ]
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsFIPS"
-                                  ]
-                                },
-                                true
-                              ]
-                            }
-                          ],
-                          "rules": [
-                            {
-                              "conditions": [],
-                              "endpoint": {
-                                "url": "https://codepipeline-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                "properties": {},
-                                "headers": {}
-                              },
-                              "type": "endpoint"
-                            }
-                          ],
-                          "type": "tree"
-                        },
-                        {
-                          "conditions": [],
-                          "error": "FIPS is enabled but this partition does not support FIPS",
-                          "type": "error"
-                        }
-                      ],
-                      "type": "tree"
-                    },
-                    {
-                      "conditions": [
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseDualStack"
-                            },
-                            true
-                          ]
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                true,
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsDualStack"
-                                  ]
-                                }
-                              ]
-                            }
-                          ],
-                          "rules": [
-                            {
-                              "conditions": [],
-                              "endpoint": {
-                                "url": "https://codepipeline.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                "properties": {},
-                                "headers": {}
-                              },
-                              "type": "endpoint"
-                            }
-                          ],
-                          "type": "tree"
-                        },
-                        {
-                          "conditions": [],
-                          "error": "DualStack is enabled but this partition does not support DualStack",
-                          "type": "error"
-                        }
-                      ],
-                      "type": "tree"
-                    },
-                    {
-                      "conditions": [],
-                      "endpoint": {
-                        "url": "https://codepipeline.{Region}.{PartitionResult#dnsSuffix}",
-                        "properties": {},
-                        "headers": {}
-                      },
-                      "type": "endpoint"
-                    }
-                  ],
-                  "type": "tree"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [],
-              "error": "Invalid Configuration: Missing Region",
-              "type": "error"
-            }
-          ]
-        },
-        "smithy.rules#endpointTests": {
-          "testCases": [
-            {
-              "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.ap-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ap-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.ap-northeast-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ap-northeast-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.ap-northeast-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ap-northeast-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.ap-south-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ap-south-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.ap-southeast-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ap-southeast-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.ap-southeast-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ap-southeast-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.ca-central-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ca-central-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.ca-central-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "ca-central-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.eu-central-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "eu-central-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.eu-north-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "eu-north-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.eu-south-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "eu-south-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.eu-west-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "eu-west-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.eu-west-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "eu-west-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.eu-west-3.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "eu-west-3",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.sa-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "sa-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.us-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.us-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.us-east-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-east-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.us-east-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-east-2",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.us-west-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-west-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.us-west-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-west-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.us-west-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-west-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.us-west-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-west-2",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.cn-north-1.amazonaws.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-north-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.cn-northwest-1.amazonaws.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-northwest-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.cn-north-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-north-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.cn-north-1.amazonaws.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-north-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.cn-north-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-north-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.us-gov-west-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.us-gov-west-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.us-gov-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.us-gov-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-gov-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.us-gov-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.us-gov-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "Region": "us-gov-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "error": "DualStack is enabled but this partition does not support DualStack"
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline-fips.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "error": "DualStack is enabled but this partition does not support DualStack"
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://codepipeline.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://example.com"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Endpoint": "https://example.com"
-              }
-            },
-            {
-              "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://example.com"
-                }
-              },
-              "params": {
-                "UseFIPS": false,
-                "UseDualStack": false,
-                "Endpoint": "https://example.com"
-              }
-            },
-            {
-              "documentation": "For custom endpoint with fips enabled and dualstack disabled",
-              "expect": {
-                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false,
-                "Endpoint": "https://example.com"
-              }
-            },
-            {
-              "documentation": "For custom endpoint with fips disabled and dualstack enabled",
-              "expect": {
-                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true,
-                "Endpoint": "https://example.com"
-              }
-            },
-            {
-              "documentation": "Missing region",
-              "expect": {
-                "error": "Invalid Configuration: Missing Region"
-              }
-            }
-          ],
-          "version": "1.0"
         }
       }
     }

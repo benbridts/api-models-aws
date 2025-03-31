@@ -6680,916 +6680,7 @@
         "target": "com.amazonaws.ssoadmin#ResourceServerScopeDetails"
       }
     },
-    "com.amazonaws.ssoadmin#Scope": {
-      "type": "string",
-      "traits": {
-        "smithy.api#pattern": "^([A-Za-z0-9_]{1,50})(:[A-Za-z0-9_]{1,50}){0,1}(:[A-Za-z0-9_]{1,50}){0,1}$"
-      }
-    },
-    "com.amazonaws.ssoadmin#ScopeDetails": {
-      "type": "structure",
-      "members": {
-        "Scope": {
-          "target": "com.amazonaws.ssoadmin#Scope",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the access scope.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "AuthorizedTargets": {
-          "target": "com.amazonaws.ssoadmin#ScopeTargets",
-          "traits": {
-            "smithy.api#documentation": "<p>An array list of ARNs of applications.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A structure that describes an IAM Identity Center access scope and its authorized targets.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#ScopeTarget": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 100
-        },
-        "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}|:instance/(sso)?ins-[a-zA-Z0-9-.]{16})$"
-      }
-    },
-    "com.amazonaws.ssoadmin#ScopeTargets": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.ssoadmin#ScopeTarget"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 10
-        }
-      }
-    },
-    "com.amazonaws.ssoadmin#Scopes": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.ssoadmin#ScopeDetails"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 10
-        }
-      }
-    },
-    "com.amazonaws.ssoadmin#ServiceQuotaExceededException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.ssoadmin#ServiceQuotaExceededMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Indicates that the principal has crossed the permitted number of resources that can be\n            created.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 402
-      }
-    },
-    "com.amazonaws.ssoadmin#ServiceQuotaExceededMessage": {
-      "type": "string"
-    },
-    "com.amazonaws.ssoadmin#SignInOptions": {
-      "type": "structure",
-      "members": {
-        "Origin": {
-          "target": "com.amazonaws.ssoadmin#SignInOrigin",
-          "traits": {
-            "smithy.api#documentation": "<p>This determines how IAM Identity Center navigates the user to the target application. It can be one\n            of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>APPLICATION</code>: IAM Identity Center redirects the customer to the configured\n                        <code>ApplicationUrl</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IDENTITY_CENTER</code>: IAM Identity Center uses SAML identity-provider initiated\n                    authentication to sign the customer directly into a SAML-based\n                    application.</p>\n            </li>\n         </ul>",
-            "smithy.api#required": {}
-          }
-        },
-        "ApplicationUrl": {
-          "target": "com.amazonaws.ssoadmin#ApplicationUrl",
-          "traits": {
-            "smithy.api#documentation": "<p>The URL that accepts authentication requests for an application. This is a required\n            parameter if the <code>Origin</code> parameter is <code>APPLICATION</code>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A structure that describes the sign-in options for an application portal.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#SignInOrigin": {
-      "type": "enum",
-      "members": {
-        "IDENTITY_CENTER": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "IDENTITY_CENTER"
-          }
-        },
-        "APPLICATION": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "APPLICATION"
-          }
-        }
-      }
-    },
-    "com.amazonaws.ssoadmin#StatusValues": {
-      "type": "enum",
-      "members": {
-        "IN_PROGRESS": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "IN_PROGRESS"
-          }
-        },
-        "FAILED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "FAILED"
-          }
-        },
-        "SUCCEEDED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "SUCCEEDED"
-          }
-        }
-      }
-    },
-    "com.amazonaws.ssoadmin#Tag": {
-      "type": "structure",
-      "members": {
-        "Key": {
-          "target": "com.amazonaws.ssoadmin#TagKey",
-          "traits": {
-            "smithy.api#documentation": "<p>The key for the tag.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Value": {
-          "target": "com.amazonaws.ssoadmin#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of the tag.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A set of key-value pairs that are used to manage the resource. Tags can only be\n            applied to permission sets and cannot be applied to corresponding roles that IAM Identity Center\n            creates in Amazon Web Services accounts.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#TagKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        },
-        "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
-      }
-    },
-    "com.amazonaws.ssoadmin#TagKeyList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.ssoadmin#TagKey"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 75
-        }
-      }
-    },
-    "com.amazonaws.ssoadmin#TagList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.ssoadmin#Tag"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 75
-        }
-      }
-    },
-    "com.amazonaws.ssoadmin#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssoadmin#TagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.ssoadmin#TagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ServiceQuotaExceededException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Associates a set of tags with a specified resource.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "InstanceArn": {
-          "target": "com.amazonaws.ssoadmin#InstanceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.\n            For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
-          }
-        },
-        "ResourceArn": {
-          "target": "com.amazonaws.ssoadmin#TaggableResourceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the resource with the tags to be listed.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.ssoadmin#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>A set of key-value pairs that are used to manage the resource.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#TagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#TagValue": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        },
-        "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
-      }
-    },
-    "com.amazonaws.ssoadmin#TaggableResourceArn": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 10,
-          "max": 2048
-        },
-        "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::((:instance/(sso)?ins-[a-zA-Z0-9-.]{16})|(:permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16})|(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16})|(\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}))$"
-      }
-    },
-    "com.amazonaws.ssoadmin#TargetId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 12,
-          "max": 12
-        },
-        "smithy.api#pattern": "^\\d{12}$"
-      }
-    },
-    "com.amazonaws.ssoadmin#TargetType": {
-      "type": "enum",
-      "members": {
-        "AWS_ACCOUNT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "AWS_ACCOUNT"
-          }
-        }
-      }
-    },
-    "com.amazonaws.ssoadmin#ThrottlingException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.ssoadmin#ThrottlingExceptionMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Indicates that the principal has crossed the throttling limits of the API\n            operations.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429
-      }
-    },
-    "com.amazonaws.ssoadmin#ThrottlingExceptionMessage": {
-      "type": "string"
-    },
-    "com.amazonaws.ssoadmin#Token": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 2048
-        },
-        "smithy.api#pattern": "^[-a-zA-Z0-9+=/_]*$"
-      }
-    },
-    "com.amazonaws.ssoadmin#TokenExchangeGrant": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Token Exchange Grant.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#TokenIssuerAudience": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 512
-        }
-      }
-    },
-    "com.amazonaws.ssoadmin#TokenIssuerAudiences": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.ssoadmin#TokenIssuerAudience"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 10
-        }
-      }
-    },
-    "com.amazonaws.ssoadmin#TrustedTokenIssuerArn": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 10,
-          "max": 1224
-        },
-        "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
-      }
-    },
-    "com.amazonaws.ssoadmin#TrustedTokenIssuerConfiguration": {
-      "type": "union",
-      "members": {
-        "OidcJwtConfiguration": {
-          "target": "com.amazonaws.ssoadmin#OidcJwtConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>A structure that describes the settings for a trusted token issuer that works with OpenID Connect\n            (OIDC) by using JSON Web Tokens (JWT).</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A structure that describes the configuration of a trusted token issuer. The structure and available\n            settings are determined by the type of the trusted token issuer.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#TrustedTokenIssuerList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerMetadata"
-      }
-    },
-    "com.amazonaws.ssoadmin#TrustedTokenIssuerMetadata": {
-      "type": "structure",
-      "members": {
-        "TrustedTokenIssuerArn": {
-          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the trusted token issuer configuration in the instance of IAM Identity Center.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the trusted token issuer configuration in the instance of IAM Identity Center.</p>"
-          }
-        },
-        "TrustedTokenIssuerType": {
-          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of trusted token issuer.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A structure that describes a trusted token issuer.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#TrustedTokenIssuerName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 255
-        },
-        "smithy.api#pattern": "^[\\w+=,.@-]+$"
-      }
-    },
-    "com.amazonaws.ssoadmin#TrustedTokenIssuerType": {
-      "type": "enum",
-      "members": {
-        "OIDC_JWT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "OIDC_JWT"
-          }
-        }
-      }
-    },
-    "com.amazonaws.ssoadmin#TrustedTokenIssuerUpdateConfiguration": {
-      "type": "union",
-      "members": {
-        "OidcJwtConfiguration": {
-          "target": "com.amazonaws.ssoadmin#OidcJwtUpdateConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>A structure that describes an updated configuration for a trusted token issuer that uses OpenID\n            Connect (OIDC) with JSON web tokens (JWT).</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A structure that contains details to be updated for a trusted token issuer configuration. The\n            structure and settings that you can include depend on the type of the trusted token issuer being\n            updated.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#TrustedTokenIssuerUrl": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 512
-        },
-        "smithy.api#pattern": "^https?:\\/\\/[-a-zA-Z0-9+&@\\/%=~_|!:,.;]*[-a-zA-Z0-9+&@\\/%=~_|]$"
-      }
-    },
-    "com.amazonaws.ssoadmin#URI": {
-      "type": "string"
-    },
-    "com.amazonaws.ssoadmin#UUId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 36,
-          "max": 36
-        },
-        "smithy.api#pattern": "^\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\b$"
-      }
-    },
-    "com.amazonaws.ssoadmin#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssoadmin#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.ssoadmin#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Disassociates a set of tags from a specified resource.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "InstanceArn": {
-          "target": "com.amazonaws.ssoadmin#InstanceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.\n            For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
-          }
-        },
-        "ResourceArn": {
-          "target": "com.amazonaws.ssoadmin#TaggableResourceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the resource with the tags to be listed.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.ssoadmin#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The keys of tags that are attached to the resource.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#UntagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateApplication": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssoadmin#UpdateApplicationRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.ssoadmin#UpdateApplicationResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates application properties. </p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateApplicationPortalOptions": {
-      "type": "structure",
-      "members": {
-        "SignInOptions": {
-          "target": "com.amazonaws.ssoadmin#SignInOptions"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A structure that describes the options for the access portal associated with an application that can be updated.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateApplicationRequest": {
-      "type": "structure",
-      "members": {
-        "ApplicationArn": {
-          "target": "com.amazonaws.ssoadmin#ApplicationArn",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the ARN of the application. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.ssoadmin#NameType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the updated name for the application.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.ssoadmin#Description",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the .</p>"
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.ssoadmin#ApplicationStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the application is enabled or disabled.</p>"
-          }
-        },
-        "PortalOptions": {
-          "target": "com.amazonaws.ssoadmin#UpdateApplicationPortalOptions",
-          "traits": {
-            "smithy.api#documentation": "<p>A structure that describes the options for the portal associated with an\n            application.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateApplicationResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateInstance": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssoadmin#UpdateInstanceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.ssoadmin#UpdateInstanceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Update the details for the instance of IAM Identity Center that is owned by the\n            Amazon Web Services account.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfiguration": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfigurationRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfigurationResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates the IAM Identity Center identity store attributes that you can use with the IAM Identity Center instance\n            for attributes-based access control (ABAC). When using an external identity provider as\n            an identity source, you can pass attributes through the SAML assertion as an alternative\n            to configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any\n            of these attributes, IAM Identity Center replaces the attribute value with the value from the IAM Identity Center\n            identity store. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfigurationRequest": {
-      "type": "structure",
-      "members": {
-        "InstanceArn": {
-          "target": "com.amazonaws.ssoadmin#InstanceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "InstanceAccessControlAttributeConfiguration": {
-          "target": "com.amazonaws.ssoadmin#InstanceAccessControlAttributeConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Updates the attributes for your ABAC configuration.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfigurationResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateInstanceRequest": {
-      "type": "structure",
-      "members": {
-        "Name": {
-          "target": "com.amazonaws.ssoadmin#NameType",
-          "traits": {
-            "smithy.api#documentation": "<p>Updates the instance name.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "InstanceArn": {
-          "target": "com.amazonaws.ssoadmin#InstanceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the instance of IAM Identity Center under which the operation will run. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateInstanceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdatePermissionSet": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssoadmin#UpdatePermissionSetRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.ssoadmin#UpdatePermissionSetResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates an existing permission set.</p>"
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdatePermissionSetRequest": {
-      "type": "structure",
-      "members": {
-        "InstanceArn": {
-          "target": "com.amazonaws.ssoadmin#InstanceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.\n            For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "PermissionSetArn": {
-          "target": "com.amazonaws.ssoadmin#PermissionSetArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the permission set.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.ssoadmin#PermissionSetDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the <a>PermissionSet</a>.</p>"
-          }
-        },
-        "SessionDuration": {
-          "target": "com.amazonaws.ssoadmin#Duration",
-          "traits": {
-            "smithy.api#documentation": "<p>The length of time that the application user sessions are valid for in the ISO-8601\n            standard.</p>"
-          }
-        },
-        "RelayState": {
-          "target": "com.amazonaws.ssoadmin#RelayState",
-          "traits": {
-            "smithy.api#documentation": "<p>Used to redirect users within the application during the federation authentication\n            process.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdatePermissionSetResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateTrustedTokenIssuer": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssoadmin#UpdateTrustedTokenIssuerRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.ssoadmin#UpdateTrustedTokenIssuerResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssoadmin#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates the name of the trusted token issuer, or the path of a source attribute or destination attribute for a trusted token issuer configuration.</p>\n         <note>\n            <p>Updating this trusted token issuer configuration might cause users to lose access to any applications that are configured to use the trusted token issuer.</p>\n         </note>"
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateTrustedTokenIssuerRequest": {
-      "type": "structure",
-      "members": {
-        "TrustedTokenIssuerArn": {
-          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerArn",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the ARN of the trusted token issuer configuration that you want to update.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerName",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the updated name to be applied to the trusted token issuer configuration.</p>"
-          }
-        },
-        "TrustedTokenIssuerConfiguration": {
-          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerUpdateConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies a structure with settings to apply to the specified trusted token issuer. The settings that\n            you can provide are determined by the type of the trusted token issuer that you are updating.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#UpdateTrustedTokenIssuerResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.ssoadmin#ValidationException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.ssoadmin#ValidationExceptionMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request failed because it contains a syntax error.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.ssoadmin#ValidationExceptionMessage": {
-      "type": "string"
-    },
-    "com.amazonaws.ssoadmin#SSOAdmin": {
+    "com.amazonaws.ssoadmin#SWBExternalService": {
       "type": "service",
       "version": "2020-07-20",
       "operations": [
@@ -8719,6 +7810,915 @@
           "version": "1.0"
         }
       }
+    },
+    "com.amazonaws.ssoadmin#Scope": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^([A-Za-z0-9_]{1,50})(:[A-Za-z0-9_]{1,50}){0,1}(:[A-Za-z0-9_]{1,50}){0,1}$"
+      }
+    },
+    "com.amazonaws.ssoadmin#ScopeDetails": {
+      "type": "structure",
+      "members": {
+        "Scope": {
+          "target": "com.amazonaws.ssoadmin#Scope",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the access scope.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AuthorizedTargets": {
+          "target": "com.amazonaws.ssoadmin#ScopeTargets",
+          "traits": {
+            "smithy.api#documentation": "<p>An array list of ARNs of applications.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure that describes an IAM Identity Center access scope and its authorized targets.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#ScopeTarget": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        },
+        "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}|:instance/(sso)?ins-[a-zA-Z0-9-.]{16})$"
+      }
+    },
+    "com.amazonaws.ssoadmin#ScopeTargets": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ssoadmin#ScopeTarget"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.ssoadmin#Scopes": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ssoadmin#ScopeDetails"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.ssoadmin#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.ssoadmin#ServiceQuotaExceededMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Indicates that the principal has crossed the permitted number of resources that can be\n            created.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402
+      }
+    },
+    "com.amazonaws.ssoadmin#ServiceQuotaExceededMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.ssoadmin#SignInOptions": {
+      "type": "structure",
+      "members": {
+        "Origin": {
+          "target": "com.amazonaws.ssoadmin#SignInOrigin",
+          "traits": {
+            "smithy.api#documentation": "<p>This determines how IAM Identity Center navigates the user to the target application. It can be one\n            of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>APPLICATION</code>: IAM Identity Center redirects the customer to the configured\n                        <code>ApplicationUrl</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IDENTITY_CENTER</code>: IAM Identity Center uses SAML identity-provider initiated\n                    authentication to sign the customer directly into a SAML-based\n                    application.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "ApplicationUrl": {
+          "target": "com.amazonaws.ssoadmin#ApplicationUrl",
+          "traits": {
+            "smithy.api#documentation": "<p>The URL that accepts authentication requests for an application. This is a required\n            parameter if the <code>Origin</code> parameter is <code>APPLICATION</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure that describes the sign-in options for an application portal.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#SignInOrigin": {
+      "type": "enum",
+      "members": {
+        "IDENTITY_CENTER": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IDENTITY_CENTER"
+          }
+        },
+        "APPLICATION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "APPLICATION"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ssoadmin#StatusValues": {
+      "type": "enum",
+      "members": {
+        "IN_PROGRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IN_PROGRESS"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        },
+        "SUCCEEDED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SUCCEEDED"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ssoadmin#Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "target": "com.amazonaws.ssoadmin#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>The key for the tag.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.ssoadmin#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of the tag.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A set of key-value pairs that are used to manage the resource. Tags can only be\n            applied to permission sets and cannot be applied to corresponding roles that IAM Identity Center\n            creates in Amazon Web Services accounts.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+      }
+    },
+    "com.amazonaws.ssoadmin#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ssoadmin#TagKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 75
+        }
+      }
+    },
+    "com.amazonaws.ssoadmin#TagList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ssoadmin#Tag"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 75
+        }
+      }
+    },
+    "com.amazonaws.ssoadmin#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssoadmin#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ssoadmin#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Associates a set of tags with a specified resource.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "InstanceArn": {
+          "target": "com.amazonaws.ssoadmin#InstanceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.\n            For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.ssoadmin#TaggableResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource with the tags to be listed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.ssoadmin#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>A set of key-value pairs that are used to manage the resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#TagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        },
+        "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+      }
+    },
+    "com.amazonaws.ssoadmin#TaggableResourceArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 10,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::((:instance/(sso)?ins-[a-zA-Z0-9-.]{16})|(:permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16})|(\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16})|(\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}))$"
+      }
+    },
+    "com.amazonaws.ssoadmin#TargetId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 12,
+          "max": 12
+        },
+        "smithy.api#pattern": "^\\d{12}$"
+      }
+    },
+    "com.amazonaws.ssoadmin#TargetType": {
+      "type": "enum",
+      "members": {
+        "AWS_ACCOUNT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "AWS_ACCOUNT"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ssoadmin#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.ssoadmin#ThrottlingExceptionMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Indicates that the principal has crossed the throttling limits of the API\n            operations.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.ssoadmin#ThrottlingExceptionMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.ssoadmin#Token": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^[-a-zA-Z0-9+=/_]*$"
+      }
+    },
+    "com.amazonaws.ssoadmin#TokenExchangeGrant": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>A structure that defines configuration settings for an application that supports the OAuth 2.0 Token Exchange Grant.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#TokenIssuerAudience": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 512
+        }
+      }
+    },
+    "com.amazonaws.ssoadmin#TokenIssuerAudiences": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ssoadmin#TokenIssuerAudience"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.ssoadmin#TrustedTokenIssuerArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 10,
+          "max": 1224
+        },
+        "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+      }
+    },
+    "com.amazonaws.ssoadmin#TrustedTokenIssuerConfiguration": {
+      "type": "union",
+      "members": {
+        "OidcJwtConfiguration": {
+          "target": "com.amazonaws.ssoadmin#OidcJwtConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>A structure that describes the settings for a trusted token issuer that works with OpenID Connect\n            (OIDC) by using JSON Web Tokens (JWT).</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure that describes the configuration of a trusted token issuer. The structure and available\n            settings are determined by the type of the trusted token issuer.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#TrustedTokenIssuerList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerMetadata"
+      }
+    },
+    "com.amazonaws.ssoadmin#TrustedTokenIssuerMetadata": {
+      "type": "structure",
+      "members": {
+        "TrustedTokenIssuerArn": {
+          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the trusted token issuer configuration in the instance of IAM Identity Center.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the trusted token issuer configuration in the instance of IAM Identity Center.</p>"
+          }
+        },
+        "TrustedTokenIssuerType": {
+          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of trusted token issuer.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure that describes a trusted token issuer.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#TrustedTokenIssuerName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "^[\\w+=,.@-]+$"
+      }
+    },
+    "com.amazonaws.ssoadmin#TrustedTokenIssuerType": {
+      "type": "enum",
+      "members": {
+        "OIDC_JWT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "OIDC_JWT"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ssoadmin#TrustedTokenIssuerUpdateConfiguration": {
+      "type": "union",
+      "members": {
+        "OidcJwtConfiguration": {
+          "target": "com.amazonaws.ssoadmin#OidcJwtUpdateConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>A structure that describes an updated configuration for a trusted token issuer that uses OpenID\n            Connect (OIDC) with JSON web tokens (JWT).</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure that contains details to be updated for a trusted token issuer configuration. The\n            structure and settings that you can include depend on the type of the trusted token issuer being\n            updated.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#TrustedTokenIssuerUrl": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 512
+        },
+        "smithy.api#pattern": "^https?:\\/\\/[-a-zA-Z0-9+&@\\/%=~_|!:,.;]*[-a-zA-Z0-9+&@\\/%=~_|]$"
+      }
+    },
+    "com.amazonaws.ssoadmin#URI": {
+      "type": "string"
+    },
+    "com.amazonaws.ssoadmin#UUId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 36,
+          "max": 36
+        },
+        "smithy.api#pattern": "^\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\b$"
+      }
+    },
+    "com.amazonaws.ssoadmin#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssoadmin#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ssoadmin#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Disassociates a set of tags from a specified resource.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "InstanceArn": {
+          "target": "com.amazonaws.ssoadmin#InstanceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.\n            For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.ssoadmin#TaggableResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource with the tags to be listed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.ssoadmin#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The keys of tags that are attached to the resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateApplication": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssoadmin#UpdateApplicationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ssoadmin#UpdateApplicationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates application properties. </p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateApplicationPortalOptions": {
+      "type": "structure",
+      "members": {
+        "SignInOptions": {
+          "target": "com.amazonaws.ssoadmin#SignInOptions"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure that describes the options for the access portal associated with an application that can be updated.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateApplicationRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationArn": {
+          "target": "com.amazonaws.ssoadmin#ApplicationArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the ARN of the application. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.ssoadmin#NameType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the updated name for the application.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.ssoadmin#Description",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the .</p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.ssoadmin#ApplicationStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether the application is enabled or disabled.</p>"
+          }
+        },
+        "PortalOptions": {
+          "target": "com.amazonaws.ssoadmin#UpdateApplicationPortalOptions",
+          "traits": {
+            "smithy.api#documentation": "<p>A structure that describes the options for the portal associated with an\n            application.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateApplicationResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateInstance": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssoadmin#UpdateInstanceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ssoadmin#UpdateInstanceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Update the details for the instance of IAM Identity Center that is owned by the\n            Amazon Web Services account.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfiguration": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfigurationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfigurationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the IAM Identity Center identity store attributes that you can use with the IAM Identity Center instance\n            for attributes-based access control (ABAC). When using an external identity provider as\n            an identity source, you can pass attributes through the SAML assertion as an alternative\n            to configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any\n            of these attributes, IAM Identity Center replaces the attribute value with the value from the IAM Identity Center\n            identity store. For more information about ABAC, see <a href=\"/singlesignon/latest/userguide/abac.html\">Attribute-Based Access Control</a> in the <i>IAM Identity Center User Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "InstanceArn": {
+          "target": "com.amazonaws.ssoadmin#InstanceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "InstanceAccessControlAttributeConfiguration": {
+          "target": "com.amazonaws.ssoadmin#InstanceAccessControlAttributeConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Updates the attributes for your ABAC configuration.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfigurationResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateInstanceRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.ssoadmin#NameType",
+          "traits": {
+            "smithy.api#documentation": "<p>Updates the instance name.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "InstanceArn": {
+          "target": "com.amazonaws.ssoadmin#InstanceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the instance of IAM Identity Center under which the operation will run. For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateInstanceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdatePermissionSet": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssoadmin#UpdatePermissionSetRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ssoadmin#UpdatePermissionSetResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates an existing permission set.</p>"
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdatePermissionSetRequest": {
+      "type": "structure",
+      "members": {
+        "InstanceArn": {
+          "target": "com.amazonaws.ssoadmin#InstanceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the IAM Identity Center instance under which the operation will be executed.\n            For more information about ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource\nNames (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PermissionSetArn": {
+          "target": "com.amazonaws.ssoadmin#PermissionSetArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the permission set.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.ssoadmin#PermissionSetDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the <a>PermissionSet</a>.</p>"
+          }
+        },
+        "SessionDuration": {
+          "target": "com.amazonaws.ssoadmin#Duration",
+          "traits": {
+            "smithy.api#documentation": "<p>The length of time that the application user sessions are valid for in the ISO-8601\n            standard.</p>"
+          }
+        },
+        "RelayState": {
+          "target": "com.amazonaws.ssoadmin#RelayState",
+          "traits": {
+            "smithy.api#documentation": "<p>Used to redirect users within the application during the federation authentication\n            process.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdatePermissionSetResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateTrustedTokenIssuer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssoadmin#UpdateTrustedTokenIssuerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ssoadmin#UpdateTrustedTokenIssuerResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssoadmin#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssoadmin#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the name of the trusted token issuer, or the path of a source attribute or destination attribute for a trusted token issuer configuration.</p>\n         <note>\n            <p>Updating this trusted token issuer configuration might cause users to lose access to any applications that are configured to use the trusted token issuer.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateTrustedTokenIssuerRequest": {
+      "type": "structure",
+      "members": {
+        "TrustedTokenIssuerArn": {
+          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the ARN of the trusted token issuer configuration that you want to update.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerName",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the updated name to be applied to the trusted token issuer configuration.</p>"
+          }
+        },
+        "TrustedTokenIssuerConfiguration": {
+          "target": "com.amazonaws.ssoadmin#TrustedTokenIssuerUpdateConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies a structure with settings to apply to the specified trusted token issuer. The settings that\n            you can provide are determined by the type of the trusted token issuer that you are updating.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#UpdateTrustedTokenIssuerResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ssoadmin#ValidationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.ssoadmin#ValidationExceptionMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request failed because it contains a syntax error.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.ssoadmin#ValidationExceptionMessage": {
+      "type": "string"
     }
   }
 }

@@ -4680,301 +4680,6 @@
         }
       }
     },
-    "com.amazonaws.textract#ThrottlingException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.textract#String"
-        },
-        "Code": {
-          "target": "com.amazonaws.textract#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Amazon Textract is temporarily unable to process the request. Try your call again.</p>",
-        "smithy.api#error": "server"
-      }
-    },
-    "com.amazonaws.textract#UInteger": {
-      "type": "integer",
-      "traits": {
-        "smithy.api#range": {
-          "min": 0
-        }
-      }
-    },
-    "com.amazonaws.textract#UndetectedDocumentTypeList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.textract#NonEmptyString"
-      }
-    },
-    "com.amazonaws.textract#UndetectedSignature": {
-      "type": "structure",
-      "members": {
-        "Page": {
-          "target": "com.amazonaws.textract#UInteger",
-          "traits": {
-            "smithy.api#documentation": "<p>The page where a signature was expected but not found.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A structure containing information about an undetected signature on a page where it was expected but not found.</p>"
-      }
-    },
-    "com.amazonaws.textract#UndetectedSignatureList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.textract#UndetectedSignature"
-      }
-    },
-    "com.amazonaws.textract#UnsupportedDocumentException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.textract#String"
-        },
-        "Code": {
-          "target": "com.amazonaws.textract#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The format of the input document isn't supported. Documents for operations can be in\n         PNG, JPEG, PDF, or TIFF format.</p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.textract#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.textract#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.textract#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.textract#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.textract#InternalServerError"
-        },
-        {
-          "target": "com.amazonaws.textract#InvalidParameterException"
-        },
-        {
-          "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
-        },
-        {
-          "target": "com.amazonaws.textract#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.textract#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.textract#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes any tags with the specified keys from the specified resource.</p>"
-      }
-    },
-    "com.amazonaws.textract#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceARN": {
-          "target": "com.amazonaws.textract#AmazonResourceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that specifies the resource to be untagged.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.textract#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the tags to be removed from the resource specified by the ResourceARN.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.textract#UntagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.textract#UpdateAdapter": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.textract#UpdateAdapterRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.textract#UpdateAdapterResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.textract#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.textract#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.textract#InternalServerError"
-        },
-        {
-          "target": "com.amazonaws.textract#InvalidParameterException"
-        },
-        {
-          "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
-        },
-        {
-          "target": "com.amazonaws.textract#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.textract#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.textract#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Update the configuration for an adapter. FeatureTypes configurations cannot be updated.\n         At least one new parameter must be specified as an argument.</p>"
-      }
-    },
-    "com.amazonaws.textract#UpdateAdapterRequest": {
-      "type": "structure",
-      "members": {
-        "AdapterId": {
-          "target": "com.amazonaws.textract#AdapterId",
-          "traits": {
-            "smithy.api#documentation": "<p>A string containing a unique ID for the adapter that will be updated.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.textract#AdapterDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The new description to be applied to the adapter.</p>"
-          }
-        },
-        "AdapterName": {
-          "target": "com.amazonaws.textract#AdapterName",
-          "traits": {
-            "smithy.api#documentation": "<p>The new name to be applied to the adapter.</p>"
-          }
-        },
-        "AutoUpdate": {
-          "target": "com.amazonaws.textract#AutoUpdate",
-          "traits": {
-            "smithy.api#documentation": "<p>The new auto-update status to be applied to the adapter.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.textract#UpdateAdapterResponse": {
-      "type": "structure",
-      "members": {
-        "AdapterId": {
-          "target": "com.amazonaws.textract#AdapterId",
-          "traits": {
-            "smithy.api#documentation": "<p>A string containing a unique ID for the adapter that has been updated.</p>"
-          }
-        },
-        "AdapterName": {
-          "target": "com.amazonaws.textract#AdapterName",
-          "traits": {
-            "smithy.api#documentation": "<p>A string containing the name of the adapter that has been updated.</p>"
-          }
-        },
-        "CreationTime": {
-          "target": "com.amazonaws.textract#DateTime",
-          "traits": {
-            "smithy.api#documentation": "<p>An object specifying the creation time of the the adapter that has been updated.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.textract#AdapterDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>A string containing the description of the adapter that has been updated.</p>"
-          }
-        },
-        "FeatureTypes": {
-          "target": "com.amazonaws.textract#FeatureTypes",
-          "traits": {
-            "smithy.api#documentation": "<p>List of the targeted feature types for the updated adapter.</p>"
-          }
-        },
-        "AutoUpdate": {
-          "target": "com.amazonaws.textract#AutoUpdate",
-          "traits": {
-            "smithy.api#documentation": "<p>The auto-update status of the adapter that has been updated.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.textract#ValidationException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.textract#String"
-        },
-        "Code": {
-          "target": "com.amazonaws.textract#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>  Indicates that a request was not valid. Check request for proper formatting. </p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.textract#ValueType": {
-      "type": "enum",
-      "members": {
-        "DATE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "DATE"
-          }
-        }
-      }
-    },
-    "com.amazonaws.textract#Warning": {
-      "type": "structure",
-      "members": {
-        "ErrorCode": {
-          "target": "com.amazonaws.textract#ErrorCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The error code for the warning.</p>"
-          }
-        },
-        "Pages": {
-          "target": "com.amazonaws.textract#Pages",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of the pages that the warning applies to.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A warning about an issue that occurred during asynchronous text analysis (<a>StartDocumentAnalysis</a>) or asynchronous document text detection (<a>StartDocumentTextDetection</a>). </p>"
-      }
-    },
-    "com.amazonaws.textract#Warnings": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.textract#Warning"
-      }
-    },
     "com.amazonaws.textract#Textract": {
       "type": "service",
       "version": "2018-06-27",
@@ -5931,6 +5636,301 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.textract#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.textract#String"
+        },
+        "Code": {
+          "target": "com.amazonaws.textract#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Amazon Textract is temporarily unable to process the request. Try your call again.</p>",
+        "smithy.api#error": "server"
+      }
+    },
+    "com.amazonaws.textract#UInteger": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0
+        }
+      }
+    },
+    "com.amazonaws.textract#UndetectedDocumentTypeList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.textract#NonEmptyString"
+      }
+    },
+    "com.amazonaws.textract#UndetectedSignature": {
+      "type": "structure",
+      "members": {
+        "Page": {
+          "target": "com.amazonaws.textract#UInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>The page where a signature was expected but not found.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure containing information about an undetected signature on a page where it was expected but not found.</p>"
+      }
+    },
+    "com.amazonaws.textract#UndetectedSignatureList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.textract#UndetectedSignature"
+      }
+    },
+    "com.amazonaws.textract#UnsupportedDocumentException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.textract#String"
+        },
+        "Code": {
+          "target": "com.amazonaws.textract#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The format of the input document isn't supported. Documents for operations can be in\n         PNG, JPEG, PDF, or TIFF format.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.textract#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.textract#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.textract#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.textract#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.textract#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.textract#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+        },
+        {
+          "target": "com.amazonaws.textract#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.textract#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.textract#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes any tags with the specified keys from the specified resource.</p>"
+      }
+    },
+    "com.amazonaws.textract#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceARN": {
+          "target": "com.amazonaws.textract#AmazonResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that specifies the resource to be untagged.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.textract#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the tags to be removed from the resource specified by the ResourceARN.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.textract#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.textract#UpdateAdapter": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.textract#UpdateAdapterRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.textract#UpdateAdapterResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.textract#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.textract#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.textract#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.textract#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+        },
+        {
+          "target": "com.amazonaws.textract#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.textract#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.textract#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Update the configuration for an adapter. FeatureTypes configurations cannot be updated.\n         At least one new parameter must be specified as an argument.</p>"
+      }
+    },
+    "com.amazonaws.textract#UpdateAdapterRequest": {
+      "type": "structure",
+      "members": {
+        "AdapterId": {
+          "target": "com.amazonaws.textract#AdapterId",
+          "traits": {
+            "smithy.api#documentation": "<p>A string containing a unique ID for the adapter that will be updated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.textract#AdapterDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The new description to be applied to the adapter.</p>"
+          }
+        },
+        "AdapterName": {
+          "target": "com.amazonaws.textract#AdapterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The new name to be applied to the adapter.</p>"
+          }
+        },
+        "AutoUpdate": {
+          "target": "com.amazonaws.textract#AutoUpdate",
+          "traits": {
+            "smithy.api#documentation": "<p>The new auto-update status to be applied to the adapter.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.textract#UpdateAdapterResponse": {
+      "type": "structure",
+      "members": {
+        "AdapterId": {
+          "target": "com.amazonaws.textract#AdapterId",
+          "traits": {
+            "smithy.api#documentation": "<p>A string containing a unique ID for the adapter that has been updated.</p>"
+          }
+        },
+        "AdapterName": {
+          "target": "com.amazonaws.textract#AdapterName",
+          "traits": {
+            "smithy.api#documentation": "<p>A string containing the name of the adapter that has been updated.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.textract#DateTime",
+          "traits": {
+            "smithy.api#documentation": "<p>An object specifying the creation time of the the adapter that has been updated.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.textract#AdapterDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>A string containing the description of the adapter that has been updated.</p>"
+          }
+        },
+        "FeatureTypes": {
+          "target": "com.amazonaws.textract#FeatureTypes",
+          "traits": {
+            "smithy.api#documentation": "<p>List of the targeted feature types for the updated adapter.</p>"
+          }
+        },
+        "AutoUpdate": {
+          "target": "com.amazonaws.textract#AutoUpdate",
+          "traits": {
+            "smithy.api#documentation": "<p>The auto-update status of the adapter that has been updated.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.textract#ValidationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.textract#String"
+        },
+        "Code": {
+          "target": "com.amazonaws.textract#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>  Indicates that a request was not valid. Check request for proper formatting. </p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.textract#ValueType": {
+      "type": "enum",
+      "members": {
+        "DATE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DATE"
+          }
+        }
+      }
+    },
+    "com.amazonaws.textract#Warning": {
+      "type": "structure",
+      "members": {
+        "ErrorCode": {
+          "target": "com.amazonaws.textract#ErrorCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code for the warning.</p>"
+          }
+        },
+        "Pages": {
+          "target": "com.amazonaws.textract#Pages",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of the pages that the warning applies to.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A warning about an issue that occurred during asynchronous text analysis (<a>StartDocumentAnalysis</a>) or asynchronous document text detection (<a>StartDocumentTextDetection</a>). </p>"
+      }
+    },
+    "com.amazonaws.textract#Warnings": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.textract#Warning"
       }
     }
   }

@@ -1674,526 +1674,7 @@
         }
       }
     },
-    "com.amazonaws.managedblockchainquery#TimeFilter": {
-      "type": "structure",
-      "members": {
-        "from": {
-          "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
-        },
-        "to": {
-          "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>This container is used to specify a time frame.</p>"
-      }
-    },
-    "com.amazonaws.managedblockchainquery#TokenBalance": {
-      "type": "structure",
-      "members": {
-        "ownerIdentifier": {
-          "target": "com.amazonaws.managedblockchainquery#OwnerIdentifier",
-          "traits": {
-            "smithy.api#documentation": "<p>The container for the identifier of the owner.</p>"
-          }
-        },
-        "tokenIdentifier": {
-          "target": "com.amazonaws.managedblockchainquery#TokenIdentifier",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier for the token, including the unique token ID and its blockchain network.</p>"
-          }
-        },
-        "balance": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The container of the token balance.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "atBlockchainInstant": {
-          "target": "com.amazonaws.managedblockchainquery#BlockchainInstant",
-          "traits": {
-            "smithy.api#documentation": "<p>The time for when the TokenBalance is requested or \n         the current time if a time is not provided in the request.</p>\n         <note>\n            <p>This time will only be recorded up to the second.</p>\n         </note>",
-            "smithy.api#required": {}
-          }
-        },
-        "lastUpdatedTime": {
-          "target": "com.amazonaws.managedblockchainquery#BlockchainInstant",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>Timestamp</code> of the last transaction at which the balance for the token in the wallet was updated.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The balance of the token.</p>"
-      }
-    },
-    "com.amazonaws.managedblockchainquery#TokenBalanceList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.managedblockchainquery#TokenBalance"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 250
-        }
-      }
-    },
-    "com.amazonaws.managedblockchainquery#TokenFilter": {
-      "type": "structure",
-      "members": {
-        "network": {
-          "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
-          "traits": {
-            "smithy.api#documentation": "<p>The blockchain network of the token.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "contractAddress": {
-          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>This is the address of the contract.</p>"
-          }
-        },
-        "tokenId": {
-          "target": "com.amazonaws.managedblockchainquery#QueryTokenId",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of the token.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The container of the token filter like the contract address \n       on a given blockchain network or a unique token identifier on a given \n       blockchain network.</p>\n         <note>\n            <p>You must always specify the network property of this \n                           container when using this operation.</p>\n         </note>"
-      }
-    },
-    "com.amazonaws.managedblockchainquery#TokenIdentifier": {
-      "type": "structure",
-      "members": {
-        "network": {
-          "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
-          "traits": {
-            "smithy.api#documentation": "<p>The blockchain network of the token.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "contractAddress": {
-          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>This is the token's contract address.</p>"
-          }
-        },
-        "tokenId": {
-          "target": "com.amazonaws.managedblockchainquery#QueryTokenId",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of the token.</p>\n         <note>\n            <p>For native tokens, use the 3 character abbreviation that best matches your token. \n         For example, btc for Bitcoin, eth for Ether, etc. For all other token types you must \n         specify the <code>tokenId</code> in the 64 character hexadecimal <code>tokenid</code> format.</p>\n         </note>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The container for the identifier for the token including the unique token ID and its blockchain network.</p>\n         <note>\n            <p>Only the native tokens BTC and ETH, and the ERC-20, \n         ERC-721, and ERC 1155 token standards are supported.</p>\n         </note>"
-      }
-    },
-    "com.amazonaws.managedblockchainquery#Transaction": {
-      "type": "structure",
-      "members": {
-        "network": {
-          "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
-          "traits": {
-            "smithy.api#documentation": "<p>The blockchain network where the transaction occurred.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "blockHash": {
-          "target": "com.amazonaws.managedblockchainquery#BlockHash",
-          "traits": {
-            "smithy.api#documentation": "<p>The block hash is a unique identifier for a block. It is a fixed-size \n         string that is calculated by using the information in the block. The block \n         hash is used to verify the integrity of the data in the block.</p>"
-          }
-        },
-        "transactionHash": {
-          "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
-          "traits": {
-            "smithy.api#documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "blockNumber": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The block number in which the transaction is recorded.</p>"
-          }
-        },
-        "transactionTimestamp": {
-          "target": "smithy.api#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>Timestamp</code> of the transaction. </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "transactionIndex": {
-          "target": "smithy.api#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The index of the transaction within a blockchain.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "numberOfTransactions": {
-          "target": "smithy.api#Long",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of transactions in the block.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "to": {
-          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "from": {
-          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>The initiator of the transaction. It is either in the form a public key or a \n         contract address.</p>"
-          }
-        },
-        "contractAddress": {
-          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>The blockchain address for the contract.</p>"
-          }
-        },
-        "gasUsed": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The amount of gas used for the transaction.</p>"
-          }
-        },
-        "cumulativeGasUsed": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The amount of gas used up to the specified point in the block.</p>"
-          }
-        },
-        "effectiveGasPrice": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The effective gas price.</p>"
-          }
-        },
-        "signatureV": {
-          "target": "smithy.api#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The signature of the transaction. The Z coordinate of a point V.</p>"
-          }
-        },
-        "signatureR": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The signature of the transaction. The X coordinate of a point R.</p>"
-          }
-        },
-        "signatureS": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The signature of the transaction. The Y coordinate of a point S.</p>"
-          }
-        },
-        "transactionFee": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The transaction fee.</p>"
-          }
-        },
-        "transactionId": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>"
-          }
-        },
-        "confirmationStatus": {
-          "target": "com.amazonaws.managedblockchainquery#ConfirmationStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies whether the transaction has reached Finality.</p>"
-          }
-        },
-        "executionStatus": {
-          "target": "com.amazonaws.managedblockchainquery#ExecutionStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies whether the transaction has succeeded or failed.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>There are two possible types of transactions used for this data type:</p>\n         <ul>\n            <li>\n               <p>A Bitcoin transaction is a movement of BTC from one address to \n            another.</p>\n            </li>\n            <li>\n               <p>An Ethereum transaction refers to an action initiated by an externally \n           owned account, which is an account managed by a human, not a contract. \n            For example, if Bob sends Alice 1 ETH, Bob's account must be debited and \n            Alice's must be credited. This state-changing action occurs within a transaction.</p>\n            </li>\n         </ul>"
-      }
-    },
-    "com.amazonaws.managedblockchainquery#TransactionEvent": {
-      "type": "structure",
-      "members": {
-        "network": {
-          "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
-          "traits": {
-            "smithy.api#documentation": "<p>The blockchain network where the transaction occurred.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "transactionHash": {
-          "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
-          "traits": {
-            "smithy.api#documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "eventType": {
-          "target": "com.amazonaws.managedblockchainquery#QueryTransactionEventType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of transaction event.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "from": {
-          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>The wallet address initiating the transaction. It can either be a public key or a contract.</p>"
-          }
-        },
-        "to": {
-          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>The wallet address receiving the transaction.  It can either be a public key or a contract.</p>"
-          }
-        },
-        "value": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The value that was transacted.</p>"
-          }
-        },
-        "contractAddress": {
-          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
-          "traits": {
-            "smithy.api#documentation": "<p>The blockchain address for the contract</p>"
-          }
-        },
-        "tokenId": {
-          "target": "com.amazonaws.managedblockchainquery#QueryTokenId",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier for the token involved in the transaction.</p>"
-          }
-        },
-        "transactionId": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>"
-          }
-        },
-        "voutIndex": {
-          "target": "smithy.api#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The position of the transaction output in the transaction output list.</p>"
-          }
-        },
-        "voutSpent": {
-          "target": "smithy.api#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies if the transaction output is spent or unspent. This is only returned for BITCOIN_VOUT event types.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VOUT</code> event types.</p>\n         </note>"
-          }
-        },
-        "spentVoutTransactionId": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The transactionId that <i>created</i> the spent transaction output.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VIN</code> event types.</p>\n         </note>"
-          }
-        },
-        "spentVoutTransactionHash": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The transactionHash that <i>created</i> the spent transaction output.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VIN</code> event types.</p>\n         </note>"
-          }
-        },
-        "spentVoutIndex": {
-          "target": "smithy.api#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The position of the spent transaction output in the output list of the <i>creating transaction</i>.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VIN</code> event types.</p>\n         </note>"
-          }
-        },
-        "blockchainInstant": {
-          "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
-        },
-        "confirmationStatus": {
-          "target": "com.amazonaws.managedblockchainquery#ConfirmationStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>This container specifies whether the transaction has reached Finality.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The container for the properties of a transaction event.</p>"
-      }
-    },
-    "com.amazonaws.managedblockchainquery#TransactionEventList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.managedblockchainquery#TransactionEvent"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 250
-        }
-      }
-    },
-    "com.amazonaws.managedblockchainquery#TransactionOutputItem": {
-      "type": "structure",
-      "members": {
-        "transactionHash": {
-          "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
-          "traits": {
-            "smithy.api#documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "transactionId": {
-          "target": "com.amazonaws.managedblockchainquery#QueryTransactionId",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>"
-          }
-        },
-        "network": {
-          "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
-          "traits": {
-            "smithy.api#documentation": "<p>The blockchain network where the transaction occurred.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "transactionTimestamp": {
-          "target": "smithy.api#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The time when the transaction occurred.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "confirmationStatus": {
-          "target": "com.amazonaws.managedblockchainquery#ConfirmationStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies whether to list transactions that have not reached Finality.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The container of the transaction output.</p>"
-      }
-    },
-    "com.amazonaws.managedblockchainquery#TransactionOutputList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.managedblockchainquery#TransactionOutputItem"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 250
-        }
-      }
-    },
-    "com.amazonaws.managedblockchainquery#ValidationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.managedblockchainquery#ExceptionMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>The container for the exception message.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "reason": {
-          "target": "com.amazonaws.managedblockchainquery#ValidationExceptionReason",
-          "traits": {
-            "smithy.api#documentation": "<p>The container for the reason for the exception</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "fieldList": {
-          "target": "com.amazonaws.managedblockchainquery#ValidationExceptionFieldList",
-          "traits": {
-            "smithy.api#documentation": "<p>The container for the <code>fieldList</code> of the exception.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The resource passed is invalid.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.managedblockchainquery#ValidationExceptionField": {
-      "type": "structure",
-      "members": {
-        "name": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the field that triggered the <code>ValidationException</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>ValidationException</code> message.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The resource passed is invalid.</p>"
-      }
-    },
-    "com.amazonaws.managedblockchainquery#ValidationExceptionFieldList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.managedblockchainquery#ValidationExceptionField"
-      }
-    },
-    "com.amazonaws.managedblockchainquery#ValidationExceptionReason": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "unknownOperation",
-            "name": "UNKNOWN_OPERATION"
-          },
-          {
-            "value": "cannotParse",
-            "name": "CANNOT_PARSE"
-          },
-          {
-            "value": "fieldValidationFailed",
-            "name": "FIELD_VALIDATION_FAILED"
-          },
-          {
-            "value": "other",
-            "name": "OTHER"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.managedblockchainquery#VoutFilter": {
-      "type": "structure",
-      "members": {
-        "voutSpent": {
-          "target": "smithy.api#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies if the transaction output is spent or unspent.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>This container specifies filtering attributes related to <code>BITCOIN_VOUT</code> event types</p>"
-      }
-    },
-    "com.amazonaws.managedblockchainquery#ManagedBlockchainQuery": {
+    "com.amazonaws.managedblockchainquery#TietonChainQueryService": {
       "type": "service",
       "version": "2023-05-04",
       "operations": [
@@ -2924,6 +2405,525 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.managedblockchainquery#TimeFilter": {
+      "type": "structure",
+      "members": {
+        "from": {
+          "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+        },
+        "to": {
+          "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>This container is used to specify a time frame.</p>"
+      }
+    },
+    "com.amazonaws.managedblockchainquery#TokenBalance": {
+      "type": "structure",
+      "members": {
+        "ownerIdentifier": {
+          "target": "com.amazonaws.managedblockchainquery#OwnerIdentifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The container for the identifier of the owner.</p>"
+          }
+        },
+        "tokenIdentifier": {
+          "target": "com.amazonaws.managedblockchainquery#TokenIdentifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the token, including the unique token ID and its blockchain network.</p>"
+          }
+        },
+        "balance": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The container of the token balance.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "atBlockchainInstant": {
+          "target": "com.amazonaws.managedblockchainquery#BlockchainInstant",
+          "traits": {
+            "smithy.api#documentation": "<p>The time for when the TokenBalance is requested or \n         the current time if a time is not provided in the request.</p>\n         <note>\n            <p>This time will only be recorded up to the second.</p>\n         </note>",
+            "smithy.api#required": {}
+          }
+        },
+        "lastUpdatedTime": {
+          "target": "com.amazonaws.managedblockchainquery#BlockchainInstant",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Timestamp</code> of the last transaction at which the balance for the token in the wallet was updated.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The balance of the token.</p>"
+      }
+    },
+    "com.amazonaws.managedblockchainquery#TokenBalanceList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.managedblockchainquery#TokenBalance"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 250
+        }
+      }
+    },
+    "com.amazonaws.managedblockchainquery#TokenFilter": {
+      "type": "structure",
+      "members": {
+        "network": {
+          "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+          "traits": {
+            "smithy.api#documentation": "<p>The blockchain network of the token.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "contractAddress": {
+          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>This is the address of the contract.</p>"
+          }
+        },
+        "tokenId": {
+          "target": "com.amazonaws.managedblockchainquery#QueryTokenId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the token.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The container of the token filter like the contract address \n       on a given blockchain network or a unique token identifier on a given \n       blockchain network.</p>\n         <note>\n            <p>You must always specify the network property of this \n                           container when using this operation.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.managedblockchainquery#TokenIdentifier": {
+      "type": "structure",
+      "members": {
+        "network": {
+          "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+          "traits": {
+            "smithy.api#documentation": "<p>The blockchain network of the token.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "contractAddress": {
+          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>This is the token's contract address.</p>"
+          }
+        },
+        "tokenId": {
+          "target": "com.amazonaws.managedblockchainquery#QueryTokenId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the token.</p>\n         <note>\n            <p>For native tokens, use the 3 character abbreviation that best matches your token. \n         For example, btc for Bitcoin, eth for Ether, etc. For all other token types you must \n         specify the <code>tokenId</code> in the 64 character hexadecimal <code>tokenid</code> format.</p>\n         </note>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The container for the identifier for the token including the unique token ID and its blockchain network.</p>\n         <note>\n            <p>Only the native tokens BTC and ETH, and the ERC-20, \n         ERC-721, and ERC 1155 token standards are supported.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.managedblockchainquery#Transaction": {
+      "type": "structure",
+      "members": {
+        "network": {
+          "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+          "traits": {
+            "smithy.api#documentation": "<p>The blockchain network where the transaction occurred.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "blockHash": {
+          "target": "com.amazonaws.managedblockchainquery#BlockHash",
+          "traits": {
+            "smithy.api#documentation": "<p>The block hash is a unique identifier for a block. It is a fixed-size \n         string that is calculated by using the information in the block. The block \n         hash is used to verify the integrity of the data in the block.</p>"
+          }
+        },
+        "transactionHash": {
+          "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
+          "traits": {
+            "smithy.api#documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "blockNumber": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The block number in which the transaction is recorded.</p>"
+          }
+        },
+        "transactionTimestamp": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Timestamp</code> of the transaction. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "transactionIndex": {
+          "target": "smithy.api#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The index of the transaction within a blockchain.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "numberOfTransactions": {
+          "target": "smithy.api#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of transactions in the block.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "to": {
+          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "from": {
+          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>The initiator of the transaction. It is either in the form a public key or a \n         contract address.</p>"
+          }
+        },
+        "contractAddress": {
+          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>The blockchain address for the contract.</p>"
+          }
+        },
+        "gasUsed": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of gas used for the transaction.</p>"
+          }
+        },
+        "cumulativeGasUsed": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of gas used up to the specified point in the block.</p>"
+          }
+        },
+        "effectiveGasPrice": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The effective gas price.</p>"
+          }
+        },
+        "signatureV": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The signature of the transaction. The Z coordinate of a point V.</p>"
+          }
+        },
+        "signatureR": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The signature of the transaction. The X coordinate of a point R.</p>"
+          }
+        },
+        "signatureS": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The signature of the transaction. The Y coordinate of a point S.</p>"
+          }
+        },
+        "transactionFee": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The transaction fee.</p>"
+          }
+        },
+        "transactionId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>"
+          }
+        },
+        "confirmationStatus": {
+          "target": "com.amazonaws.managedblockchainquery#ConfirmationStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether the transaction has reached Finality.</p>"
+          }
+        },
+        "executionStatus": {
+          "target": "com.amazonaws.managedblockchainquery#ExecutionStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies whether the transaction has succeeded or failed.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>There are two possible types of transactions used for this data type:</p>\n         <ul>\n            <li>\n               <p>A Bitcoin transaction is a movement of BTC from one address to \n            another.</p>\n            </li>\n            <li>\n               <p>An Ethereum transaction refers to an action initiated by an externally \n           owned account, which is an account managed by a human, not a contract. \n            For example, if Bob sends Alice 1 ETH, Bob's account must be debited and \n            Alice's must be credited. This state-changing action occurs within a transaction.</p>\n            </li>\n         </ul>"
+      }
+    },
+    "com.amazonaws.managedblockchainquery#TransactionEvent": {
+      "type": "structure",
+      "members": {
+        "network": {
+          "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+          "traits": {
+            "smithy.api#documentation": "<p>The blockchain network where the transaction occurred.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "transactionHash": {
+          "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
+          "traits": {
+            "smithy.api#documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "eventType": {
+          "target": "com.amazonaws.managedblockchainquery#QueryTransactionEventType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of transaction event.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "from": {
+          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>The wallet address initiating the transaction. It can either be a public key or a contract.</p>"
+          }
+        },
+        "to": {
+          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>The wallet address receiving the transaction.  It can either be a public key or a contract.</p>"
+          }
+        },
+        "value": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The value that was transacted.</p>"
+          }
+        },
+        "contractAddress": {
+          "target": "com.amazonaws.managedblockchainquery#ChainAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>The blockchain address for the contract</p>"
+          }
+        },
+        "tokenId": {
+          "target": "com.amazonaws.managedblockchainquery#QueryTokenId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier for the token involved in the transaction.</p>"
+          }
+        },
+        "transactionId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>"
+          }
+        },
+        "voutIndex": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The position of the transaction output in the transaction output list.</p>"
+          }
+        },
+        "voutSpent": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies if the transaction output is spent or unspent. This is only returned for BITCOIN_VOUT event types.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VOUT</code> event types.</p>\n         </note>"
+          }
+        },
+        "spentVoutTransactionId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The transactionId that <i>created</i> the spent transaction output.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VIN</code> event types.</p>\n         </note>"
+          }
+        },
+        "spentVoutTransactionHash": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The transactionHash that <i>created</i> the spent transaction output.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VIN</code> event types.</p>\n         </note>"
+          }
+        },
+        "spentVoutIndex": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The position of the spent transaction output in the output list of the <i>creating transaction</i>.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VIN</code> event types.</p>\n         </note>"
+          }
+        },
+        "blockchainInstant": {
+          "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+        },
+        "confirmationStatus": {
+          "target": "com.amazonaws.managedblockchainquery#ConfirmationStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>This container specifies whether the transaction has reached Finality.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The container for the properties of a transaction event.</p>"
+      }
+    },
+    "com.amazonaws.managedblockchainquery#TransactionEventList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.managedblockchainquery#TransactionEvent"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 250
+        }
+      }
+    },
+    "com.amazonaws.managedblockchainquery#TransactionOutputItem": {
+      "type": "structure",
+      "members": {
+        "transactionHash": {
+          "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
+          "traits": {
+            "smithy.api#documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "transactionId": {
+          "target": "com.amazonaws.managedblockchainquery#QueryTransactionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>"
+          }
+        },
+        "network": {
+          "target": "com.amazonaws.managedblockchainquery#QueryNetwork",
+          "traits": {
+            "smithy.api#documentation": "<p>The blockchain network where the transaction occurred.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "transactionTimestamp": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time when the transaction occurred.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "confirmationStatus": {
+          "target": "com.amazonaws.managedblockchainquery#ConfirmationStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether to list transactions that have not reached Finality.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The container of the transaction output.</p>"
+      }
+    },
+    "com.amazonaws.managedblockchainquery#TransactionOutputList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.managedblockchainquery#TransactionOutputItem"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 250
+        }
+      }
+    },
+    "com.amazonaws.managedblockchainquery#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.managedblockchainquery#ExceptionMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>The container for the exception message.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "reason": {
+          "target": "com.amazonaws.managedblockchainquery#ValidationExceptionReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The container for the reason for the exception</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "fieldList": {
+          "target": "com.amazonaws.managedblockchainquery#ValidationExceptionFieldList",
+          "traits": {
+            "smithy.api#documentation": "<p>The container for the <code>fieldList</code> of the exception.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The resource passed is invalid.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.managedblockchainquery#ValidationExceptionField": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the field that triggered the <code>ValidationException</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>ValidationException</code> message.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The resource passed is invalid.</p>"
+      }
+    },
+    "com.amazonaws.managedblockchainquery#ValidationExceptionFieldList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.managedblockchainquery#ValidationExceptionField"
+      }
+    },
+    "com.amazonaws.managedblockchainquery#ValidationExceptionReason": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "unknownOperation",
+            "name": "UNKNOWN_OPERATION"
+          },
+          {
+            "value": "cannotParse",
+            "name": "CANNOT_PARSE"
+          },
+          {
+            "value": "fieldValidationFailed",
+            "name": "FIELD_VALIDATION_FAILED"
+          },
+          {
+            "value": "other",
+            "name": "OTHER"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.managedblockchainquery#VoutFilter": {
+      "type": "structure",
+      "members": {
+        "voutSpent": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies if the transaction output is spent or unspent.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>This container specifies filtering attributes related to <code>BITCOIN_VOUT</code> event types</p>"
       }
     }
   }

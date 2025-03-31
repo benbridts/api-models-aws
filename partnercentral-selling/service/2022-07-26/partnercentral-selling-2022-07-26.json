@@ -1,6 +1,422 @@
 {
   "smithy": "2.0",
   "shapes": {
+    "com.amazonaws.partnercentralselling#AWSPartnerCentralSelling": {
+      "type": "service",
+      "version": "2022-07-26",
+      "operations": [
+        {
+          "target": "com.amazonaws.partnercentralselling#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.partnercentralselling#TagResource"
+        },
+        {
+          "target": "com.amazonaws.partnercentralselling#UntagResource"
+        }
+      ],
+      "resources": [
+        {
+          "target": "com.amazonaws.partnercentralselling#Engagement"
+        },
+        {
+          "target": "com.amazonaws.partnercentralselling#EngagementByAcceptingInvitationTask"
+        },
+        {
+          "target": "com.amazonaws.partnercentralselling#EngagementFromOpportunityTask"
+        },
+        {
+          "target": "com.amazonaws.partnercentralselling#EngagementInvitation"
+        },
+        {
+          "target": "com.amazonaws.partnercentralselling#Opportunity"
+        },
+        {
+          "target": "com.amazonaws.partnercentralselling#ResourceSnapshot"
+        },
+        {
+          "target": "com.amazonaws.partnercentralselling#ResourceSnapshotJob"
+        },
+        {
+          "target": "com.amazonaws.partnercentralselling#SellingSystemSettings"
+        },
+        {
+          "target": "com.amazonaws.partnercentralselling#Solution"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "PartnerCentral Selling",
+          "endpointPrefix": "partnercentral-selling",
+          "arnNamespace": "partnercentral",
+          "cloudTrailEventSource": "partnercentral-selling.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "partnercentral-selling"
+        },
+        "aws.endpoints#dualStackOnlyEndpoints": {},
+        "aws.endpoints#standardRegionalEndpoints": {},
+        "aws.iam#defineConditionKeys": {
+          "partnercentral:RelatedEntityType": {
+            "type": "String",
+            "relativeDocumentation": "page.html#RelatedEntityType",
+            "documentation": "Filters access by entity types for Opportunity association. Accepted values: [Solutions, AwsProducts, AwsMarketplaceOffers]"
+          },
+          "partnercentral:Catalog": {
+            "type": "String",
+            "relativeDocumentation": "page.html#Catalog",
+            "documentation": "Filters access by a specific Catalog. Accepted values: [AWS, Sandbox]"
+          }
+        },
+        "aws.iam#supportedPrincipalTypes": [
+          "Root",
+          "IAMUser",
+          "IAMRole",
+          "FederatedUser"
+        ],
+        "aws.protocols#awsJson1_0": {},
+        "smithy.api#documentation": "<fullname>AWS Partner Central API for Selling</fullname>\n         <p>\n            <b>AWS Partner Central API for Selling Reference\n            Guide</b>\n         </p>\n         <p>This Amazon Web Services (AWS) Partner Central API reference is designed to help\n                <a href=\"http://aws.amazon.com/partners/programs/\">AWS Partners</a> integrate\n            Customer Relationship Management (CRM) systems with AWS Partner Central. Partners can\n            automate interactions with AWS Partner Central, which helps to ensure effective\n            engagements in joint business activities.</p>\n         <p>The API provides standard AWS API functionality. Access it by either using API <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/API_Operations.html\">Actions</a> or by using an AWS SDK that's tailored to your programming language\n            or platform. For more information, see <a href=\"http://aws.amazon.com/getting-started\">Getting Started with AWS</a> and <a href=\"http://aws.amazon.com/developer/tools/\">Tools to Build on AWS</a>.</p>\n         <p class=\"title\">\n            <b>Features offered by AWS Partner Central API</b>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <b>Opportunity management:</b> Manages coselling\n                    opportunities through API actions such as <code>CreateOpportunity</code>,\n                        <code>UpdateOpportunity</code>, <code>ListOpportunities</code>,\n                        <code>GetOpportunity</code>, and <code>AssignOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AWS referral management:</b> Manages referrals\n                    shared by AWS using actions such as <code>ListEngagementInvitations</code>,\n                        <code>GetEngagementInvitation</code>,\n                        <code>StartEngagementByAcceptingInvitation</code>, and\n                        <code>RejectEngagementInvitation</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Entity association:</b> Associates related\n                    entities such as <i>AWS Products</i>, <i>Partner\n                        Solutions</i>, and <i>AWS Marketplace Private\n                        Offers</i> with opportunities using the actions\n                        <code>AssociateOpportunity</code>, and\n                    <code>DisassociateOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>View AWS opportunity details:</b> Retrieves\n                    real-time summaries of AWS opportunities using the\n                        <code>GetAWSOpportunitySummary</code> action.</p>\n            </li>\n            <li>\n               <p>\n                  <b>List solutions:</b> Provides list APIs for\n                    listing partner offers using <code>ListSolutions</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event subscription:</b> Subscribe to real-time\n                    opportunity updates through AWS EventBridge by using actions such as\n                        <i>Opportunity Created</i>, <i>Opportunity\n                        Updated</i>, <i>Engagement Invitation Accepted</i>,\n                        <i>Engagement Invitation Rejected</i>, and\n                        <i>Engagement Invitation Created</i>.</p>\n            </li>\n         </ol>",
+        "smithy.api#title": "Partner Central Selling API",
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "Boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "String"
+            },
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "String"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "endpoint": {
+                    "url": {
+                      "ref": "Endpoint"
+                    },
+                    "properties": {},
+                    "headers": {}
+                  },
+                  "type": "endpoint"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "isSet",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ]
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "aws.partition",
+                          "argv": [
+                            {
+                              "ref": "Region"
+                            }
+                          ],
+                          "assign": "PartitionResult"
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                {
+                                  "ref": "UseFIPS"
+                                },
+                                true
+                              ]
+                            }
+                          ],
+                          "endpoint": {
+                            "url": "https://partnercentral-selling-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                            "properties": {},
+                            "headers": {}
+                          },
+                          "type": "endpoint"
+                        },
+                        {
+                          "conditions": [],
+                          "endpoint": {
+                            "url": "https://partnercentral-selling.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                            "properties": {},
+                            "headers": {}
+                          },
+                          "type": "endpoint"
+                        }
+                      ],
+                      "type": "tree"
+                    }
+                  ],
+                  "type": "tree"
+                },
+                {
+                  "conditions": [],
+                  "error": "Invalid Configuration: Missing Region",
+                  "type": "error"
+                }
+              ],
+              "type": "tree"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "For custom endpoint with region not set and fips disabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://example.com"
+                }
+              },
+              "params": {
+                "Endpoint": "https://example.com",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For custom endpoint with fips enabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Endpoint": "https://example.com",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling.cn-northwest-1.api.amazonwebservices.com.cn"
+                }
+              },
+              "params": {
+                "Region": "cn-northwest-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling-fips.us-gov-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling.us-gov-west-1.api.aws"
+                }
+              },
+              "params": {
+                "Region": "us-gov-west-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling-fips.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling.us-iso-east-1.c2s.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-iso-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling-fips.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling.us-isob-east-1.sc2s.sgov.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isob-east-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling-fips.eu-isoe-west-1.cloud.adc-e.uk"
+                }
+              },
+              "params": {
+                "Region": "eu-isoe-west-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling.eu-isoe-west-1.cloud.adc-e.uk"
+                }
+              },
+              "params": {
+                "Region": "eu-isoe-west-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling-fips.us-isof-south-1.csp.hci.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isof-south-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
+              "expect": {
+                "endpoint": {
+                  "url": "https://partnercentral-selling.us-isof-south-1.csp.hci.ic.gov"
+                }
+              },
+              "params": {
+                "Region": "us-isof-south-1",
+                "UseFIPS": false
+              }
+            },
+            {
+              "documentation": "Missing region",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              }
+            }
+          ],
+          "version": "1.0"
+        }
+      }
+    },
     "com.amazonaws.partnercentralselling#AcceptEngagementInvitation": {
       "type": "operation",
       "input": {
@@ -11955,422 +12371,6 @@
           "max": 255
         },
         "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.partnercentralselling#PartnerCentralSelling": {
-      "type": "service",
-      "version": "2022-07-26",
-      "operations": [
-        {
-          "target": "com.amazonaws.partnercentralselling#ListTagsForResource"
-        },
-        {
-          "target": "com.amazonaws.partnercentralselling#TagResource"
-        },
-        {
-          "target": "com.amazonaws.partnercentralselling#UntagResource"
-        }
-      ],
-      "resources": [
-        {
-          "target": "com.amazonaws.partnercentralselling#Engagement"
-        },
-        {
-          "target": "com.amazonaws.partnercentralselling#EngagementByAcceptingInvitationTask"
-        },
-        {
-          "target": "com.amazonaws.partnercentralselling#EngagementFromOpportunityTask"
-        },
-        {
-          "target": "com.amazonaws.partnercentralselling#EngagementInvitation"
-        },
-        {
-          "target": "com.amazonaws.partnercentralselling#Opportunity"
-        },
-        {
-          "target": "com.amazonaws.partnercentralselling#ResourceSnapshot"
-        },
-        {
-          "target": "com.amazonaws.partnercentralselling#ResourceSnapshotJob"
-        },
-        {
-          "target": "com.amazonaws.partnercentralselling#SellingSystemSettings"
-        },
-        {
-          "target": "com.amazonaws.partnercentralselling#Solution"
-        }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "PartnerCentral Selling",
-          "endpointPrefix": "partnercentral-selling",
-          "arnNamespace": "partnercentral",
-          "cloudTrailEventSource": "partnercentral-selling.amazonaws.com"
-        },
-        "aws.auth#sigv4": {
-          "name": "partnercentral-selling"
-        },
-        "aws.endpoints#dualStackOnlyEndpoints": {},
-        "aws.endpoints#standardRegionalEndpoints": {},
-        "aws.iam#defineConditionKeys": {
-          "partnercentral:RelatedEntityType": {
-            "type": "String",
-            "relativeDocumentation": "page.html#RelatedEntityType",
-            "documentation": "Filters access by entity types for Opportunity association. Accepted values: [Solutions, AwsProducts, AwsMarketplaceOffers]"
-          },
-          "partnercentral:Catalog": {
-            "type": "String",
-            "relativeDocumentation": "page.html#Catalog",
-            "documentation": "Filters access by a specific Catalog. Accepted values: [AWS, Sandbox]"
-          }
-        },
-        "aws.iam#supportedPrincipalTypes": [
-          "Root",
-          "IAMUser",
-          "IAMRole",
-          "FederatedUser"
-        ],
-        "aws.protocols#awsJson1_0": {},
-        "smithy.api#documentation": "<fullname>AWS Partner Central API for Selling</fullname>\n         <p>\n            <b>AWS Partner Central API for Selling Reference\n            Guide</b>\n         </p>\n         <p>This Amazon Web Services (AWS) Partner Central API reference is designed to help\n                <a href=\"http://aws.amazon.com/partners/programs/\">AWS Partners</a> integrate\n            Customer Relationship Management (CRM) systems with AWS Partner Central. Partners can\n            automate interactions with AWS Partner Central, which helps to ensure effective\n            engagements in joint business activities.</p>\n         <p>The API provides standard AWS API functionality. Access it by either using API <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/API_Operations.html\">Actions</a> or by using an AWS SDK that's tailored to your programming language\n            or platform. For more information, see <a href=\"http://aws.amazon.com/getting-started\">Getting Started with AWS</a> and <a href=\"http://aws.amazon.com/developer/tools/\">Tools to Build on AWS</a>.</p>\n         <p class=\"title\">\n            <b>Features offered by AWS Partner Central API</b>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <b>Opportunity management:</b> Manages coselling\n                    opportunities through API actions such as <code>CreateOpportunity</code>,\n                        <code>UpdateOpportunity</code>, <code>ListOpportunities</code>,\n                        <code>GetOpportunity</code>, and <code>AssignOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AWS referral management:</b> Manages referrals\n                    shared by AWS using actions such as <code>ListEngagementInvitations</code>,\n                        <code>GetEngagementInvitation</code>,\n                        <code>StartEngagementByAcceptingInvitation</code>, and\n                        <code>RejectEngagementInvitation</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Entity association:</b> Associates related\n                    entities such as <i>AWS Products</i>, <i>Partner\n                        Solutions</i>, and <i>AWS Marketplace Private\n                        Offers</i> with opportunities using the actions\n                        <code>AssociateOpportunity</code>, and\n                    <code>DisassociateOpportunity</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>View AWS opportunity details:</b> Retrieves\n                    real-time summaries of AWS opportunities using the\n                        <code>GetAWSOpportunitySummary</code> action.</p>\n            </li>\n            <li>\n               <p>\n                  <b>List solutions:</b> Provides list APIs for\n                    listing partner offers using <code>ListSolutions</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Event subscription:</b> Subscribe to real-time\n                    opportunity updates through AWS EventBridge by using actions such as\n                        <i>Opportunity Created</i>, <i>Opportunity\n                        Updated</i>, <i>Engagement Invitation Accepted</i>,\n                        <i>Engagement Invitation Rejected</i>, and\n                        <i>Engagement Invitation Created</i>.</p>\n            </li>\n         </ol>",
-        "smithy.api#title": "Partner Central Selling API",
-        "smithy.rules#endpointRuleSet": {
-          "version": "1.0",
-          "parameters": {
-            "UseFIPS": {
-              "builtIn": "AWS::UseFIPS",
-              "required": true,
-              "default": false,
-              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-              "type": "Boolean"
-            },
-            "Endpoint": {
-              "builtIn": "SDK::Endpoint",
-              "required": false,
-              "documentation": "Override the endpoint used to send this request",
-              "type": "String"
-            },
-            "Region": {
-              "builtIn": "AWS::Region",
-              "required": false,
-              "documentation": "The AWS region used to dispatch the request.",
-              "type": "String"
-            }
-          },
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "fn": "isSet",
-                  "argv": [
-                    {
-                      "ref": "Endpoint"
-                    }
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "booleanEquals",
-                      "argv": [
-                        {
-                          "ref": "UseFIPS"
-                        },
-                        true
-                      ]
-                    }
-                  ],
-                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                  "type": "error"
-                },
-                {
-                  "conditions": [],
-                  "endpoint": {
-                    "url": {
-                      "ref": "Endpoint"
-                    },
-                    "properties": {},
-                    "headers": {}
-                  },
-                  "type": "endpoint"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "isSet",
-                      "argv": [
-                        {
-                          "ref": "Region"
-                        }
-                      ]
-                    }
-                  ],
-                  "rules": [
-                    {
-                      "conditions": [
-                        {
-                          "fn": "aws.partition",
-                          "argv": [
-                            {
-                              "ref": "Region"
-                            }
-                          ],
-                          "assign": "PartitionResult"
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                {
-                                  "ref": "UseFIPS"
-                                },
-                                true
-                              ]
-                            }
-                          ],
-                          "endpoint": {
-                            "url": "https://partnercentral-selling-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                            "properties": {},
-                            "headers": {}
-                          },
-                          "type": "endpoint"
-                        },
-                        {
-                          "conditions": [],
-                          "endpoint": {
-                            "url": "https://partnercentral-selling.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                            "properties": {},
-                            "headers": {}
-                          },
-                          "type": "endpoint"
-                        }
-                      ],
-                      "type": "tree"
-                    }
-                  ],
-                  "type": "tree"
-                },
-                {
-                  "conditions": [],
-                  "error": "Invalid Configuration: Missing Region",
-                  "type": "error"
-                }
-              ],
-              "type": "tree"
-            }
-          ]
-        },
-        "smithy.rules#endpointTests": {
-          "testCases": [
-            {
-              "documentation": "For custom endpoint with region not set and fips disabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://example.com"
-                }
-              },
-              "params": {
-                "Endpoint": "https://example.com",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For custom endpoint with fips enabled",
-              "expect": {
-                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-              },
-              "params": {
-                "Endpoint": "https://example.com",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling-fips.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling-fips.cn-northwest-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-northwest-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling.cn-northwest-1.api.amazonwebservices.com.cn"
-                }
-              },
-              "params": {
-                "Region": "cn-northwest-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling-fips.us-gov-west-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling.us-gov-west-1.api.aws"
-                }
-              },
-              "params": {
-                "Region": "us-gov-west-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling-fips.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling.us-iso-east-1.c2s.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-iso-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling-fips.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling.us-isob-east-1.sc2s.sgov.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isob-east-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region eu-isoe-west-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling-fips.eu-isoe-west-1.cloud.adc-e.uk"
-                }
-              },
-              "params": {
-                "Region": "eu-isoe-west-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region eu-isoe-west-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling.eu-isoe-west-1.cloud.adc-e.uk"
-                }
-              },
-              "params": {
-                "Region": "eu-isoe-west-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "For region us-isof-south-1 with FIPS enabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling-fips.us-isof-south-1.csp.hci.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isof-south-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "For region us-isof-south-1 with FIPS disabled and DualStack enabled",
-              "expect": {
-                "endpoint": {
-                  "url": "https://partnercentral-selling.us-isof-south-1.csp.hci.ic.gov"
-                }
-              },
-              "params": {
-                "Region": "us-isof-south-1",
-                "UseFIPS": false
-              }
-            },
-            {
-              "documentation": "Missing region",
-              "expect": {
-                "error": "Invalid Configuration: Missing Region"
-              }
-            }
-          ],
-          "version": "1.0"
-        }
       }
     }
   }

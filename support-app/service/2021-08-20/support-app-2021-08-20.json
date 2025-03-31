@@ -697,243 +697,6 @@
         "target": "com.amazonaws.supportapp#SlackWorkspaceConfiguration"
       }
     },
-    "com.amazonaws.supportapp#UpdateSlackChannelConfiguration": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.supportapp#UpdateSlackChannelConfigurationRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.supportapp#UpdateSlackChannelConfigurationResult"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.supportapp#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.supportapp#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.supportapp#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.supportapp#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.supportapp#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates the configuration for a Slack channel, such as case update notifications.</p>",
-        "smithy.api#http": {
-          "method": "POST",
-          "uri": "/control/update-slack-channel-configuration",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.supportapp#UpdateSlackChannelConfigurationRequest": {
-      "type": "structure",
-      "members": {
-        "teamId": {
-          "target": "com.amazonaws.supportapp#teamId",
-          "traits": {
-            "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "channelId": {
-          "target": "com.amazonaws.supportapp#channelId",
-          "traits": {
-            "smithy.api#documentation": "<p>The channel ID in Slack. This ID identifies a channel within a Slack workspace.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "channelName": {
-          "target": "com.amazonaws.supportapp#channelName",
-          "traits": {
-            "smithy.api#documentation": "<p>The Slack channel name that you want to update.</p>"
-          }
-        },
-        "notifyOnCreateOrReopenCase": {
-          "target": "com.amazonaws.supportapp#booleanValue",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether you want to get notified when a support case is created or reopened.</p>"
-          }
-        },
-        "notifyOnAddCorrespondenceToCase": {
-          "target": "com.amazonaws.supportapp#booleanValue",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether you want to get notified when a support case has a new correspondence.</p>"
-          }
-        },
-        "notifyOnResolveCase": {
-          "target": "com.amazonaws.supportapp#booleanValue",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether you want to get notified when a support case is resolved.</p>"
-          }
-        },
-        "notifyOnCaseSeverity": {
-          "target": "com.amazonaws.supportapp#NotificationSeverityLevel",
-          "traits": {
-            "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>\n         <p>If you specify <code>high</code> or <code>all</code>, at least one of the following\n      parameters must be <code>true</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you specify <code>none</code>, any of the following parameters that you specify in your\n      request must be <code>false</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>If you don't specify these parameters in your request, the Amazon Web Services Support App uses the current\n        values by default.</p>\n         </note>"
-          }
-        },
-        "channelRoleArn": {
-          "target": "com.amazonaws.supportapp#roleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that you want to\nuse to perform operations on Amazon Web Services. For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html\">Managing access to\nthe Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.supportapp#UpdateSlackChannelConfigurationResult": {
-      "type": "structure",
-      "members": {
-        "teamId": {
-          "target": "com.amazonaws.supportapp#teamId",
-          "traits": {
-            "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>"
-          }
-        },
-        "channelId": {
-          "target": "com.amazonaws.supportapp#channelId",
-          "traits": {
-            "smithy.api#documentation": "<p>The channel ID in Slack. This ID identifies a channel within a Slack workspace.</p>"
-          }
-        },
-        "channelName": {
-          "target": "com.amazonaws.supportapp#channelName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Slack channel that you configure for the Amazon Web Services Support App.</p>"
-          }
-        },
-        "notifyOnCreateOrReopenCase": {
-          "target": "com.amazonaws.supportapp#booleanValue",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether you want to get notified when a support case is created or reopened.</p>"
-          }
-        },
-        "notifyOnAddCorrespondenceToCase": {
-          "target": "com.amazonaws.supportapp#booleanValue",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether you want to get notified when a support case has a new correspondence.</p>"
-          }
-        },
-        "notifyOnResolveCase": {
-          "target": "com.amazonaws.supportapp#booleanValue",
-          "traits": {
-            "smithy.api#documentation": "<p>Whether you want to get notified when a support case is resolved.</p>"
-          }
-        },
-        "notifyOnCaseSeverity": {
-          "target": "com.amazonaws.supportapp#NotificationSeverityLevel",
-          "traits": {
-            "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>"
-          }
-        },
-        "channelRoleArn": {
-          "target": "com.amazonaws.supportapp#roleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that you want to\nuse to perform operations on Amazon Web Services. For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html\">Managing access to\nthe Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.supportapp#ValidationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.supportapp#errorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Your request input doesn't meet the constraints that the Amazon Web Services Support App specifies.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.supportapp#awsAccountAlias": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 30
-        },
-        "smithy.api#pattern": "^[\\w\\- ]+$"
-      }
-    },
-    "com.amazonaws.supportapp#booleanValue": {
-      "type": "boolean"
-    },
-    "com.amazonaws.supportapp#channelId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 256
-        },
-        "smithy.api#pattern": "^\\S+$"
-      }
-    },
-    "com.amazonaws.supportapp#channelName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 256
-        },
-        "smithy.api#pattern": "^.+$"
-      }
-    },
-    "com.amazonaws.supportapp#errorMessage": {
-      "type": "string"
-    },
-    "com.amazonaws.supportapp#paginationToken": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 256
-        },
-        "smithy.api#pattern": "^\\S+$"
-      }
-    },
-    "com.amazonaws.supportapp#roleArn": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 31,
-          "max": 2048
-        },
-        "smithy.api#pattern": "^arn:aws:iam::[0-9]{12}:role/(.+)$"
-      }
-    },
-    "com.amazonaws.supportapp#slackChannelConfigurationList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.supportapp#SlackChannelConfiguration"
-      }
-    },
-    "com.amazonaws.supportapp#teamId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 256
-        },
-        "smithy.api#pattern": "^\\S+$"
-      }
-    },
-    "com.amazonaws.supportapp#teamName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 256
-        },
-        "smithy.api#pattern": "^.+$"
-      }
-    },
     "com.amazonaws.supportapp#SupportApp": {
       "type": "service",
       "version": "2021-08-20",
@@ -1631,6 +1394,243 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.supportapp#UpdateSlackChannelConfiguration": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.supportapp#UpdateSlackChannelConfigurationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.supportapp#UpdateSlackChannelConfigurationResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.supportapp#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.supportapp#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.supportapp#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.supportapp#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.supportapp#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the configuration for a Slack channel, such as case update notifications.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/control/update-slack-channel-configuration",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.supportapp#UpdateSlackChannelConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "teamId": {
+          "target": "com.amazonaws.supportapp#teamId",
+          "traits": {
+            "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "channelId": {
+          "target": "com.amazonaws.supportapp#channelId",
+          "traits": {
+            "smithy.api#documentation": "<p>The channel ID in Slack. This ID identifies a channel within a Slack workspace.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "channelName": {
+          "target": "com.amazonaws.supportapp#channelName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Slack channel name that you want to update.</p>"
+          }
+        },
+        "notifyOnCreateOrReopenCase": {
+          "target": "com.amazonaws.supportapp#booleanValue",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether you want to get notified when a support case is created or reopened.</p>"
+          }
+        },
+        "notifyOnAddCorrespondenceToCase": {
+          "target": "com.amazonaws.supportapp#booleanValue",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether you want to get notified when a support case has a new correspondence.</p>"
+          }
+        },
+        "notifyOnResolveCase": {
+          "target": "com.amazonaws.supportapp#booleanValue",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether you want to get notified when a support case is resolved.</p>"
+          }
+        },
+        "notifyOnCaseSeverity": {
+          "target": "com.amazonaws.supportapp#NotificationSeverityLevel",
+          "traits": {
+            "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>\n         <p>If you specify <code>high</code> or <code>all</code>, at least one of the following\n      parameters must be <code>true</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n         <p>If you specify <code>none</code>, any of the following parameters that you specify in your\n      request must be <code>false</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>notifyOnAddCorrespondenceToCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnCreateOrReopenCase</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>notifyOnResolveCase</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>If you don't specify these parameters in your request, the Amazon Web Services Support App uses the current\n        values by default.</p>\n         </note>"
+          }
+        },
+        "channelRoleArn": {
+          "target": "com.amazonaws.supportapp#roleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that you want to\nuse to perform operations on Amazon Web Services. For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html\">Managing access to\nthe Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.supportapp#UpdateSlackChannelConfigurationResult": {
+      "type": "structure",
+      "members": {
+        "teamId": {
+          "target": "com.amazonaws.supportapp#teamId",
+          "traits": {
+            "smithy.api#documentation": "<p>The team ID in Slack. This ID uniquely identifies a Slack workspace, such as\n<code>T012ABCDEFG</code>.</p>"
+          }
+        },
+        "channelId": {
+          "target": "com.amazonaws.supportapp#channelId",
+          "traits": {
+            "smithy.api#documentation": "<p>The channel ID in Slack. This ID identifies a channel within a Slack workspace.</p>"
+          }
+        },
+        "channelName": {
+          "target": "com.amazonaws.supportapp#channelName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Slack channel that you configure for the Amazon Web Services Support App.</p>"
+          }
+        },
+        "notifyOnCreateOrReopenCase": {
+          "target": "com.amazonaws.supportapp#booleanValue",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether you want to get notified when a support case is created or reopened.</p>"
+          }
+        },
+        "notifyOnAddCorrespondenceToCase": {
+          "target": "com.amazonaws.supportapp#booleanValue",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether you want to get notified when a support case has a new correspondence.</p>"
+          }
+        },
+        "notifyOnResolveCase": {
+          "target": "com.amazonaws.supportapp#booleanValue",
+          "traits": {
+            "smithy.api#documentation": "<p>Whether you want to get notified when a support case is resolved.</p>"
+          }
+        },
+        "notifyOnCaseSeverity": {
+          "target": "com.amazonaws.supportapp#NotificationSeverityLevel",
+          "traits": {
+            "smithy.api#documentation": "<p>The case severity for a support case that you want to receive notifications.</p>"
+          }
+        },
+        "channelRoleArn": {
+          "target": "com.amazonaws.supportapp#roleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that you want to\nuse to perform operations on Amazon Web Services. For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html\">Managing access to\nthe Amazon Web Services Support App</a> in the <i>Amazon Web Services Support User Guide</i>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.supportapp#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.supportapp#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Your request input doesn't meet the constraints that the Amazon Web Services Support App specifies.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.supportapp#awsAccountAlias": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 30
+        },
+        "smithy.api#pattern": "^[\\w\\- ]+$"
+      }
+    },
+    "com.amazonaws.supportapp#booleanValue": {
+      "type": "boolean"
+    },
+    "com.amazonaws.supportapp#channelId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        },
+        "smithy.api#pattern": "^\\S+$"
+      }
+    },
+    "com.amazonaws.supportapp#channelName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        },
+        "smithy.api#pattern": "^.+$"
+      }
+    },
+    "com.amazonaws.supportapp#errorMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.supportapp#paginationToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        },
+        "smithy.api#pattern": "^\\S+$"
+      }
+    },
+    "com.amazonaws.supportapp#roleArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 31,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^arn:aws:iam::[0-9]{12}:role/(.+)$"
+      }
+    },
+    "com.amazonaws.supportapp#slackChannelConfigurationList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.supportapp#SlackChannelConfiguration"
+      }
+    },
+    "com.amazonaws.supportapp#teamId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        },
+        "smithy.api#pattern": "^\\S+$"
+      }
+    },
+    "com.amazonaws.supportapp#teamName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        },
+        "smithy.api#pattern": "^.+$"
       }
     }
   }

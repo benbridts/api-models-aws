@@ -3790,176 +3790,6 @@
         "smithy.api#httpError": 400
       }
     },
-    "com.amazonaws.voiceid#VoiceSpoofingRisk": {
-      "type": "structure",
-      "members": {
-        "RiskScore": {
-          "target": "com.amazonaws.voiceid#Score",
-          "traits": {
-            "smithy.api#documentation": "<p>The score indicating the likelihood of speaker\u2019s voice being spoofed.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The details resulting from 'Voice Spoofing Risk' analysis of the speaker.</p>"
-      }
-    },
-    "com.amazonaws.voiceid#Watchlist": {
-      "type": "structure",
-      "members": {
-        "DomainId": {
-          "target": "com.amazonaws.voiceid#DomainId",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of the domain that contains the watchlist.</p>"
-          }
-        },
-        "WatchlistId": {
-          "target": "com.amazonaws.voiceid#WatchlistId",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of the watchlist.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.voiceid#WatchlistName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name for the watchlist.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.voiceid#WatchlistDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the watchlist.</p>"
-          }
-        },
-        "DefaultWatchlist": {
-          "target": "com.amazonaws.voiceid#Boolean",
-          "traits": {
-            "smithy.api#default": false,
-            "smithy.api#documentation": "<p>Whether the specified watchlist is the default watchlist of a domain.</p>"
-          }
-        },
-        "CreatedAt": {
-          "target": "com.amazonaws.voiceid#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The timestamp of when the watchlist was created.</p>"
-          }
-        },
-        "UpdatedAt": {
-          "target": "com.amazonaws.voiceid#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The timestamp of when the watchlist was updated.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains all the information about a watchlist.</p>"
-      }
-    },
-    "com.amazonaws.voiceid#WatchlistDescription": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 1024
-        },
-        "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$",
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.voiceid#WatchlistDetails": {
-      "type": "structure",
-      "members": {
-        "DefaultWatchlistId": {
-          "target": "com.amazonaws.voiceid#WatchlistId",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of the default watchlist.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Details of the watchlists in a domain.</p>"
-      }
-    },
-    "com.amazonaws.voiceid#WatchlistId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 22,
-          "max": 22
-        },
-        "smithy.api#pattern": "^[a-zA-Z0-9]{22}$"
-      }
-    },
-    "com.amazonaws.voiceid#WatchlistName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 256
-        },
-        "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.voiceid#WatchlistSummaries": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.voiceid#WatchlistSummary"
-      }
-    },
-    "com.amazonaws.voiceid#WatchlistSummary": {
-      "type": "structure",
-      "members": {
-        "DomainId": {
-          "target": "com.amazonaws.voiceid#DomainId",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of the domain that contains the watchlist.</p>"
-          }
-        },
-        "WatchlistId": {
-          "target": "com.amazonaws.voiceid#WatchlistId",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of the watchlist.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.voiceid#WatchlistName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name for the watchlist.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.voiceid#WatchlistDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the watchlist.</p>"
-          }
-        },
-        "DefaultWatchlist": {
-          "target": "com.amazonaws.voiceid#Boolean",
-          "traits": {
-            "smithy.api#default": false,
-            "smithy.api#documentation": "<p>Whether the specified watchlist is the default watchlist of a domain.</p>"
-          }
-        },
-        "CreatedAt": {
-          "target": "com.amazonaws.voiceid#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The timestamp of when the watchlist was created.</p>"
-          }
-        },
-        "UpdatedAt": {
-          "target": "com.amazonaws.voiceid#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The timestamp of when the watchlist was last updated.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains a summary of information about a watchlist.</p>"
-      }
-    },
     "com.amazonaws.voiceid#VoiceID": {
       "type": "service",
       "version": "2021-09-27",
@@ -4762,6 +4592,176 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.voiceid#VoiceSpoofingRisk": {
+      "type": "structure",
+      "members": {
+        "RiskScore": {
+          "target": "com.amazonaws.voiceid#Score",
+          "traits": {
+            "smithy.api#documentation": "<p>The score indicating the likelihood of speaker\u2019s voice being spoofed.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The details resulting from 'Voice Spoofing Risk' analysis of the speaker.</p>"
+      }
+    },
+    "com.amazonaws.voiceid#Watchlist": {
+      "type": "structure",
+      "members": {
+        "DomainId": {
+          "target": "com.amazonaws.voiceid#DomainId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the domain that contains the watchlist.</p>"
+          }
+        },
+        "WatchlistId": {
+          "target": "com.amazonaws.voiceid#WatchlistId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the watchlist.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.voiceid#WatchlistName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name for the watchlist.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.voiceid#WatchlistDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the watchlist.</p>"
+          }
+        },
+        "DefaultWatchlist": {
+          "target": "com.amazonaws.voiceid#Boolean",
+          "traits": {
+            "smithy.api#default": false,
+            "smithy.api#documentation": "<p>Whether the specified watchlist is the default watchlist of a domain.</p>"
+          }
+        },
+        "CreatedAt": {
+          "target": "com.amazonaws.voiceid#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp of when the watchlist was created.</p>"
+          }
+        },
+        "UpdatedAt": {
+          "target": "com.amazonaws.voiceid#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp of when the watchlist was updated.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains all the information about a watchlist.</p>"
+      }
+    },
+    "com.amazonaws.voiceid#WatchlistDescription": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        },
+        "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$",
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.voiceid#WatchlistDetails": {
+      "type": "structure",
+      "members": {
+        "DefaultWatchlistId": {
+          "target": "com.amazonaws.voiceid#WatchlistId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the default watchlist.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Details of the watchlists in a domain.</p>"
+      }
+    },
+    "com.amazonaws.voiceid#WatchlistId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 22,
+          "max": 22
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9]{22}$"
+      }
+    },
+    "com.amazonaws.voiceid#WatchlistName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.voiceid#WatchlistSummaries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.voiceid#WatchlistSummary"
+      }
+    },
+    "com.amazonaws.voiceid#WatchlistSummary": {
+      "type": "structure",
+      "members": {
+        "DomainId": {
+          "target": "com.amazonaws.voiceid#DomainId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the domain that contains the watchlist.</p>"
+          }
+        },
+        "WatchlistId": {
+          "target": "com.amazonaws.voiceid#WatchlistId",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the watchlist.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.voiceid#WatchlistName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name for the watchlist.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.voiceid#WatchlistDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the watchlist.</p>"
+          }
+        },
+        "DefaultWatchlist": {
+          "target": "com.amazonaws.voiceid#Boolean",
+          "traits": {
+            "smithy.api#default": false,
+            "smithy.api#documentation": "<p>Whether the specified watchlist is the default watchlist of a domain.</p>"
+          }
+        },
+        "CreatedAt": {
+          "target": "com.amazonaws.voiceid#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp of when the watchlist was created.</p>"
+          }
+        },
+        "UpdatedAt": {
+          "target": "com.amazonaws.voiceid#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp of when the watchlist was last updated.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains a summary of information about a watchlist.</p>"
       }
     }
   }

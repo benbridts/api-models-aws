@@ -7165,1145 +7165,7 @@
         }
       }
     },
-    "com.amazonaws.kms#TrustAnchorCertificateType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 5000
-        }
-      }
-    },
-    "com.amazonaws.kms#UnsupportedOperationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "UnsupportedOperation",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>The request was rejected because a specified parameter is not supported or a specified\n      resource is not valid for this operation.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kms#UntagResourceRequest"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kms#InvalidArnException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInternalException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.kms#NotFoundException"
-        },
-        {
-          "target": "com.amazonaws.kms#TagException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Deletes tags from a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">customer managed key</a>. To delete a tag,\n      specify the tag key and the KMS key.</p>\n         <note>\n            <p>Tagging or untagging a KMS key can allow or deny permission to the KMS key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/abac.html\">ABAC for KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         </note>\n         <p>When it succeeds, the <code>UntagResource</code> operation doesn't return any output.\n      Also, if the specified tag key isn't found on the KMS key, it doesn't throw an exception or\n      return a response. To confirm that the operation worked, use the <a>ListResourceTags</a> operation.</p>\n         <p>For information about using tags in KMS, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html\">Tagging keys</a>. For general information about\n      tags, including the format and syntax, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon\n        Web Services General Reference</i>. </p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UntagResource</a> (key policy)</p>\n         <p>\n            <b>Related operations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListResourceTags</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ReplicateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "To remove tags from a KMS key",
-            "documentation": "The following example removes tags from a KMS key.",
-            "input": {
-              "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
-              "TagKeys": [
-                "Purpose",
-                "CostCenter"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.kms#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the KMS key from which you are removing tags.</p>\n         <p>Specify the key ID or key ARN of the KMS key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.kms#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>One or more tag keys. Specify only the tag keys, not the tag values.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kms#UpdateAlias": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kms#UpdateAliasRequest"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kms#DependencyTimeoutException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInternalException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.kms#LimitExceededException"
-        },
-        {
-          "target": "com.amazonaws.kms#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Associates an existing KMS alias with a different KMS key. Each alias is associated with\n      only one KMS key at a time, although a KMS key can have multiple aliases. The alias and the\n      KMS key must be in the same Amazon Web Services account and Region.</p>\n         <note>\n            <p>Adding, deleting, or updating an alias can allow or deny permission to the KMS key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/abac.html\">ABAC for KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         </note>\n         <p>The current and new KMS key must be the same type (both symmetric or both asymmetric or\n      both HMAC), and they must have the same key usage. This restriction prevents errors in code\n      that uses aliases. If you must assign an alias to a different type of KMS key, use <a>DeleteAlias</a> to delete the old alias and <a>CreateAlias</a> to create\n      a new alias.</p>\n         <p>You cannot use <code>UpdateAlias</code> to change an alias name. To change an alias name,\n      use <a>DeleteAlias</a> to delete the old alias and <a>CreateAlias</a> to\n      create a new alias.</p>\n         <p>Because an alias is not a property of a KMS key, you can create, update, and delete the\n      aliases of a KMS key without affecting the KMS key. Also, aliases do not appear in the\n      response from the <a>DescribeKey</a> operation. To get the aliases of all KMS keys\n      in the account, use the <a>ListAliases</a> operation. </p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account. </p>\n         <p>\n            <b>Required permissions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UpdateAlias</a> on\n          the alias (IAM policy).</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UpdateAlias</a> on\n          the current KMS key (key policy).</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UpdateAlias</a> on\n          the new KMS key (key policy).</p>\n            </li>\n         </ul>\n         <p>For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access\">Controlling access to aliases</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "To update an alias",
-            "documentation": "The following example updates the specified alias to refer to the specified KMS key.",
-            "input": {
-              "AliasName": "alias/ExampleAlias",
-              "TargetKeyId": "1234abcd-12ab-34cd-56ef-1234567890ab"
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.kms#UpdateAliasRequest": {
-      "type": "structure",
-      "members": {
-        "AliasName": {
-          "target": "com.amazonaws.kms#AliasNameType",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the alias that is changing its KMS key. This value must begin with\n        <code>alias/</code> followed by the alias name, such as <code>alias/ExampleAlias</code>. You\n      cannot use <code>UpdateAlias</code> to change the alias name.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
-            "smithy.api#required": {}
-          }
-        },
-        "TargetKeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">customer managed key</a> to associate with the alias. You don't have permission to\n      associate an alias with an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed key</a>.</p>\n         <p>The KMS key must be in the same Amazon Web Services account and Region as the alias. Also, the new\n      target KMS key must be the same type as the current target KMS key (both symmetric or both\n      asymmetric or both HMAC) and they must have the same key usage. </p>\n         <p>Specify the key ID or key ARN of the KMS key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>\n         <p>To verify that the alias is mapped to the correct KMS key, use <a>ListAliases</a>.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kms#UpdateCustomKeyStore": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kms#UpdateCustomKeyStoreRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.kms#UpdateCustomKeyStoreResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kms#CloudHsmClusterInvalidConfigurationException"
-        },
-        {
-          "target": "com.amazonaws.kms#CloudHsmClusterNotActiveException"
-        },
-        {
-          "target": "com.amazonaws.kms#CloudHsmClusterNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.kms#CloudHsmClusterNotRelatedException"
-        },
-        {
-          "target": "com.amazonaws.kms#CustomKeyStoreInvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.kms#CustomKeyStoreNameInUseException"
-        },
-        {
-          "target": "com.amazonaws.kms#CustomKeyStoreNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInternalException"
-        },
-        {
-          "target": "com.amazonaws.kms#XksProxyIncorrectAuthenticationCredentialException"
-        },
-        {
-          "target": "com.amazonaws.kms#XksProxyInvalidConfigurationException"
-        },
-        {
-          "target": "com.amazonaws.kms#XksProxyInvalidResponseException"
-        },
-        {
-          "target": "com.amazonaws.kms#XksProxyUriEndpointInUseException"
-        },
-        {
-          "target": "com.amazonaws.kms#XksProxyUriInUseException"
-        },
-        {
-          "target": "com.amazonaws.kms#XksProxyUriUnreachableException"
-        },
-        {
-          "target": "com.amazonaws.kms#XksProxyVpcEndpointServiceInUseException"
-        },
-        {
-          "target": "com.amazonaws.kms#XksProxyVpcEndpointServiceInvalidConfigurationException"
-        },
-        {
-          "target": "com.amazonaws.kms#XksProxyVpcEndpointServiceNotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Changes the properties of a custom key store. You can use this operation to change the\n      properties of an CloudHSM key store or an external key store.</p>\n         <p>Use the required <code>CustomKeyStoreId</code> parameter to identify the custom key store.\n      Use the remaining optional parameters to change its properties. This operation does not return\n      any property values. To verify the updated property values, use the <a>DescribeCustomKeyStores</a> operation.</p>\n         <p> This operation is part of the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key stores</a> feature in KMS, which\ncombines the convenience and extensive integration of KMS with the isolation and control of a\nkey store that you own and manage.</p>\n         <important>\n            <p>When updating the properties of an external key store, verify that the updated settings\n        connect your key store, via the external key store proxy, to the same external key manager\n        as the previous settings, or to a backup or snapshot of the external key manager with the\n        same cryptographic keys. If the updated connection settings fail, you can fix them and\n        retry, although an extended delay might disrupt Amazon Web Services services. However, if KMS\n        permanently loses its access to cryptographic keys, ciphertext encrypted under those keys is\n        unrecoverable.</p>\n         </important>\n         <note>\n            <p>For external key stores:</p>\n            <p>Some external key managers provide a simpler method for updating an external key store.\n        For details, see your external key manager documentation.</p>\n            <p>When updating an external key store in the KMS console, you can upload a JSON-based\n        proxy configuration file with the desired values. You cannot upload the proxy configuration\n        file to the <code>UpdateCustomKeyStore</code> operation. However, you can use the file to\n        help you determine the correct values for the <code>UpdateCustomKeyStore</code>\n        parameters.</p>\n         </note>\n         <p>For an CloudHSM key store, you can use this operation to change the custom key store friendly\n      name (<code>NewCustomKeyStoreName</code>), to tell KMS about a change to the\n        <code>kmsuser</code> crypto user password (<code>KeyStorePassword</code>), or to associate\n      the custom key store with a different, but related, CloudHSM cluster\n        (<code>CloudHsmClusterId</code>). To update any property of an CloudHSM key store, the\n        <code>ConnectionState</code> of the CloudHSM key store must be <code>DISCONNECTED</code>. </p>\n         <p>For an external key store, you can use this operation to change the custom key store\n      friendly name (<code>NewCustomKeyStoreName</code>), or to tell KMS about a change to the\n      external key store proxy authentication credentials\n        (<code>XksProxyAuthenticationCredential</code>), connection method\n        (<code>XksProxyConnectivity</code>), external proxy endpoint\n        (<code>XksProxyUriEndpoint</code>) and path (<code>XksProxyUriPath</code>). For external key\n      stores with an <code>XksProxyConnectivity</code> of <code>VPC_ENDPOINT_SERVICE</code>, you can\n      also update the Amazon VPC endpoint service name (<code>XksProxyVpcEndpointServiceName</code>). To\n      update most properties of an external key store, the <code>ConnectionState</code> of the\n      external key store must be <code>DISCONNECTED</code>. However, you can update the\n        <code>CustomKeyStoreName</code>, <code>XksProxyAuthenticationCredential</code>, and\n        <code>XksProxyUriPath</code> of an external key store when it is in the CONNECTED or\n      DISCONNECTED state. </p>\n         <p>If your update requires a <code>DISCONNECTED</code> state, before using\n        <code>UpdateCustomKeyStore</code>, use the <a>DisconnectCustomKeyStore</a>\n      operation to disconnect the custom key store. After the <code>UpdateCustomKeyStore</code>\n      operation completes, use the <a>ConnectCustomKeyStore</a> to reconnect the custom\n      key store. To find the <code>ConnectionState</code> of the custom key store, use the <a>DescribeCustomKeyStores</a> operation. </p>\n         <p>\n    </p>\n         <p>Before updating the custom key store, verify that the new values allow KMS to connect\n      the custom key store to its backing key store. For example, before you change the\n        <code>XksProxyUriPath</code> value, verify that the external key store proxy is reachable at\n      the new path.</p>\n         <p>If the operation succeeds, it returns a JSON object with no\nproperties.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a custom key store in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UpdateCustomKeyStore</a> (IAM policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ConnectCustomKeyStore</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateCustomKeyStore</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteCustomKeyStore</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeCustomKeyStores</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DisconnectCustomKeyStore</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "To edit the friendly name of a custom key store",
-            "documentation": "This example changes the friendly name of the AWS KMS custom key store to the name that you specify. This operation does not return any data. To verify that the operation worked, use the DescribeCustomKeyStores operation.",
-            "input": {
-              "CustomKeyStoreId": "cks-1234567890abcdef0",
-              "NewCustomKeyStoreName": "DevelopmentKeys"
-            },
-            "output": {}
-          },
-          {
-            "title": "To edit the password of an AWS CloudHSM key store",
-            "documentation": "This example tells AWS KMS the password for the kmsuser crypto user in the AWS CloudHSM cluster that is associated with the AWS KMS custom key store. (It does not change the password in the CloudHSM cluster.) This operation does not return any data.",
-            "input": {
-              "CustomKeyStoreId": "cks-1234567890abcdef0",
-              "KeyStorePassword": "ExamplePassword"
-            },
-            "output": {}
-          },
-          {
-            "title": "To update the proxy connectivity of an external key store to VPC_ENDPOINT_SERVICE",
-            "documentation": "To change the external key store proxy connectivity option from public endpoint connectivity to VPC endpoint service connectivity, in addition to changing the <code>XksProxyConnectivity</code> value, you must change the <code>XksProxyUriEndpoint</code> value to reflect the private DNS name associated with the VPC endpoint service. You must also add an <code>XksProxyVpcEndpointServiceName</code> value.",
-            "input": {
-              "CustomKeyStoreId": "cks-1234567890abcdef0",
-              "XksProxyConnectivity": "VPC_ENDPOINT_SERVICE",
-              "XksProxyUriEndpoint": "https://myproxy-private.xks.example.com",
-              "XksProxyVpcEndpointServiceName": "com.amazonaws.vpce.us-east-1.vpce-svc-example"
-            },
-            "output": {}
-          },
-          {
-            "title": "To edit the proxy URI path of an external key store.",
-            "documentation": "This example updates the proxy URI path for an external key store",
-            "input": {
-              "CustomKeyStoreId": "cks-1234567890abcdef0",
-              "XksProxyUriPath": "/new-path/kms/xks/v1"
-            },
-            "output": {}
-          },
-          {
-            "title": "To associate the custom key store with a different, but related, AWS CloudHSM cluster.",
-            "documentation": "This example changes the AWS CloudHSM cluster that is associated with an AWS CloudHSM key store to a related cluster, such as a different backup of the same cluster. This operation does not return any data. To verify that the operation worked, use the DescribeCustomKeyStores operation.",
-            "input": {
-              "CustomKeyStoreId": "cks-1234567890abcdef0",
-              "CloudHsmClusterId": "cluster-234abcdefABC"
-            },
-            "output": {}
-          }
-        ]
-      }
-    },
-    "com.amazonaws.kms#UpdateCustomKeyStoreRequest": {
-      "type": "structure",
-      "members": {
-        "CustomKeyStoreId": {
-          "target": "com.amazonaws.kms#CustomKeyStoreIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the custom key store that you want to update. Enter the ID of the custom key\n      store. To find the ID of a custom key store, use the <a>DescribeCustomKeyStores</a> operation.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "NewCustomKeyStoreName": {
-          "target": "com.amazonaws.kms#CustomKeyStoreNameType",
-          "traits": {
-            "smithy.api#documentation": "<p>Changes the friendly name of the custom key store to the value that you specify. The\n      custom key store name must be unique in the Amazon Web Services account.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>To change this value, an CloudHSM key store must be disconnected. An external key store can\n      be connected or disconnected.</p>"
-          }
-        },
-        "KeyStorePassword": {
-          "target": "com.amazonaws.kms#KeyStorePasswordType",
-          "traits": {
-            "smithy.api#documentation": "<p>Enter the current password of the <code>kmsuser</code> crypto user (CU) in the CloudHSM\n      cluster that is associated with the custom key store. This parameter is valid only for custom\n      key stores with a <code>CustomKeyStoreType</code> of <code>AWS_CLOUDHSM</code>.</p>\n         <p>This parameter tells KMS the current password of the <code>kmsuser</code> crypto user\n      (CU). It does not set or change the password of any users in the CloudHSM cluster.</p>\n         <p>To change this value, the CloudHSM key store must be disconnected.</p>"
-          }
-        },
-        "CloudHsmClusterId": {
-          "target": "com.amazonaws.kms#CloudHsmClusterIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Associates the custom key store with a related CloudHSM cluster. This parameter is valid only\n      for custom key stores with a <code>CustomKeyStoreType</code> of\n      <code>AWS_CLOUDHSM</code>.</p>\n         <p>Enter the cluster ID of the cluster that you used to create the custom key store or a\n      cluster that shares a backup history and has the same cluster certificate as the original\n      cluster. You cannot use this parameter to associate a custom key store with an unrelated\n      cluster. In addition, the replacement cluster must <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore\">fulfill the requirements</a> for\n      a cluster associated with a custom key store. To view the cluster certificate of a cluster,\n      use the <a href=\"https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html\">DescribeClusters</a> operation.</p>\n         <p>To change this value, the CloudHSM key store must be disconnected.</p>"
-          }
-        },
-        "XksProxyUriEndpoint": {
-          "target": "com.amazonaws.kms#XksProxyUriEndpointType",
-          "traits": {
-            "smithy.api#documentation": "<p>Changes the URI endpoint that KMS uses to connect to your external key store proxy (XKS\n      proxy). This parameter is valid only for custom key stores with a\n        <code>CustomKeyStoreType</code> of <code>EXTERNAL_KEY_STORE</code>.</p>\n         <p>For external key stores with an <code>XksProxyConnectivity</code> value of\n        <code>PUBLIC_ENDPOINT</code>, the protocol must be HTTPS.</p>\n         <p>For external key stores with an <code>XksProxyConnectivity</code> value of\n        <code>VPC_ENDPOINT_SERVICE</code>, specify <code>https://</code> followed by the private DNS\n      name associated with the VPC endpoint service. Each external key store must use a different\n      private DNS name.</p>\n         <p>The combined <code>XksProxyUriEndpoint</code> and <code>XksProxyUriPath</code> values must\n      be unique in the Amazon Web Services account and Region.</p>\n         <p>To change this value, the external key store must be disconnected.</p>"
-          }
-        },
-        "XksProxyUriPath": {
-          "target": "com.amazonaws.kms#XksProxyUriPathType",
-          "traits": {
-            "smithy.api#documentation": "<p>Changes the base path to the proxy APIs for this external key store. To find this value,\n      see the documentation for your external key manager and external key store proxy (XKS proxy).\n      This parameter is valid only for custom key stores with a <code>CustomKeyStoreType</code> of\n        <code>EXTERNAL_KEY_STORE</code>.</p>\n         <p>The value must start with <code>/</code> and must end with <code>/kms/xks/v1</code>, where\n        <code>v1</code> represents the version of the KMS external key store proxy API. You can\n      include an optional prefix between the required elements such as\n          <code>/<i>example</i>/kms/xks/v1</code>.</p>\n         <p>The combined <code>XksProxyUriEndpoint</code> and <code>XksProxyUriPath</code> values must\n      be unique in the Amazon Web Services account and Region.</p>\n         <p>You can change this value when the external key store is connected or disconnected.</p>"
-          }
-        },
-        "XksProxyVpcEndpointServiceName": {
-          "target": "com.amazonaws.kms#XksProxyVpcEndpointServiceNameType",
-          "traits": {
-            "smithy.api#documentation": "<p>Changes the name that KMS uses to identify the Amazon VPC endpoint service for your external\n      key store proxy (XKS proxy). This parameter is valid when the <code>CustomKeyStoreType</code>\n      is <code>EXTERNAL_KEY_STORE</code> and the <code>XksProxyConnectivity</code> is\n        <code>VPC_ENDPOINT_SERVICE</code>.</p>\n         <p>To change this value, the external key store must be disconnected.</p>"
-          }
-        },
-        "XksProxyAuthenticationCredential": {
-          "target": "com.amazonaws.kms#XksProxyAuthenticationCredentialType",
-          "traits": {
-            "smithy.api#documentation": "<p>Changes the credentials that KMS uses to sign requests to the external key store proxy\n      (XKS proxy). This parameter is valid only for custom key stores with a\n        <code>CustomKeyStoreType</code> of <code>EXTERNAL_KEY_STORE</code>.</p>\n         <p>You must specify both the <code>AccessKeyId</code> and <code>SecretAccessKey</code> value\n      in the authentication credential, even if you are only updating one value.</p>\n         <p>This parameter doesn't establish or change your authentication credentials on the proxy.\n      It just tells KMS the credential that you established with your external key store proxy.\n      For example, if you rotate the credential on your external key store proxy, you can use this\n      parameter to update the credential in KMS.</p>\n         <p>You can change this value when the external key store is connected or disconnected.</p>"
-          }
-        },
-        "XksProxyConnectivity": {
-          "target": "com.amazonaws.kms#XksProxyConnectivityType",
-          "traits": {
-            "smithy.api#documentation": "<p>Changes the connectivity setting for the external key store. To indicate that the external\n      key store proxy uses a Amazon VPC endpoint service to communicate with KMS, specify\n        <code>VPC_ENDPOINT_SERVICE</code>. Otherwise, specify <code>PUBLIC_ENDPOINT</code>.</p>\n         <p>If you change the <code>XksProxyConnectivity</code> to <code>VPC_ENDPOINT_SERVICE</code>,\n      you must also change the <code>XksProxyUriEndpoint</code> and add an\n        <code>XksProxyVpcEndpointServiceName</code> value. </p>\n         <p>If you change the <code>XksProxyConnectivity</code> to <code>PUBLIC_ENDPOINT</code>, you\n      must also change the <code>XksProxyUriEndpoint</code> and specify a null or empty string for\n      the <code>XksProxyVpcEndpointServiceName</code> value.</p>\n         <p>To change this value, the external key store must be disconnected.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kms#UpdateCustomKeyStoreResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.kms#UpdateKeyDescription": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kms#UpdateKeyDescriptionRequest"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kms#DependencyTimeoutException"
-        },
-        {
-          "target": "com.amazonaws.kms#InvalidArnException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInternalException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.kms#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates the description of a KMS key. To see the description of a KMS key, use <a>DescribeKey</a>. </p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account. </p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UpdateKeyDescription</a> (key policy)</p>\n         <p>\n            <b>Related operations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeKey</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "To update the description of a KMS key",
-            "documentation": "The following example updates the description of the specified KMS key.",
-            "input": {
-              "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
-              "Description": "Example description that indicates the intended use of this KMS key."
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.kms#UpdateKeyDescriptionRequest": {
-      "type": "structure",
-      "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Updates the description of the specified KMS key.</p>\n         <p>Specify the key ID or key ARN of the KMS key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.kms#DescriptionType",
-          "traits": {
-            "smithy.api#documentation": "<p>New description for the KMS key.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kms#UpdatePrimaryRegion": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kms#UpdatePrimaryRegionRequest"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kms#DisabledException"
-        },
-        {
-          "target": "com.amazonaws.kms#InvalidArnException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInternalException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.kms#NotFoundException"
-        },
-        {
-          "target": "com.amazonaws.kms#UnsupportedOperationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Changes the primary key of a multi-Region key. </p>\n         <p>This operation changes the replica key in the specified Region to a primary key and\n      changes the former primary key to a replica key. For example, suppose you have a primary key\n      in <code>us-east-1</code> and a replica key in <code>eu-west-2</code>. If you run\n        <code>UpdatePrimaryRegion</code> with a <code>PrimaryRegion</code> value of\n        <code>eu-west-2</code>, the primary key is now the key in <code>eu-west-2</code>, and the\n      key in <code>us-east-1</code> becomes a replica key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-update\">Updating the primary Region</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>This operation supports <i>multi-Region keys</i>, an KMS feature that lets you create multiple\n      interoperable KMS keys in different Amazon Web Services Regions. Because these KMS keys have the same key ID, key\n      material, and other metadata, you can use them interchangeably to encrypt data in one Amazon Web Services Region and decrypt\n      it in a different Amazon Web Services Region without re-encrypting the data or making a cross-Region call. For more information about multi-Region keys, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">Multi-Region keys in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>The <i>primary key</i> of a multi-Region key is the source for properties\n      that are always shared by primary and replica keys, including the key material, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id\">key ID</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-spec\">key spec</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-usage\">key usage</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-origin\">key material\n      origin</a>, and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html\">automatic\n        key rotation</a>. It's the only key that can be replicated. You cannot <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html\">delete the primary\n        key</a> until all replica keys are deleted.</p>\n         <p>The key ID and primary Region that you specify uniquely identify the replica key that will\n      become the primary key. The primary Region must already have a replica key. This operation\n      does not create a KMS key in the specified Region. To find the replica keys, use the <a>DescribeKey</a> operation on the primary key or any replica key. To create a replica\n      key, use the <a>ReplicateKey</a> operation.</p>\n         <p>You can run this operation while using the affected multi-Region keys in cryptographic\n      operations. This operation should not delay, interrupt, or cause failures in cryptographic\n      operations. </p>\n         <p>Even after this operation completes, the process of updating the primary Region might\n      still be in progress for a few more seconds. Operations such as <code>DescribeKey</code> might\n      display both the old and new primary keys as replicas. The old and new primary keys have a\n      transient key state of <code>Updating</code>. The original key state is restored when the\n      update is complete. While the key state is <code>Updating</code>, you can use the keys in\n      cryptographic operations, but you cannot replicate the new primary key or perform certain\n      management operations, such as enabling or disabling these keys. For details about the\n        <code>Updating</code> key state, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>This operation does not return any output. To verify that primary key is changed, use the\n        <a>DescribeKey</a> operation.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot use this operation in a\n      different Amazon Web Services account. </p>\n         <p>\n            <b>Required permissions</b>: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>kms:UpdatePrimaryRegion</code> on the current primary key (in the primary key's\n          Region). Include this permission primary key's key policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kms:UpdatePrimaryRegion</code> on the current replica key (in the replica key's\n          Region). Include this permission in the replica key's key policy.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Related operations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ReplicateKey</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "To update the primary Region of a multi-Region KMS key",
-            "documentation": "The following UpdatePrimaryRegion example changes the multi-Region replica key in the eu-central-1 Region to the primary key. The current primary key in the us-west-1 Region becomes a replica key. \n\nThe KeyId parameter identifies the current primary key in the us-west-1 Region. The PrimaryRegion parameter indicates the Region of the replica key that will become the new primary key.\n\nThis operation does not return any output. To verify that primary key is changed, use the DescribeKey operation.",
-            "input": {
-              "KeyId": "arn:aws:kms:us-west-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab",
-              "PrimaryRegion": "eu-central-1"
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.kms#UpdatePrimaryRegionRequest": {
-      "type": "structure",
-      "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the current primary key. When the operation completes, this KMS key will be a\n      replica key.</p>\n         <p>Specify the key ID or key ARN of a multi-Region primary key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>mrk-1234abcd12ab34cd56ef1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "PrimaryRegion": {
-          "target": "com.amazonaws.kms#RegionType",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Web Services Region of the new primary key. Enter the Region ID, such as\n        <code>us-east-1</code> or <code>ap-southeast-2</code>. There must be an existing replica key\n      in this Region. </p>\n         <p>When the operation completes, the multi-Region key in this Region will be the primary\n      key.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kms#Verify": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kms#VerifyRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.kms#VerifyResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kms#DependencyTimeoutException"
-        },
-        {
-          "target": "com.amazonaws.kms#DisabledException"
-        },
-        {
-          "target": "com.amazonaws.kms#DryRunOperationException"
-        },
-        {
-          "target": "com.amazonaws.kms#InvalidGrantTokenException"
-        },
-        {
-          "target": "com.amazonaws.kms#InvalidKeyUsageException"
-        },
-        {
-          "target": "com.amazonaws.kms#KeyUnavailableException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInternalException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInvalidSignatureException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.kms#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Verifies a digital signature that was generated by the <a>Sign</a> operation. </p>\n         <p></p>\n         <p>Verification confirms that an authorized user signed the message with the specified KMS\n      key and signing algorithm, and the message hasn't changed since it was signed. If the\n      signature is verified, the value of the <code>SignatureValid</code> field in the response is\n        <code>True</code>. If the signature verification fails, the <code>Verify</code> operation\n      fails with an <code>KMSInvalidSignatureException</code> exception.</p>\n         <p>A digital signature is generated by using the private key in an asymmetric KMS key. The\n      signature is verified by using the public key in the same asymmetric KMS key.\n      For information about asymmetric KMS keys, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Asymmetric KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>To use the <code>Verify</code> operation, specify the same asymmetric KMS key, message,\n      and signing algorithm that were used to produce the signature. The message type does not need\n      to be the same as the one used for signing, but it must indicate whether the value of the\n        <code>Message</code> parameter should be hashed as part of the verification process.</p>\n         <p>You can also verify the digital signature by using the public key of the KMS key outside\n      of KMS. Use the <a>GetPublicKey</a> operation to download the public key in the\n      asymmetric KMS key and then use the public key to verify the signature outside of KMS. The\n      advantage of using the <code>Verify</code> operation is that it is performed within KMS. As\n      a result, it's easy to call, the operation is performed within the FIPS boundary, it is logged\n      in CloudTrail, and you can use key policy and IAM policy to determine who is authorized to use\n      the KMS key to verify signatures.</p>\n         <p>To verify a signature outside of KMS with an SM2 public key (China Regions only), you\n      must specify the distinguishing ID. By default, KMS uses <code>1234567812345678</code> as\n      the distinguishing ID. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification\">Offline\n        verification with SM2 key pairs</a>.</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter. </p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:Verify</a> (key policy)</p>\n         <p>\n            <b>Related operations</b>: <a>Sign</a>\n         </p>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "To use an asymmetric KMS key to verify a digital signature",
-            "documentation": "This operation uses the public key in an elliptic curve (ECC) asymmetric key to verify a digital signature within AWS KMS.",
-            "input": {
-              "KeyId": "alias/ECC_signing_key",
-              "Message": "<message to be verified>",
-              "MessageType": "RAW",
-              "Signature": "<binary data>",
-              "SigningAlgorithm": "ECDSA_SHA_384"
-            },
-            "output": {
-              "KeyId": "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab",
-              "SignatureValid": true,
-              "SigningAlgorithm": "ECDSA_SHA_384"
-            }
-          },
-          {
-            "title": "To use an asymmetric KMS key to verify a digital signature on a message digest",
-            "documentation": "This operation uses the public key in an RSA asymmetric signing key pair to verify the digital signature of a message digest. Hashing a message into a digest before sending it to KMS lets you verify messages that exceed the 4096-byte message size limit. To indicate that the value of Message is a digest, use the MessageType parameter ",
-            "input": {
-              "KeyId": "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321",
-              "Message": "<message digest to be verified>",
-              "MessageType": "DIGEST",
-              "Signature": "<binary data>",
-              "SigningAlgorithm": "RSASSA_PSS_SHA_512"
-            },
-            "output": {
-              "KeyId": "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321",
-              "SignatureValid": true,
-              "SigningAlgorithm": "RSASSA_PSS_SHA_512"
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.kms#VerifyMac": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.kms#VerifyMacRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.kms#VerifyMacResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.kms#DisabledException"
-        },
-        {
-          "target": "com.amazonaws.kms#DryRunOperationException"
-        },
-        {
-          "target": "com.amazonaws.kms#InvalidGrantTokenException"
-        },
-        {
-          "target": "com.amazonaws.kms#InvalidKeyUsageException"
-        },
-        {
-          "target": "com.amazonaws.kms#KeyUnavailableException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInternalException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInvalidMacException"
-        },
-        {
-          "target": "com.amazonaws.kms#KMSInvalidStateException"
-        },
-        {
-          "target": "com.amazonaws.kms#NotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Verifies the hash-based message authentication code (HMAC) for a specified message, HMAC\n      KMS key, and MAC algorithm. To verify the HMAC, <code>VerifyMac</code> computes an HMAC using\n      the message, HMAC KMS key, and MAC algorithm that you specify, and compares the computed HMAC\n      to the HMAC that you specify. If the HMACs are identical, the verification succeeds;\n      otherwise, it fails. Verification indicates that the message hasn't changed since the HMAC was\n      calculated, and the specified key was used to generate and verify the HMAC.</p>\n         <p>HMAC KMS keys and the HMAC algorithms that KMS uses conform to industry standards\n      defined in <a href=\"https://datatracker.ietf.org/doc/html/rfc2104\">RFC 2104</a>.</p>\n         <p>This operation is part of KMS support for HMAC KMS keys. For details, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html\">HMAC keys in KMS</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter. </p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:VerifyMac</a> (key policy)</p>\n         <p>\n            <b>Related operations</b>: <a>GenerateMac</a>\n         </p>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "To verify an HMAC",
-            "documentation": "This example verifies an HMAC for a particular message, HMAC KMS keys, and MAC algorithm. A value of 'true' in the MacValid value in the response indicates that the HMAC is valid.",
-            "input": {
-              "Message": "Hello World",
-              "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
-              "MacAlgorithm": "HMAC_SHA_384",
-              "Mac": "<HMAC_TAG>"
-            },
-            "output": {
-              "KeyId": "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab",
-              "MacValid": true,
-              "MacAlgorithm": "HMAC_SHA_384"
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.kms#VerifyMacRequest": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.kms#PlaintextType",
-          "traits": {
-            "smithy.api#documentation": "<p>The message that will be used in the verification. Enter the same message that was used to\n      generate the HMAC.</p>\n         <p>\n            <a>GenerateMac</a> and <code>VerifyMac</code> do not provide special handling\n      for message digests. If you generated an HMAC for a hash digest of a message, you must verify\n      the HMAC for the same hash digest.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The KMS key that will be used in the verification.</p>\n         <p>Enter a key ID of the KMS key that was used to generate the HMAC. If you identify a\n      different KMS key, the <code>VerifyMac</code> operation fails.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "MacAlgorithm": {
-          "target": "com.amazonaws.kms#MacAlgorithmSpec",
-          "traits": {
-            "smithy.api#documentation": "<p>The MAC algorithm that will be used in the verification. Enter the same MAC algorithm that\n      was used to compute the HMAC. This algorithm must be supported by the HMAC KMS key identified\n      by the <code>KeyId</code> parameter.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Mac": {
-          "target": "com.amazonaws.kms#CiphertextType",
-          "traits": {
-            "smithy.api#documentation": "<p>The HMAC to verify. Enter the HMAC that was generated by the <a>GenerateMac</a>\n      operation when you specified the same message, HMAC KMS key, and MAC algorithm as the values\n      specified in this request.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "GrantTokens": {
-          "target": "com.amazonaws.kms#GrantTokenList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token\">Grant token</a> and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token\">Using a grant token</a> in the\n    <i>Key Management Service Developer Guide</i>.</p>"
-          }
-        },
-        "DryRun": {
-          "target": "com.amazonaws.kms#NullableBooleanType",
-          "traits": {
-            "smithy.api#documentation": "<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p>\n         <p>To learn more about how to use this parameter, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html\">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kms#VerifyMacResponse": {
-      "type": "structure",
-      "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The HMAC KMS key used in the verification.</p>"
-          }
-        },
-        "MacValid": {
-          "target": "com.amazonaws.kms#BooleanType",
-          "traits": {
-            "smithy.api#default": false,
-            "smithy.api#documentation": "<p>A Boolean value that indicates whether the HMAC was verified. A value of <code>True</code>\n      indicates that the HMAC (<code>Mac</code>) was generated with the specified\n        <code>Message</code>, HMAC KMS key (<code>KeyID</code>) and\n      <code>MacAlgorithm.</code>.</p>\n         <p>If the HMAC is not verified, the <code>VerifyMac</code> operation fails with a\n        <code>KMSInvalidMacException</code> exception. This exception indicates that one or more of\n      the inputs changed since the HMAC was computed.</p>"
-          }
-        },
-        "MacAlgorithm": {
-          "target": "com.amazonaws.kms#MacAlgorithmSpec",
-          "traits": {
-            "smithy.api#documentation": "<p>The MAC algorithm used in the verification.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.kms#VerifyRequest": {
-      "type": "structure",
-      "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>Identifies the asymmetric KMS key that will be used to verify the signature. This must be\n      the same KMS key that was used to generate the signature. If you specify a different KMS key,\n      the signature verification fails.</p>\n         <p>To specify a KMS key, use its key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>. To specify a KMS key in a different Amazon Web Services account, you must use the key ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Message": {
-          "target": "com.amazonaws.kms#PlaintextType",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies the message that was signed. You can submit a raw message of up to 4096 bytes,\n      or a hash digest of the message. If you submit a digest, use the <code>MessageType</code>\n      parameter with a value of <code>DIGEST</code>.</p>\n         <p>If the message specified here is different from the message that was signed, the signature\n      verification fails. A message and its hash digest are considered to be the same\n      message.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "MessageType": {
-          "target": "com.amazonaws.kms#MessageType",
-          "traits": {
-            "smithy.api#documentation": "<p>Tells KMS whether the value of the <code>Message</code> parameter should be hashed as\n      part of the signing algorithm. Use <code>RAW</code> for unhashed messages; use\n        <code>DIGEST</code> for message digests, which are already hashed.</p>\n         <p>When the value of <code>MessageType</code> is <code>RAW</code>, KMS uses the standard\n      signing algorithm, which begins with a hash function. When the value is <code>DIGEST</code>,\n      KMS skips the hashing step in the signing algorithm.</p>\n         <important>\n            <p>Use the <code>DIGEST</code> value only when the value of the <code>Message</code>\n        parameter is a message digest. If you use the <code>DIGEST</code> value with an unhashed\n        message, the security of the verification operation can be compromised.</p>\n         </important>\n         <p>When the value of <code>MessageType</code>is <code>DIGEST</code>, the length of the\n        <code>Message</code> value must match the length of hashed messages for the specified\n      signing algorithm.</p>\n         <p>You can submit a message digest and omit the <code>MessageType</code> or specify\n        <code>RAW</code> so the digest is hashed again while signing. However, if the signed message\n      is hashed once while signing, but twice while verifying, verification fails, even when the\n      message hasn't changed.</p>\n         <p>The hashing algorithm in that <code>Verify</code> uses is based on the\n        <code>SigningAlgorithm</code> value.</p>\n         <ul>\n            <li>\n               <p>Signing algorithms that end in SHA_256 use the SHA_256 hashing algorithm.</p>\n            </li>\n            <li>\n               <p>Signing algorithms that end in SHA_384 use the SHA_384 hashing algorithm.</p>\n            </li>\n            <li>\n               <p>Signing algorithms that end in SHA_512 use the SHA_512 hashing algorithm.</p>\n            </li>\n            <li>\n               <p>SM2DSA uses the SM3 hashing algorithm. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification\">Offline\n            verification with SM2 key pairs</a>.</p>\n            </li>\n         </ul>"
-          }
-        },
-        "Signature": {
-          "target": "com.amazonaws.kms#CiphertextType",
-          "traits": {
-            "smithy.api#documentation": "<p>The signature that the <code>Sign</code> operation generated.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "SigningAlgorithm": {
-          "target": "com.amazonaws.kms#SigningAlgorithmSpec",
-          "traits": {
-            "smithy.api#documentation": "<p>The signing algorithm that was used to sign the message. If you submit a different\n      algorithm, the signature verification fails.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "GrantTokens": {
-          "target": "com.amazonaws.kms#GrantTokenList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token\">Grant token</a> and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token\">Using a grant token</a> in the\n    <i>Key Management Service Developer Guide</i>.</p>"
-          }
-        },
-        "DryRun": {
-          "target": "com.amazonaws.kms#NullableBooleanType",
-          "traits": {
-            "smithy.api#documentation": "<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p>\n         <p>To learn more about how to use this parameter, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html\">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.kms#VerifyResponse": {
-      "type": "structure",
-      "members": {
-        "KeyId": {
-          "target": "com.amazonaws.kms#KeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the asymmetric KMS key that was used to verify the signature.</p>"
-          }
-        },
-        "SignatureValid": {
-          "target": "com.amazonaws.kms#BooleanType",
-          "traits": {
-            "smithy.api#default": false,
-            "smithy.api#documentation": "<p>A Boolean value that indicates whether the signature was verified. A value of\n        <code>True</code> indicates that the <code>Signature</code> was produced by signing the\n        <code>Message</code> with the specified <code>KeyID</code> and\n        <code>SigningAlgorithm.</code> If the signature is not verified, the <code>Verify</code>\n      operation fails with a <code>KMSInvalidSignatureException</code> exception. </p>"
-          }
-        },
-        "SigningAlgorithm": {
-          "target": "com.amazonaws.kms#SigningAlgorithmSpec",
-          "traits": {
-            "smithy.api#documentation": "<p>The signing algorithm that was used to verify the signature.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.kms#WrappingKeySpec": {
-      "type": "enum",
-      "members": {
-        "RSA_2048": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "RSA_2048"
-          }
-        },
-        "RSA_3072": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "RSA_3072"
-          }
-        },
-        "RSA_4096": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "RSA_4096"
-          }
-        },
-        "SM2": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "SM2"
-          }
-        }
-      }
-    },
-    "com.amazonaws.kms#XksKeyAlreadyInUseException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksKeyAlreadyInUse",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>The request was rejected because the (<code>XksKeyId</code>) is already associated with\n      another KMS key in this external key store. Each KMS key in an external key store must be\n      associated with a different external key.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#XksKeyConfigurationType": {
-      "type": "structure",
-      "members": {
-        "Id": {
-          "target": "com.amazonaws.kms#XksKeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the external key in its external key manager. This is the ID that the external\n      key store proxy uses to identify the external key.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Information about the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key\">external key </a>that is\n      associated with a KMS key in an external key store. </p>\n         <p>This element appears in a <a>CreateKey</a> or <a>DescribeKey</a>\n      response only for a KMS key in an external key store.</p>\n         <p>The <i>external key</i> is a symmetric encryption key that is hosted by an\n      external key manager outside of Amazon Web Services. When you use the KMS key in an external key store in a\n      cryptographic operation, the cryptographic operation is performed in the external key manager\n      using the specified external key. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key\">External key</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>"
-      }
-    },
-    "com.amazonaws.kms#XksKeyIdType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        },
-        "smithy.api#pattern": "^[a-zA-Z0-9-_.]+$"
-      }
-    },
-    "com.amazonaws.kms#XksKeyInvalidConfigurationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksKeyInvalidConfiguration",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>The request was rejected because the external key specified by the <code>XksKeyId</code>\n      parameter did not meet the configuration requirements for an external key store.</p>\n         <p>The external key must be an AES-256 symmetric key that is enabled and performs encryption\n      and decryption.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#XksKeyNotFoundException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksKeyNotFoundException",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>The request was rejected because the external key store proxy could not find the external\n      key. This exception is thrown when the value of the <code>XksKeyId</code> parameter doesn't\n      identify a key in the external key manager associated with the external key proxy.</p>\n         <p>Verify that the <code>XksKeyId</code> represents an existing key in the external key\n      manager. Use the key identifier that the external key store proxy uses to identify the key.\n      For details, see the documentation provided with your external key store proxy or key\n      manager.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#XksProxyAuthenticationAccessKeyIdType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 20,
-          "max": 30
-        },
-        "smithy.api#pattern": "^[A-Z2-7]+$",
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.kms#XksProxyAuthenticationCredentialType": {
-      "type": "structure",
-      "members": {
-        "AccessKeyId": {
-          "target": "com.amazonaws.kms#XksProxyAuthenticationAccessKeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique identifier for the raw secret access key.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "RawSecretAccessKey": {
-          "target": "com.amazonaws.kms#XksProxyAuthenticationRawSecretAccessKeyType",
-          "traits": {
-            "smithy.api#documentation": "<p>A secret string of 43-64 characters. Valid characters are a-z, A-Z, 0-9, /, +, and\n      =.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>KMS uses the authentication credential to sign requests that it sends to the external\n      key store proxy (XKS proxy) on your behalf. You establish these credentials on your external\n      key store proxy and report them to KMS.</p>\n         <p>The <code>XksProxyAuthenticationCredential</code> includes two required elements.</p>"
-      }
-    },
-    "com.amazonaws.kms#XksProxyAuthenticationRawSecretAccessKeyType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 43,
-          "max": 64
-        },
-        "smithy.api#pattern": "^[a-zA-Z0-9\\/+=]+$",
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.kms#XksProxyConfigurationType": {
-      "type": "structure",
-      "members": {
-        "Connectivity": {
-          "target": "com.amazonaws.kms#XksProxyConnectivityType",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates whether the external key store proxy uses a public endpoint or an Amazon VPC endpoint\n      service to communicate with KMS.</p>"
-          }
-        },
-        "AccessKeyId": {
-          "target": "com.amazonaws.kms#XksProxyAuthenticationAccessKeyIdType",
-          "traits": {
-            "smithy.api#documentation": "<p>The part of the external key store <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateCustomKeyStore.html#KMS-CreateCustomKeyStore-request-XksProxyAuthenticationCredential\">proxy authentication credential</a> that uniquely identifies the secret access\n      key.</p>"
-          }
-        },
-        "UriEndpoint": {
-          "target": "com.amazonaws.kms#XksProxyUriEndpointType",
-          "traits": {
-            "smithy.api#documentation": "<p>The URI endpoint for the external key store proxy.</p>\n         <p>If the external key store proxy has a public endpoint, it is displayed here.</p>\n         <p>If the external key store proxy uses an Amazon VPC endpoint service name, this field displays\n      the private DNS name associated with the VPC endpoint service.</p>"
-          }
-        },
-        "UriPath": {
-          "target": "com.amazonaws.kms#XksProxyUriPathType",
-          "traits": {
-            "smithy.api#documentation": "<p>The path to the external key store proxy APIs.</p>"
-          }
-        },
-        "VpcEndpointServiceName": {
-          "target": "com.amazonaws.kms#XksProxyVpcEndpointServiceNameType",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon VPC endpoint service used to communicate with the external key store proxy. This\n      field appears only when the external key store proxy uses an Amazon VPC endpoint service to\n      communicate with KMS.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Detailed information about the external key store proxy (XKS proxy). Your external key\n      store proxy translates KMS requests into a format that your external key manager can\n      understand. These fields appear in a <a>DescribeCustomKeyStores</a> response only\n      when the <code>CustomKeyStoreType</code> is <code>EXTERNAL_KEY_STORE</code>.</p>"
-      }
-    },
-    "com.amazonaws.kms#XksProxyConnectivityType": {
-      "type": "enum",
-      "members": {
-        "PUBLIC_ENDPOINT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "PUBLIC_ENDPOINT"
-          }
-        },
-        "VPC_ENDPOINT_SERVICE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "VPC_ENDPOINT_SERVICE"
-          }
-        }
-      }
-    },
-    "com.amazonaws.kms#XksProxyIncorrectAuthenticationCredentialException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksProxyIncorrectAuthenticationCredentialException",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>The request was rejected because the proxy credentials failed to authenticate to the\n      specified external key store proxy. The specified external key store proxy rejected a status\n      request from KMS due to invalid credentials. This can indicate an error in the credentials\n      or in the identification of the external key store proxy.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#XksProxyInvalidConfigurationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksProxyInvalidConfigurationException",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>The request was rejected because the external key store proxy is not configured correctly.\n      To identify the cause, see the error message that accompanies the exception.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#XksProxyInvalidResponseException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksProxyInvalidResponseException",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p></p>\n         <p>KMS cannot interpret the response it received from the external key store proxy. The\n      problem might be a poorly constructed response, but it could also be a transient network\n      issue. If you see this error repeatedly, report it to the proxy vendor.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#XksProxyUriEndpointInUseException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksProxyUriEndpointInUseException",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>The request was rejected because the <code>XksProxyUriEndpoint</code> is already\n      associated with another external key store in this Amazon Web Services Region. To identify the cause, see\n      the error message that accompanies the exception. </p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#XksProxyUriEndpointType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 10,
-          "max": 128
-        },
-        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+$"
-      }
-    },
-    "com.amazonaws.kms#XksProxyUriInUseException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksProxyUriInUseException",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>The request was rejected because the concatenation of the <code>XksProxyUriEndpoint</code>\n      and <code>XksProxyUriPath</code> is already associated with another external key store in this\n      Amazon Web Services Region. Each external key store in a Region must use a unique external key store proxy\n      API address.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#XksProxyUriPathType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 10,
-          "max": 128
-        },
-        "smithy.api#pattern": "^(/[a-zA-Z0-9\\/_-]+/kms/xks/v\\d{1,2})$|^(/kms/xks/v\\d{1,2})$"
-      }
-    },
-    "com.amazonaws.kms#XksProxyUriUnreachableException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksProxyUriUnreachableException",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>KMS was unable to reach the specified <code>XksProxyUriPath</code>. The path must be\n      reachable before you create the external key store or update its settings.</p>\n         <p>This exception is also thrown when the external key store proxy response to a\n        <code>GetHealthStatus</code> request indicates that all external key manager instances are\n      unavailable.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#XksProxyVpcEndpointServiceInUseException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksProxyVpcEndpointServiceInUseException",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>The request was rejected because the specified Amazon VPC endpoint service is already\n      associated with another external key store in this Amazon Web Services Region. Each external key store in a\n      Region must use a different Amazon VPC endpoint service.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#XksProxyVpcEndpointServiceInvalidConfigurationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksProxyVpcEndpointServiceInvalidConfigurationException",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>The request was rejected because the Amazon VPC endpoint service configuration does not fulfill\n      the requirements for an external key store. To identify the cause, see the error message that\n      accompanies the exception and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/vpc-connectivity.html#xks-vpc-requirements\">review the\n        requirements</a> for Amazon VPC endpoint service connectivity for an external key\n      store.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#XksProxyVpcEndpointServiceNameType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 20,
-          "max": 64
-        },
-        "smithy.api#pattern": "^com\\.amazonaws\\.vpce\\.([a-z]+-){2,3}\\d+\\.vpce-svc-[0-9a-z]+$"
-      }
-    },
-    "com.amazonaws.kms#XksProxyVpcEndpointServiceNotFoundException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.kms#ErrorMessageType"
-        }
-      },
-      "traits": {
-        "aws.protocols#awsQueryError": {
-          "code": "XksProxyVpcEndpointServiceNotFoundException",
-          "httpResponseCode": 400
-        },
-        "smithy.api#documentation": "<p>The request was rejected because KMS could not find the specified VPC endpoint service.\n      Use <a>DescribeCustomKeyStores</a> to verify the VPC endpoint service name for the\n      external key store. Also, confirm that the <code>Allow principals</code> list for the VPC\n      endpoint service includes the KMS service principal for the Region, such as\n        <code>cks.kms.us-east-1.amazonaws.com</code>.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.kms#KMS": {
+    "com.amazonaws.kms#TrentService": {
       "type": "service",
       "version": "2014-11-01",
       "operations": [
@@ -9723,6 +8585,1144 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.kms#TrustAnchorCertificateType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 5000
+        }
+      }
+    },
+    "com.amazonaws.kms#UnsupportedOperationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "UnsupportedOperation",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>The request was rejected because a specified parameter is not supported or a specified\n      resource is not valid for this operation.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kms#UntagResourceRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kms#InvalidArnException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInternalException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.kms#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.kms#TagException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes tags from a <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">customer managed key</a>. To delete a tag,\n      specify the tag key and the KMS key.</p>\n         <note>\n            <p>Tagging or untagging a KMS key can allow or deny permission to the KMS key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/abac.html\">ABAC for KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         </note>\n         <p>When it succeeds, the <code>UntagResource</code> operation doesn't return any output.\n      Also, if the specified tag key isn't found on the KMS key, it doesn't throw an exception or\n      return a response. To confirm that the operation worked, use the <a>ListResourceTags</a> operation.</p>\n         <p>For information about using tags in KMS, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html\">Tagging keys</a>. For general information about\n      tags, including the format and syntax, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon\n        Web Services General Reference</i>. </p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UntagResource</a> (key policy)</p>\n         <p>\n            <b>Related operations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListResourceTags</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ReplicateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To remove tags from a KMS key",
+            "documentation": "The following example removes tags from a KMS key.",
+            "input": {
+              "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
+              "TagKeys": [
+                "Purpose",
+                "CostCenter"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.kms#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the KMS key from which you are removing tags.</p>\n         <p>Specify the key ID or key ARN of the KMS key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.kms#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more tag keys. Specify only the tag keys, not the tag values.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.kms#UpdateAlias": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kms#UpdateAliasRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kms#DependencyTimeoutException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInternalException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.kms#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.kms#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Associates an existing KMS alias with a different KMS key. Each alias is associated with\n      only one KMS key at a time, although a KMS key can have multiple aliases. The alias and the\n      KMS key must be in the same Amazon Web Services account and Region.</p>\n         <note>\n            <p>Adding, deleting, or updating an alias can allow or deny permission to the KMS key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/abac.html\">ABAC for KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         </note>\n         <p>The current and new KMS key must be the same type (both symmetric or both asymmetric or\n      both HMAC), and they must have the same key usage. This restriction prevents errors in code\n      that uses aliases. If you must assign an alias to a different type of KMS key, use <a>DeleteAlias</a> to delete the old alias and <a>CreateAlias</a> to create\n      a new alias.</p>\n         <p>You cannot use <code>UpdateAlias</code> to change an alias name. To change an alias name,\n      use <a>DeleteAlias</a> to delete the old alias and <a>CreateAlias</a> to\n      create a new alias.</p>\n         <p>Because an alias is not a property of a KMS key, you can create, update, and delete the\n      aliases of a KMS key without affecting the KMS key. Also, aliases do not appear in the\n      response from the <a>DescribeKey</a> operation. To get the aliases of all KMS keys\n      in the account, use the <a>ListAliases</a> operation. </p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account. </p>\n         <p>\n            <b>Required permissions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UpdateAlias</a> on\n          the alias (IAM policy).</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UpdateAlias</a> on\n          the current KMS key (key policy).</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UpdateAlias</a> on\n          the new KMS key (key policy).</p>\n            </li>\n         </ul>\n         <p>For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access\">Controlling access to aliases</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To update an alias",
+            "documentation": "The following example updates the specified alias to refer to the specified KMS key.",
+            "input": {
+              "AliasName": "alias/ExampleAlias",
+              "TargetKeyId": "1234abcd-12ab-34cd-56ef-1234567890ab"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.kms#UpdateAliasRequest": {
+      "type": "structure",
+      "members": {
+        "AliasName": {
+          "target": "com.amazonaws.kms#AliasNameType",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the alias that is changing its KMS key. This value must begin with\n        <code>alias/</code> followed by the alias name, such as <code>alias/ExampleAlias</code>. You\n      cannot use <code>UpdateAlias</code> to change the alias name.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
+            "smithy.api#required": {}
+          }
+        },
+        "TargetKeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk\">customer managed key</a> to associate with the alias. You don't have permission to\n      associate an alias with an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed key</a>.</p>\n         <p>The KMS key must be in the same Amazon Web Services account and Region as the alias. Also, the new\n      target KMS key must be the same type as the current target KMS key (both symmetric or both\n      asymmetric or both HMAC) and they must have the same key usage. </p>\n         <p>Specify the key ID or key ARN of the KMS key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>\n         <p>To verify that the alias is mapped to the correct KMS key, use <a>ListAliases</a>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.kms#UpdateCustomKeyStore": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kms#UpdateCustomKeyStoreRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.kms#UpdateCustomKeyStoreResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kms#CloudHsmClusterInvalidConfigurationException"
+        },
+        {
+          "target": "com.amazonaws.kms#CloudHsmClusterNotActiveException"
+        },
+        {
+          "target": "com.amazonaws.kms#CloudHsmClusterNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.kms#CloudHsmClusterNotRelatedException"
+        },
+        {
+          "target": "com.amazonaws.kms#CustomKeyStoreInvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.kms#CustomKeyStoreNameInUseException"
+        },
+        {
+          "target": "com.amazonaws.kms#CustomKeyStoreNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInternalException"
+        },
+        {
+          "target": "com.amazonaws.kms#XksProxyIncorrectAuthenticationCredentialException"
+        },
+        {
+          "target": "com.amazonaws.kms#XksProxyInvalidConfigurationException"
+        },
+        {
+          "target": "com.amazonaws.kms#XksProxyInvalidResponseException"
+        },
+        {
+          "target": "com.amazonaws.kms#XksProxyUriEndpointInUseException"
+        },
+        {
+          "target": "com.amazonaws.kms#XksProxyUriInUseException"
+        },
+        {
+          "target": "com.amazonaws.kms#XksProxyUriUnreachableException"
+        },
+        {
+          "target": "com.amazonaws.kms#XksProxyVpcEndpointServiceInUseException"
+        },
+        {
+          "target": "com.amazonaws.kms#XksProxyVpcEndpointServiceInvalidConfigurationException"
+        },
+        {
+          "target": "com.amazonaws.kms#XksProxyVpcEndpointServiceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Changes the properties of a custom key store. You can use this operation to change the\n      properties of an CloudHSM key store or an external key store.</p>\n         <p>Use the required <code>CustomKeyStoreId</code> parameter to identify the custom key store.\n      Use the remaining optional parameters to change its properties. This operation does not return\n      any property values. To verify the updated property values, use the <a>DescribeCustomKeyStores</a> operation.</p>\n         <p> This operation is part of the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html\">custom key stores</a> feature in KMS, which\ncombines the convenience and extensive integration of KMS with the isolation and control of a\nkey store that you own and manage.</p>\n         <important>\n            <p>When updating the properties of an external key store, verify that the updated settings\n        connect your key store, via the external key store proxy, to the same external key manager\n        as the previous settings, or to a backup or snapshot of the external key manager with the\n        same cryptographic keys. If the updated connection settings fail, you can fix them and\n        retry, although an extended delay might disrupt Amazon Web Services services. However, if KMS\n        permanently loses its access to cryptographic keys, ciphertext encrypted under those keys is\n        unrecoverable.</p>\n         </important>\n         <note>\n            <p>For external key stores:</p>\n            <p>Some external key managers provide a simpler method for updating an external key store.\n        For details, see your external key manager documentation.</p>\n            <p>When updating an external key store in the KMS console, you can upload a JSON-based\n        proxy configuration file with the desired values. You cannot upload the proxy configuration\n        file to the <code>UpdateCustomKeyStore</code> operation. However, you can use the file to\n        help you determine the correct values for the <code>UpdateCustomKeyStore</code>\n        parameters.</p>\n         </note>\n         <p>For an CloudHSM key store, you can use this operation to change the custom key store friendly\n      name (<code>NewCustomKeyStoreName</code>), to tell KMS about a change to the\n        <code>kmsuser</code> crypto user password (<code>KeyStorePassword</code>), or to associate\n      the custom key store with a different, but related, CloudHSM cluster\n        (<code>CloudHsmClusterId</code>). To update any property of an CloudHSM key store, the\n        <code>ConnectionState</code> of the CloudHSM key store must be <code>DISCONNECTED</code>. </p>\n         <p>For an external key store, you can use this operation to change the custom key store\n      friendly name (<code>NewCustomKeyStoreName</code>), or to tell KMS about a change to the\n      external key store proxy authentication credentials\n        (<code>XksProxyAuthenticationCredential</code>), connection method\n        (<code>XksProxyConnectivity</code>), external proxy endpoint\n        (<code>XksProxyUriEndpoint</code>) and path (<code>XksProxyUriPath</code>). For external key\n      stores with an <code>XksProxyConnectivity</code> of <code>VPC_ENDPOINT_SERVICE</code>, you can\n      also update the Amazon VPC endpoint service name (<code>XksProxyVpcEndpointServiceName</code>). To\n      update most properties of an external key store, the <code>ConnectionState</code> of the\n      external key store must be <code>DISCONNECTED</code>. However, you can update the\n        <code>CustomKeyStoreName</code>, <code>XksProxyAuthenticationCredential</code>, and\n        <code>XksProxyUriPath</code> of an external key store when it is in the CONNECTED or\n      DISCONNECTED state. </p>\n         <p>If your update requires a <code>DISCONNECTED</code> state, before using\n        <code>UpdateCustomKeyStore</code>, use the <a>DisconnectCustomKeyStore</a>\n      operation to disconnect the custom key store. After the <code>UpdateCustomKeyStore</code>\n      operation completes, use the <a>ConnectCustomKeyStore</a> to reconnect the custom\n      key store. To find the <code>ConnectionState</code> of the custom key store, use the <a>DescribeCustomKeyStores</a> operation. </p>\n         <p>\n    </p>\n         <p>Before updating the custom key store, verify that the new values allow KMS to connect\n      the custom key store to its backing key store. For example, before you change the\n        <code>XksProxyUriPath</code> value, verify that the external key store proxy is reachable at\n      the new path.</p>\n         <p>If the operation succeeds, it returns a JSON object with no\nproperties.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a custom key store in a different Amazon Web Services account.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UpdateCustomKeyStore</a> (IAM policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ConnectCustomKeyStore</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateCustomKeyStore</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteCustomKeyStore</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeCustomKeyStores</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DisconnectCustomKeyStore</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To edit the friendly name of a custom key store",
+            "documentation": "This example changes the friendly name of the AWS KMS custom key store to the name that you specify. This operation does not return any data. To verify that the operation worked, use the DescribeCustomKeyStores operation.",
+            "input": {
+              "CustomKeyStoreId": "cks-1234567890abcdef0",
+              "NewCustomKeyStoreName": "DevelopmentKeys"
+            },
+            "output": {}
+          },
+          {
+            "title": "To edit the password of an AWS CloudHSM key store",
+            "documentation": "This example tells AWS KMS the password for the kmsuser crypto user in the AWS CloudHSM cluster that is associated with the AWS KMS custom key store. (It does not change the password in the CloudHSM cluster.) This operation does not return any data.",
+            "input": {
+              "CustomKeyStoreId": "cks-1234567890abcdef0",
+              "KeyStorePassword": "ExamplePassword"
+            },
+            "output": {}
+          },
+          {
+            "title": "To update the proxy connectivity of an external key store to VPC_ENDPOINT_SERVICE",
+            "documentation": "To change the external key store proxy connectivity option from public endpoint connectivity to VPC endpoint service connectivity, in addition to changing the <code>XksProxyConnectivity</code> value, you must change the <code>XksProxyUriEndpoint</code> value to reflect the private DNS name associated with the VPC endpoint service. You must also add an <code>XksProxyVpcEndpointServiceName</code> value.",
+            "input": {
+              "CustomKeyStoreId": "cks-1234567890abcdef0",
+              "XksProxyConnectivity": "VPC_ENDPOINT_SERVICE",
+              "XksProxyUriEndpoint": "https://myproxy-private.xks.example.com",
+              "XksProxyVpcEndpointServiceName": "com.amazonaws.vpce.us-east-1.vpce-svc-example"
+            },
+            "output": {}
+          },
+          {
+            "title": "To edit the proxy URI path of an external key store.",
+            "documentation": "This example updates the proxy URI path for an external key store",
+            "input": {
+              "CustomKeyStoreId": "cks-1234567890abcdef0",
+              "XksProxyUriPath": "/new-path/kms/xks/v1"
+            },
+            "output": {}
+          },
+          {
+            "title": "To associate the custom key store with a different, but related, AWS CloudHSM cluster.",
+            "documentation": "This example changes the AWS CloudHSM cluster that is associated with an AWS CloudHSM key store to a related cluster, such as a different backup of the same cluster. This operation does not return any data. To verify that the operation worked, use the DescribeCustomKeyStores operation.",
+            "input": {
+              "CustomKeyStoreId": "cks-1234567890abcdef0",
+              "CloudHsmClusterId": "cluster-234abcdefABC"
+            },
+            "output": {}
+          }
+        ]
+      }
+    },
+    "com.amazonaws.kms#UpdateCustomKeyStoreRequest": {
+      "type": "structure",
+      "members": {
+        "CustomKeyStoreId": {
+          "target": "com.amazonaws.kms#CustomKeyStoreIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the custom key store that you want to update. Enter the ID of the custom key\n      store. To find the ID of a custom key store, use the <a>DescribeCustomKeyStores</a> operation.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NewCustomKeyStoreName": {
+          "target": "com.amazonaws.kms#CustomKeyStoreNameType",
+          "traits": {
+            "smithy.api#documentation": "<p>Changes the friendly name of the custom key store to the value that you specify. The\n      custom key store name must be unique in the Amazon Web Services account.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>To change this value, an CloudHSM key store must be disconnected. An external key store can\n      be connected or disconnected.</p>"
+          }
+        },
+        "KeyStorePassword": {
+          "target": "com.amazonaws.kms#KeyStorePasswordType",
+          "traits": {
+            "smithy.api#documentation": "<p>Enter the current password of the <code>kmsuser</code> crypto user (CU) in the CloudHSM\n      cluster that is associated with the custom key store. This parameter is valid only for custom\n      key stores with a <code>CustomKeyStoreType</code> of <code>AWS_CLOUDHSM</code>.</p>\n         <p>This parameter tells KMS the current password of the <code>kmsuser</code> crypto user\n      (CU). It does not set or change the password of any users in the CloudHSM cluster.</p>\n         <p>To change this value, the CloudHSM key store must be disconnected.</p>"
+          }
+        },
+        "CloudHsmClusterId": {
+          "target": "com.amazonaws.kms#CloudHsmClusterIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Associates the custom key store with a related CloudHSM cluster. This parameter is valid only\n      for custom key stores with a <code>CustomKeyStoreType</code> of\n      <code>AWS_CLOUDHSM</code>.</p>\n         <p>Enter the cluster ID of the cluster that you used to create the custom key store or a\n      cluster that shares a backup history and has the same cluster certificate as the original\n      cluster. You cannot use this parameter to associate a custom key store with an unrelated\n      cluster. In addition, the replacement cluster must <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore\">fulfill the requirements</a> for\n      a cluster associated with a custom key store. To view the cluster certificate of a cluster,\n      use the <a href=\"https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html\">DescribeClusters</a> operation.</p>\n         <p>To change this value, the CloudHSM key store must be disconnected.</p>"
+          }
+        },
+        "XksProxyUriEndpoint": {
+          "target": "com.amazonaws.kms#XksProxyUriEndpointType",
+          "traits": {
+            "smithy.api#documentation": "<p>Changes the URI endpoint that KMS uses to connect to your external key store proxy (XKS\n      proxy). This parameter is valid only for custom key stores with a\n        <code>CustomKeyStoreType</code> of <code>EXTERNAL_KEY_STORE</code>.</p>\n         <p>For external key stores with an <code>XksProxyConnectivity</code> value of\n        <code>PUBLIC_ENDPOINT</code>, the protocol must be HTTPS.</p>\n         <p>For external key stores with an <code>XksProxyConnectivity</code> value of\n        <code>VPC_ENDPOINT_SERVICE</code>, specify <code>https://</code> followed by the private DNS\n      name associated with the VPC endpoint service. Each external key store must use a different\n      private DNS name.</p>\n         <p>The combined <code>XksProxyUriEndpoint</code> and <code>XksProxyUriPath</code> values must\n      be unique in the Amazon Web Services account and Region.</p>\n         <p>To change this value, the external key store must be disconnected.</p>"
+          }
+        },
+        "XksProxyUriPath": {
+          "target": "com.amazonaws.kms#XksProxyUriPathType",
+          "traits": {
+            "smithy.api#documentation": "<p>Changes the base path to the proxy APIs for this external key store. To find this value,\n      see the documentation for your external key manager and external key store proxy (XKS proxy).\n      This parameter is valid only for custom key stores with a <code>CustomKeyStoreType</code> of\n        <code>EXTERNAL_KEY_STORE</code>.</p>\n         <p>The value must start with <code>/</code> and must end with <code>/kms/xks/v1</code>, where\n        <code>v1</code> represents the version of the KMS external key store proxy API. You can\n      include an optional prefix between the required elements such as\n          <code>/<i>example</i>/kms/xks/v1</code>.</p>\n         <p>The combined <code>XksProxyUriEndpoint</code> and <code>XksProxyUriPath</code> values must\n      be unique in the Amazon Web Services account and Region.</p>\n         <p>You can change this value when the external key store is connected or disconnected.</p>"
+          }
+        },
+        "XksProxyVpcEndpointServiceName": {
+          "target": "com.amazonaws.kms#XksProxyVpcEndpointServiceNameType",
+          "traits": {
+            "smithy.api#documentation": "<p>Changes the name that KMS uses to identify the Amazon VPC endpoint service for your external\n      key store proxy (XKS proxy). This parameter is valid when the <code>CustomKeyStoreType</code>\n      is <code>EXTERNAL_KEY_STORE</code> and the <code>XksProxyConnectivity</code> is\n        <code>VPC_ENDPOINT_SERVICE</code>.</p>\n         <p>To change this value, the external key store must be disconnected.</p>"
+          }
+        },
+        "XksProxyAuthenticationCredential": {
+          "target": "com.amazonaws.kms#XksProxyAuthenticationCredentialType",
+          "traits": {
+            "smithy.api#documentation": "<p>Changes the credentials that KMS uses to sign requests to the external key store proxy\n      (XKS proxy). This parameter is valid only for custom key stores with a\n        <code>CustomKeyStoreType</code> of <code>EXTERNAL_KEY_STORE</code>.</p>\n         <p>You must specify both the <code>AccessKeyId</code> and <code>SecretAccessKey</code> value\n      in the authentication credential, even if you are only updating one value.</p>\n         <p>This parameter doesn't establish or change your authentication credentials on the proxy.\n      It just tells KMS the credential that you established with your external key store proxy.\n      For example, if you rotate the credential on your external key store proxy, you can use this\n      parameter to update the credential in KMS.</p>\n         <p>You can change this value when the external key store is connected or disconnected.</p>"
+          }
+        },
+        "XksProxyConnectivity": {
+          "target": "com.amazonaws.kms#XksProxyConnectivityType",
+          "traits": {
+            "smithy.api#documentation": "<p>Changes the connectivity setting for the external key store. To indicate that the external\n      key store proxy uses a Amazon VPC endpoint service to communicate with KMS, specify\n        <code>VPC_ENDPOINT_SERVICE</code>. Otherwise, specify <code>PUBLIC_ENDPOINT</code>.</p>\n         <p>If you change the <code>XksProxyConnectivity</code> to <code>VPC_ENDPOINT_SERVICE</code>,\n      you must also change the <code>XksProxyUriEndpoint</code> and add an\n        <code>XksProxyVpcEndpointServiceName</code> value. </p>\n         <p>If you change the <code>XksProxyConnectivity</code> to <code>PUBLIC_ENDPOINT</code>, you\n      must also change the <code>XksProxyUriEndpoint</code> and specify a null or empty string for\n      the <code>XksProxyVpcEndpointServiceName</code> value.</p>\n         <p>To change this value, the external key store must be disconnected.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.kms#UpdateCustomKeyStoreResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.kms#UpdateKeyDescription": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kms#UpdateKeyDescriptionRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kms#DependencyTimeoutException"
+        },
+        {
+          "target": "com.amazonaws.kms#InvalidArnException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInternalException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.kms#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the description of a KMS key. To see the description of a KMS key, use <a>DescribeKey</a>. </p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account. </p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:UpdateKeyDescription</a> (key policy)</p>\n         <p>\n            <b>Related operations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeKey</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To update the description of a KMS key",
+            "documentation": "The following example updates the description of the specified KMS key.",
+            "input": {
+              "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
+              "Description": "Example description that indicates the intended use of this KMS key."
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.kms#UpdateKeyDescriptionRequest": {
+      "type": "structure",
+      "members": {
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Updates the description of the specified KMS key.</p>\n         <p>Specify the key ID or key ARN of the KMS key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.kms#DescriptionType",
+          "traits": {
+            "smithy.api#documentation": "<p>New description for the KMS key.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.kms#UpdatePrimaryRegion": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kms#UpdatePrimaryRegionRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kms#DisabledException"
+        },
+        {
+          "target": "com.amazonaws.kms#InvalidArnException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInternalException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.kms#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.kms#UnsupportedOperationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Changes the primary key of a multi-Region key. </p>\n         <p>This operation changes the replica key in the specified Region to a primary key and\n      changes the former primary key to a replica key. For example, suppose you have a primary key\n      in <code>us-east-1</code> and a replica key in <code>eu-west-2</code>. If you run\n        <code>UpdatePrimaryRegion</code> with a <code>PrimaryRegion</code> value of\n        <code>eu-west-2</code>, the primary key is now the key in <code>eu-west-2</code>, and the\n      key in <code>us-east-1</code> becomes a replica key. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-update\">Updating the primary Region</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>This operation supports <i>multi-Region keys</i>, an KMS feature that lets you create multiple\n      interoperable KMS keys in different Amazon Web Services Regions. Because these KMS keys have the same key ID, key\n      material, and other metadata, you can use them interchangeably to encrypt data in one Amazon Web Services Region and decrypt\n      it in a different Amazon Web Services Region without re-encrypting the data or making a cross-Region call. For more information about multi-Region keys, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">Multi-Region keys in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>The <i>primary key</i> of a multi-Region key is the source for properties\n      that are always shared by primary and replica keys, including the key material, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id\">key ID</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-spec\">key spec</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-usage\">key usage</a>, <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-origin\">key material\n      origin</a>, and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html\">automatic\n        key rotation</a>. It's the only key that can be replicated. You cannot <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_ScheduleKeyDeletion.html\">delete the primary\n        key</a> until all replica keys are deleted.</p>\n         <p>The key ID and primary Region that you specify uniquely identify the replica key that will\n      become the primary key. The primary Region must already have a replica key. This operation\n      does not create a KMS key in the specified Region. To find the replica keys, use the <a>DescribeKey</a> operation on the primary key or any replica key. To create a replica\n      key, use the <a>ReplicateKey</a> operation.</p>\n         <p>You can run this operation while using the affected multi-Region keys in cryptographic\n      operations. This operation should not delay, interrupt, or cause failures in cryptographic\n      operations. </p>\n         <p>Even after this operation completes, the process of updating the primary Region might\n      still be in progress for a few more seconds. Operations such as <code>DescribeKey</code> might\n      display both the old and new primary keys as replicas. The old and new primary keys have a\n      transient key state of <code>Updating</code>. The original key state is restored when the\n      update is complete. While the key state is <code>Updating</code>, you can use the keys in\n      cryptographic operations, but you cannot replicate the new primary key or perform certain\n      management operations, such as enabling or disabling these keys. For details about the\n        <code>Updating</code> key state, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>This operation does not return any output. To verify that primary key is changed, use the\n        <a>DescribeKey</a> operation.</p>\n         <p>\n            <b>Cross-account use</b>: No. You cannot use this operation in a\n      different Amazon Web Services account. </p>\n         <p>\n            <b>Required permissions</b>: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>kms:UpdatePrimaryRegion</code> on the current primary key (in the primary key's\n          Region). Include this permission primary key's key policy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kms:UpdatePrimaryRegion</code> on the current replica key (in the replica key's\n          Region). Include this permission in the replica key's key policy.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Related operations</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ReplicateKey</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To update the primary Region of a multi-Region KMS key",
+            "documentation": "The following UpdatePrimaryRegion example changes the multi-Region replica key in the eu-central-1 Region to the primary key. The current primary key in the us-west-1 Region becomes a replica key. \n\nThe KeyId parameter identifies the current primary key in the us-west-1 Region. The PrimaryRegion parameter indicates the Region of the replica key that will become the new primary key.\n\nThis operation does not return any output. To verify that primary key is changed, use the DescribeKey operation.",
+            "input": {
+              "KeyId": "arn:aws:kms:us-west-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab",
+              "PrimaryRegion": "eu-central-1"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.kms#UpdatePrimaryRegionRequest": {
+      "type": "structure",
+      "members": {
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the current primary key. When the operation completes, this KMS key will be a\n      replica key.</p>\n         <p>Specify the key ID or key ARN of a multi-Region primary key.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>mrk-1234abcd12ab34cd56ef1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PrimaryRegion": {
+          "target": "com.amazonaws.kms#RegionType",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Web Services Region of the new primary key. Enter the Region ID, such as\n        <code>us-east-1</code> or <code>ap-southeast-2</code>. There must be an existing replica key\n      in this Region. </p>\n         <p>When the operation completes, the multi-Region key in this Region will be the primary\n      key.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.kms#Verify": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kms#VerifyRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.kms#VerifyResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kms#DependencyTimeoutException"
+        },
+        {
+          "target": "com.amazonaws.kms#DisabledException"
+        },
+        {
+          "target": "com.amazonaws.kms#DryRunOperationException"
+        },
+        {
+          "target": "com.amazonaws.kms#InvalidGrantTokenException"
+        },
+        {
+          "target": "com.amazonaws.kms#InvalidKeyUsageException"
+        },
+        {
+          "target": "com.amazonaws.kms#KeyUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInternalException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInvalidSignatureException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.kms#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Verifies a digital signature that was generated by the <a>Sign</a> operation. </p>\n         <p></p>\n         <p>Verification confirms that an authorized user signed the message with the specified KMS\n      key and signing algorithm, and the message hasn't changed since it was signed. If the\n      signature is verified, the value of the <code>SignatureValid</code> field in the response is\n        <code>True</code>. If the signature verification fails, the <code>Verify</code> operation\n      fails with an <code>KMSInvalidSignatureException</code> exception.</p>\n         <p>A digital signature is generated by using the private key in an asymmetric KMS key. The\n      signature is verified by using the public key in the same asymmetric KMS key.\n      For information about asymmetric KMS keys, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Asymmetric KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>To use the <code>Verify</code> operation, specify the same asymmetric KMS key, message,\n      and signing algorithm that were used to produce the signature. The message type does not need\n      to be the same as the one used for signing, but it must indicate whether the value of the\n        <code>Message</code> parameter should be hashed as part of the verification process.</p>\n         <p>You can also verify the digital signature by using the public key of the KMS key outside\n      of KMS. Use the <a>GetPublicKey</a> operation to download the public key in the\n      asymmetric KMS key and then use the public key to verify the signature outside of KMS. The\n      advantage of using the <code>Verify</code> operation is that it is performed within KMS. As\n      a result, it's easy to call, the operation is performed within the FIPS boundary, it is logged\n      in CloudTrail, and you can use key policy and IAM policy to determine who is authorized to use\n      the KMS key to verify signatures.</p>\n         <p>To verify a signature outside of KMS with an SM2 public key (China Regions only), you\n      must specify the distinguishing ID. By default, KMS uses <code>1234567812345678</code> as\n      the distinguishing ID. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification\">Offline\n        verification with SM2 key pairs</a>.</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter. </p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:Verify</a> (key policy)</p>\n         <p>\n            <b>Related operations</b>: <a>Sign</a>\n         </p>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To use an asymmetric KMS key to verify a digital signature",
+            "documentation": "This operation uses the public key in an elliptic curve (ECC) asymmetric key to verify a digital signature within AWS KMS.",
+            "input": {
+              "KeyId": "alias/ECC_signing_key",
+              "Message": "<message to be verified>",
+              "MessageType": "RAW",
+              "Signature": "<binary data>",
+              "SigningAlgorithm": "ECDSA_SHA_384"
+            },
+            "output": {
+              "KeyId": "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+              "SignatureValid": true,
+              "SigningAlgorithm": "ECDSA_SHA_384"
+            }
+          },
+          {
+            "title": "To use an asymmetric KMS key to verify a digital signature on a message digest",
+            "documentation": "This operation uses the public key in an RSA asymmetric signing key pair to verify the digital signature of a message digest. Hashing a message into a digest before sending it to KMS lets you verify messages that exceed the 4096-byte message size limit. To indicate that the value of Message is a digest, use the MessageType parameter ",
+            "input": {
+              "KeyId": "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321",
+              "Message": "<message digest to be verified>",
+              "MessageType": "DIGEST",
+              "Signature": "<binary data>",
+              "SigningAlgorithm": "RSASSA_PSS_SHA_512"
+            },
+            "output": {
+              "KeyId": "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321",
+              "SignatureValid": true,
+              "SigningAlgorithm": "RSASSA_PSS_SHA_512"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.kms#VerifyMac": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.kms#VerifyMacRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.kms#VerifyMacResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.kms#DisabledException"
+        },
+        {
+          "target": "com.amazonaws.kms#DryRunOperationException"
+        },
+        {
+          "target": "com.amazonaws.kms#InvalidGrantTokenException"
+        },
+        {
+          "target": "com.amazonaws.kms#InvalidKeyUsageException"
+        },
+        {
+          "target": "com.amazonaws.kms#KeyUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInternalException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInvalidMacException"
+        },
+        {
+          "target": "com.amazonaws.kms#KMSInvalidStateException"
+        },
+        {
+          "target": "com.amazonaws.kms#NotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Verifies the hash-based message authentication code (HMAC) for a specified message, HMAC\n      KMS key, and MAC algorithm. To verify the HMAC, <code>VerifyMac</code> computes an HMAC using\n      the message, HMAC KMS key, and MAC algorithm that you specify, and compares the computed HMAC\n      to the HMAC that you specify. If the HMACs are identical, the verification succeeds;\n      otherwise, it fails. Verification indicates that the message hasn't changed since the HMAC was\n      calculated, and the specified key was used to generate and verify the HMAC.</p>\n         <p>HMAC KMS keys and the HMAC algorithms that KMS uses conform to industry standards\n      defined in <a href=\"https://datatracker.ietf.org/doc/html/rfc2104\">RFC 2104</a>.</p>\n         <p>This operation is part of KMS support for HMAC KMS keys. For details, see\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html\">HMAC keys in KMS</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation with a KMS key in a different Amazon Web Services account, specify\n  the key ARN or alias ARN in the value of the <code>KeyId</code> parameter. </p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:VerifyMac</a> (key policy)</p>\n         <p>\n            <b>Related operations</b>: <a>GenerateMac</a>\n         </p>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html\">KMS eventual consistency</a>.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To verify an HMAC",
+            "documentation": "This example verifies an HMAC for a particular message, HMAC KMS keys, and MAC algorithm. A value of 'true' in the MacValid value in the response indicates that the HMAC is valid.",
+            "input": {
+              "Message": "Hello World",
+              "KeyId": "1234abcd-12ab-34cd-56ef-1234567890ab",
+              "MacAlgorithm": "HMAC_SHA_384",
+              "Mac": "<HMAC_TAG>"
+            },
+            "output": {
+              "KeyId": "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+              "MacValid": true,
+              "MacAlgorithm": "HMAC_SHA_384"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.kms#VerifyMacRequest": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.kms#PlaintextType",
+          "traits": {
+            "smithy.api#documentation": "<p>The message that will be used in the verification. Enter the same message that was used to\n      generate the HMAC.</p>\n         <p>\n            <a>GenerateMac</a> and <code>VerifyMac</code> do not provide special handling\n      for message digests. If you generated an HMAC for a hash digest of a message, you must verify\n      the HMAC for the same hash digest.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The KMS key that will be used in the verification.</p>\n         <p>Enter a key ID of the KMS key that was used to generate the HMAC. If you identify a\n      different KMS key, the <code>VerifyMac</code> operation fails.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MacAlgorithm": {
+          "target": "com.amazonaws.kms#MacAlgorithmSpec",
+          "traits": {
+            "smithy.api#documentation": "<p>The MAC algorithm that will be used in the verification. Enter the same MAC algorithm that\n      was used to compute the HMAC. This algorithm must be supported by the HMAC KMS key identified\n      by the <code>KeyId</code> parameter.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Mac": {
+          "target": "com.amazonaws.kms#CiphertextType",
+          "traits": {
+            "smithy.api#documentation": "<p>The HMAC to verify. Enter the HMAC that was generated by the <a>GenerateMac</a>\n      operation when you specified the same message, HMAC KMS key, and MAC algorithm as the values\n      specified in this request.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "GrantTokens": {
+          "target": "com.amazonaws.kms#GrantTokenList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token\">Grant token</a> and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token\">Using a grant token</a> in the\n    <i>Key Management Service Developer Guide</i>.</p>"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.kms#NullableBooleanType",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p>\n         <p>To learn more about how to use this parameter, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html\">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.kms#VerifyMacResponse": {
+      "type": "structure",
+      "members": {
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The HMAC KMS key used in the verification.</p>"
+          }
+        },
+        "MacValid": {
+          "target": "com.amazonaws.kms#BooleanType",
+          "traits": {
+            "smithy.api#default": false,
+            "smithy.api#documentation": "<p>A Boolean value that indicates whether the HMAC was verified. A value of <code>True</code>\n      indicates that the HMAC (<code>Mac</code>) was generated with the specified\n        <code>Message</code>, HMAC KMS key (<code>KeyID</code>) and\n      <code>MacAlgorithm.</code>.</p>\n         <p>If the HMAC is not verified, the <code>VerifyMac</code> operation fails with a\n        <code>KMSInvalidMacException</code> exception. This exception indicates that one or more of\n      the inputs changed since the HMAC was computed.</p>"
+          }
+        },
+        "MacAlgorithm": {
+          "target": "com.amazonaws.kms#MacAlgorithmSpec",
+          "traits": {
+            "smithy.api#documentation": "<p>The MAC algorithm used in the verification.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.kms#VerifyRequest": {
+      "type": "structure",
+      "members": {
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the asymmetric KMS key that will be used to verify the signature. This must be\n      the same KMS key that was used to generate the signature. If you specify a different KMS key,\n      the signature verification fails.</p>\n         <p>To specify a KMS key, use its key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix it with <code>\"alias/\"</code>. To specify a KMS key in a different Amazon Web Services account, you must use the key ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>. To get the alias name and alias ARN, use <a>ListAliases</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.kms#PlaintextType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the message that was signed. You can submit a raw message of up to 4096 bytes,\n      or a hash digest of the message. If you submit a digest, use the <code>MessageType</code>\n      parameter with a value of <code>DIGEST</code>.</p>\n         <p>If the message specified here is different from the message that was signed, the signature\n      verification fails. A message and its hash digest are considered to be the same\n      message.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MessageType": {
+          "target": "com.amazonaws.kms#MessageType",
+          "traits": {
+            "smithy.api#documentation": "<p>Tells KMS whether the value of the <code>Message</code> parameter should be hashed as\n      part of the signing algorithm. Use <code>RAW</code> for unhashed messages; use\n        <code>DIGEST</code> for message digests, which are already hashed.</p>\n         <p>When the value of <code>MessageType</code> is <code>RAW</code>, KMS uses the standard\n      signing algorithm, which begins with a hash function. When the value is <code>DIGEST</code>,\n      KMS skips the hashing step in the signing algorithm.</p>\n         <important>\n            <p>Use the <code>DIGEST</code> value only when the value of the <code>Message</code>\n        parameter is a message digest. If you use the <code>DIGEST</code> value with an unhashed\n        message, the security of the verification operation can be compromised.</p>\n         </important>\n         <p>When the value of <code>MessageType</code>is <code>DIGEST</code>, the length of the\n        <code>Message</code> value must match the length of hashed messages for the specified\n      signing algorithm.</p>\n         <p>You can submit a message digest and omit the <code>MessageType</code> or specify\n        <code>RAW</code> so the digest is hashed again while signing. However, if the signed message\n      is hashed once while signing, but twice while verifying, verification fails, even when the\n      message hasn't changed.</p>\n         <p>The hashing algorithm in that <code>Verify</code> uses is based on the\n        <code>SigningAlgorithm</code> value.</p>\n         <ul>\n            <li>\n               <p>Signing algorithms that end in SHA_256 use the SHA_256 hashing algorithm.</p>\n            </li>\n            <li>\n               <p>Signing algorithms that end in SHA_384 use the SHA_384 hashing algorithm.</p>\n            </li>\n            <li>\n               <p>Signing algorithms that end in SHA_512 use the SHA_512 hashing algorithm.</p>\n            </li>\n            <li>\n               <p>SM2DSA uses the SM3 hashing algorithm. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification\">Offline\n            verification with SM2 key pairs</a>.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "Signature": {
+          "target": "com.amazonaws.kms#CiphertextType",
+          "traits": {
+            "smithy.api#documentation": "<p>The signature that the <code>Sign</code> operation generated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SigningAlgorithm": {
+          "target": "com.amazonaws.kms#SigningAlgorithmSpec",
+          "traits": {
+            "smithy.api#documentation": "<p>The signing algorithm that was used to sign the message. If you submit a different\n      algorithm, the signature verification fails.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "GrantTokens": {
+          "target": "com.amazonaws.kms#GrantTokenList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of grant tokens.</p>\n         <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token\">Grant token</a> and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token\">Using a grant token</a> in the\n    <i>Key Management Service Developer Guide</i>.</p>"
+          }
+        },
+        "DryRun": {
+          "target": "com.amazonaws.kms#NullableBooleanType",
+          "traits": {
+            "smithy.api#documentation": "<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p>\n         <p>To learn more about how to use this parameter, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html\">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.kms#VerifyResponse": {
+      "type": "structure",
+      "members": {
+        "KeyId": {
+          "target": "com.amazonaws.kms#KeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>) of the asymmetric KMS key that was used to verify the signature.</p>"
+          }
+        },
+        "SignatureValid": {
+          "target": "com.amazonaws.kms#BooleanType",
+          "traits": {
+            "smithy.api#default": false,
+            "smithy.api#documentation": "<p>A Boolean value that indicates whether the signature was verified. A value of\n        <code>True</code> indicates that the <code>Signature</code> was produced by signing the\n        <code>Message</code> with the specified <code>KeyID</code> and\n        <code>SigningAlgorithm.</code> If the signature is not verified, the <code>Verify</code>\n      operation fails with a <code>KMSInvalidSignatureException</code> exception. </p>"
+          }
+        },
+        "SigningAlgorithm": {
+          "target": "com.amazonaws.kms#SigningAlgorithmSpec",
+          "traits": {
+            "smithy.api#documentation": "<p>The signing algorithm that was used to verify the signature.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.kms#WrappingKeySpec": {
+      "type": "enum",
+      "members": {
+        "RSA_2048": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "RSA_2048"
+          }
+        },
+        "RSA_3072": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "RSA_3072"
+          }
+        },
+        "RSA_4096": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "RSA_4096"
+          }
+        },
+        "SM2": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SM2"
+          }
+        }
+      }
+    },
+    "com.amazonaws.kms#XksKeyAlreadyInUseException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksKeyAlreadyInUse",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>The request was rejected because the (<code>XksKeyId</code>) is already associated with\n      another KMS key in this external key store. Each KMS key in an external key store must be\n      associated with a different external key.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#XksKeyConfigurationType": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "target": "com.amazonaws.kms#XksKeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the external key in its external key manager. This is the ID that the external\n      key store proxy uses to identify the external key.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key\">external key </a>that is\n      associated with a KMS key in an external key store. </p>\n         <p>This element appears in a <a>CreateKey</a> or <a>DescribeKey</a>\n      response only for a KMS key in an external key store.</p>\n         <p>The <i>external key</i> is a symmetric encryption key that is hosted by an\n      external key manager outside of Amazon Web Services. When you use the KMS key in an external key store in a\n      cryptographic operation, the cryptographic operation is performed in the external key manager\n      using the specified external key. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key\">External key</a> in the\n      <i>Key Management Service Developer Guide</i>.</p>"
+      }
+    },
+    "com.amazonaws.kms#XksKeyIdType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9-_.]+$"
+      }
+    },
+    "com.amazonaws.kms#XksKeyInvalidConfigurationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksKeyInvalidConfiguration",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>The request was rejected because the external key specified by the <code>XksKeyId</code>\n      parameter did not meet the configuration requirements for an external key store.</p>\n         <p>The external key must be an AES-256 symmetric key that is enabled and performs encryption\n      and decryption.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#XksKeyNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksKeyNotFoundException",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>The request was rejected because the external key store proxy could not find the external\n      key. This exception is thrown when the value of the <code>XksKeyId</code> parameter doesn't\n      identify a key in the external key manager associated with the external key proxy.</p>\n         <p>Verify that the <code>XksKeyId</code> represents an existing key in the external key\n      manager. Use the key identifier that the external key store proxy uses to identify the key.\n      For details, see the documentation provided with your external key store proxy or key\n      manager.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#XksProxyAuthenticationAccessKeyIdType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 20,
+          "max": 30
+        },
+        "smithy.api#pattern": "^[A-Z2-7]+$",
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.kms#XksProxyAuthenticationCredentialType": {
+      "type": "structure",
+      "members": {
+        "AccessKeyId": {
+          "target": "com.amazonaws.kms#XksProxyAuthenticationAccessKeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the raw secret access key.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RawSecretAccessKey": {
+          "target": "com.amazonaws.kms#XksProxyAuthenticationRawSecretAccessKeyType",
+          "traits": {
+            "smithy.api#documentation": "<p>A secret string of 43-64 characters. Valid characters are a-z, A-Z, 0-9, /, +, and\n      =.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>KMS uses the authentication credential to sign requests that it sends to the external\n      key store proxy (XKS proxy) on your behalf. You establish these credentials on your external\n      key store proxy and report them to KMS.</p>\n         <p>The <code>XksProxyAuthenticationCredential</code> includes two required elements.</p>"
+      }
+    },
+    "com.amazonaws.kms#XksProxyAuthenticationRawSecretAccessKeyType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 43,
+          "max": 64
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9\\/+=]+$",
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.kms#XksProxyConfigurationType": {
+      "type": "structure",
+      "members": {
+        "Connectivity": {
+          "target": "com.amazonaws.kms#XksProxyConnectivityType",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether the external key store proxy uses a public endpoint or an Amazon VPC endpoint\n      service to communicate with KMS.</p>"
+          }
+        },
+        "AccessKeyId": {
+          "target": "com.amazonaws.kms#XksProxyAuthenticationAccessKeyIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The part of the external key store <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateCustomKeyStore.html#KMS-CreateCustomKeyStore-request-XksProxyAuthenticationCredential\">proxy authentication credential</a> that uniquely identifies the secret access\n      key.</p>"
+          }
+        },
+        "UriEndpoint": {
+          "target": "com.amazonaws.kms#XksProxyUriEndpointType",
+          "traits": {
+            "smithy.api#documentation": "<p>The URI endpoint for the external key store proxy.</p>\n         <p>If the external key store proxy has a public endpoint, it is displayed here.</p>\n         <p>If the external key store proxy uses an Amazon VPC endpoint service name, this field displays\n      the private DNS name associated with the VPC endpoint service.</p>"
+          }
+        },
+        "UriPath": {
+          "target": "com.amazonaws.kms#XksProxyUriPathType",
+          "traits": {
+            "smithy.api#documentation": "<p>The path to the external key store proxy APIs.</p>"
+          }
+        },
+        "VpcEndpointServiceName": {
+          "target": "com.amazonaws.kms#XksProxyVpcEndpointServiceNameType",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon VPC endpoint service used to communicate with the external key store proxy. This\n      field appears only when the external key store proxy uses an Amazon VPC endpoint service to\n      communicate with KMS.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Detailed information about the external key store proxy (XKS proxy). Your external key\n      store proxy translates KMS requests into a format that your external key manager can\n      understand. These fields appear in a <a>DescribeCustomKeyStores</a> response only\n      when the <code>CustomKeyStoreType</code> is <code>EXTERNAL_KEY_STORE</code>.</p>"
+      }
+    },
+    "com.amazonaws.kms#XksProxyConnectivityType": {
+      "type": "enum",
+      "members": {
+        "PUBLIC_ENDPOINT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "PUBLIC_ENDPOINT"
+          }
+        },
+        "VPC_ENDPOINT_SERVICE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "VPC_ENDPOINT_SERVICE"
+          }
+        }
+      }
+    },
+    "com.amazonaws.kms#XksProxyIncorrectAuthenticationCredentialException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksProxyIncorrectAuthenticationCredentialException",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>The request was rejected because the proxy credentials failed to authenticate to the\n      specified external key store proxy. The specified external key store proxy rejected a status\n      request from KMS due to invalid credentials. This can indicate an error in the credentials\n      or in the identification of the external key store proxy.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#XksProxyInvalidConfigurationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksProxyInvalidConfigurationException",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>The request was rejected because the external key store proxy is not configured correctly.\n      To identify the cause, see the error message that accompanies the exception.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#XksProxyInvalidResponseException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksProxyInvalidResponseException",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p></p>\n         <p>KMS cannot interpret the response it received from the external key store proxy. The\n      problem might be a poorly constructed response, but it could also be a transient network\n      issue. If you see this error repeatedly, report it to the proxy vendor.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#XksProxyUriEndpointInUseException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksProxyUriEndpointInUseException",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>The request was rejected because the <code>XksProxyUriEndpoint</code> is already\n      associated with another external key store in this Amazon Web Services Region. To identify the cause, see\n      the error message that accompanies the exception. </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#XksProxyUriEndpointType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 10,
+          "max": 128
+        },
+        "smithy.api#pattern": "^https://[a-zA-Z0-9.-]+$"
+      }
+    },
+    "com.amazonaws.kms#XksProxyUriInUseException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksProxyUriInUseException",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>The request was rejected because the concatenation of the <code>XksProxyUriEndpoint</code>\n      and <code>XksProxyUriPath</code> is already associated with another external key store in this\n      Amazon Web Services Region. Each external key store in a Region must use a unique external key store proxy\n      API address.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#XksProxyUriPathType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 10,
+          "max": 128
+        },
+        "smithy.api#pattern": "^(/[a-zA-Z0-9\\/_-]+/kms/xks/v\\d{1,2})$|^(/kms/xks/v\\d{1,2})$"
+      }
+    },
+    "com.amazonaws.kms#XksProxyUriUnreachableException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksProxyUriUnreachableException",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>KMS was unable to reach the specified <code>XksProxyUriPath</code>. The path must be\n      reachable before you create the external key store or update its settings.</p>\n         <p>This exception is also thrown when the external key store proxy response to a\n        <code>GetHealthStatus</code> request indicates that all external key manager instances are\n      unavailable.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#XksProxyVpcEndpointServiceInUseException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksProxyVpcEndpointServiceInUseException",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>The request was rejected because the specified Amazon VPC endpoint service is already\n      associated with another external key store in this Amazon Web Services Region. Each external key store in a\n      Region must use a different Amazon VPC endpoint service.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#XksProxyVpcEndpointServiceInvalidConfigurationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksProxyVpcEndpointServiceInvalidConfigurationException",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>The request was rejected because the Amazon VPC endpoint service configuration does not fulfill\n      the requirements for an external key store. To identify the cause, see the error message that\n      accompanies the exception and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/vpc-connectivity.html#xks-vpc-requirements\">review the\n        requirements</a> for Amazon VPC endpoint service connectivity for an external key\n      store.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.kms#XksProxyVpcEndpointServiceNameType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 20,
+          "max": 64
+        },
+        "smithy.api#pattern": "^com\\.amazonaws\\.vpce\\.([a-z]+-){2,3}\\d+\\.vpce-svc-[0-9a-z]+$"
+      }
+    },
+    "com.amazonaws.kms#XksProxyVpcEndpointServiceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.kms#ErrorMessageType"
+        }
+      },
+      "traits": {
+        "aws.protocols#awsQueryError": {
+          "code": "XksProxyVpcEndpointServiceNotFoundException",
+          "httpResponseCode": 400
+        },
+        "smithy.api#documentation": "<p>The request was rejected because KMS could not find the specified VPC endpoint service.\n      Use <a>DescribeCustomKeyStores</a> to verify the VPC endpoint service name for the\n      external key store. Also, confirm that the <code>Allow principals</code> list for the VPC\n      endpoint service includes the KMS service principal for the Region, such as\n        <code>cks.kms.us-east-1.amazonaws.com</code>.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
       }
     }
   }

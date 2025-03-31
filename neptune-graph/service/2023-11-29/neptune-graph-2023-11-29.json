@@ -18,6 +18,1512 @@
         "smithy.api#httpError": 403
       }
     },
+    "com.amazonaws.neptunegraph#AmazonNeptuneGraph": {
+      "type": "service",
+      "version": "2023-11-29",
+      "operations": [
+        {
+          "target": "com.amazonaws.neptunegraph#CancelQuery"
+        },
+        {
+          "target": "com.amazonaws.neptunegraph#ExecuteQuery"
+        },
+        {
+          "target": "com.amazonaws.neptunegraph#GetGraphSummary"
+        },
+        {
+          "target": "com.amazonaws.neptunegraph#GetQuery"
+        },
+        {
+          "target": "com.amazonaws.neptunegraph#ListQueries"
+        },
+        {
+          "target": "com.amazonaws.neptunegraph#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.neptunegraph#TagResource"
+        },
+        {
+          "target": "com.amazonaws.neptunegraph#UntagResource"
+        }
+      ],
+      "resources": [
+        {
+          "target": "com.amazonaws.neptunegraph#GraphResource"
+        },
+        {
+          "target": "com.amazonaws.neptunegraph#PrivateGraphEndpointResource"
+        },
+        {
+          "target": "com.amazonaws.neptunegraph#SnapshotResource"
+        },
+        {
+          "target": "com.amazonaws.neptunegraph#TaskResource"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "Neptune Graph",
+          "arnNamespace": "neptune-graph",
+          "cloudTrailEventSource": "neptune-graph.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "neptune-graph"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#cors": {
+          "maxAge": 86400,
+          "additionalAllowedHeaders": [
+            "*",
+            "Authorization",
+            "Date",
+            "X-Amz-Date",
+            "X-Amz-Security-Token",
+            "X-Amz-Target",
+            "content-type",
+            "x-amz-content-sha256",
+            "x-amz-user-agent",
+            "x-amzn-platform-id",
+            "x-amzn-trace-id"
+          ],
+          "additionalExposedHeaders": [
+            "x-amzn-errortype",
+            "x-amzn-requestid",
+            "x-amzn-errormessage",
+            "x-amzn-trace-id",
+            "x-amz-apigw-id",
+            "date"
+          ]
+        },
+        "smithy.api#documentation": "<p>Neptune Analytics is a new analytics database engine for Amazon Neptune that helps customers get to \n    insights faster by quickly processing large amounts of graph data, invoking popular graph analytic \n    algorithms in low-latency queries, and getting analytics results in seconds.</p>",
+        "smithy.api#title": "Amazon Neptune Graph",
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "String"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "Boolean"
+            },
+            "UseDualStack": {
+              "builtIn": "AWS::UseDualStack",
+              "required": true,
+              "default": false,
+              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+              "type": "Boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "String"
+            },
+            "ApiType": {
+              "required": true,
+              "documentation": "Parameter to determine whether current API is a control plane or dataplane API",
+              "type": "String"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Endpoint"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseFIPS"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [
+                    {
+                      "fn": "booleanEquals",
+                      "argv": [
+                        {
+                          "ref": "UseDualStack"
+                        },
+                        true
+                      ]
+                    }
+                  ],
+                  "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                  "type": "error"
+                },
+                {
+                  "conditions": [],
+                  "endpoint": {
+                    "url": {
+                      "ref": "Endpoint"
+                    },
+                    "properties": {},
+                    "headers": {}
+                  },
+                  "type": "endpoint"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [
+                {
+                  "fn": "isSet",
+                  "argv": [
+                    {
+                      "ref": "Region"
+                    }
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "aws.partition",
+                      "argv": [
+                        {
+                          "ref": "Region"
+                        }
+                      ],
+                      "assign": "PartitionResult"
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        },
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "stringEquals",
+                                  "argv": [
+                                    {
+                                      "ref": "ApiType"
+                                    },
+                                    "ControlPlane"
+                                  ]
+                                }
+                              ],
+                              "endpoint": {
+                                "url": "https://neptune-graph-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            },
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "stringEquals",
+                                  "argv": [
+                                    {
+                                      "ref": "ApiType"
+                                    },
+                                    "DataPlane"
+                                  ]
+                                }
+                              ],
+                              "error": "Invalid Configuration: fips endpoint is not supported for this API",
+                              "type": "error"
+                            },
+                            {
+                              "conditions": [],
+                              "error": "Invalid Configuration: Unknown ApiType",
+                              "type": "error"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseFIPS"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsFIPS"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "stringEquals",
+                                  "argv": [
+                                    {
+                                      "ref": "ApiType"
+                                    },
+                                    "ControlPlane"
+                                  ]
+                                }
+                              ],
+                              "endpoint": {
+                                "url": "https://neptune-graph-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            },
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "stringEquals",
+                                  "argv": [
+                                    {
+                                      "ref": "ApiType"
+                                    },
+                                    "DataPlane"
+                                  ]
+                                }
+                              ],
+                              "error": "Invalid Configuration: fips endpoint is not supported for this API",
+                              "type": "error"
+                            },
+                            {
+                              "conditions": [],
+                              "error": "Invalid Configuration: Unknown ApiType",
+                              "type": "error"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "FIPS is enabled but this partition does not support FIPS",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "booleanEquals",
+                          "argv": [
+                            {
+                              "ref": "UseDualStack"
+                            },
+                            true
+                          ]
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "booleanEquals",
+                              "argv": [
+                                true,
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "PartitionResult"
+                                    },
+                                    "supportsDualStack"
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "stringEquals",
+                                  "argv": [
+                                    {
+                                      "ref": "ApiType"
+                                    },
+                                    "ControlPlane"
+                                  ]
+                                }
+                              ],
+                              "endpoint": {
+                                "url": "https://neptune-graph.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            },
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "stringEquals",
+                                  "argv": [
+                                    {
+                                      "ref": "ApiType"
+                                    },
+                                    "DataPlane"
+                                  ]
+                                }
+                              ],
+                              "endpoint": {
+                                "url": "https://neptune-graph.{Region}.on.aws",
+                                "properties": {},
+                                "headers": {}
+                              },
+                              "type": "endpoint"
+                            },
+                            {
+                              "conditions": [],
+                              "error": "Invalid Configuration: Unknown ApiType",
+                              "type": "error"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "DualStack is enabled but this partition does not support DualStack",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "stringEquals",
+                          "argv": [
+                            {
+                              "ref": "ApiType"
+                            },
+                            "ControlPlane"
+                          ]
+                        }
+                      ],
+                      "endpoint": {
+                        "url": "https://neptune-graph.{Region}.{PartitionResult#dnsSuffix}",
+                        "properties": {},
+                        "headers": {}
+                      },
+                      "type": "endpoint"
+                    },
+                    {
+                      "conditions": [
+                        {
+                          "fn": "stringEquals",
+                          "argv": [
+                            {
+                              "ref": "ApiType"
+                            },
+                            "DataPlane"
+                          ]
+                        }
+                      ],
+                      "endpoint": {
+                        "url": "https://{Region}.neptune-graph.{PartitionResult#dnsSuffix}",
+                        "properties": {},
+                        "headers": {}
+                      },
+                      "type": "endpoint"
+                    },
+                    {
+                      "conditions": [],
+                      "error": "Invalid Configuration: Unknown ApiType",
+                      "type": "error"
+                    }
+                  ],
+                  "type": "tree"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: Missing Region",
+              "type": "error"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "Region and CP ApiType are provided",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mycustomDomain.com"
+                }
+              },
+              "params": {
+                "Endpoint": "https://mycustomDomain.com",
+                "ApiType": "ControlPlane",
+                "Region": "us-east-1"
+              }
+            },
+            {
+              "documentation": "Region and DP ApiType are provided",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mycustomDomain.com"
+                }
+              },
+              "params": {
+                "Endpoint": "https://mycustomDomain.com",
+                "ApiType": "DataPlane",
+                "Region": "us-east-1"
+              }
+            },
+            {
+              "documentation": "Region and invalid ApiType are provided",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mycustomDomain.com"
+                }
+              },
+              "params": {
+                "Endpoint": "https://mycustomDomain.com",
+                "ApiType": "someInvalidApiType",
+                "Region": "us-east-1"
+              }
+            },
+            {
+              "documentation": "Only invalid ApiType is provided",
+              "expect": {
+                "endpoint": {
+                  "url": "https://mycustomDomain.com"
+                }
+              },
+              "params": {
+                "Endpoint": "https://mycustomDomain.com",
+                "ApiType": "someInvalidApiType"
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.us-east-1.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.us-east-1.on.aws"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.us-east-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://us-east-1.neptune-graph.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.us-east-2.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-east-2",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-east-2",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.us-east-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-east-2",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-east-2",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.us-east-2.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-east-2",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.us-east-2.on.aws"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-east-2",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.us-east-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-east-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://us-east-2.neptune-graph.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-east-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.us-west-2.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.us-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-west-2",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.us-west-2.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.us-west-2.on.aws"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.us-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://us-west-2.neptune-graph.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "us-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.eu-west-1.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-west-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-west-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.eu-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-west-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-west-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.eu-west-1.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-west-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.eu-west-1.on.aws"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-west-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.eu-west-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://eu-west-1.neptune-graph.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-west-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.eu-west-2.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-west-2",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-west-2",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.eu-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-west-2",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-west-2",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.eu-west-2.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.eu-west-2.on.aws"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-west-2",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.eu-west-2.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://eu-west-2.neptune-graph.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-west-2",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.eu-central-1.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-central-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-central-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.eu-central-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-central-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-central-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.eu-central-1.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-central-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.eu-central-1.on.aws"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-central-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.eu-central-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "eu-central-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://eu-central-1.neptune-graph.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "eu-central-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.ap-southeast-1.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "ap-southeast-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "ap-southeast-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.ap-southeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "ap-southeast-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "ap-southeast-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.ap-southeast-1.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "ap-southeast-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.ap-southeast-1.on.aws"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "ap-southeast-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.ap-southeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "ap-southeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://ap-southeast-1.neptune-graph.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "ap-southeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.ap-northeast-1.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "ap-northeast-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: true",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "ap-northeast-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph-fips.ap-northeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "ap-northeast-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: false",
+              "expect": {
+                "error": "Invalid Configuration: fips endpoint is not supported for this API"
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "ap-northeast-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.ap-northeast-1.api.aws"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "ap-northeast-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: true",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.ap-northeast-1.on.aws"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "ap-northeast-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://neptune-graph.ap-northeast-1.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "ControlPlane",
+                "Region": "ap-northeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: false",
+              "expect": {
+                "endpoint": {
+                  "url": "https://ap-northeast-1.neptune-graph.amazonaws.com"
+                }
+              },
+              "params": {
+                "ApiType": "DataPlane",
+                "Region": "ap-northeast-1",
+                "UseFIPS": false,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Validate When no region is provided",
+              "expect": {
+                "error": "Invalid Configuration: Missing Region"
+              },
+              "params": {
+                "ApiType": "DataPlane"
+              }
+            },
+            {
+              "documentation": "Validate When invalid/unknown ApiType provided",
+              "expect": {
+                "error": "Invalid Configuration: Unknown ApiType"
+              },
+              "params": {
+                "Region": "us-east-1",
+                "ApiType": "someUnknownValue"
+              }
+            },
+            {
+              "documentation": "Both Fips and dualstack enabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Endpoint": "https://mycustomDomain.com",
+                "ApiType": "ControlPlane",
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": true
+              }
+            },
+            {
+              "documentation": "Fips enabled and dualstack disabled",
+              "expect": {
+                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+              },
+              "params": {
+                "Endpoint": "https://mycustomDomain.com",
+                "ApiType": "ControlPlane",
+                "Region": "us-east-1",
+                "UseFIPS": true,
+                "UseDualStack": false
+              }
+            },
+            {
+              "documentation": "Fips disabled and dualstack enabled",
+              "expect": {
+                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+              },
+              "params": {
+                "Endpoint": "https://mycustomDomain.com",
+                "ApiType": "ControlPlane",
+                "Region": "us-east-1",
+                "UseFIPS": false,
+                "UseDualStack": true
+              }
+            }
+          ],
+          "version": "1.0"
+        }
+      }
+    },
     "com.amazonaws.neptunegraph#Arn": {
       "type": "string",
       "traits": {
@@ -6105,1512 +7611,6 @@
       "type": "string",
       "traits": {
         "smithy.api#pattern": "^vpc-[a-z0-9]+$"
-      }
-    },
-    "com.amazonaws.neptunegraph#NeptuneGraph": {
-      "type": "service",
-      "version": "2023-11-29",
-      "operations": [
-        {
-          "target": "com.amazonaws.neptunegraph#CancelQuery"
-        },
-        {
-          "target": "com.amazonaws.neptunegraph#ExecuteQuery"
-        },
-        {
-          "target": "com.amazonaws.neptunegraph#GetGraphSummary"
-        },
-        {
-          "target": "com.amazonaws.neptunegraph#GetQuery"
-        },
-        {
-          "target": "com.amazonaws.neptunegraph#ListQueries"
-        },
-        {
-          "target": "com.amazonaws.neptunegraph#ListTagsForResource"
-        },
-        {
-          "target": "com.amazonaws.neptunegraph#TagResource"
-        },
-        {
-          "target": "com.amazonaws.neptunegraph#UntagResource"
-        }
-      ],
-      "resources": [
-        {
-          "target": "com.amazonaws.neptunegraph#GraphResource"
-        },
-        {
-          "target": "com.amazonaws.neptunegraph#PrivateGraphEndpointResource"
-        },
-        {
-          "target": "com.amazonaws.neptunegraph#SnapshotResource"
-        },
-        {
-          "target": "com.amazonaws.neptunegraph#TaskResource"
-        }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "Neptune Graph",
-          "arnNamespace": "neptune-graph",
-          "cloudTrailEventSource": "neptune-graph.amazonaws.com"
-        },
-        "aws.auth#sigv4": {
-          "name": "neptune-graph"
-        },
-        "aws.protocols#restJson1": {},
-        "smithy.api#cors": {
-          "maxAge": 86400,
-          "additionalAllowedHeaders": [
-            "*",
-            "Authorization",
-            "Date",
-            "X-Amz-Date",
-            "X-Amz-Security-Token",
-            "X-Amz-Target",
-            "content-type",
-            "x-amz-content-sha256",
-            "x-amz-user-agent",
-            "x-amzn-platform-id",
-            "x-amzn-trace-id"
-          ],
-          "additionalExposedHeaders": [
-            "x-amzn-errortype",
-            "x-amzn-requestid",
-            "x-amzn-errormessage",
-            "x-amzn-trace-id",
-            "x-amz-apigw-id",
-            "date"
-          ]
-        },
-        "smithy.api#documentation": "<p>Neptune Analytics is a new analytics database engine for Amazon Neptune that helps customers get to \n    insights faster by quickly processing large amounts of graph data, invoking popular graph analytic \n    algorithms in low-latency queries, and getting analytics results in seconds.</p>",
-        "smithy.api#title": "Amazon Neptune Graph",
-        "smithy.rules#endpointRuleSet": {
-          "version": "1.0",
-          "parameters": {
-            "Region": {
-              "builtIn": "AWS::Region",
-              "required": false,
-              "documentation": "The AWS region used to dispatch the request.",
-              "type": "String"
-            },
-            "UseFIPS": {
-              "builtIn": "AWS::UseFIPS",
-              "required": true,
-              "default": false,
-              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-              "type": "Boolean"
-            },
-            "UseDualStack": {
-              "builtIn": "AWS::UseDualStack",
-              "required": true,
-              "default": false,
-              "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-              "type": "Boolean"
-            },
-            "Endpoint": {
-              "builtIn": "SDK::Endpoint",
-              "required": false,
-              "documentation": "Override the endpoint used to send this request",
-              "type": "String"
-            },
-            "ApiType": {
-              "required": true,
-              "documentation": "Parameter to determine whether current API is a control plane or dataplane API",
-              "type": "String"
-            }
-          },
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "fn": "isSet",
-                  "argv": [
-                    {
-                      "ref": "Endpoint"
-                    }
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "booleanEquals",
-                      "argv": [
-                        {
-                          "ref": "UseFIPS"
-                        },
-                        true
-                      ]
-                    }
-                  ],
-                  "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
-                  "type": "error"
-                },
-                {
-                  "conditions": [
-                    {
-                      "fn": "booleanEquals",
-                      "argv": [
-                        {
-                          "ref": "UseDualStack"
-                        },
-                        true
-                      ]
-                    }
-                  ],
-                  "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
-                  "type": "error"
-                },
-                {
-                  "conditions": [],
-                  "endpoint": {
-                    "url": {
-                      "ref": "Endpoint"
-                    },
-                    "properties": {},
-                    "headers": {}
-                  },
-                  "type": "endpoint"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [
-                {
-                  "fn": "isSet",
-                  "argv": [
-                    {
-                      "ref": "Region"
-                    }
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "aws.partition",
-                      "argv": [
-                        {
-                          "ref": "Region"
-                        }
-                      ],
-                      "assign": "PartitionResult"
-                    }
-                  ],
-                  "rules": [
-                    {
-                      "conditions": [
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseFIPS"
-                            },
-                            true
-                          ]
-                        },
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseDualStack"
-                            },
-                            true
-                          ]
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                true,
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsFIPS"
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                true,
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsDualStack"
-                                  ]
-                                }
-                              ]
-                            }
-                          ],
-                          "rules": [
-                            {
-                              "conditions": [
-                                {
-                                  "fn": "stringEquals",
-                                  "argv": [
-                                    {
-                                      "ref": "ApiType"
-                                    },
-                                    "ControlPlane"
-                                  ]
-                                }
-                              ],
-                              "endpoint": {
-                                "url": "https://neptune-graph-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                "properties": {},
-                                "headers": {}
-                              },
-                              "type": "endpoint"
-                            },
-                            {
-                              "conditions": [
-                                {
-                                  "fn": "stringEquals",
-                                  "argv": [
-                                    {
-                                      "ref": "ApiType"
-                                    },
-                                    "DataPlane"
-                                  ]
-                                }
-                              ],
-                              "error": "Invalid Configuration: fips endpoint is not supported for this API",
-                              "type": "error"
-                            },
-                            {
-                              "conditions": [],
-                              "error": "Invalid Configuration: Unknown ApiType",
-                              "type": "error"
-                            }
-                          ],
-                          "type": "tree"
-                        },
-                        {
-                          "conditions": [],
-                          "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
-                          "type": "error"
-                        }
-                      ],
-                      "type": "tree"
-                    },
-                    {
-                      "conditions": [
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseFIPS"
-                            },
-                            true
-                          ]
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                true,
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsFIPS"
-                                  ]
-                                }
-                              ]
-                            }
-                          ],
-                          "rules": [
-                            {
-                              "conditions": [
-                                {
-                                  "fn": "stringEquals",
-                                  "argv": [
-                                    {
-                                      "ref": "ApiType"
-                                    },
-                                    "ControlPlane"
-                                  ]
-                                }
-                              ],
-                              "endpoint": {
-                                "url": "https://neptune-graph-fips.{Region}.{PartitionResult#dnsSuffix}",
-                                "properties": {},
-                                "headers": {}
-                              },
-                              "type": "endpoint"
-                            },
-                            {
-                              "conditions": [
-                                {
-                                  "fn": "stringEquals",
-                                  "argv": [
-                                    {
-                                      "ref": "ApiType"
-                                    },
-                                    "DataPlane"
-                                  ]
-                                }
-                              ],
-                              "error": "Invalid Configuration: fips endpoint is not supported for this API",
-                              "type": "error"
-                            },
-                            {
-                              "conditions": [],
-                              "error": "Invalid Configuration: Unknown ApiType",
-                              "type": "error"
-                            }
-                          ],
-                          "type": "tree"
-                        },
-                        {
-                          "conditions": [],
-                          "error": "FIPS is enabled but this partition does not support FIPS",
-                          "type": "error"
-                        }
-                      ],
-                      "type": "tree"
-                    },
-                    {
-                      "conditions": [
-                        {
-                          "fn": "booleanEquals",
-                          "argv": [
-                            {
-                              "ref": "UseDualStack"
-                            },
-                            true
-                          ]
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "booleanEquals",
-                              "argv": [
-                                true,
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "PartitionResult"
-                                    },
-                                    "supportsDualStack"
-                                  ]
-                                }
-                              ]
-                            }
-                          ],
-                          "rules": [
-                            {
-                              "conditions": [
-                                {
-                                  "fn": "stringEquals",
-                                  "argv": [
-                                    {
-                                      "ref": "ApiType"
-                                    },
-                                    "ControlPlane"
-                                  ]
-                                }
-                              ],
-                              "endpoint": {
-                                "url": "https://neptune-graph.{Region}.{PartitionResult#dualStackDnsSuffix}",
-                                "properties": {},
-                                "headers": {}
-                              },
-                              "type": "endpoint"
-                            },
-                            {
-                              "conditions": [
-                                {
-                                  "fn": "stringEquals",
-                                  "argv": [
-                                    {
-                                      "ref": "ApiType"
-                                    },
-                                    "DataPlane"
-                                  ]
-                                }
-                              ],
-                              "endpoint": {
-                                "url": "https://neptune-graph.{Region}.on.aws",
-                                "properties": {},
-                                "headers": {}
-                              },
-                              "type": "endpoint"
-                            },
-                            {
-                              "conditions": [],
-                              "error": "Invalid Configuration: Unknown ApiType",
-                              "type": "error"
-                            }
-                          ],
-                          "type": "tree"
-                        },
-                        {
-                          "conditions": [],
-                          "error": "DualStack is enabled but this partition does not support DualStack",
-                          "type": "error"
-                        }
-                      ],
-                      "type": "tree"
-                    },
-                    {
-                      "conditions": [
-                        {
-                          "fn": "stringEquals",
-                          "argv": [
-                            {
-                              "ref": "ApiType"
-                            },
-                            "ControlPlane"
-                          ]
-                        }
-                      ],
-                      "endpoint": {
-                        "url": "https://neptune-graph.{Region}.{PartitionResult#dnsSuffix}",
-                        "properties": {},
-                        "headers": {}
-                      },
-                      "type": "endpoint"
-                    },
-                    {
-                      "conditions": [
-                        {
-                          "fn": "stringEquals",
-                          "argv": [
-                            {
-                              "ref": "ApiType"
-                            },
-                            "DataPlane"
-                          ]
-                        }
-                      ],
-                      "endpoint": {
-                        "url": "https://{Region}.neptune-graph.{PartitionResult#dnsSuffix}",
-                        "properties": {},
-                        "headers": {}
-                      },
-                      "type": "endpoint"
-                    },
-                    {
-                      "conditions": [],
-                      "error": "Invalid Configuration: Unknown ApiType",
-                      "type": "error"
-                    }
-                  ],
-                  "type": "tree"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [],
-              "error": "Invalid Configuration: Missing Region",
-              "type": "error"
-            }
-          ]
-        },
-        "smithy.rules#endpointTests": {
-          "testCases": [
-            {
-              "documentation": "Region and CP ApiType are provided",
-              "expect": {
-                "endpoint": {
-                  "url": "https://mycustomDomain.com"
-                }
-              },
-              "params": {
-                "Endpoint": "https://mycustomDomain.com",
-                "ApiType": "ControlPlane",
-                "Region": "us-east-1"
-              }
-            },
-            {
-              "documentation": "Region and DP ApiType are provided",
-              "expect": {
-                "endpoint": {
-                  "url": "https://mycustomDomain.com"
-                }
-              },
-              "params": {
-                "Endpoint": "https://mycustomDomain.com",
-                "ApiType": "DataPlane",
-                "Region": "us-east-1"
-              }
-            },
-            {
-              "documentation": "Region and invalid ApiType are provided",
-              "expect": {
-                "endpoint": {
-                  "url": "https://mycustomDomain.com"
-                }
-              },
-              "params": {
-                "Endpoint": "https://mycustomDomain.com",
-                "ApiType": "someInvalidApiType",
-                "Region": "us-east-1"
-              }
-            },
-            {
-              "documentation": "Only invalid ApiType is provided",
-              "expect": {
-                "endpoint": {
-                  "url": "https://mycustomDomain.com"
-                }
-              },
-              "params": {
-                "Endpoint": "https://mycustomDomain.com",
-                "ApiType": "someInvalidApiType"
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.us-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-east-1, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.us-east-1.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.us-east-1.on.aws"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.us-east-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-east-1, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://us-east-1.neptune-graph.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.us-east-2.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-east-2",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-east-2",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.us-east-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-east-2",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-east-2, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-east-2",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.us-east-2.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-east-2",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.us-east-2.on.aws"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-east-2",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.us-east-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-east-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-east-2, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://us-east-2.neptune-graph.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-east-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.us-west-2.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-west-2",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-west-2",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.us-west-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-west-2",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-west-2, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-west-2",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.us-west-2.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-west-2",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.us-west-2.on.aws"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-west-2",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.us-west-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "us-west-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: us-west-2, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://us-west-2.neptune-graph.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "us-west-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.eu-west-1.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-west-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-west-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.eu-west-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-west-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-west-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.eu-west-1.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-west-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.eu-west-1.on.aws"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-west-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.eu-west-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-west-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-west-1, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://eu-west-1.neptune-graph.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-west-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.eu-west-2.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-west-2",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-west-2",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.eu-west-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-west-2",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-west-2",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.eu-west-2.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-west-2",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.eu-west-2.on.aws"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-west-2",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.eu-west-2.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-west-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-west-2, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://eu-west-2.neptune-graph.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-west-2",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.eu-central-1.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-central-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-central-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.eu-central-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-central-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-central-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.eu-central-1.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-central-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.eu-central-1.on.aws"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-central-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.eu-central-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "eu-central-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: eu-central-1, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://eu-central-1.neptune-graph.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "eu-central-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.ap-southeast-1.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "ap-southeast-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "ap-southeast-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.ap-southeast-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "ap-southeast-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "ap-southeast-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.ap-southeast-1.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "ap-southeast-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.ap-southeast-1.on.aws"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "ap-southeast-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.ap-southeast-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "ap-southeast-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: ap-southeast-1, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://ap-southeast-1.neptune-graph.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "ap-southeast-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.ap-northeast-1.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "ap-northeast-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: true",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "ap-northeast-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph-fips.ap-northeast-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "ap-northeast-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: true, useDualStackEndpoint: false",
-              "expect": {
-                "error": "Invalid Configuration: fips endpoint is not supported for this API"
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "ap-northeast-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.ap-northeast-1.api.aws"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "ap-northeast-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: true",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.ap-northeast-1.on.aws"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "ap-northeast-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Validate CP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://neptune-graph.ap-northeast-1.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "ControlPlane",
-                "Region": "ap-northeast-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate DP endpoint in region: ap-northeast-1, useFipsEndpoint: false, useDualStackEndpoint: false",
-              "expect": {
-                "endpoint": {
-                  "url": "https://ap-northeast-1.neptune-graph.amazonaws.com"
-                }
-              },
-              "params": {
-                "ApiType": "DataPlane",
-                "Region": "ap-northeast-1",
-                "UseFIPS": false,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Validate When no region is provided",
-              "expect": {
-                "error": "Invalid Configuration: Missing Region"
-              },
-              "params": {
-                "ApiType": "DataPlane"
-              }
-            },
-            {
-              "documentation": "Validate When invalid/unknown ApiType provided",
-              "expect": {
-                "error": "Invalid Configuration: Unknown ApiType"
-              },
-              "params": {
-                "Region": "us-east-1",
-                "ApiType": "someUnknownValue"
-              }
-            },
-            {
-              "documentation": "Both Fips and dualstack enabled",
-              "expect": {
-                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-              },
-              "params": {
-                "Endpoint": "https://mycustomDomain.com",
-                "ApiType": "ControlPlane",
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": true
-              }
-            },
-            {
-              "documentation": "Fips enabled and dualstack disabled",
-              "expect": {
-                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
-              },
-              "params": {
-                "Endpoint": "https://mycustomDomain.com",
-                "ApiType": "ControlPlane",
-                "Region": "us-east-1",
-                "UseFIPS": true,
-                "UseDualStack": false
-              }
-            },
-            {
-              "documentation": "Fips disabled and dualstack enabled",
-              "expect": {
-                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
-              },
-              "params": {
-                "Endpoint": "https://mycustomDomain.com",
-                "ApiType": "ControlPlane",
-                "Region": "us-east-1",
-                "UseFIPS": false,
-                "UseDualStack": true
-              }
-            }
-          ],
-          "version": "1.0"
-        }
       }
     }
   }

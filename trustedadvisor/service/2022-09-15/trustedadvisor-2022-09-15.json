@@ -3031,302 +3031,6 @@
         }
       }
     },
-    "com.amazonaws.trustedadvisor#UpdateOrganizationRecommendationLifecycle": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.trustedadvisor#UpdateOrganizationRecommendationLifecycleRequest"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.trustedadvisor#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.trustedadvisor#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.trustedadvisor#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.trustedadvisor#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.trustedadvisor#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.trustedadvisor#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Update the lifecycle of a Recommendation within an Organization. This API only supports prioritized\n            recommendations.\n        </p>",
-        "smithy.api#examples": [
-          {
-            "title": "Update the lifecycle stage of an AWS Organization's Recommendation that is managed by AWS Trusted Advisor Priority",
-            "input": {
-              "organizationRecommendationIdentifier": "arn:aws:trustedadvisor:::organization-recommendation/96b5e5ca-7930-444c-90c6-06d386128100",
-              "lifecycleStage": "dismissed",
-              "updateReasonCode": "not_applicable",
-              "updateReason": "Does not apply to this resource"
-            },
-            "output": {}
-          }
-        ],
-        "smithy.api#http": {
-          "method": "PUT",
-          "uri": "/v1/organization-recommendations/{organizationRecommendationIdentifier}/lifecycle",
-          "code": 200
-        },
-        "smithy.api#idempotent": {},
-        "smithy.api#tags": []
-      }
-    },
-    "com.amazonaws.trustedadvisor#UpdateOrganizationRecommendationLifecycleRequest": {
-      "type": "structure",
-      "members": {
-        "lifecycleStage": {
-          "target": "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStage",
-          "traits": {
-            "smithy.api#documentation": "<p>The new lifecycle stage</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "updateReason": {
-          "target": "com.amazonaws.trustedadvisor#RecommendationUpdateReason",
-          "traits": {
-            "smithy.api#documentation": "<p>Reason for the lifecycle stage change</p>"
-          }
-        },
-        "updateReasonCode": {
-          "target": "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStageReasonCode",
-          "traits": {
-            "smithy.api#documentation": "<p>Reason code for the lifecycle state change</p>"
-          }
-        },
-        "organizationRecommendationIdentifier": {
-          "target": "com.amazonaws.trustedadvisor#OrganizationRecommendationIdentifier",
-          "traits": {
-            "smithy.api#documentation": "<p>The Recommendation identifier for AWS Trusted Advisor Priority recommendations</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycle": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleRequest"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.trustedadvisor#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.trustedadvisor#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.trustedadvisor#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.trustedadvisor#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.trustedadvisor#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.trustedadvisor#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Update the lifecyle of a Recommendation. This API only supports prioritized recommendations.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "Update the lifecycle stage of a Recommendation managed by AWS Trusted Advisor Priority",
-            "input": {
-              "recommendationIdentifier": "arn:aws:trustedadvisor::000000000000:recommendation/861c9c6e-f169-405a-8b59-537a8caccd7a",
-              "lifecycleStage": "resolved",
-              "updateReasonCode": "valid_business_case",
-              "updateReason": "Resolved the recommendation"
-            },
-            "output": {}
-          }
-        ],
-        "smithy.api#http": {
-          "method": "PUT",
-          "uri": "/v1/recommendations/{recommendationIdentifier}/lifecycle",
-          "code": 200
-        },
-        "smithy.api#idempotent": {},
-        "smithy.api#tags": []
-      }
-    },
-    "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleRequest": {
-      "type": "structure",
-      "members": {
-        "lifecycleStage": {
-          "target": "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStage",
-          "traits": {
-            "smithy.api#documentation": "<p>The new lifecycle stage</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "updateReason": {
-          "target": "com.amazonaws.trustedadvisor#RecommendationUpdateReason",
-          "traits": {
-            "smithy.api#documentation": "<p>Reason for the lifecycle stage change</p>"
-          }
-        },
-        "updateReasonCode": {
-          "target": "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStageReasonCode",
-          "traits": {
-            "smithy.api#documentation": "<p>Reason code for the lifecycle state change</p>"
-          }
-        },
-        "recommendationIdentifier": {
-          "target": "com.amazonaws.trustedadvisor#AccountRecommendationIdentifier",
-          "traits": {
-            "smithy.api#documentation": "<p>The Recommendation identifier for AWS Trusted Advisor Priority recommendations</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStage": {
-      "type": "enum",
-      "members": {
-        "PENDING_RESPONSE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "pending_response"
-          }
-        },
-        "IN_PROGRESS": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "in_progress"
-          }
-        },
-        "DISMISSED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "dismissed"
-          }
-        },
-        "RESOLVED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "resolved"
-          }
-        }
-      }
-    },
-    "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStageReasonCode": {
-      "type": "enum",
-      "members": {
-        "NON_CRITICAL_ACCOUNT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "non_critical_account"
-          }
-        },
-        "TEMPORARY_ACCOUNT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "temporary_account"
-          }
-        },
-        "VALID_BUSINESS_CASE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "valid_business_case"
-          }
-        },
-        "OTHER_METHODS_AVAILABLE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "other_methods_available"
-          }
-        },
-        "LOW_PRIORITY": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "low_priority"
-          }
-        },
-        "NOT_APPLICABLE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "not_applicable"
-          }
-        },
-        "OTHER": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "other"
-          }
-        }
-      }
-    },
-    "com.amazonaws.trustedadvisor#UpdateRecommendationResourceExclusionError": {
-      "type": "structure",
-      "members": {
-        "arn": {
-          "target": "com.amazonaws.trustedadvisor#RecommendationResourceArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the Recommendation Resource</p>"
-          }
-        },
-        "errorCode": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The error code</p>"
-          }
-        },
-        "errorMessage": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The error message</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The error entry for Recommendation Resource exclusion. Each entry is a combination of Recommendation Resource ARN, error code and error message</p>"
-      }
-    },
-    "com.amazonaws.trustedadvisor#UpdateRecommendationResourceExclusionErrorList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.trustedadvisor#UpdateRecommendationResourceExclusionError"
-      }
-    },
-    "com.amazonaws.trustedadvisor#ValidationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Exception that the request failed to satisfy service constraints</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
     "com.amazonaws.trustedadvisor#TrustedAdvisor": {
       "type": "service",
       "version": "2022-09-15",
@@ -4077,6 +3781,302 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.trustedadvisor#UpdateOrganizationRecommendationLifecycle": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.trustedadvisor#UpdateOrganizationRecommendationLifecycleRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.trustedadvisor#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.trustedadvisor#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.trustedadvisor#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.trustedadvisor#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.trustedadvisor#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.trustedadvisor#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Update the lifecycle of a Recommendation within an Organization. This API only supports prioritized\n            recommendations.\n        </p>",
+        "smithy.api#examples": [
+          {
+            "title": "Update the lifecycle stage of an AWS Organization's Recommendation that is managed by AWS Trusted Advisor Priority",
+            "input": {
+              "organizationRecommendationIdentifier": "arn:aws:trustedadvisor:::organization-recommendation/96b5e5ca-7930-444c-90c6-06d386128100",
+              "lifecycleStage": "dismissed",
+              "updateReasonCode": "not_applicable",
+              "updateReason": "Does not apply to this resource"
+            },
+            "output": {}
+          }
+        ],
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/v1/organization-recommendations/{organizationRecommendationIdentifier}/lifecycle",
+          "code": 200
+        },
+        "smithy.api#idempotent": {},
+        "smithy.api#tags": []
+      }
+    },
+    "com.amazonaws.trustedadvisor#UpdateOrganizationRecommendationLifecycleRequest": {
+      "type": "structure",
+      "members": {
+        "lifecycleStage": {
+          "target": "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStage",
+          "traits": {
+            "smithy.api#documentation": "<p>The new lifecycle stage</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "updateReason": {
+          "target": "com.amazonaws.trustedadvisor#RecommendationUpdateReason",
+          "traits": {
+            "smithy.api#documentation": "<p>Reason for the lifecycle stage change</p>"
+          }
+        },
+        "updateReasonCode": {
+          "target": "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStageReasonCode",
+          "traits": {
+            "smithy.api#documentation": "<p>Reason code for the lifecycle state change</p>"
+          }
+        },
+        "organizationRecommendationIdentifier": {
+          "target": "com.amazonaws.trustedadvisor#OrganizationRecommendationIdentifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The Recommendation identifier for AWS Trusted Advisor Priority recommendations</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycle": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.trustedadvisor#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.trustedadvisor#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.trustedadvisor#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.trustedadvisor#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.trustedadvisor#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.trustedadvisor#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Update the lifecyle of a Recommendation. This API only supports prioritized recommendations.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "Update the lifecycle stage of a Recommendation managed by AWS Trusted Advisor Priority",
+            "input": {
+              "recommendationIdentifier": "arn:aws:trustedadvisor::000000000000:recommendation/861c9c6e-f169-405a-8b59-537a8caccd7a",
+              "lifecycleStage": "resolved",
+              "updateReasonCode": "valid_business_case",
+              "updateReason": "Resolved the recommendation"
+            },
+            "output": {}
+          }
+        ],
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/v1/recommendations/{recommendationIdentifier}/lifecycle",
+          "code": 200
+        },
+        "smithy.api#idempotent": {},
+        "smithy.api#tags": []
+      }
+    },
+    "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleRequest": {
+      "type": "structure",
+      "members": {
+        "lifecycleStage": {
+          "target": "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStage",
+          "traits": {
+            "smithy.api#documentation": "<p>The new lifecycle stage</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "updateReason": {
+          "target": "com.amazonaws.trustedadvisor#RecommendationUpdateReason",
+          "traits": {
+            "smithy.api#documentation": "<p>Reason for the lifecycle stage change</p>"
+          }
+        },
+        "updateReasonCode": {
+          "target": "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStageReasonCode",
+          "traits": {
+            "smithy.api#documentation": "<p>Reason code for the lifecycle state change</p>"
+          }
+        },
+        "recommendationIdentifier": {
+          "target": "com.amazonaws.trustedadvisor#AccountRecommendationIdentifier",
+          "traits": {
+            "smithy.api#documentation": "<p>The Recommendation identifier for AWS Trusted Advisor Priority recommendations</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStage": {
+      "type": "enum",
+      "members": {
+        "PENDING_RESPONSE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "pending_response"
+          }
+        },
+        "IN_PROGRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "in_progress"
+          }
+        },
+        "DISMISSED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "dismissed"
+          }
+        },
+        "RESOLVED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "resolved"
+          }
+        }
+      }
+    },
+    "com.amazonaws.trustedadvisor#UpdateRecommendationLifecycleStageReasonCode": {
+      "type": "enum",
+      "members": {
+        "NON_CRITICAL_ACCOUNT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "non_critical_account"
+          }
+        },
+        "TEMPORARY_ACCOUNT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "temporary_account"
+          }
+        },
+        "VALID_BUSINESS_CASE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "valid_business_case"
+          }
+        },
+        "OTHER_METHODS_AVAILABLE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "other_methods_available"
+          }
+        },
+        "LOW_PRIORITY": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "low_priority"
+          }
+        },
+        "NOT_APPLICABLE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "not_applicable"
+          }
+        },
+        "OTHER": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "other"
+          }
+        }
+      }
+    },
+    "com.amazonaws.trustedadvisor#UpdateRecommendationResourceExclusionError": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.trustedadvisor#RecommendationResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the Recommendation Resource</p>"
+          }
+        },
+        "errorCode": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code</p>"
+          }
+        },
+        "errorMessage": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The error message</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The error entry for Recommendation Resource exclusion. Each entry is a combination of Recommendation Resource ARN, error code and error message</p>"
+      }
+    },
+    "com.amazonaws.trustedadvisor#UpdateRecommendationResourceExclusionErrorList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.trustedadvisor#UpdateRecommendationResourceExclusionError"
+      }
+    },
+    "com.amazonaws.trustedadvisor#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exception that the request failed to satisfy service constraints</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
       }
     }
   }

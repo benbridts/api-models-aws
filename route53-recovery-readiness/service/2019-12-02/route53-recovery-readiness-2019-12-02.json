@@ -2739,748 +2739,6 @@
         "smithy.api#documentation": "<p>A collection of resources of the same type.</p>"
       }
     },
-    "com.amazonaws.route53recoveryreadiness#RuleResult": {
-      "type": "structure",
-      "members": {
-        "LastCheckedTimestamp": {
-          "target": "com.amazonaws.route53recoveryreadiness#ReadinessCheckTimestamp",
-          "traits": {
-            "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p>The time the resource was last checked for readiness, in ISO-8601 format, UTC.</p>",
-            "smithy.api#jsonName": "lastCheckedTimestamp",
-            "smithy.api#required": {}
-          }
-        },
-        "Messages": {
-          "target": "com.amazonaws.route53recoveryreadiness#__listOfMessage",
-          "traits": {
-            "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p>Details about the resource's readiness.</p>",
-            "smithy.api#jsonName": "messages",
-            "smithy.api#required": {}
-          }
-        },
-        "Readiness": {
-          "target": "com.amazonaws.route53recoveryreadiness#Readiness",
-          "traits": {
-            "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p>The readiness at rule level.</p>",
-            "smithy.api#jsonName": "readiness",
-            "smithy.api#required": {}
-          }
-        },
-        "RuleId": {
-          "target": "com.amazonaws.route53recoveryreadiness#__string",
-          "traits": {
-            "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p>The identifier of the rule.</p>",
-            "smithy.api#jsonName": "ruleId",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The result of a successful Rule request, with status for an individual rule.</p>"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.route53recoveryreadiness#TagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.route53recoveryreadiness#TagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Adds a tag to a resource.</p>",
-        "smithy.api#http": {
-          "method": "POST",
-          "uri": "/tags/{ResourceArn}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.route53recoveryreadiness#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a resource.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.route53recoveryreadiness#Tags",
-          "traits": {
-            "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p></p>",
-            "smithy.api#jsonName": "tags",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#TagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#Tags": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.route53recoveryreadiness#__string"
-      },
-      "value": {
-        "target": "com.amazonaws.route53recoveryreadiness#__string"
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A collection of tags associated with a resource.</p>"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#TargetResource": {
-      "type": "structure",
-      "members": {
-        "NLBResource": {
-          "target": "com.amazonaws.route53recoveryreadiness#NLBResource",
-          "traits": {
-            "smithy.api#documentation": "<p>The Network Load Balancer Resource.</p>",
-            "smithy.api#jsonName": "nLBResource"
-          }
-        },
-        "R53Resource": {
-          "target": "com.amazonaws.route53recoveryreadiness#R53ResourceRecord",
-          "traits": {
-            "smithy.api#documentation": "<p>The Route 53 resource.</p>",
-            "smithy.api#jsonName": "r53Resource"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The target resource that the Route 53 record points to.</p>"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#ThrottlingException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.route53recoveryreadiness#__string",
-          "traits": {
-            "smithy.api#jsonName": "message"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "Request was denied due to request throttling.",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.route53recoveryreadiness#UntagResourceRequest"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes a tag from a resource.</p>",
-        "smithy.api#http": {
-          "method": "DELETE",
-          "uri": "/tags/{ResourceArn}",
-          "code": 204
-        }
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.route53recoveryreadiness#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a resource.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
-          "traits": {
-            "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p>The keys for tags you add to resources.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateCell": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.route53recoveryreadiness#UpdateCellRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.route53recoveryreadiness#UpdateCellResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates a cell to replace the list of nested cells with a new list of nested cells.</p>",
-        "smithy.api#http": {
-          "method": "PUT",
-          "uri": "/cells/{CellName}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateCellRequest": {
-      "type": "structure",
-      "members": {
-        "CellName": {
-          "target": "com.amazonaws.route53recoveryreadiness#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the cell.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "Cells": {
-          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
-          "traits": {
-            "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p>A list of cell Amazon Resource Names (ARNs), which completely replaces the previous list.</p>",
-            "smithy.api#jsonName": "cells",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateCellResponse": {
-      "type": "structure",
-      "members": {
-        "CellArn": {
-          "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the cell.</p>",
-            "smithy.api#jsonName": "cellArn"
-          }
-        },
-        "CellName": {
-          "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the cell.</p>",
-            "smithy.api#jsonName": "cellName"
-          }
-        },
-        "Cells": {
-          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of cell ARNs.</p>",
-            "smithy.api#jsonName": "cells"
-          }
-        },
-        "ParentReadinessScopes": {
-          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.</p>",
-            "smithy.api#jsonName": "parentReadinessScopes"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.route53recoveryreadiness#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>Tags on the resources.</p>",
-            "smithy.api#jsonName": "tags"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateReadinessCheck": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.route53recoveryreadiness#UpdateReadinessCheckRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.route53recoveryreadiness#UpdateReadinessCheckResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates a readiness check.</p>",
-        "smithy.api#http": {
-          "method": "PUT",
-          "uri": "/readinesschecks/{ReadinessCheckName}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateReadinessCheckRequest": {
-      "type": "structure",
-      "members": {
-        "ReadinessCheckName": {
-          "target": "com.amazonaws.route53recoveryreadiness#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>Name of a readiness check.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "ResourceSetName": {
-          "target": "com.amazonaws.route53recoveryreadiness#__string",
-          "traits": {
-            "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p>The name of the resource set to be checked.</p>",
-            "smithy.api#jsonName": "resourceSetName",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Name of a readiness check to describe.</p>",
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateReadinessCheckResponse": {
-      "type": "structure",
-      "members": {
-        "ReadinessCheckArn": {
-          "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with a readiness check.</p>",
-            "smithy.api#jsonName": "readinessCheckArn"
-          }
-        },
-        "ReadinessCheckName": {
-          "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
-          "traits": {
-            "smithy.api#documentation": "<p>Name of a readiness check.</p>",
-            "smithy.api#jsonName": "readinessCheckName"
-          }
-        },
-        "ResourceSet": {
-          "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
-          "traits": {
-            "smithy.api#documentation": "<p>Name of the resource set to be checked.</p>",
-            "smithy.api#jsonName": "resourceSet"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.route53recoveryreadiness#Tags",
-          "traits": {
-            "smithy.api#jsonName": "tags"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateRecoveryGroup": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.route53recoveryreadiness#UpdateRecoveryGroupRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.route53recoveryreadiness#UpdateRecoveryGroupResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates a recovery group.</p>",
-        "smithy.api#http": {
-          "method": "PUT",
-          "uri": "/recoverygroups/{RecoveryGroupName}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateRecoveryGroupRequest": {
-      "type": "structure",
-      "members": {
-        "Cells": {
-          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
-          "traits": {
-            "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p>A list of cell Amazon Resource Names (ARNs). This list completely replaces the previous list.</p>",
-            "smithy.api#jsonName": "cells",
-            "smithy.api#required": {}
-          }
-        },
-        "RecoveryGroupName": {
-          "target": "com.amazonaws.route53recoveryreadiness#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of a recovery group.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Name of a recovery group.</p>",
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateRecoveryGroupResponse": {
-      "type": "structure",
-      "members": {
-        "Cells": {
-          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of a cell's Amazon Resource Names (ARNs).</p>",
-            "smithy.api#jsonName": "cells"
-          }
-        },
-        "RecoveryGroupArn": {
-          "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the recovery group.</p>",
-            "smithy.api#jsonName": "recoveryGroupArn"
-          }
-        },
-        "RecoveryGroupName": {
-          "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the recovery group.</p>",
-            "smithy.api#jsonName": "recoveryGroupName"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.route53recoveryreadiness#Tags",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags associated with the recovery group.</p>",
-            "smithy.api#jsonName": "tags"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateResourceSet": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.route53recoveryreadiness#UpdateResourceSetRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.route53recoveryreadiness#UpdateResourceSetResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates a resource set.</p>",
-        "smithy.api#http": {
-          "method": "PUT",
-          "uri": "/resourcesets/{ResourceSetName}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateResourceSetRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceSetName": {
-          "target": "com.amazonaws.route53recoveryreadiness#__string",
-          "traits": {
-            "smithy.api#documentation": "<p>Name of a resource set.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "ResourceSetType": {
-          "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
-          "traits": {
-            "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
-            "smithy.api#jsonName": "resourceSetType",
-            "smithy.api#required": {}
-          }
-        },
-        "Resources": {
-          "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
-          "traits": {
-            "smithy.api#clientOptional": {},
-            "smithy.api#documentation": "<p>A list of resource objects.</p>",
-            "smithy.api#jsonName": "resources",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Name of a resource set.</p>",
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#UpdateResourceSetResponse": {
-      "type": "structure",
-      "members": {
-        "ResourceSetArn": {
-          "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the resource set.</p>",
-            "smithy.api#jsonName": "resourceSetArn"
-          }
-        },
-        "ResourceSetName": {
-          "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the resource set.</p>",
-            "smithy.api#jsonName": "resourceSetName"
-          }
-        },
-        "ResourceSetType": {
-          "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
-          "traits": {
-            "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
-            "smithy.api#jsonName": "resourceSetType"
-          }
-        },
-        "Resources": {
-          "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of resource objects.</p>",
-            "smithy.api#jsonName": "resources"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.route53recoveryreadiness#Tags",
-          "traits": {
-            "smithy.api#jsonName": "tags"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#ValidationException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.route53recoveryreadiness#__string",
-          "traits": {
-            "smithy.api#jsonName": "message"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "The input fails to satisfy the constraints specified by an AWS service.",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfCellOutput": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#CellOutput"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfCrossAccountAuthorization": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#CrossAccountAuthorization"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfListRulesOutput": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#ListRulesOutput"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfMessage": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#Message"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfReadinessCheckOutput": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#ReadinessCheckOutput"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfReadinessCheckSummary": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#ReadinessCheckSummary"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfRecommendation": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#Recommendation"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfRecoveryGroupOutput": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#RecoveryGroupOutput"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfResource": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#Resource"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfResourceResult": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#ResourceResult"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfResourceSetOutput": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#ResourceSetOutput"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOfRuleResult": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#RuleResult"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__listOf__string": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoveryreadiness#__string"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__string": {
-      "type": "string"
-    },
-    "com.amazonaws.route53recoveryreadiness#__stringMax256": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        }
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__stringMax64": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 64
-        }
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 64
-        },
-        "smithy.api#pattern": "^\\A[a-zA-Z0-9_]+\\z$"
-      }
-    },
-    "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09": {
-      "type": "string",
-      "traits": {
-        "smithy.api#pattern": "^AWS::[A-Za-z0-9]+::[A-Za-z0-9]+$"
-      }
-    },
     "com.amazonaws.route53recoveryreadiness#Route53RecoveryReadiness": {
       "type": "service",
       "version": "2019-12-02",
@@ -4224,6 +3482,748 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#RuleResult": {
+      "type": "structure",
+      "members": {
+        "LastCheckedTimestamp": {
+          "target": "com.amazonaws.route53recoveryreadiness#ReadinessCheckTimestamp",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The time the resource was last checked for readiness, in ISO-8601 format, UTC.</p>",
+            "smithy.api#jsonName": "lastCheckedTimestamp",
+            "smithy.api#required": {}
+          }
+        },
+        "Messages": {
+          "target": "com.amazonaws.route53recoveryreadiness#__listOfMessage",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>Details about the resource's readiness.</p>",
+            "smithy.api#jsonName": "messages",
+            "smithy.api#required": {}
+          }
+        },
+        "Readiness": {
+          "target": "com.amazonaws.route53recoveryreadiness#Readiness",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The readiness at rule level.</p>",
+            "smithy.api#jsonName": "readiness",
+            "smithy.api#required": {}
+          }
+        },
+        "RuleId": {
+          "target": "com.amazonaws.route53recoveryreadiness#__string",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The identifier of the rule.</p>",
+            "smithy.api#jsonName": "ruleId",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The result of a successful Rule request, with status for an individual rule.</p>"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.route53recoveryreadiness#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.route53recoveryreadiness#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds a tag to a resource.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/tags/{ResourceArn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.route53recoveryreadiness#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a resource.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.route53recoveryreadiness#Tags",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p></p>",
+            "smithy.api#jsonName": "tags",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#TagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#Tags": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.route53recoveryreadiness#__string"
+      },
+      "value": {
+        "target": "com.amazonaws.route53recoveryreadiness#__string"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A collection of tags associated with a resource.</p>"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#TargetResource": {
+      "type": "structure",
+      "members": {
+        "NLBResource": {
+          "target": "com.amazonaws.route53recoveryreadiness#NLBResource",
+          "traits": {
+            "smithy.api#documentation": "<p>The Network Load Balancer Resource.</p>",
+            "smithy.api#jsonName": "nLBResource"
+          }
+        },
+        "R53Resource": {
+          "target": "com.amazonaws.route53recoveryreadiness#R53ResourceRecord",
+          "traits": {
+            "smithy.api#documentation": "<p>The Route 53 resource.</p>",
+            "smithy.api#jsonName": "r53Resource"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The target resource that the Route 53 record points to.</p>"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.route53recoveryreadiness#__string",
+          "traits": {
+            "smithy.api#jsonName": "message"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Request was denied due to request throttling.",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.route53recoveryreadiness#UntagResourceRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes a tag from a resource.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/tags/{ResourceArn}",
+          "code": 204
+        }
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.route53recoveryreadiness#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a resource.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The keys for tags you add to resources.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateCell": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.route53recoveryreadiness#UpdateCellRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.route53recoveryreadiness#UpdateCellResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a cell to replace the list of nested cells with a new list of nested cells.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/cells/{CellName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateCellRequest": {
+      "type": "structure",
+      "members": {
+        "CellName": {
+          "target": "com.amazonaws.route53recoveryreadiness#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the cell.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Cells": {
+          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>A list of cell Amazon Resource Names (ARNs), which completely replaces the previous list.</p>",
+            "smithy.api#jsonName": "cells",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateCellResponse": {
+      "type": "structure",
+      "members": {
+        "CellArn": {
+          "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the cell.</p>",
+            "smithy.api#jsonName": "cellArn"
+          }
+        },
+        "CellName": {
+          "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the cell.</p>",
+            "smithy.api#jsonName": "cellName"
+          }
+        },
+        "Cells": {
+          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of cell ARNs.</p>",
+            "smithy.api#jsonName": "cells"
+          }
+        },
+        "ParentReadinessScopes": {
+          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.</p>",
+            "smithy.api#jsonName": "parentReadinessScopes"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.route53recoveryreadiness#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Tags on the resources.</p>",
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateReadinessCheck": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.route53recoveryreadiness#UpdateReadinessCheckRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.route53recoveryreadiness#UpdateReadinessCheckResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a readiness check.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/readinesschecks/{ReadinessCheckName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateReadinessCheckRequest": {
+      "type": "structure",
+      "members": {
+        "ReadinessCheckName": {
+          "target": "com.amazonaws.route53recoveryreadiness#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>Name of a readiness check.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceSetName": {
+          "target": "com.amazonaws.route53recoveryreadiness#__string",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The name of the resource set to be checked.</p>",
+            "smithy.api#jsonName": "resourceSetName",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Name of a readiness check to describe.</p>",
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateReadinessCheckResponse": {
+      "type": "structure",
+      "members": {
+        "ReadinessCheckArn": {
+          "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) associated with a readiness check.</p>",
+            "smithy.api#jsonName": "readinessCheckArn"
+          }
+        },
+        "ReadinessCheckName": {
+          "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
+          "traits": {
+            "smithy.api#documentation": "<p>Name of a readiness check.</p>",
+            "smithy.api#jsonName": "readinessCheckName"
+          }
+        },
+        "ResourceSet": {
+          "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
+          "traits": {
+            "smithy.api#documentation": "<p>Name of the resource set to be checked.</p>",
+            "smithy.api#jsonName": "resourceSet"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.route53recoveryreadiness#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateRecoveryGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.route53recoveryreadiness#UpdateRecoveryGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.route53recoveryreadiness#UpdateRecoveryGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a recovery group.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/recoverygroups/{RecoveryGroupName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateRecoveryGroupRequest": {
+      "type": "structure",
+      "members": {
+        "Cells": {
+          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>A list of cell Amazon Resource Names (ARNs). This list completely replaces the previous list.</p>",
+            "smithy.api#jsonName": "cells",
+            "smithy.api#required": {}
+          }
+        },
+        "RecoveryGroupName": {
+          "target": "com.amazonaws.route53recoveryreadiness#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a recovery group.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Name of a recovery group.</p>",
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateRecoveryGroupResponse": {
+      "type": "structure",
+      "members": {
+        "Cells": {
+          "target": "com.amazonaws.route53recoveryreadiness#__listOf__string",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of a cell's Amazon Resource Names (ARNs).</p>",
+            "smithy.api#jsonName": "cells"
+          }
+        },
+        "RecoveryGroupArn": {
+          "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the recovery group.</p>",
+            "smithy.api#jsonName": "recoveryGroupArn"
+          }
+        },
+        "RecoveryGroupName": {
+          "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the recovery group.</p>",
+            "smithy.api#jsonName": "recoveryGroupName"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.route53recoveryreadiness#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags associated with the recovery group.</p>",
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateResourceSet": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.route53recoveryreadiness#UpdateResourceSetRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.route53recoveryreadiness#UpdateResourceSetResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.route53recoveryreadiness#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a resource set.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/resourcesets/{ResourceSetName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateResourceSetRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceSetName": {
+          "target": "com.amazonaws.route53recoveryreadiness#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>Name of a resource set.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "ResourceSetType": {
+          "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
+            "smithy.api#jsonName": "resourceSetType",
+            "smithy.api#required": {}
+          }
+        },
+        "Resources": {
+          "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
+          "traits": {
+            "smithy.api#clientOptional": {},
+            "smithy.api#documentation": "<p>A list of resource objects.</p>",
+            "smithy.api#jsonName": "resources",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Name of a resource set.</p>",
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#UpdateResourceSetResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceSetArn": {
+          "target": "com.amazonaws.route53recoveryreadiness#__stringMax256",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the resource set.</p>",
+            "smithy.api#jsonName": "resourceSetArn"
+          }
+        },
+        "ResourceSetName": {
+          "target": "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the resource set.</p>",
+            "smithy.api#jsonName": "resourceSetName"
+          }
+        },
+        "ResourceSetType": {
+          "target": "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource type of the resources in the resource set. Enter one of the following values for resource type:</p> <p>AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage, AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm, AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume, AWS::ElasticLoadBalancing::LoadBalancer, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function, AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck, AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource</p>",
+            "smithy.api#jsonName": "resourceSetType"
+          }
+        },
+        "Resources": {
+          "target": "com.amazonaws.route53recoveryreadiness#__listOfResource",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of resource objects.</p>",
+            "smithy.api#jsonName": "resources"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.route53recoveryreadiness#Tags",
+          "traits": {
+            "smithy.api#jsonName": "tags"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#ValidationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.route53recoveryreadiness#__string",
+          "traits": {
+            "smithy.api#jsonName": "message"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "The input fails to satisfy the constraints specified by an AWS service.",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfCellOutput": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#CellOutput"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfCrossAccountAuthorization": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#CrossAccountAuthorization"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfListRulesOutput": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#ListRulesOutput"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfMessage": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#Message"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfReadinessCheckOutput": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#ReadinessCheckOutput"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfReadinessCheckSummary": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#ReadinessCheckSummary"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfRecommendation": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#Recommendation"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfRecoveryGroupOutput": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#RecoveryGroupOutput"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfResource": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#Resource"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfResourceResult": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#ResourceResult"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfResourceSetOutput": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#ResourceSetOutput"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOfRuleResult": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#RuleResult"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__listOf__string": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoveryreadiness#__string"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__string": {
+      "type": "string"
+    },
+    "com.amazonaws.route53recoveryreadiness#__stringMax256": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__stringMax64": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 64
+        }
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__stringMax64PatternAAZAZ09Z": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 64
+        },
+        "smithy.api#pattern": "^\\A[a-zA-Z0-9_]+\\z$"
+      }
+    },
+    "com.amazonaws.route53recoveryreadiness#__stringPatternAWSAZaZ09AZaZ09": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^AWS::[A-Za-z0-9]+::[A-Za-z0-9]+$"
       }
     }
   }

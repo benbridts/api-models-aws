@@ -2768,364 +2768,7 @@
         "smithy.api#output": {}
       }
     },
-    "com.amazonaws.ecrpublic#Tag": {
-      "type": "structure",
-      "members": {
-        "Key": {
-          "target": "com.amazonaws.ecrpublic#TagKey",
-          "traits": {
-            "smithy.api#documentation": "<p>One part of a key-value pair that make up a tag. A <code>key</code> is a general label\n         that acts like a category for more specific tag values.</p>"
-          }
-        },
-        "Value": {
-          "target": "com.amazonaws.ecrpublic#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a\n         descriptor within a tag category (key).</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The metadata that you apply to a resource to help you categorize and organize them. Each\n         tag consists of a key and an optional value. You define both. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
-      }
-    },
-    "com.amazonaws.ecrpublic#TagKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        }
-      }
-    },
-    "com.amazonaws.ecrpublic#TagKeyList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.ecrpublic#TagKey"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.ecrpublic#TagList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.ecrpublic#Tag"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.ecrpublic#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ecrpublic#TagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.ecrpublic#TagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ecrpublic#InvalidParameterException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#InvalidTagParameterException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#RepositoryNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#ServerException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#TooManyTagsException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Associates the specified tags to a resource with the specified <code>resourceArn</code>.\n         If existing tags on a resource aren't specified in the request parameters, they aren't\n         changed. When a resource is deleted, the tags associated with that resource are also\n         deleted.</p>"
-      }
-    },
-    "com.amazonaws.ecrpublic#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "com.amazonaws.ecrpublic#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to add tags to. Currently, the supported\n         resource is an Amazon ECR Public repository.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.ecrpublic#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to add to the resource. A tag is an array of key-value pairs.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ecrpublic#TagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.ecrpublic#TagValue": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        }
-      }
-    },
-    "com.amazonaws.ecrpublic#TooManyTagsException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.ecrpublic#ExceptionMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The list of tags on the repository is over the limit. The maximum number of tags that\n         can be applied to a repository is 50.</p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.ecrpublic#UnsupportedCommandException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.ecrpublic#ExceptionMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The action isn't supported in this Region.</p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.ecrpublic#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ecrpublic#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.ecrpublic#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ecrpublic#InvalidParameterException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#InvalidTagParameterException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#RepositoryNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#ServerException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#TooManyTagsException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>"
-      }
-    },
-    "com.amazonaws.ecrpublic#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "com.amazonaws.ecrpublic#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to delete tags from. Currently, the supported resource is\n         an Amazon ECR Public repository.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "tagKeys": {
-          "target": "com.amazonaws.ecrpublic#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The keys of the tags to be removed.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ecrpublic#UntagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.ecrpublic#UploadId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-      }
-    },
-    "com.amazonaws.ecrpublic#UploadLayerPart": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ecrpublic#UploadLayerPartRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.ecrpublic#UploadLayerPartResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ecrpublic#InvalidLayerPartException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#InvalidParameterException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#LimitExceededException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#RegistryNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#RepositoryNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#ServerException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
-        },
-        {
-          "target": "com.amazonaws.ecrpublic#UploadNotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Uploads an image layer part to Amazon ECR.</p>\n         <p>When an image is pushed, each new image layer is uploaded in parts. The maximum size of\n         each image layer part can be 20971520 bytes (about 20MB). The UploadLayerPart API is called\n         once for each new image layer part.</p>\n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
-      }
-    },
-    "com.amazonaws.ecrpublic#UploadLayerPartRequest": {
-      "type": "structure",
-      "members": {
-        "registryId": {
-          "target": "com.amazonaws.ecrpublic#RegistryIdOrAlias",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Web Services account ID, or registry alias, that's associated with the registry that you're\n         uploading layer parts to. If you do not specify a registry, the default public registry is assumed.</p>"
-          }
-        },
-        "repositoryName": {
-          "target": "com.amazonaws.ecrpublic#RepositoryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the repository that you're uploading layer parts to.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "uploadId": {
-          "target": "com.amazonaws.ecrpublic#UploadId",
-          "traits": {
-            "smithy.api#documentation": "<p>The upload ID from a previous <a>InitiateLayerUpload</a> operation to\n         associate with the layer part upload.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "partFirstByte": {
-          "target": "com.amazonaws.ecrpublic#PartSize",
-          "traits": {
-            "smithy.api#documentation": "<p>The position of the first byte of the layer part witin the overall image layer.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "partLastByte": {
-          "target": "com.amazonaws.ecrpublic#PartSize",
-          "traits": {
-            "smithy.api#documentation": "<p>The position of the last byte of the layer part within the overall image layer.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "layerPartBlob": {
-          "target": "com.amazonaws.ecrpublic#LayerPartBlob",
-          "traits": {
-            "smithy.api#documentation": "<p>The base64-encoded layer part payload.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ecrpublic#UploadLayerPartResponse": {
-      "type": "structure",
-      "members": {
-        "registryId": {
-          "target": "com.amazonaws.ecrpublic#RegistryId",
-          "traits": {
-            "smithy.api#documentation": "<p>The registry ID that's associated with the request.</p>"
-          }
-        },
-        "repositoryName": {
-          "target": "com.amazonaws.ecrpublic#RepositoryName",
-          "traits": {
-            "smithy.api#documentation": "<p>The repository name that's associated with the request.</p>"
-          }
-        },
-        "uploadId": {
-          "target": "com.amazonaws.ecrpublic#UploadId",
-          "traits": {
-            "smithy.api#documentation": "<p>The upload ID that's associated with the request.</p>"
-          }
-        },
-        "lastByteReceived": {
-          "target": "com.amazonaws.ecrpublic#PartSize",
-          "traits": {
-            "smithy.api#documentation": "<p>The integer value of the last byte that's received in the request.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.ecrpublic#UploadNotFoundException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.ecrpublic#ExceptionMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The upload can't be found, or the specified upload ID isn't valid for this\n         repository.</p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.ecrpublic#Url": {
-      "type": "string"
-    },
-    "com.amazonaws.ecrpublic#UsageText": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 25600
-        }
-      }
-    },
-    "com.amazonaws.ecrpublic#ECRPUBLIC": {
+    "com.amazonaws.ecrpublic#SpencerFrontendService": {
       "type": "service",
       "version": "2020-10-30",
       "operations": [
@@ -3843,6 +3486,363 @@
             }
           ],
           "version": "1.0"
+        }
+      }
+    },
+    "com.amazonaws.ecrpublic#Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "target": "com.amazonaws.ecrpublic#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>One part of a key-value pair that make up a tag. A <code>key</code> is a general label\n         that acts like a category for more specific tag values.</p>"
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.ecrpublic#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a\n         descriptor within a tag category (key).</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The metadata that you apply to a resource to help you categorize and organize them. Each\n         tag consists of a key and an optional value. You define both. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
+      }
+    },
+    "com.amazonaws.ecrpublic#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        }
+      }
+    },
+    "com.amazonaws.ecrpublic#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ecrpublic#TagKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.ecrpublic#TagList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ecrpublic#Tag"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.ecrpublic#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ecrpublic#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ecrpublic#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ecrpublic#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#InvalidTagParameterException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#RepositoryNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#ServerException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#TooManyTagsException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Associates the specified tags to a resource with the specified <code>resourceArn</code>.\n         If existing tags on a resource aren't specified in the request parameters, they aren't\n         changed. When a resource is deleted, the tags associated with that resource are also\n         deleted.</p>"
+      }
+    },
+    "com.amazonaws.ecrpublic#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.ecrpublic#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to add tags to. Currently, the supported\n         resource is an Amazon ECR Public repository.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.ecrpublic#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to add to the resource. A tag is an array of key-value pairs.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ecrpublic#TagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ecrpublic#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.ecrpublic#TooManyTagsException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.ecrpublic#ExceptionMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The list of tags on the repository is over the limit. The maximum number of tags that\n         can be applied to a repository is 50.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.ecrpublic#UnsupportedCommandException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.ecrpublic#ExceptionMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The action isn't supported in this Region.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.ecrpublic#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ecrpublic#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ecrpublic#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ecrpublic#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#InvalidTagParameterException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#RepositoryNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#ServerException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#TooManyTagsException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>"
+      }
+    },
+    "com.amazonaws.ecrpublic#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.ecrpublic#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to delete tags from. Currently, the supported resource is\n         an Amazon ECR Public repository.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tagKeys": {
+          "target": "com.amazonaws.ecrpublic#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The keys of the tags to be removed.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ecrpublic#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ecrpublic#UploadId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+      }
+    },
+    "com.amazonaws.ecrpublic#UploadLayerPart": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ecrpublic#UploadLayerPartRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ecrpublic#UploadLayerPartResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ecrpublic#InvalidLayerPartException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#RegistryNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#RepositoryNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#ServerException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#UnsupportedCommandException"
+        },
+        {
+          "target": "com.amazonaws.ecrpublic#UploadNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Uploads an image layer part to Amazon ECR.</p>\n         <p>When an image is pushed, each new image layer is uploaded in parts. The maximum size of\n         each image layer part can be 20971520 bytes (about 20MB). The UploadLayerPart API is called\n         once for each new image layer part.</p>\n         <note>\n            <p>This operation is used by the Amazon ECR proxy and is not generally used by customers for pulling and pushing images. In most cases, you should use the <code>docker</code> CLI to pull, tag, and push images.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.ecrpublic#UploadLayerPartRequest": {
+      "type": "structure",
+      "members": {
+        "registryId": {
+          "target": "com.amazonaws.ecrpublic#RegistryIdOrAlias",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Web Services account ID, or registry alias, that's associated with the registry that you're\n         uploading layer parts to. If you do not specify a registry, the default public registry is assumed.</p>"
+          }
+        },
+        "repositoryName": {
+          "target": "com.amazonaws.ecrpublic#RepositoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the repository that you're uploading layer parts to.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "uploadId": {
+          "target": "com.amazonaws.ecrpublic#UploadId",
+          "traits": {
+            "smithy.api#documentation": "<p>The upload ID from a previous <a>InitiateLayerUpload</a> operation to\n         associate with the layer part upload.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "partFirstByte": {
+          "target": "com.amazonaws.ecrpublic#PartSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The position of the first byte of the layer part witin the overall image layer.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "partLastByte": {
+          "target": "com.amazonaws.ecrpublic#PartSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The position of the last byte of the layer part within the overall image layer.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "layerPartBlob": {
+          "target": "com.amazonaws.ecrpublic#LayerPartBlob",
+          "traits": {
+            "smithy.api#documentation": "<p>The base64-encoded layer part payload.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ecrpublic#UploadLayerPartResponse": {
+      "type": "structure",
+      "members": {
+        "registryId": {
+          "target": "com.amazonaws.ecrpublic#RegistryId",
+          "traits": {
+            "smithy.api#documentation": "<p>The registry ID that's associated with the request.</p>"
+          }
+        },
+        "repositoryName": {
+          "target": "com.amazonaws.ecrpublic#RepositoryName",
+          "traits": {
+            "smithy.api#documentation": "<p>The repository name that's associated with the request.</p>"
+          }
+        },
+        "uploadId": {
+          "target": "com.amazonaws.ecrpublic#UploadId",
+          "traits": {
+            "smithy.api#documentation": "<p>The upload ID that's associated with the request.</p>"
+          }
+        },
+        "lastByteReceived": {
+          "target": "com.amazonaws.ecrpublic#PartSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The integer value of the last byte that's received in the request.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.ecrpublic#UploadNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.ecrpublic#ExceptionMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The upload can't be found, or the specified upload ID isn't valid for this\n         repository.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.ecrpublic#Url": {
+      "type": "string"
+    },
+    "com.amazonaws.ecrpublic#UsageText": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 25600
         }
       }
     }

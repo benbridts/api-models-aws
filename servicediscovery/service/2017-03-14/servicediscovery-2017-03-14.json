@@ -3374,1128 +3374,7 @@
     "com.amazonaws.servicediscovery#Revision": {
       "type": "long"
     },
-    "com.amazonaws.servicediscovery#RoutingPolicy": {
-      "type": "enum",
-      "members": {
-        "MULTIVALUE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "MULTIVALUE"
-          }
-        },
-        "WEIGHTED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "WEIGHTED"
-          }
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#SOA": {
-      "type": "structure",
-      "members": {
-        "TTL": {
-          "target": "com.amazonaws.servicediscovery#RecordTTL",
-          "traits": {
-            "smithy.api#documentation": "<p>The time to live (TTL) for purposes\n   of negative caching.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Start of Authority (SOA) properties\n   for a public or private DNS namespace.</p>"
-      }
-    },
-    "com.amazonaws.servicediscovery#SOAChange": {
-      "type": "structure",
-      "members": {
-        "TTL": {
-          "target": "com.amazonaws.servicediscovery#RecordTTL",
-          "traits": {
-            "smithy.api#documentation": "<p>The updated time to live (TTL) for\n   purposes of negative caching.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Updated Start of Authority (SOA)\n   properties for a public or private DNS namespace.</p>"
-      }
-    },
-    "com.amazonaws.servicediscovery#Service": {
-      "type": "structure",
-      "members": {
-        "Id": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID that Cloud Map assigned to the service when you created it.</p>"
-          }
-        },
-        "Arn": {
-          "target": "com.amazonaws.servicediscovery#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that Cloud Map assigns to the service when you create it.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.servicediscovery#ServiceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the service.</p>"
-          }
-        },
-        "NamespaceId": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the namespace that was used to create the service.</p>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.servicediscovery#ResourceDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description of the service.</p>"
-          }
-        },
-        "InstanceCount": {
-          "target": "com.amazonaws.servicediscovery#ResourceCount",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of instances that are currently associated with the service. Instances that were previously\n   associated with the service but that are deleted aren't included in the count. The count might not reflect\n   pending registrations and deregistrations.</p>"
-          }
-        },
-        "DnsConfig": {
-          "target": "com.amazonaws.servicediscovery#DnsConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>A complex type that contains information about the Route\u00a053 DNS records that you want Cloud Map to create\n   when you register an instance.</p>\n         <important>\n            <p>The record types of a service can only be changed by deleting the service and recreating it with a new\n     <code>Dnsconfig</code>.</p>\n         </important>"
-          }
-        },
-        "Type": {
-          "target": "com.amazonaws.servicediscovery#ServiceType",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes the systems that can be used to discover the service instances.</p>\n         <dl>\n            <dt>DNS_HTTP</dt>\n            <dd>\n               <p>The service instances can be discovered using either DNS queries or the <code>DiscoverInstances</code>\n      API operation.</p>\n            </dd>\n            <dt>HTTP</dt>\n            <dd>\n               <p>The service instances can only be discovered using the <code>DiscoverInstances</code> API\n      operation.</p>\n            </dd>\n            <dt>DNS</dt>\n            <dd>\n               <p>Reserved.</p>\n            </dd>\n         </dl>"
-          }
-        },
-        "HealthCheckConfig": {
-          "target": "com.amazonaws.servicediscovery#HealthCheckConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            <i>Public DNS and HTTP namespaces only.</i> A complex type that contains settings for an\n   optional health check. If you specify settings for a health check, Cloud Map associates the health check with\n   the records that you specify in <code>DnsConfig</code>.</p>\n         <p>For information about the charges for health checks, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route\u00a053 Pricing</a>.</p>"
-          }
-        },
-        "HealthCheckCustomConfig": {
-          "target": "com.amazonaws.servicediscovery#HealthCheckCustomConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>A complex type that contains information about an optional custom health check.</p>\n         <important>\n            <p>If you specify a health check configuration, you can specify either <code>HealthCheckCustomConfig</code>\n    or <code>HealthCheckConfig</code> but not both.</p>\n         </important>"
-          }
-        },
-        "CreateDate": {
-          "target": "com.amazonaws.servicediscovery#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time that the service was created, in Unix format and Coordinated Universal Time (UTC). The\n   value of <code>CreateDate</code> is accurate to milliseconds. For example, the value <code>1516925490.087</code>\n   represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
-          }
-        },
-        "CreatorRequestId": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk\n   of running the operation twice. <code>CreatorRequestId</code> can be any unique string (for example, a\n   date/timestamp).</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A complex type that contains information about the specified service.</p>"
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceAlreadyExists": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.servicediscovery#ErrorMessage"
-        },
-        "CreatorRequestId": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The <code>CreatorRequestId</code> that was used to create the service.</p>"
-          }
-        },
-        "ServiceId": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the existing service.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The service can't be created because a service with the same name already exists.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceAttributeKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 255
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceAttributeKeyList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.servicediscovery#ServiceAttributeKey"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 30
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceAttributeValue": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 1024
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceAttributes": {
-      "type": "structure",
-      "members": {
-        "ServiceArn": {
-          "target": "com.amazonaws.servicediscovery#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the service that the attributes are associated with.</p>"
-          }
-        },
-        "Attributes": {
-          "target": "com.amazonaws.servicediscovery#ServiceAttributesMap",
-          "traits": {
-            "smithy.api#documentation": "<p>A string map that contains the following information for the service that you specify in\n   <code>ServiceArn</code>:</p>\n         <ul>\n            <li>\n               <p>The attributes that apply to the service. </p>\n            </li>\n            <li>\n               <p>For each attribute, the applicable value.</p>\n            </li>\n         </ul>\n         <p>You can specify a total of 30 attributes.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A complex type that contains information about attributes associated with a specific service.</p>"
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceAttributesLimitExceededException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.servicediscovery#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The attribute can't be added to the service because you've exceeded the quota for the number of attributes you can add to a service.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceAttributesMap": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.servicediscovery#ServiceAttributeKey"
-      },
-      "value": {
-        "target": "com.amazonaws.servicediscovery#ServiceAttributeValue"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 30
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceChange": {
-      "type": "structure",
-      "members": {
-        "Description": {
-          "target": "com.amazonaws.servicediscovery#ResourceDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>A description for the service.</p>"
-          }
-        },
-        "DnsConfig": {
-          "target": "com.amazonaws.servicediscovery#DnsConfigChange",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the Route\u00a053 DNS records that you want Cloud Map to create when you register an\n   instance.</p>"
-          }
-        },
-        "HealthCheckConfig": {
-          "target": "com.amazonaws.servicediscovery#HealthCheckConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            <i>Public DNS and HTTP namespaces only.</i> Settings for an optional health check. If you\n   specify settings for a health check, Cloud Map associates the health check with the records that you specify in\n    <code>DnsConfig</code>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A complex type that contains changes to an existing service.</p>"
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceFilter": {
-      "type": "structure",
-      "members": {
-        "Name": {
-          "target": "com.amazonaws.servicediscovery#ServiceFilterName",
-          "traits": {
-            "smithy.api#documentation": "<p>Specify <code>NAMESPACE_ID</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Values": {
-          "target": "com.amazonaws.servicediscovery#FilterValues",
-          "traits": {
-            "smithy.api#documentation": "<p>The values that are applicable to the value that you specify for <code>Condition</code> to filter the list\n   of services.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Condition": {
-          "target": "com.amazonaws.servicediscovery#FilterCondition",
-          "traits": {
-            "smithy.api#documentation": "<p>The operator that you want to use to determine whether a service is returned by <code>ListServices</code>.\n   Valid values for <code>Condition</code> include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EQ</code>: When you specify <code>EQ</code>, specify one namespace ID for <code>Values</code>.\n      <code>EQ</code> is the default condition and can be omitted.</p>\n            </li>\n         </ul>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A complex type that lets you specify the namespaces that you want to list services for.</p>"
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceFilterName": {
-      "type": "enum",
-      "members": {
-        "NAMESPACE_ID": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "NAMESPACE_ID"
-          }
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceFilters": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.servicediscovery#ServiceFilter",
-        "traits": {
-          "smithy.api#xmlName": "item"
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#pattern": "^((?=^.{1,127}$)^([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9])(\\.([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9]))*$)|(^\\.$)$"
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceNotFound": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.servicediscovery#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>No service exists with the specified ID.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 404
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceSummariesList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.servicediscovery#ServiceSummary"
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceSummary": {
-      "type": "structure",
-      "members": {
-        "Id": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID that Cloud Map assigned to the service when you created it.</p>"
-          }
-        },
-        "Arn": {
-          "target": "com.amazonaws.servicediscovery#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that Cloud Map assigns to the service when you create it.</p>"
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.servicediscovery#ServiceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the service.</p>"
-          }
-        },
-        "Type": {
-          "target": "com.amazonaws.servicediscovery#ServiceType",
-          "traits": {
-            "smithy.api#documentation": "<p>Describes the systems that can be used to discover the service instances.</p>\n         <dl>\n            <dt>DNS_HTTP</dt>\n            <dd>\n               <p>The service instances can be discovered using either DNS queries or the <code>DiscoverInstances</code>\n      API operation.</p>\n            </dd>\n            <dt>HTTP</dt>\n            <dd>\n               <p>The service instances can only be discovered using the <code>DiscoverInstances</code> API\n      operation.</p>\n            </dd>\n            <dt>DNS</dt>\n            <dd>\n               <p>Reserved.</p>\n            </dd>\n         </dl>"
-          }
-        },
-        "Description": {
-          "target": "com.amazonaws.servicediscovery#ResourceDescription",
-          "traits": {
-            "smithy.api#documentation": "<p>The description that you specify when you create the service.</p>"
-          }
-        },
-        "InstanceCount": {
-          "target": "com.amazonaws.servicediscovery#ResourceCount",
-          "traits": {
-            "smithy.api#documentation": "<p>The number of instances that are currently associated with the service. Instances that were previously\n   associated with the service but that are deleted aren't included in the count. The count might not reflect\n   pending registrations and deregistrations.</p>"
-          }
-        },
-        "DnsConfig": {
-          "target": "com.amazonaws.servicediscovery#DnsConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the Route\u00a053 DNS records that you want Cloud Map to create when you register an\n   instance.</p>"
-          }
-        },
-        "HealthCheckConfig": {
-          "target": "com.amazonaws.servicediscovery#HealthCheckConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>\n            <i>Public DNS and HTTP namespaces only.</i> Settings for an optional health check. If you\n   specify settings for a health check, Cloud Map associates the health check with the records that you specify in\n    <code>DnsConfig</code>.</p>"
-          }
-        },
-        "HealthCheckCustomConfig": {
-          "target": "com.amazonaws.servicediscovery#HealthCheckCustomConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about an optional custom health check. A custom health check, which requires that you use a\n   third-party health checker to evaluate the health of your resources, is useful in the following\n   circumstances:</p>\n         <ul>\n            <li>\n               <p>You can't use a health check that's defined by <code>HealthCheckConfig</code> because the resource isn't\n     available over the internet. For example, you can use a custom health check when the instance is in an Amazon\n     VPC. (To check the health of resources in a VPC, the health checker must also be in the VPC.)</p>\n            </li>\n            <li>\n               <p>You want to use a third-party health checker regardless of where your resources are located.</p>\n            </li>\n         </ul>\n         <important>\n            <p>If you specify a health check configuration, you can specify either <code>HealthCheckCustomConfig</code>\n    or <code>HealthCheckConfig</code> but not both.</p>\n         </important>"
-          }
-        },
-        "CreateDate": {
-          "target": "com.amazonaws.servicediscovery#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time that the service was created.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A complex type that contains information about a specified service.</p>"
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceType": {
-      "type": "enum",
-      "members": {
-        "HTTP": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "HTTP"
-          }
-        },
-        "DNS_HTTP": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "DNS_HTTP"
-          }
-        },
-        "DNS": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "DNS"
-          }
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceTypeOption": {
-      "type": "enum",
-      "members": {
-        "HTTP": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "HTTP"
-          }
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#Tag": {
-      "type": "structure",
-      "members": {
-        "Key": {
-          "target": "com.amazonaws.servicediscovery#TagKey",
-          "traits": {
-            "smithy.api#documentation": "<p>The key identifier, or name, of the tag.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Value": {
-          "target": "com.amazonaws.servicediscovery#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>The string value that's associated with the key of the tag. You can set the value of a tag to an empty\n   string, but you can't set the value of a tag to null.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A custom key-value pair that's associated with a resource.</p>"
-      }
-    },
-    "com.amazonaws.servicediscovery#TagKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#TagKeyList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.servicediscovery#TagKey"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#TagList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.servicediscovery#Tag"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.servicediscovery#TagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.servicediscovery#TagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.servicediscovery#InvalidInput"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#TooManyTagsException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Adds one or more tags to the specified resource.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "TagResource example",
-            "documentation": "This example adds \"Department\" and \"Project\" tags to a resource.",
-            "input": {
-              "ResourceARN": "arn:aws:servicediscovery:us-east-1:123456789012:namespace/ns-ylexjili4cdxy3xm",
-              "Tags": [
-                {
-                  "Key": "Department",
-                  "Value": "Engineering"
-                },
-                {
-                  "Key": "Project",
-                  "Value": "Zeta"
-                }
-              ]
-            },
-            "output": {}
-          }
-        ]
-      }
-    },
-    "com.amazonaws.servicediscovery#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceARN": {
-          "target": "com.amazonaws.servicediscovery#AmazonResourceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.servicediscovery#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to add to the specified resource. Specifying the tag key is required. You can set the value of a\n   tag to an empty string, but you can't set the value of a tag to null.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#TagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#TagValue": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        }
-      }
-    },
-    "com.amazonaws.servicediscovery#Timestamp": {
-      "type": "timestamp"
-    },
-    "com.amazonaws.servicediscovery#TooManyTagsException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.servicediscovery#ErrorMessage"
-        },
-        "ResourceName": {
-          "target": "com.amazonaws.servicediscovery#AmazonResourceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the resource.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The list of tags on the resource is over the quota. The maximum number of tags that can be applied to a\n   resource is 50.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.servicediscovery#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.servicediscovery#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.servicediscovery#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.servicediscovery#InvalidInput"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#ResourceNotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "UntagResource example",
-            "documentation": "This example removes the \"Department\" and \"Project\" tags from a resource.",
-            "input": {
-              "ResourceARN": "arn:aws:servicediscovery:us-east-1:123456789012:namespace/ns-ylexjili4cdxy3xm",
-              "TagKeys": [
-                "Project",
-                "Department"
-              ]
-            },
-            "output": {}
-          }
-        ]
-      }
-    },
-    "com.amazonaws.servicediscovery#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceARN": {
-          "target": "com.amazonaws.servicediscovery#AmazonResourceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.servicediscovery#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tag keys to remove from the specified resource.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UntagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdateHttpNamespace": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.servicediscovery#UpdateHttpNamespaceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.servicediscovery#UpdateHttpNamespaceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.servicediscovery#DuplicateRequest"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#InvalidInput"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#NamespaceNotFound"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#ResourceInUse"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates an HTTP\n   namespace.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "To update a HTTP namespace",
-            "documentation": "The following example updates the description of a HTTP namespace.",
-            "input": {
-              "Id": "ns-vh4nbmEXAMPLE",
-              "Namespace": {
-                "Description": "The updated namespace description."
-              }
-            },
-            "output": {
-              "OperationId": "ft52xe2koxhoeormaceymagglsdjyvEXAMPLE"
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdateHttpNamespaceRequest": {
-      "type": "structure",
-      "members": {
-        "Id": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the namespace that you\n   want to update.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "UpdaterRequestId": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique string that identifies the\n   request and that allows failed <code>UpdateHttpNamespace</code> requests to be retried without the risk of\n   running the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a\n   date/timestamp).</p>",
-            "smithy.api#idempotencyToken": {}
-          }
-        },
-        "Namespace": {
-          "target": "com.amazonaws.servicediscovery#HttpNamespaceChange",
-          "traits": {
-            "smithy.api#documentation": "<p>Updated properties for the the HTTP\n   namespace.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdateHttpNamespaceResponse": {
-      "type": "structure",
-      "members": {
-        "OperationId": {
-          "target": "com.amazonaws.servicediscovery#OperationId",
-          "traits": {
-            "smithy.api#documentation": "<p>A value that you can use to determine whether the request completed successfully.\n                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdateInstanceCustomHealthStatus": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.servicediscovery#UpdateInstanceCustomHealthStatusRequest"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.servicediscovery#CustomHealthNotFound"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#InstanceNotFound"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#InvalidInput"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#ServiceNotFound"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Submits a request to change the health status of a custom health check to healthy or unhealthy.</p>\n         <p>You can use <code>UpdateInstanceCustomHealthStatus</code> to change the status only for custom health\n   checks, which you define using <code>HealthCheckCustomConfig</code> when you create a service. You can't use it\n   to change the status for Route\u00a053 health checks, which you define using <code>HealthCheckConfig</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html\">HealthCheckCustomConfig</a>.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "UpdateInstanceCustomHealthStatus Example",
-            "documentation": "This example submits a request to change the health status of an instance associated with a service with a custom health check to HEALTHY.",
-            "input": {
-              "InstanceId": "i-abcd1234",
-              "ServiceId": "srv-e4anhexample0004",
-              "Status": "HEALTHY"
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdateInstanceCustomHealthStatusRequest": {
-      "type": "structure",
-      "members": {
-        "ServiceId": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the service that includes the configuration for the custom health check that you want to change\n   the status for.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "InstanceId": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the instance that you want to change the health status for.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.servicediscovery#CustomHealthStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The new status of the instance, <code>HEALTHY</code> or <code>UNHEALTHY</code>.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdatePrivateDnsNamespace": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.servicediscovery#UpdatePrivateDnsNamespaceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.servicediscovery#UpdatePrivateDnsNamespaceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.servicediscovery#DuplicateRequest"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#InvalidInput"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#NamespaceNotFound"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#ResourceInUse"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates a private DNS\n   namespace.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "To update a private DNS namespace",
-            "documentation": "The following example updates the description of a private DNS namespace.",
-            "input": {
-              "Id": "ns-bk3aEXAMPLE",
-              "UpdaterRequestId": "",
-              "Namespace": {
-                "Description": "The updated namespace description."
-              }
-            },
-            "output": {
-              "OperationId": "ft52xe2koxhoeormaceymagglsdjyvEXAMPLE"
-            }
-          },
-          {
-            "title": "To update a public DNS namespace",
-            "documentation": "The following example updates the description of a public DNS namespace.",
-            "input": {
-              "Id": "ns-bk3aEXAMPLE",
-              "UpdaterRequestId": "",
-              "Namespace": {
-                "Description": "The updated namespace description."
-              }
-            },
-            "output": {
-              "OperationId": "ft52xe2koxhoeormaceymagglsdjEXAMPLE"
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdatePrivateDnsNamespaceRequest": {
-      "type": "structure",
-      "members": {
-        "Id": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the namespace that you\n   want to update.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "UpdaterRequestId": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique string that identifies the\n   request and that allows failed <code>UpdatePrivateDnsNamespace</code> requests to be retried without the risk of\n   running the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a\n   date/timestamp).</p>",
-            "smithy.api#idempotencyToken": {}
-          }
-        },
-        "Namespace": {
-          "target": "com.amazonaws.servicediscovery#PrivateDnsNamespaceChange",
-          "traits": {
-            "smithy.api#documentation": "<p>Updated properties for the private\n   DNS namespace.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdatePrivateDnsNamespaceResponse": {
-      "type": "structure",
-      "members": {
-        "OperationId": {
-          "target": "com.amazonaws.servicediscovery#OperationId",
-          "traits": {
-            "smithy.api#documentation": "<p>A value that you can use to determine whether the request completed successfully.\n                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdatePublicDnsNamespace": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.servicediscovery#UpdatePublicDnsNamespaceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.servicediscovery#UpdatePublicDnsNamespaceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.servicediscovery#DuplicateRequest"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#InvalidInput"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#NamespaceNotFound"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#ResourceInUse"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates a public DNS\n   namespace.</p>"
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdatePublicDnsNamespaceRequest": {
-      "type": "structure",
-      "members": {
-        "Id": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the namespace being\n   updated.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "UpdaterRequestId": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique string that identifies the\n   request and that allows failed <code>UpdatePublicDnsNamespace</code> requests to be retried without the risk of\n   running the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a\n   date/timestamp).</p>",
-            "smithy.api#idempotencyToken": {}
-          }
-        },
-        "Namespace": {
-          "target": "com.amazonaws.servicediscovery#PublicDnsNamespaceChange",
-          "traits": {
-            "smithy.api#documentation": "<p>Updated properties for the public\n   DNS namespace.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdatePublicDnsNamespaceResponse": {
-      "type": "structure",
-      "members": {
-        "OperationId": {
-          "target": "com.amazonaws.servicediscovery#OperationId",
-          "traits": {
-            "smithy.api#documentation": "<p>A value that you can use to determine whether the request completed successfully.\n                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdateService": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.servicediscovery#UpdateServiceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.servicediscovery#UpdateServiceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.servicediscovery#DuplicateRequest"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#InvalidInput"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#ServiceNotFound"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Submits a request to perform the following operations:</p>\n         <ul>\n            <li>\n               <p>Update the TTL setting for existing <code>DnsRecords</code> configurations</p>\n            </li>\n            <li>\n               <p>Add, update, or delete <code>HealthCheckConfig</code> for a specified service</p>\n               <note>\n                  <p>You can't add, update, or delete a <code>HealthCheckCustomConfig</code> configuration.</p>\n               </note>\n            </li>\n         </ul>\n         <p>For public and private DNS namespaces, note the following:</p>\n         <ul>\n            <li>\n               <p>If you omit any existing <code>DnsRecords</code> or <code>HealthCheckConfig</code> configurations from an\n      <code>UpdateService</code> request, the configurations are deleted from the service.</p>\n            </li>\n            <li>\n               <p>If you omit an existing <code>HealthCheckCustomConfig</code> configuration from an\n      <code>UpdateService</code> request, the configuration isn't deleted from the service.</p>\n            </li>\n         </ul>\n         <p>When you update settings for a service, Cloud Map also updates the corresponding settings in all the\n   records and health checks that were created by using the specified service.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "UpdateService Example",
-            "documentation": "This example submits a request to replace the DnsConfig and HealthCheckConfig settings of a specified service.",
-            "input": {
-              "Id": "srv-e4anhexample0004",
-              "Service": {
-                "HealthCheckConfig": {
-                  "Type": "HTTP",
-                  "ResourcePath": "/",
-                  "FailureThreshold": 2
-                },
-                "DnsConfig": {
-                  "DnsRecords": [
-                    {
-                      "Type": "A",
-                      "TTL": 60
-                    }
-                  ]
-                }
-              }
-            },
-            "output": {
-              "OperationId": "m35hsdrkxwjffm3xef4bxyy6vc3ewakx-jdn3y5g5"
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdateServiceAttributes": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.servicediscovery#UpdateServiceAttributesRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.servicediscovery#UpdateServiceAttributesResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.servicediscovery#InvalidInput"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#ServiceAttributesLimitExceededException"
-        },
-        {
-          "target": "com.amazonaws.servicediscovery#ServiceNotFound"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Submits a request to update a specified service to add service-level attributes.</p>",
-        "smithy.api#examples": [
-          {
-            "title": "UpdateServiceAttributes Example",
-            "documentation": "This example submits a request to update the specified service to add a port attribute with the value 80.",
-            "input": {
-              "ServiceId": "srv-e4anhexample0004",
-              "Attributes": {
-                "port": "80"
-              }
-            },
-            "output": {}
-          }
-        ]
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdateServiceAttributesRequest": {
-      "type": "structure",
-      "members": {
-        "ServiceId": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the service that you want to update.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Attributes": {
-          "target": "com.amazonaws.servicediscovery#ServiceAttributesMap",
-          "traits": {
-            "smithy.api#documentation": "<p>A string map that contains attribute key-value pairs.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdateServiceAttributesResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdateServiceRequest": {
-      "type": "structure",
-      "members": {
-        "Id": {
-          "target": "com.amazonaws.servicediscovery#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the service that you want to update.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Service": {
-          "target": "com.amazonaws.servicediscovery#ServiceChange",
-          "traits": {
-            "smithy.api#documentation": "<p>A complex type that contains the new settings for the service. You can specify a maximum of 30 attributes (key-value pairs).</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#UpdateServiceResponse": {
-      "type": "structure",
-      "members": {
-        "OperationId": {
-          "target": "com.amazonaws.servicediscovery#OperationId",
-          "traits": {
-            "smithy.api#documentation": "<p>A value that you can use to determine whether the request completed successfully.\n                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.servicediscovery#ServiceDiscovery": {
+    "com.amazonaws.servicediscovery#Route53AutoNaming_v20170314": {
       "type": "service",
       "version": "2017-03-14",
       "operations": [
@@ -5645,6 +4524,1127 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.servicediscovery#RoutingPolicy": {
+      "type": "enum",
+      "members": {
+        "MULTIVALUE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "MULTIVALUE"
+          }
+        },
+        "WEIGHTED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "WEIGHTED"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#SOA": {
+      "type": "structure",
+      "members": {
+        "TTL": {
+          "target": "com.amazonaws.servicediscovery#RecordTTL",
+          "traits": {
+            "smithy.api#documentation": "<p>The time to live (TTL) for purposes\n   of negative caching.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Start of Authority (SOA) properties\n   for a public or private DNS namespace.</p>"
+      }
+    },
+    "com.amazonaws.servicediscovery#SOAChange": {
+      "type": "structure",
+      "members": {
+        "TTL": {
+          "target": "com.amazonaws.servicediscovery#RecordTTL",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated time to live (TTL) for\n   purposes of negative caching.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Updated Start of Authority (SOA)\n   properties for a public or private DNS namespace.</p>"
+      }
+    },
+    "com.amazonaws.servicediscovery#Service": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID that Cloud Map assigned to the service when you created it.</p>"
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.servicediscovery#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that Cloud Map assigns to the service when you create it.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.servicediscovery#ServiceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the service.</p>"
+          }
+        },
+        "NamespaceId": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the namespace that was used to create the service.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.servicediscovery#ResourceDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the service.</p>"
+          }
+        },
+        "InstanceCount": {
+          "target": "com.amazonaws.servicediscovery#ResourceCount",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of instances that are currently associated with the service. Instances that were previously\n   associated with the service but that are deleted aren't included in the count. The count might not reflect\n   pending registrations and deregistrations.</p>"
+          }
+        },
+        "DnsConfig": {
+          "target": "com.amazonaws.servicediscovery#DnsConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>A complex type that contains information about the Route\u00a053 DNS records that you want Cloud Map to create\n   when you register an instance.</p>\n         <important>\n            <p>The record types of a service can only be changed by deleting the service and recreating it with a new\n     <code>Dnsconfig</code>.</p>\n         </important>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.servicediscovery#ServiceType",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the systems that can be used to discover the service instances.</p>\n         <dl>\n            <dt>DNS_HTTP</dt>\n            <dd>\n               <p>The service instances can be discovered using either DNS queries or the <code>DiscoverInstances</code>\n      API operation.</p>\n            </dd>\n            <dt>HTTP</dt>\n            <dd>\n               <p>The service instances can only be discovered using the <code>DiscoverInstances</code> API\n      operation.</p>\n            </dd>\n            <dt>DNS</dt>\n            <dd>\n               <p>Reserved.</p>\n            </dd>\n         </dl>"
+          }
+        },
+        "HealthCheckConfig": {
+          "target": "com.amazonaws.servicediscovery#HealthCheckConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            <i>Public DNS and HTTP namespaces only.</i> A complex type that contains settings for an\n   optional health check. If you specify settings for a health check, Cloud Map associates the health check with\n   the records that you specify in <code>DnsConfig</code>.</p>\n         <p>For information about the charges for health checks, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route\u00a053 Pricing</a>.</p>"
+          }
+        },
+        "HealthCheckCustomConfig": {
+          "target": "com.amazonaws.servicediscovery#HealthCheckCustomConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>A complex type that contains information about an optional custom health check.</p>\n         <important>\n            <p>If you specify a health check configuration, you can specify either <code>HealthCheckCustomConfig</code>\n    or <code>HealthCheckConfig</code> but not both.</p>\n         </important>"
+          }
+        },
+        "CreateDate": {
+          "target": "com.amazonaws.servicediscovery#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the service was created, in Unix format and Coordinated Universal Time (UTC). The\n   value of <code>CreateDate</code> is accurate to milliseconds. For example, the value <code>1516925490.087</code>\n   represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
+          }
+        },
+        "CreatorRequestId": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk\n   of running the operation twice. <code>CreatorRequestId</code> can be any unique string (for example, a\n   date/timestamp).</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A complex type that contains information about the specified service.</p>"
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceAlreadyExists": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.servicediscovery#ErrorMessage"
+        },
+        "CreatorRequestId": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>CreatorRequestId</code> that was used to create the service.</p>"
+          }
+        },
+        "ServiceId": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the existing service.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The service can't be created because a service with the same name already exists.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceAttributeKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceAttributeKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.servicediscovery#ServiceAttributeKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 30
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceAttributeValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceAttributes": {
+      "type": "structure",
+      "members": {
+        "ServiceArn": {
+          "target": "com.amazonaws.servicediscovery#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the service that the attributes are associated with.</p>"
+          }
+        },
+        "Attributes": {
+          "target": "com.amazonaws.servicediscovery#ServiceAttributesMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A string map that contains the following information for the service that you specify in\n   <code>ServiceArn</code>:</p>\n         <ul>\n            <li>\n               <p>The attributes that apply to the service. </p>\n            </li>\n            <li>\n               <p>For each attribute, the applicable value.</p>\n            </li>\n         </ul>\n         <p>You can specify a total of 30 attributes.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A complex type that contains information about attributes associated with a specific service.</p>"
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceAttributesLimitExceededException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.servicediscovery#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The attribute can't be added to the service because you've exceeded the quota for the number of attributes you can add to a service.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceAttributesMap": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.servicediscovery#ServiceAttributeKey"
+      },
+      "value": {
+        "target": "com.amazonaws.servicediscovery#ServiceAttributeValue"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 30
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceChange": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "target": "com.amazonaws.servicediscovery#ResourceDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>A description for the service.</p>"
+          }
+        },
+        "DnsConfig": {
+          "target": "com.amazonaws.servicediscovery#DnsConfigChange",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the Route\u00a053 DNS records that you want Cloud Map to create when you register an\n   instance.</p>"
+          }
+        },
+        "HealthCheckConfig": {
+          "target": "com.amazonaws.servicediscovery#HealthCheckConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            <i>Public DNS and HTTP namespaces only.</i> Settings for an optional health check. If you\n   specify settings for a health check, Cloud Map associates the health check with the records that you specify in\n    <code>DnsConfig</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A complex type that contains changes to an existing service.</p>"
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceFilter": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.servicediscovery#ServiceFilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>Specify <code>NAMESPACE_ID</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Values": {
+          "target": "com.amazonaws.servicediscovery#FilterValues",
+          "traits": {
+            "smithy.api#documentation": "<p>The values that are applicable to the value that you specify for <code>Condition</code> to filter the list\n   of services.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Condition": {
+          "target": "com.amazonaws.servicediscovery#FilterCondition",
+          "traits": {
+            "smithy.api#documentation": "<p>The operator that you want to use to determine whether a service is returned by <code>ListServices</code>.\n   Valid values for <code>Condition</code> include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EQ</code>: When you specify <code>EQ</code>, specify one namespace ID for <code>Values</code>.\n      <code>EQ</code> is the default condition and can be omitted.</p>\n            </li>\n         </ul>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A complex type that lets you specify the namespaces that you want to list services for.</p>"
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceFilterName": {
+      "type": "enum",
+      "members": {
+        "NAMESPACE_ID": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "NAMESPACE_ID"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceFilters": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.servicediscovery#ServiceFilter",
+        "traits": {
+          "smithy.api#xmlName": "item"
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^((?=^.{1,127}$)^([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9])(\\.([a-zA-Z0-9_][a-zA-Z0-9-_]{0,61}[a-zA-Z0-9_]|[a-zA-Z0-9]))*$)|(^\\.$)$"
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceNotFound": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.servicediscovery#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>No service exists with the specified ID.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceSummariesList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.servicediscovery#ServiceSummary"
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceSummary": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID that Cloud Map assigned to the service when you created it.</p>"
+          }
+        },
+        "Arn": {
+          "target": "com.amazonaws.servicediscovery#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that Cloud Map assigns to the service when you create it.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.servicediscovery#ServiceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the service.</p>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.servicediscovery#ServiceType",
+          "traits": {
+            "smithy.api#documentation": "<p>Describes the systems that can be used to discover the service instances.</p>\n         <dl>\n            <dt>DNS_HTTP</dt>\n            <dd>\n               <p>The service instances can be discovered using either DNS queries or the <code>DiscoverInstances</code>\n      API operation.</p>\n            </dd>\n            <dt>HTTP</dt>\n            <dd>\n               <p>The service instances can only be discovered using the <code>DiscoverInstances</code> API\n      operation.</p>\n            </dd>\n            <dt>DNS</dt>\n            <dd>\n               <p>Reserved.</p>\n            </dd>\n         </dl>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.servicediscovery#ResourceDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The description that you specify when you create the service.</p>"
+          }
+        },
+        "InstanceCount": {
+          "target": "com.amazonaws.servicediscovery#ResourceCount",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of instances that are currently associated with the service. Instances that were previously\n   associated with the service but that are deleted aren't included in the count. The count might not reflect\n   pending registrations and deregistrations.</p>"
+          }
+        },
+        "DnsConfig": {
+          "target": "com.amazonaws.servicediscovery#DnsConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the Route\u00a053 DNS records that you want Cloud Map to create when you register an\n   instance.</p>"
+          }
+        },
+        "HealthCheckConfig": {
+          "target": "com.amazonaws.servicediscovery#HealthCheckConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            <i>Public DNS and HTTP namespaces only.</i> Settings for an optional health check. If you\n   specify settings for a health check, Cloud Map associates the health check with the records that you specify in\n    <code>DnsConfig</code>.</p>"
+          }
+        },
+        "HealthCheckCustomConfig": {
+          "target": "com.amazonaws.servicediscovery#HealthCheckCustomConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about an optional custom health check. A custom health check, which requires that you use a\n   third-party health checker to evaluate the health of your resources, is useful in the following\n   circumstances:</p>\n         <ul>\n            <li>\n               <p>You can't use a health check that's defined by <code>HealthCheckConfig</code> because the resource isn't\n     available over the internet. For example, you can use a custom health check when the instance is in an Amazon\n     VPC. (To check the health of resources in a VPC, the health checker must also be in the VPC.)</p>\n            </li>\n            <li>\n               <p>You want to use a third-party health checker regardless of where your resources are located.</p>\n            </li>\n         </ul>\n         <important>\n            <p>If you specify a health check configuration, you can specify either <code>HealthCheckCustomConfig</code>\n    or <code>HealthCheckConfig</code> but not both.</p>\n         </important>"
+          }
+        },
+        "CreateDate": {
+          "target": "com.amazonaws.servicediscovery#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the service was created.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A complex type that contains information about a specified service.</p>"
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceType": {
+      "type": "enum",
+      "members": {
+        "HTTP": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "HTTP"
+          }
+        },
+        "DNS_HTTP": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DNS_HTTP"
+          }
+        },
+        "DNS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DNS"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#ServiceTypeOption": {
+      "type": "enum",
+      "members": {
+        "HTTP": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "HTTP"
+          }
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "target": "com.amazonaws.servicediscovery#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>The key identifier, or name, of the tag.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.servicediscovery#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The string value that's associated with the key of the tag. You can set the value of a tag to an empty\n   string, but you can't set the value of a tag to null.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A custom key-value pair that's associated with a resource.</p>"
+      }
+    },
+    "com.amazonaws.servicediscovery#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.servicediscovery#TagKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#TagList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.servicediscovery#Tag"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicediscovery#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicediscovery#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicediscovery#InvalidInput"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#TooManyTagsException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds one or more tags to the specified resource.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "TagResource example",
+            "documentation": "This example adds \"Department\" and \"Project\" tags to a resource.",
+            "input": {
+              "ResourceARN": "arn:aws:servicediscovery:us-east-1:123456789012:namespace/ns-ylexjili4cdxy3xm",
+              "Tags": [
+                {
+                  "Key": "Department",
+                  "Value": "Engineering"
+                },
+                {
+                  "Key": "Project",
+                  "Value": "Zeta"
+                }
+              ]
+            },
+            "output": {}
+          }
+        ]
+      }
+    },
+    "com.amazonaws.servicediscovery#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceARN": {
+          "target": "com.amazonaws.servicediscovery#AmazonResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.servicediscovery#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to add to the specified resource. Specifying the tag key is required. You can set the value of a\n   tag to an empty string, but you can't set the value of a tag to null.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#TagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.servicediscovery#Timestamp": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.servicediscovery#TooManyTagsException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.servicediscovery#ErrorMessage"
+        },
+        "ResourceName": {
+          "target": "com.amazonaws.servicediscovery#AmazonResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the resource.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The list of tags on the resource is over the quota. The maximum number of tags that can be applied to a\n   resource is 50.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.servicediscovery#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicediscovery#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicediscovery#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicediscovery#InvalidInput"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "UntagResource example",
+            "documentation": "This example removes the \"Department\" and \"Project\" tags from a resource.",
+            "input": {
+              "ResourceARN": "arn:aws:servicediscovery:us-east-1:123456789012:namespace/ns-ylexjili4cdxy3xm",
+              "TagKeys": [
+                "Project",
+                "Department"
+              ]
+            },
+            "output": {}
+          }
+        ]
+      }
+    },
+    "com.amazonaws.servicediscovery#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceARN": {
+          "target": "com.amazonaws.servicediscovery#AmazonResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.servicediscovery#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tag keys to remove from the specified resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdateHttpNamespace": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicediscovery#UpdateHttpNamespaceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicediscovery#UpdateHttpNamespaceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicediscovery#DuplicateRequest"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#InvalidInput"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#NamespaceNotFound"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#ResourceInUse"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates an HTTP\n   namespace.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To update a HTTP namespace",
+            "documentation": "The following example updates the description of a HTTP namespace.",
+            "input": {
+              "Id": "ns-vh4nbmEXAMPLE",
+              "Namespace": {
+                "Description": "The updated namespace description."
+              }
+            },
+            "output": {
+              "OperationId": "ft52xe2koxhoeormaceymagglsdjyvEXAMPLE"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdateHttpNamespaceRequest": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the namespace that you\n   want to update.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "UpdaterRequestId": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique string that identifies the\n   request and that allows failed <code>UpdateHttpNamespace</code> requests to be retried without the risk of\n   running the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a\n   date/timestamp).</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "Namespace": {
+          "target": "com.amazonaws.servicediscovery#HttpNamespaceChange",
+          "traits": {
+            "smithy.api#documentation": "<p>Updated properties for the the HTTP\n   namespace.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdateHttpNamespaceResponse": {
+      "type": "structure",
+      "members": {
+        "OperationId": {
+          "target": "com.amazonaws.servicediscovery#OperationId",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that you can use to determine whether the request completed successfully.\n                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdateInstanceCustomHealthStatus": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicediscovery#UpdateInstanceCustomHealthStatusRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicediscovery#CustomHealthNotFound"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#InstanceNotFound"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#InvalidInput"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#ServiceNotFound"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Submits a request to change the health status of a custom health check to healthy or unhealthy.</p>\n         <p>You can use <code>UpdateInstanceCustomHealthStatus</code> to change the status only for custom health\n   checks, which you define using <code>HealthCheckCustomConfig</code> when you create a service. You can't use it\n   to change the status for Route\u00a053 health checks, which you define using <code>HealthCheckConfig</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_HealthCheckCustomConfig.html\">HealthCheckCustomConfig</a>.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "UpdateInstanceCustomHealthStatus Example",
+            "documentation": "This example submits a request to change the health status of an instance associated with a service with a custom health check to HEALTHY.",
+            "input": {
+              "InstanceId": "i-abcd1234",
+              "ServiceId": "srv-e4anhexample0004",
+              "Status": "HEALTHY"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdateInstanceCustomHealthStatusRequest": {
+      "type": "structure",
+      "members": {
+        "ServiceId": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the service that includes the configuration for the custom health check that you want to change\n   the status for.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "InstanceId": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the instance that you want to change the health status for.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.servicediscovery#CustomHealthStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The new status of the instance, <code>HEALTHY</code> or <code>UNHEALTHY</code>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdatePrivateDnsNamespace": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicediscovery#UpdatePrivateDnsNamespaceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicediscovery#UpdatePrivateDnsNamespaceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicediscovery#DuplicateRequest"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#InvalidInput"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#NamespaceNotFound"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#ResourceInUse"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a private DNS\n   namespace.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "To update a private DNS namespace",
+            "documentation": "The following example updates the description of a private DNS namespace.",
+            "input": {
+              "Id": "ns-bk3aEXAMPLE",
+              "UpdaterRequestId": "",
+              "Namespace": {
+                "Description": "The updated namespace description."
+              }
+            },
+            "output": {
+              "OperationId": "ft52xe2koxhoeormaceymagglsdjyvEXAMPLE"
+            }
+          },
+          {
+            "title": "To update a public DNS namespace",
+            "documentation": "The following example updates the description of a public DNS namespace.",
+            "input": {
+              "Id": "ns-bk3aEXAMPLE",
+              "UpdaterRequestId": "",
+              "Namespace": {
+                "Description": "The updated namespace description."
+              }
+            },
+            "output": {
+              "OperationId": "ft52xe2koxhoeormaceymagglsdjEXAMPLE"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdatePrivateDnsNamespaceRequest": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the namespace that you\n   want to update.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "UpdaterRequestId": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique string that identifies the\n   request and that allows failed <code>UpdatePrivateDnsNamespace</code> requests to be retried without the risk of\n   running the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a\n   date/timestamp).</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "Namespace": {
+          "target": "com.amazonaws.servicediscovery#PrivateDnsNamespaceChange",
+          "traits": {
+            "smithy.api#documentation": "<p>Updated properties for the private\n   DNS namespace.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdatePrivateDnsNamespaceResponse": {
+      "type": "structure",
+      "members": {
+        "OperationId": {
+          "target": "com.amazonaws.servicediscovery#OperationId",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that you can use to determine whether the request completed successfully.\n                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdatePublicDnsNamespace": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicediscovery#UpdatePublicDnsNamespaceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicediscovery#UpdatePublicDnsNamespaceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicediscovery#DuplicateRequest"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#InvalidInput"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#NamespaceNotFound"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#ResourceInUse"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a public DNS\n   namespace.</p>"
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdatePublicDnsNamespaceRequest": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the namespace being\n   updated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "UpdaterRequestId": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique string that identifies the\n   request and that allows failed <code>UpdatePublicDnsNamespace</code> requests to be retried without the risk of\n   running the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a\n   date/timestamp).</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "Namespace": {
+          "target": "com.amazonaws.servicediscovery#PublicDnsNamespaceChange",
+          "traits": {
+            "smithy.api#documentation": "<p>Updated properties for the public\n   DNS namespace.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdatePublicDnsNamespaceResponse": {
+      "type": "structure",
+      "members": {
+        "OperationId": {
+          "target": "com.amazonaws.servicediscovery#OperationId",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that you can use to determine whether the request completed successfully.\n                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdateService": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicediscovery#UpdateServiceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicediscovery#UpdateServiceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicediscovery#DuplicateRequest"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#InvalidInput"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#ServiceNotFound"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Submits a request to perform the following operations:</p>\n         <ul>\n            <li>\n               <p>Update the TTL setting for existing <code>DnsRecords</code> configurations</p>\n            </li>\n            <li>\n               <p>Add, update, or delete <code>HealthCheckConfig</code> for a specified service</p>\n               <note>\n                  <p>You can't add, update, or delete a <code>HealthCheckCustomConfig</code> configuration.</p>\n               </note>\n            </li>\n         </ul>\n         <p>For public and private DNS namespaces, note the following:</p>\n         <ul>\n            <li>\n               <p>If you omit any existing <code>DnsRecords</code> or <code>HealthCheckConfig</code> configurations from an\n      <code>UpdateService</code> request, the configurations are deleted from the service.</p>\n            </li>\n            <li>\n               <p>If you omit an existing <code>HealthCheckCustomConfig</code> configuration from an\n      <code>UpdateService</code> request, the configuration isn't deleted from the service.</p>\n            </li>\n         </ul>\n         <p>When you update settings for a service, Cloud Map also updates the corresponding settings in all the\n   records and health checks that were created by using the specified service.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "UpdateService Example",
+            "documentation": "This example submits a request to replace the DnsConfig and HealthCheckConfig settings of a specified service.",
+            "input": {
+              "Id": "srv-e4anhexample0004",
+              "Service": {
+                "HealthCheckConfig": {
+                  "Type": "HTTP",
+                  "ResourcePath": "/",
+                  "FailureThreshold": 2
+                },
+                "DnsConfig": {
+                  "DnsRecords": [
+                    {
+                      "Type": "A",
+                      "TTL": 60
+                    }
+                  ]
+                }
+              }
+            },
+            "output": {
+              "OperationId": "m35hsdrkxwjffm3xef4bxyy6vc3ewakx-jdn3y5g5"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdateServiceAttributes": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.servicediscovery#UpdateServiceAttributesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.servicediscovery#UpdateServiceAttributesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.servicediscovery#InvalidInput"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#ServiceAttributesLimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.servicediscovery#ServiceNotFound"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Submits a request to update a specified service to add service-level attributes.</p>",
+        "smithy.api#examples": [
+          {
+            "title": "UpdateServiceAttributes Example",
+            "documentation": "This example submits a request to update the specified service to add a port attribute with the value 80.",
+            "input": {
+              "ServiceId": "srv-e4anhexample0004",
+              "Attributes": {
+                "port": "80"
+              }
+            },
+            "output": {}
+          }
+        ]
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdateServiceAttributesRequest": {
+      "type": "structure",
+      "members": {
+        "ServiceId": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the service that you want to update.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Attributes": {
+          "target": "com.amazonaws.servicediscovery#ServiceAttributesMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A string map that contains attribute key-value pairs.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdateServiceAttributesResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdateServiceRequest": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "target": "com.amazonaws.servicediscovery#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the service that you want to update.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Service": {
+          "target": "com.amazonaws.servicediscovery#ServiceChange",
+          "traits": {
+            "smithy.api#documentation": "<p>A complex type that contains the new settings for the service. You can specify a maximum of 30 attributes (key-value pairs).</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.servicediscovery#UpdateServiceResponse": {
+      "type": "structure",
+      "members": {
+        "OperationId": {
+          "target": "com.amazonaws.servicediscovery#OperationId",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that you can use to determine whether the request completed successfully.\n                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
       }
     }
   }

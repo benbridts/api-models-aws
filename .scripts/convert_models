@@ -27,43 +27,16 @@ class ModelInfo:
     service: tuple[str, dict]  # the service shape id and service shape
 
 
-def sanitize_sdk_id(sdk_id: str) -> str:
-    """Sanitize the SDK ID by removing service/client/api suffixes.
+def transform_sdk_id(sdk_id: str) -> str:
+    """Transform the sdkId to lower-case and spaces replaced with hyphens.
 
-    :param sdk_id: value of the sdkId attribute of a service trait
-    :return: the sdkId without certain suffixes
+    For example, 'API Gateway' would become 'api-gateway'.
+
+    :param sdk_id: the sdkId
+    :return: the lowercased 'sdkId' with spaces replaced with hypens
     """
 
-    for suffix in ["service", "client", "api"]:
-        if sdk_id.lower().endswith(suffix):
-            sdk_id = sdk_id[: -len(suffix)]
-    return sdk_id.strip()
-
-
-def transform_service_shape_id(shape_id: str, sdk_id: str) -> str:
-    """Transform the sdkId to (roughly) PascalCase, the sdk id should contain only alphanumeric characters and spaces.
-
-    :param shape_id: the service shape id
-    :param sdk_id: the sanitized sdkId
-    :return: the sdkId without certain suffixes
-    """
-
-    # If no spaces, assume already in PascalCase
-    service_name = sdk_id
-    if " " in sdk_id:
-        service_name = "".join(word[0] + word[1:] for word in sdk_id.split(" "))
-
-    if not service_name:
-        raise ValueError(f"Could not determine service name from '{sdk_id}'")
-
-    service_name = service_name[0].upper() + service_name[1:]
-
-    try:
-        namespace, _ = shape_id.split("#")
-    except ValueError:
-        raise ValueError(f"Invalid shape ID format: '{shape_id}'")
-
-    return f"{namespace}#{service_name}"
+    return sdk_id.lower().replace(" ", "-")
 
 
 def load_overrides(override_path: Optional[Path]) -> Dict[str, dict]:
@@ -134,6 +107,7 @@ def handle_model(model_path: Path, overrides: Dict[str, dict] = None) -> ModelIn
         if shape.get("type") == "service":
             service_shape = shape
             service_shape_id = shape_id
+            # Get the 'sdkId' for the service
             sdk_id = shape.get("traits", {}).get("aws.api#service", {}).get("sdkId")
             break
 
@@ -225,22 +199,16 @@ def process_model(input_path: Path, dest_dir: Path, overrides: Dict[str, dict]) 
         service_version = service_shape["version"]
 
         # Create the service-id and file name
-        sanitized_sdk_id = sanitize_sdk_id(modelInfo.sdk_id)
-        service_id = sanitized_sdk_id.lower().replace(" ", "-")
-        file_name = f"{service_id}-{service_version}.json"
+        transformed_sdk_id = transform_sdk_id(modelInfo.sdk_id)
+        file_name = f"{transformed_sdk_id}-{service_version}.json"
 
         # Create the new directory structure and file path
-        output_path = dest_dir / service_id / "service" / service_version / file_name
+        output_path = (
+            dest_dir / transformed_sdk_id / "service" / service_version / file_name
+        )
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Update the service shape id to the transformed service shape id
-        transformed_service_shape_id = transform_service_shape_id(
-            service_shape_id, sanitized_sdk_id
-        )
-        modelInfo.model["shapes"].pop(service_shape_id)
-        modelInfo.model["shapes"].update({transformed_service_shape_id: service_shape})
-
-        # Write the transformed model
+        # Write the model
         output_path.write_text(json.dumps(modelInfo.model, indent=2), encoding="utf-8")
 
         logger.info(f"  SDK ID: {modelInfo.sdk_id}")

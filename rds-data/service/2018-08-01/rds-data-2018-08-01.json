@@ -1129,525 +1129,7 @@
     "com.amazonaws.rdsdata#ParameterName": {
       "type": "string"
     },
-    "com.amazonaws.rdsdata#Record": {
-      "type": "structure",
-      "members": {
-        "values": {
-          "target": "com.amazonaws.rdsdata#Row",
-          "traits": {
-            "smithy.api#documentation": "<p>The values returned in the record.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A record returned by a call.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
-      }
-    },
-    "com.amazonaws.rdsdata#Records": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.rdsdata#Record"
-      }
-    },
-    "com.amazonaws.rdsdata#RecordsFormatType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "NONE",
-            "name": "NONE"
-          },
-          {
-            "value": "JSON",
-            "name": "JSON"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.rdsdata#RecordsUpdated": {
-      "type": "long",
-      "traits": {
-        "smithy.api#default": 0
-      }
-    },
-    "com.amazonaws.rdsdata#ResultFrame": {
-      "type": "structure",
-      "members": {
-        "resultSetMetadata": {
-          "target": "com.amazonaws.rdsdata#ResultSetMetadata",
-          "traits": {
-            "smithy.api#documentation": "<p>The result-set metadata in the result set.</p>"
-          }
-        },
-        "records": {
-          "target": "com.amazonaws.rdsdata#Records",
-          "traits": {
-            "smithy.api#documentation": "<p>The records in the result set.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The result set returned by a SQL statement.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
-      }
-    },
-    "com.amazonaws.rdsdata#ResultSetMetadata": {
-      "type": "structure",
-      "members": {
-        "columnCount": {
-          "target": "com.amazonaws.rdsdata#Long",
-          "traits": {
-            "smithy.api#default": 0,
-            "smithy.api#documentation": "<p>The number of columns in the result set.</p>"
-          }
-        },
-        "columnMetadata": {
-          "target": "com.amazonaws.rdsdata#Metadata",
-          "traits": {
-            "smithy.api#documentation": "<p>The metadata of the columns in the result set.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The metadata of the result set returned by a SQL statement.</p>"
-      }
-    },
-    "com.amazonaws.rdsdata#ResultSetOptions": {
-      "type": "structure",
-      "members": {
-        "decimalReturnType": {
-          "target": "com.amazonaws.rdsdata#DecimalReturnType",
-          "traits": {
-            "smithy.api#documentation": "<p>A value that indicates how a field of <code>DECIMAL</code> type is represented\n            in the response. The value of <code>STRING</code>, the default, specifies that\n            it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code>\n            specifies that it is converted to a Long value if its scale is 0, or to a Double\n            value otherwise.</p>\n         <note>\n            <p>Conversion to Double or Long can result in roundoff errors due to precision loss.\n                We recommend converting to String, especially when working with currency values.</p>\n         </note>"
-          }
-        },
-        "longReturnType": {
-          "target": "com.amazonaws.rdsdata#LongReturnType",
-          "traits": {
-            "smithy.api#documentation": "<p>A value that indicates how a field of <code>LONG</code> type is represented.\n        Allowed values are <code>LONG</code> and <code>STRING</code>. The default\n        is <code>LONG</code>. Specify <code>STRING</code> if the length or\n        precision of numeric values might cause truncation or rounding errors.\n        </p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Options that control how the result set is returned.</p>"
-      }
-    },
-    "com.amazonaws.rdsdata#RollbackTransaction": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.rdsdata#RollbackTransactionRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.rdsdata#RollbackTransactionResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.rdsdata#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#DatabaseErrorException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#DatabaseNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#DatabaseUnavailableException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#ForbiddenException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#HttpEndpointNotEnabledException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#InternalServerErrorException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#InvalidResourceStateException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#InvalidSecretException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#NotFoundException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#SecretsErrorException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#ServiceUnavailableError"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#StatementTimeoutException"
-        },
-        {
-          "target": "com.amazonaws.rdsdata#TransactionNotFoundException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Performs a rollback of a transaction. Rolling back a transaction cancels its changes.</p>",
-        "smithy.api#http": {
-          "code": 200,
-          "method": "POST",
-          "uri": "/RollbackTransaction"
-        }
-      }
-    },
-    "com.amazonaws.rdsdata#RollbackTransactionRequest": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "com.amazonaws.rdsdata#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "secretArn": {
-          "target": "com.amazonaws.rdsdata#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The name or ARN of the secret that enables access to the DB cluster.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "transactionId": {
-          "target": "com.amazonaws.rdsdata#Id",
-          "traits": {
-            "smithy.api#documentation": "<p>The identifier of the transaction to roll back.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request parameters represent the input of a request to perform a rollback of a\n            transaction.</p>"
-      }
-    },
-    "com.amazonaws.rdsdata#RollbackTransactionResponse": {
-      "type": "structure",
-      "members": {
-        "transactionStatus": {
-          "target": "com.amazonaws.rdsdata#TransactionStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the rollback operation.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The response elements represent the output of a request to perform a rollback of a\n            transaction.</p>"
-      }
-    },
-    "com.amazonaws.rdsdata#Row": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.rdsdata#Value"
-      }
-    },
-    "com.amazonaws.rdsdata#SecretsErrorException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.rdsdata#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>There was a problem with the Secrets Manager secret used with the request, caused by one of the following conditions:</p>\n         <ul>\n            <li>\n               <p>RDS Data API timed out retrieving the secret.</p>\n            </li>\n            <li>\n               <p>The secret provided wasn't found.</p>\n            </li>\n            <li>\n               <p>The secret couldn't be decrypted.</p>\n            </li>\n         </ul>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.rdsdata#ServiceUnavailableError": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#documentation": "<p>The service specified by the <code>resourceArn</code> parameter isn't\n            available.</p>",
-        "smithy.api#error": "server",
-        "smithy.api#httpError": 503
-      }
-    },
-    "com.amazonaws.rdsdata#SqlParameter": {
-      "type": "structure",
-      "members": {
-        "name": {
-          "target": "com.amazonaws.rdsdata#ParameterName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the parameter.</p>"
-          }
-        },
-        "value": {
-          "target": "com.amazonaws.rdsdata#Field",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of the parameter.</p>"
-          }
-        },
-        "typeHint": {
-          "target": "com.amazonaws.rdsdata#TypeHint",
-          "traits": {
-            "smithy.api#documentation": "<p>A hint that specifies the correct object type for data type mapping. Possible values\n            are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object \n              of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object \n                    of <code>DECIMAL</code> type to the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> - The corresponding <code>String</code> parameter value is sent as an\n           object of <code>JSON</code> type to the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object \n                    of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object \n              of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UUID</code> - The corresponding <code>String</code> parameter value is sent as an object of\n             <code>UUID</code> type to the database.\n          </p>\n            </li>\n         </ul>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A parameter used in a SQL statement.</p>"
-      }
-    },
-    "com.amazonaws.rdsdata#SqlParameterSets": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.rdsdata#SqlParametersList"
-      }
-    },
-    "com.amazonaws.rdsdata#SqlParametersList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.rdsdata#SqlParameter"
-      }
-    },
-    "com.amazonaws.rdsdata#SqlRecords": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.rdsdata#FieldList"
-      }
-    },
-    "com.amazonaws.rdsdata#SqlStatement": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "max": 65536
-        }
-      }
-    },
-    "com.amazonaws.rdsdata#SqlStatementResult": {
-      "type": "structure",
-      "members": {
-        "resultFrame": {
-          "target": "com.amazonaws.rdsdata#ResultFrame",
-          "traits": {
-            "smithy.api#documentation": "<p>The result set of the SQL statement.</p>"
-          }
-        },
-        "numberOfRecordsUpdated": {
-          "target": "com.amazonaws.rdsdata#RecordsUpdated",
-          "traits": {
-            "smithy.api#default": 0,
-            "smithy.api#documentation": "<p>The number of records updated by a SQL statement.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The result of a SQL statement.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
-      }
-    },
-    "com.amazonaws.rdsdata#SqlStatementResults": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.rdsdata#SqlStatementResult"
-      }
-    },
-    "com.amazonaws.rdsdata#StatementTimeoutException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.rdsdata#ErrorMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>The error message returned by this <code>StatementTimeoutException</code> error.</p>"
-          }
-        },
-        "dbConnectionId": {
-          "target": "com.amazonaws.rdsdata#Long",
-          "traits": {
-            "smithy.api#default": 0,
-            "smithy.api#documentation": "<p>The database connection ID that executed the SQL statement.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The execution of the SQL statement timed out.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.rdsdata#String": {
-      "type": "string"
-    },
-    "com.amazonaws.rdsdata#StringArray": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.rdsdata#String"
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>An array of strings.</p>\n         <note>\n            <p>Some array entries can be null.</p>\n         </note>"
-      }
-    },
-    "com.amazonaws.rdsdata#StructValue": {
-      "type": "structure",
-      "members": {
-        "attributes": {
-          "target": "com.amazonaws.rdsdata#ArrayValueList",
-          "traits": {
-            "smithy.api#documentation": "<p>The attributes returned in the record.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A structure value returned by a call.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
-      }
-    },
-    "com.amazonaws.rdsdata#TransactionNotFoundException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.rdsdata#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The transaction ID wasn't found.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 404
-      }
-    },
-    "com.amazonaws.rdsdata#TransactionStatus": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "max": 128
-        }
-      }
-    },
-    "com.amazonaws.rdsdata#TypeHint": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "JSON",
-            "name": "JSON"
-          },
-          {
-            "value": "UUID",
-            "name": "UUID"
-          },
-          {
-            "value": "TIMESTAMP",
-            "name": "TIMESTAMP"
-          },
-          {
-            "value": "DATE",
-            "name": "DATE"
-          },
-          {
-            "value": "TIME",
-            "name": "TIME"
-          },
-          {
-            "value": "DECIMAL",
-            "name": "DECIMAL"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.rdsdata#UnsupportedResultException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.rdsdata#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>There was a problem with the result because of one of the following conditions:</p>\n         <ul>\n            <li>\n               <p>It contained an unsupported data type.</p>\n            </li>\n            <li>\n               <p>It contained a multidimensional array.</p>\n            </li>\n            <li>\n               <p>The size was too large.</p>\n            </li>\n         </ul>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.rdsdata#UpdateResult": {
-      "type": "structure",
-      "members": {
-        "generatedFields": {
-          "target": "com.amazonaws.rdsdata#FieldList",
-          "traits": {
-            "smithy.api#documentation": "<p>Values for fields generated during the request.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The response elements represent the results of an update.</p>"
-      }
-    },
-    "com.amazonaws.rdsdata#UpdateResults": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.rdsdata#UpdateResult"
-      }
-    },
-    "com.amazonaws.rdsdata#Value": {
-      "type": "union",
-      "members": {
-        "isNull": {
-          "target": "com.amazonaws.rdsdata#BoxedBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>A NULL value.</p>"
-          }
-        },
-        "bitValue": {
-          "target": "com.amazonaws.rdsdata#BoxedBoolean",
-          "traits": {
-            "smithy.api#documentation": "<p>A value for a column of BIT data type.</p>"
-          }
-        },
-        "bigIntValue": {
-          "target": "com.amazonaws.rdsdata#BoxedLong",
-          "traits": {
-            "smithy.api#documentation": "<p>A value for a column of big integer data type.</p>"
-          }
-        },
-        "intValue": {
-          "target": "com.amazonaws.rdsdata#BoxedInteger",
-          "traits": {
-            "smithy.api#documentation": "<p>A value for a column of integer data type.</p>"
-          }
-        },
-        "doubleValue": {
-          "target": "com.amazonaws.rdsdata#BoxedDouble",
-          "traits": {
-            "smithy.api#documentation": "<p>A value for a column of double data type.</p>"
-          }
-        },
-        "realValue": {
-          "target": "com.amazonaws.rdsdata#BoxedFloat",
-          "traits": {
-            "smithy.api#documentation": "<p>A value for a column of real data type.</p>"
-          }
-        },
-        "stringValue": {
-          "target": "com.amazonaws.rdsdata#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A value for a column of string data type.</p>"
-          }
-        },
-        "blobValue": {
-          "target": "com.amazonaws.rdsdata#Blob",
-          "traits": {
-            "smithy.api#documentation": "<p>A value for a column of BLOB data type.</p>"
-          }
-        },
-        "arrayValues": {
-          "target": "com.amazonaws.rdsdata#ArrayValueList",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of column values.</p>"
-          }
-        },
-        "structValue": {
-          "target": "com.amazonaws.rdsdata#StructValue",
-          "traits": {
-            "smithy.api#documentation": "<p>A value for a column of STRUCT data type.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains the value of a column.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
-      }
-    },
-    "com.amazonaws.rdsdata#RDSData": {
+    "com.amazonaws.rdsdata#RdsDataService": {
       "type": "service",
       "version": "2018-08-01",
       "operations": [
@@ -2310,6 +1792,524 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.rdsdata#Record": {
+      "type": "structure",
+      "members": {
+        "values": {
+          "target": "com.amazonaws.rdsdata#Row",
+          "traits": {
+            "smithy.api#documentation": "<p>The values returned in the record.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A record returned by a call.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.rdsdata#Records": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.rdsdata#Record"
+      }
+    },
+    "com.amazonaws.rdsdata#RecordsFormatType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "NONE",
+            "name": "NONE"
+          },
+          {
+            "value": "JSON",
+            "name": "JSON"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.rdsdata#RecordsUpdated": {
+      "type": "long",
+      "traits": {
+        "smithy.api#default": 0
+      }
+    },
+    "com.amazonaws.rdsdata#ResultFrame": {
+      "type": "structure",
+      "members": {
+        "resultSetMetadata": {
+          "target": "com.amazonaws.rdsdata#ResultSetMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>The result-set metadata in the result set.</p>"
+          }
+        },
+        "records": {
+          "target": "com.amazonaws.rdsdata#Records",
+          "traits": {
+            "smithy.api#documentation": "<p>The records in the result set.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The result set returned by a SQL statement.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.rdsdata#ResultSetMetadata": {
+      "type": "structure",
+      "members": {
+        "columnCount": {
+          "target": "com.amazonaws.rdsdata#Long",
+          "traits": {
+            "smithy.api#default": 0,
+            "smithy.api#documentation": "<p>The number of columns in the result set.</p>"
+          }
+        },
+        "columnMetadata": {
+          "target": "com.amazonaws.rdsdata#Metadata",
+          "traits": {
+            "smithy.api#documentation": "<p>The metadata of the columns in the result set.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The metadata of the result set returned by a SQL statement.</p>"
+      }
+    },
+    "com.amazonaws.rdsdata#ResultSetOptions": {
+      "type": "structure",
+      "members": {
+        "decimalReturnType": {
+          "target": "com.amazonaws.rdsdata#DecimalReturnType",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that indicates how a field of <code>DECIMAL</code> type is represented\n            in the response. The value of <code>STRING</code>, the default, specifies that\n            it is converted to a String value. The value of <code>DOUBLE_OR_LONG</code>\n            specifies that it is converted to a Long value if its scale is 0, or to a Double\n            value otherwise.</p>\n         <note>\n            <p>Conversion to Double or Long can result in roundoff errors due to precision loss.\n                We recommend converting to String, especially when working with currency values.</p>\n         </note>"
+          }
+        },
+        "longReturnType": {
+          "target": "com.amazonaws.rdsdata#LongReturnType",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that indicates how a field of <code>LONG</code> type is represented.\n        Allowed values are <code>LONG</code> and <code>STRING</code>. The default\n        is <code>LONG</code>. Specify <code>STRING</code> if the length or\n        precision of numeric values might cause truncation or rounding errors.\n        </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Options that control how the result set is returned.</p>"
+      }
+    },
+    "com.amazonaws.rdsdata#RollbackTransaction": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.rdsdata#RollbackTransactionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.rdsdata#RollbackTransactionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.rdsdata#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#DatabaseErrorException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#DatabaseNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#DatabaseUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#ForbiddenException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#HttpEndpointNotEnabledException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#InvalidResourceStateException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#InvalidSecretException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#SecretsErrorException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#ServiceUnavailableError"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#StatementTimeoutException"
+        },
+        {
+          "target": "com.amazonaws.rdsdata#TransactionNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Performs a rollback of a transaction. Rolling back a transaction cancels its changes.</p>",
+        "smithy.api#http": {
+          "code": 200,
+          "method": "POST",
+          "uri": "/RollbackTransaction"
+        }
+      }
+    },
+    "com.amazonaws.rdsdata#RollbackTransactionRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.rdsdata#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "secretArn": {
+          "target": "com.amazonaws.rdsdata#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The name or ARN of the secret that enables access to the DB cluster.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "transactionId": {
+          "target": "com.amazonaws.rdsdata#Id",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the transaction to roll back.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request parameters represent the input of a request to perform a rollback of a\n            transaction.</p>"
+      }
+    },
+    "com.amazonaws.rdsdata#RollbackTransactionResponse": {
+      "type": "structure",
+      "members": {
+        "transactionStatus": {
+          "target": "com.amazonaws.rdsdata#TransactionStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the rollback operation.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response elements represent the output of a request to perform a rollback of a\n            transaction.</p>"
+      }
+    },
+    "com.amazonaws.rdsdata#Row": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.rdsdata#Value"
+      }
+    },
+    "com.amazonaws.rdsdata#SecretsErrorException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.rdsdata#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>There was a problem with the Secrets Manager secret used with the request, caused by one of the following conditions:</p>\n         <ul>\n            <li>\n               <p>RDS Data API timed out retrieving the secret.</p>\n            </li>\n            <li>\n               <p>The secret provided wasn't found.</p>\n            </li>\n            <li>\n               <p>The secret couldn't be decrypted.</p>\n            </li>\n         </ul>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.rdsdata#ServiceUnavailableError": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>The service specified by the <code>resourceArn</code> parameter isn't\n            available.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 503
+      }
+    },
+    "com.amazonaws.rdsdata#SqlParameter": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.rdsdata#ParameterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the parameter.</p>"
+          }
+        },
+        "value": {
+          "target": "com.amazonaws.rdsdata#Field",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of the parameter.</p>"
+          }
+        },
+        "typeHint": {
+          "target": "com.amazonaws.rdsdata#TypeHint",
+          "traits": {
+            "smithy.api#documentation": "<p>A hint that specifies the correct object type for data type mapping. Possible values\n            are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DATE</code> - The corresponding <code>String</code> parameter value is sent as an object \n              of <code>DATE</code> type to the database. The accepted format is <code>YYYY-MM-DD</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DECIMAL</code> - The corresponding <code>String</code> parameter value is sent as an object \n                    of <code>DECIMAL</code> type to the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>JSON</code> - The corresponding <code>String</code> parameter value is sent as an\n           object of <code>JSON</code> type to the database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIME</code> - The corresponding <code>String</code> parameter value is sent as an object \n                    of <code>TIME</code> type to the database. The accepted format is <code>HH:MM:SS[.FFF]</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TIMESTAMP</code> - The corresponding <code>String</code> parameter value is sent as an object \n              of <code>TIMESTAMP</code> type to the database. The accepted format is <code>YYYY-MM-DD HH:MM:SS[.FFF]</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UUID</code> - The corresponding <code>String</code> parameter value is sent as an object of\n             <code>UUID</code> type to the database.\n          </p>\n            </li>\n         </ul>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A parameter used in a SQL statement.</p>"
+      }
+    },
+    "com.amazonaws.rdsdata#SqlParameterSets": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.rdsdata#SqlParametersList"
+      }
+    },
+    "com.amazonaws.rdsdata#SqlParametersList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.rdsdata#SqlParameter"
+      }
+    },
+    "com.amazonaws.rdsdata#SqlRecords": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.rdsdata#FieldList"
+      }
+    },
+    "com.amazonaws.rdsdata#SqlStatement": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "max": 65536
+        }
+      }
+    },
+    "com.amazonaws.rdsdata#SqlStatementResult": {
+      "type": "structure",
+      "members": {
+        "resultFrame": {
+          "target": "com.amazonaws.rdsdata#ResultFrame",
+          "traits": {
+            "smithy.api#documentation": "<p>The result set of the SQL statement.</p>"
+          }
+        },
+        "numberOfRecordsUpdated": {
+          "target": "com.amazonaws.rdsdata#RecordsUpdated",
+          "traits": {
+            "smithy.api#default": 0,
+            "smithy.api#documentation": "<p>The number of records updated by a SQL statement.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The result of a SQL statement.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.rdsdata#SqlStatementResults": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.rdsdata#SqlStatementResult"
+      }
+    },
+    "com.amazonaws.rdsdata#StatementTimeoutException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.rdsdata#ErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>The error message returned by this <code>StatementTimeoutException</code> error.</p>"
+          }
+        },
+        "dbConnectionId": {
+          "target": "com.amazonaws.rdsdata#Long",
+          "traits": {
+            "smithy.api#default": 0,
+            "smithy.api#documentation": "<p>The database connection ID that executed the SQL statement.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The execution of the SQL statement timed out.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.rdsdata#String": {
+      "type": "string"
+    },
+    "com.amazonaws.rdsdata#StringArray": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.rdsdata#String"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An array of strings.</p>\n         <note>\n            <p>Some array entries can be null.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.rdsdata#StructValue": {
+      "type": "structure",
+      "members": {
+        "attributes": {
+          "target": "com.amazonaws.rdsdata#ArrayValueList",
+          "traits": {
+            "smithy.api#documentation": "<p>The attributes returned in the record.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure value returned by a call.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.rdsdata#TransactionNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.rdsdata#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The transaction ID wasn't found.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.rdsdata#TransactionStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "max": 128
+        }
+      }
+    },
+    "com.amazonaws.rdsdata#TypeHint": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "JSON",
+            "name": "JSON"
+          },
+          {
+            "value": "UUID",
+            "name": "UUID"
+          },
+          {
+            "value": "TIMESTAMP",
+            "name": "TIMESTAMP"
+          },
+          {
+            "value": "DATE",
+            "name": "DATE"
+          },
+          {
+            "value": "TIME",
+            "name": "TIME"
+          },
+          {
+            "value": "DECIMAL",
+            "name": "DECIMAL"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.rdsdata#UnsupportedResultException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.rdsdata#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>There was a problem with the result because of one of the following conditions:</p>\n         <ul>\n            <li>\n               <p>It contained an unsupported data type.</p>\n            </li>\n            <li>\n               <p>It contained a multidimensional array.</p>\n            </li>\n            <li>\n               <p>The size was too large.</p>\n            </li>\n         </ul>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.rdsdata#UpdateResult": {
+      "type": "structure",
+      "members": {
+        "generatedFields": {
+          "target": "com.amazonaws.rdsdata#FieldList",
+          "traits": {
+            "smithy.api#documentation": "<p>Values for fields generated during the request.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response elements represent the results of an update.</p>"
+      }
+    },
+    "com.amazonaws.rdsdata#UpdateResults": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.rdsdata#UpdateResult"
+      }
+    },
+    "com.amazonaws.rdsdata#Value": {
+      "type": "union",
+      "members": {
+        "isNull": {
+          "target": "com.amazonaws.rdsdata#BoxedBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A NULL value.</p>"
+          }
+        },
+        "bitValue": {
+          "target": "com.amazonaws.rdsdata#BoxedBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A value for a column of BIT data type.</p>"
+          }
+        },
+        "bigIntValue": {
+          "target": "com.amazonaws.rdsdata#BoxedLong",
+          "traits": {
+            "smithy.api#documentation": "<p>A value for a column of big integer data type.</p>"
+          }
+        },
+        "intValue": {
+          "target": "com.amazonaws.rdsdata#BoxedInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>A value for a column of integer data type.</p>"
+          }
+        },
+        "doubleValue": {
+          "target": "com.amazonaws.rdsdata#BoxedDouble",
+          "traits": {
+            "smithy.api#documentation": "<p>A value for a column of double data type.</p>"
+          }
+        },
+        "realValue": {
+          "target": "com.amazonaws.rdsdata#BoxedFloat",
+          "traits": {
+            "smithy.api#documentation": "<p>A value for a column of real data type.</p>"
+          }
+        },
+        "stringValue": {
+          "target": "com.amazonaws.rdsdata#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A value for a column of string data type.</p>"
+          }
+        },
+        "blobValue": {
+          "target": "com.amazonaws.rdsdata#Blob",
+          "traits": {
+            "smithy.api#documentation": "<p>A value for a column of BLOB data type.</p>"
+          }
+        },
+        "arrayValues": {
+          "target": "com.amazonaws.rdsdata#ArrayValueList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of column values.</p>"
+          }
+        },
+        "structValue": {
+          "target": "com.amazonaws.rdsdata#StructValue",
+          "traits": {
+            "smithy.api#documentation": "<p>A value for a column of STRUCT data type.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains the value of a column.</p>\n         <note>\n            <p>This data structure is only used with the deprecated <code>ExecuteSql</code> operation.\n              Use the <code>BatchExecuteStatement</code> or <code>ExecuteStatement</code> operation instead.</p>\n         </note>"
       }
     }
   }

@@ -2621,650 +2621,7 @@
         }
       }
     },
-    "com.amazonaws.s3tables#SchemaField": {
-      "type": "structure",
-      "members": {
-        "name": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the field.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "type": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The field type. S3 Tables supports all Apache Iceberg primitive types. For more information, see the <a href=\"https://iceberg.apache.org/spec/#primitive-types\">Apache Iceberg documentation</a>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "required": {
-          "target": "smithy.api#Boolean",
-          "traits": {
-            "smithy.api#default": false,
-            "smithy.api#documentation": "<p>A Boolean value that specifies whether values are required for each row in this field. By default, this is <code>false</code> and null values are allowed in the field. If this is <code>true</code> the field does not allow null values.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains details about a schema field.</p>"
-      }
-    },
-    "com.amazonaws.s3tables#SchemaFieldList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.s3tables#SchemaField"
-      }
-    },
-    "com.amazonaws.s3tables#TableARN": {
-      "type": "string",
-      "traits": {
-        "aws.api#arnReference": {
-          "type": "AWS::S3Tables::Table"
-        },
-        "smithy.api#length": {
-          "min": 1,
-          "max": 2048
-        },
-        "smithy.api#pattern": "^(arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:bucket/[a-z0-9_-]{3,63}/table/[a-zA-Z0-9-_]{1,255})$"
-      }
-    },
-    "com.amazonaws.s3tables#TableBucketARN": {
-      "type": "string",
-      "traits": {
-        "aws.api#arnReference": {
-          "type": "AWS::S3Tables::TableBucket"
-        },
-        "smithy.api#pattern": "^(arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:bucket/[a-z0-9_-]{3,63})$"
-      }
-    },
-    "com.amazonaws.s3tables#TableBucketMaintenanceConfiguration": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.s3tables#TableBucketMaintenanceType"
-      },
-      "value": {
-        "target": "com.amazonaws.s3tables#TableBucketMaintenanceConfigurationValue"
-      }
-    },
-    "com.amazonaws.s3tables#TableBucketMaintenanceConfigurationValue": {
-      "type": "structure",
-      "members": {
-        "status": {
-          "target": "com.amazonaws.s3tables#MaintenanceStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the maintenance configuration.</p>"
-          }
-        },
-        "settings": {
-          "target": "com.amazonaws.s3tables#TableBucketMaintenanceSettings",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains details about the settings of the maintenance configuration.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Details about the values that define the maintenance configuration for a table bucket.</p>"
-      }
-    },
-    "com.amazonaws.s3tables#TableBucketMaintenanceSettings": {
-      "type": "union",
-      "members": {
-        "icebergUnreferencedFileRemoval": {
-          "target": "com.amazonaws.s3tables#IcebergUnreferencedFileRemovalSettings",
-          "traits": {
-            "smithy.api#documentation": "<p>The unreferenced file removal settings for the table bucket.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains details about the maintenance settings for the table bucket.</p>"
-      }
-    },
-    "com.amazonaws.s3tables#TableBucketMaintenanceType": {
-      "type": "enum",
-      "members": {
-        "ICEBERG_UNREFERENCED_FILE_REMOVAL": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "icebergUnreferencedFileRemoval"
-          }
-        }
-      }
-    },
-    "com.amazonaws.s3tables#TableBucketName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 3,
-          "max": 63
-        },
-        "smithy.api#pattern": "^[0-9a-z-]*$"
-      }
-    },
-    "com.amazonaws.s3tables#TableBucketPolicyResource": {
-      "type": "resource",
-      "operations": [
-        {
-          "target": "com.amazonaws.s3tables#DeleteTableBucketPolicy"
-        },
-        {
-          "target": "com.amazonaws.s3tables#GetTableBucketPolicy"
-        },
-        {
-          "target": "com.amazonaws.s3tables#PutTableBucketPolicy"
-        }
-      ]
-    },
-    "com.amazonaws.s3tables#TableBucketResource": {
-      "type": "resource",
-      "operations": [
-        {
-          "target": "com.amazonaws.s3tables#CreateTableBucket"
-        },
-        {
-          "target": "com.amazonaws.s3tables#DeleteTableBucket"
-        },
-        {
-          "target": "com.amazonaws.s3tables#GetTableBucket"
-        },
-        {
-          "target": "com.amazonaws.s3tables#GetTableBucketMaintenanceConfiguration"
-        },
-        {
-          "target": "com.amazonaws.s3tables#ListTableBuckets"
-        },
-        {
-          "target": "com.amazonaws.s3tables#PutTableBucketMaintenanceConfiguration"
-        }
-      ],
-      "traits": {
-        "aws.api#arn": {
-          "absolute": true,
-          "template": "com.amazonaws.s3tables#TableBucketARN"
-        }
-      }
-    },
-    "com.amazonaws.s3tables#TableBucketSummary": {
-      "type": "structure",
-      "members": {
-        "arn": {
-          "target": "com.amazonaws.s3tables#TableBucketARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "name": {
-          "target": "com.amazonaws.s3tables#TableBucketName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the table bucket.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "ownerAccountId": {
-          "target": "com.amazonaws.s3tables#AccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the account that owns the table bucket.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "createdAt": {
-          "target": "smithy.api#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the table bucket was created at.</p>",
-            "smithy.api#required": {},
-            "smithy.api#timestampFormat": "date-time"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains details about a table bucket.</p>"
-      }
-    },
-    "com.amazonaws.s3tables#TableBucketSummaryList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.s3tables#TableBucketSummary"
-      }
-    },
-    "com.amazonaws.s3tables#TableMaintenanceConfiguration": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.s3tables#TableMaintenanceType"
-      },
-      "value": {
-        "target": "com.amazonaws.s3tables#TableMaintenanceConfigurationValue"
-      }
-    },
-    "com.amazonaws.s3tables#TableMaintenanceConfigurationValue": {
-      "type": "structure",
-      "members": {
-        "status": {
-          "target": "com.amazonaws.s3tables#MaintenanceStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the maintenance configuration.</p>"
-          }
-        },
-        "settings": {
-          "target": "com.amazonaws.s3tables#TableMaintenanceSettings",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains details about the settings for the maintenance configuration.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains the values that define a maintenance configuration for a table.</p>"
-      }
-    },
-    "com.amazonaws.s3tables#TableMaintenanceJobStatus": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.s3tables#TableMaintenanceJobType"
-      },
-      "value": {
-        "target": "com.amazonaws.s3tables#TableMaintenanceJobStatusValue"
-      }
-    },
-    "com.amazonaws.s3tables#TableMaintenanceJobStatusValue": {
-      "type": "structure",
-      "members": {
-        "status": {
-          "target": "com.amazonaws.s3tables#JobStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>The status of the job.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "lastRunTimestamp": {
-          "target": "smithy.api#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time that the maintenance job was last run.</p>",
-            "smithy.api#timestampFormat": "date-time"
-          }
-        },
-        "failureMessage": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The failure message of a failed job.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Details about the status of a maintenance job.</p>"
-      }
-    },
-    "com.amazonaws.s3tables#TableMaintenanceJobType": {
-      "type": "enum",
-      "members": {
-        "ICEBERG_COMPACTION": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "icebergCompaction"
-          }
-        },
-        "ICEBERG_SNAPSHOT_MANAGEMENT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "icebergSnapshotManagement"
-          }
-        },
-        "ICEBERG_UNREFERENCED_FILE_REMOVAL": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "icebergUnreferencedFileRemoval"
-          }
-        }
-      }
-    },
-    "com.amazonaws.s3tables#TableMaintenanceSettings": {
-      "type": "union",
-      "members": {
-        "icebergCompaction": {
-          "target": "com.amazonaws.s3tables#IcebergCompactionSettings",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains details about the Iceberg compaction settings for the table.</p>"
-          }
-        },
-        "icebergSnapshotManagement": {
-          "target": "com.amazonaws.s3tables#IcebergSnapshotManagementSettings",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains details about the Iceberg snapshot management settings for the table.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains details about maintenance settings for the table.</p>"
-      }
-    },
-    "com.amazonaws.s3tables#TableMaintenanceType": {
-      "type": "enum",
-      "members": {
-        "ICEBERG_COMPACTION": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "icebergCompaction"
-          }
-        },
-        "ICEBERG_SNAPSHOT_MANAGEMENT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "icebergSnapshotManagement"
-          }
-        }
-      }
-    },
-    "com.amazonaws.s3tables#TableMetadata": {
-      "type": "union",
-      "members": {
-        "iceberg": {
-          "target": "com.amazonaws.s3tables#IcebergMetadata",
-          "traits": {
-            "smithy.api#documentation": "<p>Contains details about the metadata of an Iceberg table.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains details about the table metadata.</p>"
-      }
-    },
-    "com.amazonaws.s3tables#TableName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 255
-        },
-        "smithy.api#pattern": "^[0-9a-z_]*$"
-      }
-    },
-    "com.amazonaws.s3tables#TablePolicyResource": {
-      "type": "resource",
-      "operations": [
-        {
-          "target": "com.amazonaws.s3tables#DeleteTablePolicy"
-        },
-        {
-          "target": "com.amazonaws.s3tables#GetTablePolicy"
-        },
-        {
-          "target": "com.amazonaws.s3tables#PutTablePolicy"
-        }
-      ]
-    },
-    "com.amazonaws.s3tables#TableResource": {
-      "type": "resource",
-      "operations": [
-        {
-          "target": "com.amazonaws.s3tables#CreateTable"
-        },
-        {
-          "target": "com.amazonaws.s3tables#DeleteTable"
-        },
-        {
-          "target": "com.amazonaws.s3tables#GetTable"
-        },
-        {
-          "target": "com.amazonaws.s3tables#GetTableMaintenanceConfiguration"
-        },
-        {
-          "target": "com.amazonaws.s3tables#GetTableMaintenanceJobStatus"
-        },
-        {
-          "target": "com.amazonaws.s3tables#GetTableMetadataLocation"
-        },
-        {
-          "target": "com.amazonaws.s3tables#ListTables"
-        },
-        {
-          "target": "com.amazonaws.s3tables#PutTableMaintenanceConfiguration"
-        },
-        {
-          "target": "com.amazonaws.s3tables#RenameTable"
-        },
-        {
-          "target": "com.amazonaws.s3tables#UpdateTableMetadataLocation"
-        }
-      ],
-      "traits": {
-        "aws.api#arn": {
-          "absolute": true,
-          "template": "com.amazonaws.s3tables#TableARN"
-        }
-      }
-    },
-    "com.amazonaws.s3tables#TableSummary": {
-      "type": "structure",
-      "members": {
-        "namespace": {
-          "target": "com.amazonaws.s3tables#NamespaceList",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the namespace.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "name": {
-          "target": "com.amazonaws.s3tables#TableName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the table.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "type": {
-          "target": "com.amazonaws.s3tables#TableType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the table.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "tableARN": {
-          "target": "com.amazonaws.s3tables#TableARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "createdAt": {
-          "target": "smithy.api#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the table was created at.</p>",
-            "smithy.api#required": {},
-            "smithy.api#timestampFormat": "date-time"
-          }
-        },
-        "modifiedAt": {
-          "target": "smithy.api#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The date and time the table was last modified at.</p>",
-            "smithy.api#required": {},
-            "smithy.api#timestampFormat": "date-time"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains details about a table.</p>"
-      }
-    },
-    "com.amazonaws.s3tables#TableSummaryList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.s3tables#TableSummary"
-      }
-    },
-    "com.amazonaws.s3tables#TableType": {
-      "type": "enum",
-      "members": {
-        "CUSTOMER": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "customer"
-          }
-        },
-        "AWS": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "aws"
-          }
-        }
-      }
-    },
-    "com.amazonaws.s3tables#TooManyRequestsException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.s3tables#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The limit on the number of requests per second was exceeded.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429
-      }
-    },
-    "com.amazonaws.s3tables#UpdateTableMetadataLocation": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.s3tables#UpdateTableMetadataLocationRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.s3tables#UpdateTableMetadataLocationResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.s3tables#BadRequestException"
-        },
-        {
-          "target": "com.amazonaws.s3tables#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.s3tables#ForbiddenException"
-        },
-        {
-          "target": "com.amazonaws.s3tables#InternalServerErrorException"
-        },
-        {
-          "target": "com.amazonaws.s3tables#NotFoundException"
-        },
-        {
-          "target": "com.amazonaws.s3tables#TooManyRequestsException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates the metadata location for a table.  The metadata location of a table must be an S3 URI that begins with the table's warehouse location. The metadata location for an Apache Iceberg table must end with <code>.metadata.json</code>, or if the metadata file is Gzip-compressed, <code>.metadata.json.gz</code>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:UpdateTableMetadataLocation</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
-        "smithy.api#http": {
-          "uri": "/tables/{tableBucketARN}/{namespace}/{name}/metadata-location",
-          "method": "PUT"
-        }
-      }
-    },
-    "com.amazonaws.s3tables#UpdateTableMetadataLocationRequest": {
-      "type": "structure",
-      "members": {
-        "tableBucketARN": {
-          "target": "com.amazonaws.s3tables#TableBucketARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket. </p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "namespace": {
-          "target": "com.amazonaws.s3tables#NamespaceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The namespace of the table.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "name": {
-          "target": "com.amazonaws.s3tables#TableName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the table.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "versionToken": {
-          "target": "com.amazonaws.s3tables#VersionToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The version token of the table. </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "metadataLocation": {
-          "target": "com.amazonaws.s3tables#MetadataLocation",
-          "traits": {
-            "smithy.api#documentation": "<p>The new metadata location for the table. </p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.s3tables#UpdateTableMetadataLocationResponse": {
-      "type": "structure",
-      "members": {
-        "name": {
-          "target": "com.amazonaws.s3tables#TableName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the table.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "tableARN": {
-          "target": "com.amazonaws.s3tables#TableARN",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "namespace": {
-          "target": "com.amazonaws.s3tables#NamespaceList",
-          "traits": {
-            "smithy.api#documentation": "<p>The namespace the table is associated with.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "versionToken": {
-          "target": "com.amazonaws.s3tables#VersionToken",
-          "traits": {
-            "smithy.api#documentation": "<p>The version token of the table.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "metadataLocation": {
-          "target": "com.amazonaws.s3tables#MetadataLocation",
-          "traits": {
-            "smithy.api#documentation": "<p>The metadata location of the table.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.s3tables#VersionToken": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 2048
-        }
-      }
-    },
-    "com.amazonaws.s3tables#WarehouseLocation": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 2048
-        }
-      }
-    },
-    "com.amazonaws.s3tables#S3Tables": {
+    "com.amazonaws.s3tables#S3TableBuckets": {
       "type": "service",
       "version": "2018-05-10",
       "resources": [
@@ -3960,6 +3317,649 @@
             }
           ],
           "version": "1.0"
+        }
+      }
+    },
+    "com.amazonaws.s3tables#SchemaField": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the field.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The field type. S3 Tables supports all Apache Iceberg primitive types. For more information, see the <a href=\"https://iceberg.apache.org/spec/#primitive-types\">Apache Iceberg documentation</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "required": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#default": false,
+            "smithy.api#documentation": "<p>A Boolean value that specifies whether values are required for each row in this field. By default, this is <code>false</code> and null values are allowed in the field. If this is <code>true</code> the field does not allow null values.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a schema field.</p>"
+      }
+    },
+    "com.amazonaws.s3tables#SchemaFieldList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.s3tables#SchemaField"
+      }
+    },
+    "com.amazonaws.s3tables#TableARN": {
+      "type": "string",
+      "traits": {
+        "aws.api#arnReference": {
+          "type": "AWS::S3Tables::Table"
+        },
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^(arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:bucket/[a-z0-9_-]{3,63}/table/[a-zA-Z0-9-_]{1,255})$"
+      }
+    },
+    "com.amazonaws.s3tables#TableBucketARN": {
+      "type": "string",
+      "traits": {
+        "aws.api#arnReference": {
+          "type": "AWS::S3Tables::TableBucket"
+        },
+        "smithy.api#pattern": "^(arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:bucket/[a-z0-9_-]{3,63})$"
+      }
+    },
+    "com.amazonaws.s3tables#TableBucketMaintenanceConfiguration": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.s3tables#TableBucketMaintenanceType"
+      },
+      "value": {
+        "target": "com.amazonaws.s3tables#TableBucketMaintenanceConfigurationValue"
+      }
+    },
+    "com.amazonaws.s3tables#TableBucketMaintenanceConfigurationValue": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "target": "com.amazonaws.s3tables#MaintenanceStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the maintenance configuration.</p>"
+          }
+        },
+        "settings": {
+          "target": "com.amazonaws.s3tables#TableBucketMaintenanceSettings",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about the settings of the maintenance configuration.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Details about the values that define the maintenance configuration for a table bucket.</p>"
+      }
+    },
+    "com.amazonaws.s3tables#TableBucketMaintenanceSettings": {
+      "type": "union",
+      "members": {
+        "icebergUnreferencedFileRemoval": {
+          "target": "com.amazonaws.s3tables#IcebergUnreferencedFileRemovalSettings",
+          "traits": {
+            "smithy.api#documentation": "<p>The unreferenced file removal settings for the table bucket.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the maintenance settings for the table bucket.</p>"
+      }
+    },
+    "com.amazonaws.s3tables#TableBucketMaintenanceType": {
+      "type": "enum",
+      "members": {
+        "ICEBERG_UNREFERENCED_FILE_REMOVAL": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "icebergUnreferencedFileRemoval"
+          }
+        }
+      }
+    },
+    "com.amazonaws.s3tables#TableBucketName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 3,
+          "max": 63
+        },
+        "smithy.api#pattern": "^[0-9a-z-]*$"
+      }
+    },
+    "com.amazonaws.s3tables#TableBucketPolicyResource": {
+      "type": "resource",
+      "operations": [
+        {
+          "target": "com.amazonaws.s3tables#DeleteTableBucketPolicy"
+        },
+        {
+          "target": "com.amazonaws.s3tables#GetTableBucketPolicy"
+        },
+        {
+          "target": "com.amazonaws.s3tables#PutTableBucketPolicy"
+        }
+      ]
+    },
+    "com.amazonaws.s3tables#TableBucketResource": {
+      "type": "resource",
+      "operations": [
+        {
+          "target": "com.amazonaws.s3tables#CreateTableBucket"
+        },
+        {
+          "target": "com.amazonaws.s3tables#DeleteTableBucket"
+        },
+        {
+          "target": "com.amazonaws.s3tables#GetTableBucket"
+        },
+        {
+          "target": "com.amazonaws.s3tables#GetTableBucketMaintenanceConfiguration"
+        },
+        {
+          "target": "com.amazonaws.s3tables#ListTableBuckets"
+        },
+        {
+          "target": "com.amazonaws.s3tables#PutTableBucketMaintenanceConfiguration"
+        }
+      ],
+      "traits": {
+        "aws.api#arn": {
+          "absolute": true,
+          "template": "com.amazonaws.s3tables#TableBucketARN"
+        }
+      }
+    },
+    "com.amazonaws.s3tables#TableBucketSummary": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.s3tables#TableBucketARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.s3tables#TableBucketName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the table bucket.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ownerAccountId": {
+          "target": "com.amazonaws.s3tables#AccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the account that owns the table bucket.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the table bucket was created at.</p>",
+            "smithy.api#required": {},
+            "smithy.api#timestampFormat": "date-time"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a table bucket.</p>"
+      }
+    },
+    "com.amazonaws.s3tables#TableBucketSummaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.s3tables#TableBucketSummary"
+      }
+    },
+    "com.amazonaws.s3tables#TableMaintenanceConfiguration": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.s3tables#TableMaintenanceType"
+      },
+      "value": {
+        "target": "com.amazonaws.s3tables#TableMaintenanceConfigurationValue"
+      }
+    },
+    "com.amazonaws.s3tables#TableMaintenanceConfigurationValue": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "target": "com.amazonaws.s3tables#MaintenanceStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the maintenance configuration.</p>"
+          }
+        },
+        "settings": {
+          "target": "com.amazonaws.s3tables#TableMaintenanceSettings",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about the settings for the maintenance configuration.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains the values that define a maintenance configuration for a table.</p>"
+      }
+    },
+    "com.amazonaws.s3tables#TableMaintenanceJobStatus": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.s3tables#TableMaintenanceJobType"
+      },
+      "value": {
+        "target": "com.amazonaws.s3tables#TableMaintenanceJobStatusValue"
+      }
+    },
+    "com.amazonaws.s3tables#TableMaintenanceJobStatusValue": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "target": "com.amazonaws.s3tables#JobStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the job.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "lastRunTimestamp": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time that the maintenance job was last run.</p>",
+            "smithy.api#timestampFormat": "date-time"
+          }
+        },
+        "failureMessage": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The failure message of a failed job.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Details about the status of a maintenance job.</p>"
+      }
+    },
+    "com.amazonaws.s3tables#TableMaintenanceJobType": {
+      "type": "enum",
+      "members": {
+        "ICEBERG_COMPACTION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "icebergCompaction"
+          }
+        },
+        "ICEBERG_SNAPSHOT_MANAGEMENT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "icebergSnapshotManagement"
+          }
+        },
+        "ICEBERG_UNREFERENCED_FILE_REMOVAL": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "icebergUnreferencedFileRemoval"
+          }
+        }
+      }
+    },
+    "com.amazonaws.s3tables#TableMaintenanceSettings": {
+      "type": "union",
+      "members": {
+        "icebergCompaction": {
+          "target": "com.amazonaws.s3tables#IcebergCompactionSettings",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about the Iceberg compaction settings for the table.</p>"
+          }
+        },
+        "icebergSnapshotManagement": {
+          "target": "com.amazonaws.s3tables#IcebergSnapshotManagementSettings",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about the Iceberg snapshot management settings for the table.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about maintenance settings for the table.</p>"
+      }
+    },
+    "com.amazonaws.s3tables#TableMaintenanceType": {
+      "type": "enum",
+      "members": {
+        "ICEBERG_COMPACTION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "icebergCompaction"
+          }
+        },
+        "ICEBERG_SNAPSHOT_MANAGEMENT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "icebergSnapshotManagement"
+          }
+        }
+      }
+    },
+    "com.amazonaws.s3tables#TableMetadata": {
+      "type": "union",
+      "members": {
+        "iceberg": {
+          "target": "com.amazonaws.s3tables#IcebergMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about the metadata of an Iceberg table.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the table metadata.</p>"
+      }
+    },
+    "com.amazonaws.s3tables#TableName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "^[0-9a-z_]*$"
+      }
+    },
+    "com.amazonaws.s3tables#TablePolicyResource": {
+      "type": "resource",
+      "operations": [
+        {
+          "target": "com.amazonaws.s3tables#DeleteTablePolicy"
+        },
+        {
+          "target": "com.amazonaws.s3tables#GetTablePolicy"
+        },
+        {
+          "target": "com.amazonaws.s3tables#PutTablePolicy"
+        }
+      ]
+    },
+    "com.amazonaws.s3tables#TableResource": {
+      "type": "resource",
+      "operations": [
+        {
+          "target": "com.amazonaws.s3tables#CreateTable"
+        },
+        {
+          "target": "com.amazonaws.s3tables#DeleteTable"
+        },
+        {
+          "target": "com.amazonaws.s3tables#GetTable"
+        },
+        {
+          "target": "com.amazonaws.s3tables#GetTableMaintenanceConfiguration"
+        },
+        {
+          "target": "com.amazonaws.s3tables#GetTableMaintenanceJobStatus"
+        },
+        {
+          "target": "com.amazonaws.s3tables#GetTableMetadataLocation"
+        },
+        {
+          "target": "com.amazonaws.s3tables#ListTables"
+        },
+        {
+          "target": "com.amazonaws.s3tables#PutTableMaintenanceConfiguration"
+        },
+        {
+          "target": "com.amazonaws.s3tables#RenameTable"
+        },
+        {
+          "target": "com.amazonaws.s3tables#UpdateTableMetadataLocation"
+        }
+      ],
+      "traits": {
+        "aws.api#arn": {
+          "absolute": true,
+          "template": "com.amazonaws.s3tables#TableARN"
+        }
+      }
+    },
+    "com.amazonaws.s3tables#TableSummary": {
+      "type": "structure",
+      "members": {
+        "namespace": {
+          "target": "com.amazonaws.s3tables#NamespaceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the namespace.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.s3tables#TableName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the table.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.s3tables#TableType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the table.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tableARN": {
+          "target": "com.amazonaws.s3tables#TableARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the table was created at.</p>",
+            "smithy.api#required": {},
+            "smithy.api#timestampFormat": "date-time"
+          }
+        },
+        "modifiedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the table was last modified at.</p>",
+            "smithy.api#required": {},
+            "smithy.api#timestampFormat": "date-time"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a table.</p>"
+      }
+    },
+    "com.amazonaws.s3tables#TableSummaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.s3tables#TableSummary"
+      }
+    },
+    "com.amazonaws.s3tables#TableType": {
+      "type": "enum",
+      "members": {
+        "CUSTOMER": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "customer"
+          }
+        },
+        "AWS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "aws"
+          }
+        }
+      }
+    },
+    "com.amazonaws.s3tables#TooManyRequestsException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.s3tables#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The limit on the number of requests per second was exceeded.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.s3tables#UpdateTableMetadataLocation": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.s3tables#UpdateTableMetadataLocationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.s3tables#UpdateTableMetadataLocationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.s3tables#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.s3tables#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.s3tables#ForbiddenException"
+        },
+        {
+          "target": "com.amazonaws.s3tables#InternalServerErrorException"
+        },
+        {
+          "target": "com.amazonaws.s3tables#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.s3tables#TooManyRequestsException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the metadata location for a table.  The metadata location of a table must be an S3 URI that begins with the table's warehouse location. The metadata location for an Apache Iceberg table must end with <code>.metadata.json</code>, or if the metadata file is Gzip-compressed, <code>.metadata.json.gz</code>.</p>\n         <dl>\n            <dt>Permissions</dt>\n            <dd>\n               <p>You must have the <code>s3tables:UpdateTableMetadataLocation</code> permission to use this operation. </p>\n            </dd>\n         </dl>",
+        "smithy.api#http": {
+          "uri": "/tables/{tableBucketARN}/{namespace}/{name}/metadata-location",
+          "method": "PUT"
+        }
+      }
+    },
+    "com.amazonaws.s3tables#UpdateTableMetadataLocationRequest": {
+      "type": "structure",
+      "members": {
+        "tableBucketARN": {
+          "target": "com.amazonaws.s3tables#TableBucketARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table bucket. </p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "namespace": {
+          "target": "com.amazonaws.s3tables#NamespaceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The namespace of the table.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.s3tables#TableName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the table.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "versionToken": {
+          "target": "com.amazonaws.s3tables#VersionToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The version token of the table. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "metadataLocation": {
+          "target": "com.amazonaws.s3tables#MetadataLocation",
+          "traits": {
+            "smithy.api#documentation": "<p>The new metadata location for the table. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.s3tables#UpdateTableMetadataLocationResponse": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.s3tables#TableName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the table.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tableARN": {
+          "target": "com.amazonaws.s3tables#TableARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the table.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "namespace": {
+          "target": "com.amazonaws.s3tables#NamespaceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The namespace the table is associated with.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "versionToken": {
+          "target": "com.amazonaws.s3tables#VersionToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The version token of the table.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "metadataLocation": {
+          "target": "com.amazonaws.s3tables#MetadataLocation",
+          "traits": {
+            "smithy.api#documentation": "<p>The metadata location of the table.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.s3tables#VersionToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.s3tables#WarehouseLocation": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
         }
       }
     }

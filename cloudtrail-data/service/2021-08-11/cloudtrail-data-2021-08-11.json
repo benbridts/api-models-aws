@@ -118,204 +118,7 @@
         "smithy.api#error": "client"
       }
     },
-    "com.amazonaws.cloudtraildata#DuplicatedAuditEventId": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Two or more entries in the request have the same event ID.</p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.cloudtraildata#ErrorCode": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        }
-      }
-    },
-    "com.amazonaws.cloudtraildata#ErrorMessage": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 1024
-        }
-      }
-    },
-    "com.amazonaws.cloudtraildata#ExternalId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 2,
-          "max": 1224
-        },
-        "smithy.api#pattern": "^[\\w+=,.@:\\/-]*$"
-      }
-    },
-    "com.amazonaws.cloudtraildata#InvalidChannelARN": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The specified channel ARN is not a valid \n         channel ARN.</p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.cloudtraildata#PutAuditEvents": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.cloudtraildata#PutAuditEventsRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.cloudtraildata#PutAuditEventsResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.cloudtraildata#ChannelInsufficientPermission"
-        },
-        {
-          "target": "com.amazonaws.cloudtraildata#ChannelNotFound"
-        },
-        {
-          "target": "com.amazonaws.cloudtraildata#ChannelUnsupportedSchema"
-        },
-        {
-          "target": "com.amazonaws.cloudtraildata#DuplicatedAuditEventId"
-        },
-        {
-          "target": "com.amazonaws.cloudtraildata#InvalidChannelARN"
-        },
-        {
-          "target": "com.amazonaws.cloudtraildata#UnsupportedOperationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Ingests your application events into CloudTrail Lake. A required parameter,\n            <code>auditEvents</code>, accepts the JSON records (also called\n            <i>payload</i>) of events that you want CloudTrail to ingest. You\n         can add up to 100 of these events (or up to 1 MB) per <code>PutAuditEvents</code>\n         request.</p>",
-        "smithy.api#http": {
-          "uri": "/PutAuditEvents",
-          "method": "POST"
-        }
-      }
-    },
-    "com.amazonaws.cloudtraildata#PutAuditEventsRequest": {
-      "type": "structure",
-      "members": {
-        "auditEvents": {
-          "target": "com.amazonaws.cloudtraildata#AuditEvents",
-          "traits": {
-            "smithy.api#documentation": "<p>The JSON payload of events that you want to ingest. You can also point to the JSON event\n         payload in a file.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "channelArn": {
-          "target": "com.amazonaws.cloudtraildata#ChannelArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN or ID (the ARN suffix) of a channel.</p>",
-            "smithy.api#httpQuery": "channelArn",
-            "smithy.api#required": {}
-          }
-        },
-        "externalId": {
-          "target": "com.amazonaws.cloudtraildata#ExternalId",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique identifier that is conditionally required when the channel's resource policy includes an external \n         ID. This value can be any string, \n         such as a passphrase or account number.</p>",
-            "smithy.api#httpQuery": "externalId"
-          }
-        }
-      }
-    },
-    "com.amazonaws.cloudtraildata#PutAuditEventsResponse": {
-      "type": "structure",
-      "members": {
-        "successful": {
-          "target": "com.amazonaws.cloudtraildata#AuditEventResultEntries",
-          "traits": {
-            "smithy.api#documentation": "<p>Lists events in the provided event payload that were successfully ingested \n      into CloudTrail.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "failed": {
-          "target": "com.amazonaws.cloudtraildata#ResultErrorEntries",
-          "traits": {
-            "smithy.api#documentation": "<p>Lists events in the provided event payload that could not be \n         ingested into CloudTrail, and includes the error code and error message \n         returned for events that could not be ingested.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.cloudtraildata#ResultErrorEntries": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.cloudtraildata#ResultErrorEntry"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 100
-        }
-      }
-    },
-    "com.amazonaws.cloudtraildata#ResultErrorEntry": {
-      "type": "structure",
-      "members": {
-        "id": {
-          "target": "com.amazonaws.cloudtraildata#Uuid",
-          "traits": {
-            "smithy.api#documentation": "<p>The original event ID from the source event that could not be ingested by CloudTrail.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "errorCode": {
-          "target": "com.amazonaws.cloudtraildata#ErrorCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The error code for events that could not be ingested by CloudTrail. Possible error codes include: <code>FieldTooLong</code>, <code>FieldNotFound</code>, \n         <code>InvalidChecksum</code>, <code>InvalidData</code>, <code>InvalidRecipient</code>, <code>InvalidEventSource</code>, <code>AccountNotSubscribed</code>, \n         <code>Throttling</code>, and <code>InternalFailure</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "errorMessage": {
-          "target": "com.amazonaws.cloudtraildata#ErrorMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>The message that describes the error for events that could not be ingested by CloudTrail.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Includes the error code and error message for events that could not be ingested by CloudTrail.</p>"
-      }
-    },
-    "com.amazonaws.cloudtraildata#UnsupportedOperationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The operation requested is not supported in this region or account.</p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.cloudtraildata#Uuid": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        },
-        "smithy.api#pattern": "^[-_A-Za-z0-9]+$"
-      }
-    },
-    "com.amazonaws.cloudtraildata#CloudTrailData": {
+    "com.amazonaws.cloudtraildata#CloudTrailDataService": {
       "type": "service",
       "version": "2021-08-11",
       "operations": [
@@ -999,6 +802,203 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.cloudtraildata#DuplicatedAuditEventId": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Two or more entries in the request have the same event ID.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.cloudtraildata#ErrorCode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        }
+      }
+    },
+    "com.amazonaws.cloudtraildata#ErrorMessage": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.cloudtraildata#ExternalId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 2,
+          "max": 1224
+        },
+        "smithy.api#pattern": "^[\\w+=,.@:\\/-]*$"
+      }
+    },
+    "com.amazonaws.cloudtraildata#InvalidChannelARN": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified channel ARN is not a valid \n         channel ARN.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.cloudtraildata#PutAuditEvents": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.cloudtraildata#PutAuditEventsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.cloudtraildata#PutAuditEventsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.cloudtraildata#ChannelInsufficientPermission"
+        },
+        {
+          "target": "com.amazonaws.cloudtraildata#ChannelNotFound"
+        },
+        {
+          "target": "com.amazonaws.cloudtraildata#ChannelUnsupportedSchema"
+        },
+        {
+          "target": "com.amazonaws.cloudtraildata#DuplicatedAuditEventId"
+        },
+        {
+          "target": "com.amazonaws.cloudtraildata#InvalidChannelARN"
+        },
+        {
+          "target": "com.amazonaws.cloudtraildata#UnsupportedOperationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Ingests your application events into CloudTrail Lake. A required parameter,\n            <code>auditEvents</code>, accepts the JSON records (also called\n            <i>payload</i>) of events that you want CloudTrail to ingest. You\n         can add up to 100 of these events (or up to 1 MB) per <code>PutAuditEvents</code>\n         request.</p>",
+        "smithy.api#http": {
+          "uri": "/PutAuditEvents",
+          "method": "POST"
+        }
+      }
+    },
+    "com.amazonaws.cloudtraildata#PutAuditEventsRequest": {
+      "type": "structure",
+      "members": {
+        "auditEvents": {
+          "target": "com.amazonaws.cloudtraildata#AuditEvents",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON payload of events that you want to ingest. You can also point to the JSON event\n         payload in a file.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "channelArn": {
+          "target": "com.amazonaws.cloudtraildata#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN or ID (the ARN suffix) of a channel.</p>",
+            "smithy.api#httpQuery": "channelArn",
+            "smithy.api#required": {}
+          }
+        },
+        "externalId": {
+          "target": "com.amazonaws.cloudtraildata#ExternalId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier that is conditionally required when the channel's resource policy includes an external \n         ID. This value can be any string, \n         such as a passphrase or account number.</p>",
+            "smithy.api#httpQuery": "externalId"
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudtraildata#PutAuditEventsResponse": {
+      "type": "structure",
+      "members": {
+        "successful": {
+          "target": "com.amazonaws.cloudtraildata#AuditEventResultEntries",
+          "traits": {
+            "smithy.api#documentation": "<p>Lists events in the provided event payload that were successfully ingested \n      into CloudTrail.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "failed": {
+          "target": "com.amazonaws.cloudtraildata#ResultErrorEntries",
+          "traits": {
+            "smithy.api#documentation": "<p>Lists events in the provided event payload that could not be \n         ingested into CloudTrail, and includes the error code and error message \n         returned for events that could not be ingested.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.cloudtraildata#ResultErrorEntries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.cloudtraildata#ResultErrorEntry"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.cloudtraildata#ResultErrorEntry": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.cloudtraildata#Uuid",
+          "traits": {
+            "smithy.api#documentation": "<p>The original event ID from the source event that could not be ingested by CloudTrail.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "errorCode": {
+          "target": "com.amazonaws.cloudtraildata#ErrorCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code for events that could not be ingested by CloudTrail. Possible error codes include: <code>FieldTooLong</code>, <code>FieldNotFound</code>, \n         <code>InvalidChecksum</code>, <code>InvalidData</code>, <code>InvalidRecipient</code>, <code>InvalidEventSource</code>, <code>AccountNotSubscribed</code>, \n         <code>Throttling</code>, and <code>InternalFailure</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "errorMessage": {
+          "target": "com.amazonaws.cloudtraildata#ErrorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>The message that describes the error for events that could not be ingested by CloudTrail.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Includes the error code and error message for events that could not be ingested by CloudTrail.</p>"
+      }
+    },
+    "com.amazonaws.cloudtraildata#UnsupportedOperationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The operation requested is not supported in this region or account.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.cloudtraildata#Uuid": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^[-_A-Za-z0-9]+$"
       }
     }
   }

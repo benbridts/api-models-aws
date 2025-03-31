@@ -2370,624 +2370,6 @@
         "smithy.api#default": 0
       }
     },
-    "com.amazonaws.rum#ResourceNotFoundException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "resourceName": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the resource that is associated with the error.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "resourceType": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the resource that is associated with the error.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Resource not found.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 404
-      }
-    },
-    "com.amazonaws.rum#RumEvent": {
-      "type": "structure",
-      "members": {
-        "id": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A unique ID for this event.</p>",
-            "smithy.api#length": {
-              "min": 36,
-              "max": 36
-            },
-            "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-            "smithy.api#required": {}
-          }
-        },
-        "timestamp": {
-          "target": "smithy.api#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The exact time that this event occurred.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "type": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The JSON schema that denotes the type of event this is, such as a page load or a new session.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "metadata": {
-          "target": "com.amazonaws.rum#JsonValue",
-          "traits": {
-            "smithy.api#documentation": "<p>Metadata about this event, which contains a JSON serialization of the identity of the user for\n         this session. The user information comes from information such as the HTTP user-agent request header\n         and document interface.</p>"
-          }
-        },
-        "details": {
-          "target": "com.amazonaws.rum#JsonValue",
-          "traits": {
-            "smithy.api#documentation": "<p>A string containing details about the event.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A structure that contains the information for one performance event that RUM collects from a user session with your\n      application.</p>"
-      }
-    },
-    "com.amazonaws.rum#RumEventList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.rum#RumEvent"
-      }
-    },
-    "com.amazonaws.rum#ServiceQuotaExceededException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>This request exceeds a service quota.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 402
-      }
-    },
-    "com.amazonaws.rum#SessionSampleRate": {
-      "type": "double",
-      "traits": {
-        "smithy.api#default": 0,
-        "smithy.api#range": {
-          "min": 0,
-          "max": 1
-        }
-      }
-    },
-    "com.amazonaws.rum#StateEnum": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "name": "CREATED",
-            "value": "CREATED"
-          },
-          {
-            "name": "DELETING",
-            "value": "DELETING"
-          },
-          {
-            "name": "ACTIVE",
-            "value": "ACTIVE"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.rum#TagKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        },
-        "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
-      }
-    },
-    "com.amazonaws.rum#TagKeyList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.rum#TagKey"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 50
-        }
-      }
-    },
-    "com.amazonaws.rum#TagMap": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.rum#TagKey"
-      },
-      "value": {
-        "target": "com.amazonaws.rum#TagValue"
-      }
-    },
-    "com.amazonaws.rum#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.rum#TagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.rum#TagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.rum#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.rum#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.rum#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch RUM resource. Currently, \n       the only resources that \n       can be tagged app monitors.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can use the <code>TagResource</code> action with a resource that already has tags. \n       If you specify a new tag key for the resource, \n       this tag is appended to the list of tags associated\n       with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces\n       the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>",
-        "smithy.api#http": {
-          "method": "POST",
-          "uri": "/tags/{ResourceArn}"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.rum#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.rum#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the CloudWatch RUM resource that you're adding tags to.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.rum#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of key-value pairs to associate with the resource.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.rum#TagResourceResponse": {
-      "type": "structure",
-      "members": {}
-    },
-    "com.amazonaws.rum#TagValue": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        }
-      }
-    },
-    "com.amazonaws.rum#Telemetries": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.rum#Telemetry"
-      }
-    },
-    "com.amazonaws.rum#Telemetry": {
-      "type": "string",
-      "traits": {
-        "smithy.api#enum": [
-          {
-            "value": "errors",
-            "name": "ERRORS",
-            "documentation": "Includes JS error event plugin"
-          },
-          {
-            "value": "performance",
-            "name": "PERFORMANCE",
-            "documentation": "Includes navigation, paint, resource and web vital event plugins"
-          },
-          {
-            "value": "http",
-            "name": "HTTP",
-            "documentation": "Includes X-Ray Xhr and X-Ray Fetch plugin"
-          }
-        ]
-      }
-    },
-    "com.amazonaws.rum#ThrottlingException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "serviceCode": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the service that is associated with the error.</p>"
-          }
-        },
-        "quotaCode": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the service quota that was exceeded.</p>"
-          }
-        },
-        "retryAfterSeconds": {
-          "target": "smithy.api#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The value of a parameter in the request caused an error.</p>",
-            "smithy.api#httpHeader": "Retry-After"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request was throttled because of quota limits.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429,
-        "smithy.api#retryable": {
-          "throttling": true
-        }
-      }
-    },
-    "com.amazonaws.rum#TimeRange": {
-      "type": "structure",
-      "members": {
-        "After": {
-          "target": "com.amazonaws.rum#QueryTimestamp",
-          "traits": {
-            "smithy.api#default": 0,
-            "smithy.api#documentation": "<p>The beginning of the time range to retrieve performance events from.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Before": {
-          "target": "com.amazonaws.rum#QueryTimestamp",
-          "traits": {
-            "smithy.api#default": 0,
-            "smithy.api#documentation": "<p>The end of the time range to retrieve performance events from. If you omit this, the time \n      range extends to the time that this operation is performed.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A structure that defines the time range that you want to retrieve results from.</p>"
-      }
-    },
-    "com.amazonaws.rum#Token": {
-      "type": "string"
-    },
-    "com.amazonaws.rum#UnitLabel": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 256
-        }
-      }
-    },
-    "com.amazonaws.rum#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.rum#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.rum#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.rum#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.rum#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.rum#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>",
-        "smithy.api#http": {
-          "code": 200,
-          "method": "DELETE",
-          "uri": "/tags/{ResourceArn}"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.rum#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.rum#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the CloudWatch RUM resource that you're removing tags from.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.rum#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>The list of tag keys to remove from the resource.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.rum#UntagResourceResponse": {
-      "type": "structure",
-      "members": {}
-    },
-    "com.amazonaws.rum#UpdateAppMonitor": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.rum#UpdateAppMonitorRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.rum#UpdateAppMonitorResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.rum#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.rum#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.rum#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.rum#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.rum#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.rum#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates the configuration of an existing app monitor. When you use this operation, only the parts of the app monitor\n         configuration that you specify in this operation are changed. For any parameters that you omit, the existing\n         values are kept.</p>\n         <p>You can't use this operation to change the tags of an existing app monitor. To change the tags of an existing app monitor, use\n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>\n         <p>To create a new app monitor, use <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_CreateAppMonitor.html\">CreateAppMonitor</a>.</p>\n         <p>After you update an app monitor, sign in to the CloudWatch RUM console to get \n         the updated JavaScript code snippet to add to your web application. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html\">How do I find a code snippet\n            that I've already generated?</a>\n         </p>",
-        "smithy.api#http": {
-          "code": 200,
-          "method": "PATCH",
-          "uri": "/appmonitor/{Name}"
-        }
-      }
-    },
-    "com.amazonaws.rum#UpdateAppMonitorRequest": {
-      "type": "structure",
-      "members": {
-        "Name": {
-          "target": "com.amazonaws.rum#AppMonitorName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the app monitor to update.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "Domain": {
-          "target": "com.amazonaws.rum#AppMonitorDomain",
-          "traits": {
-            "smithy.api#documentation": "<p>The top-level internet domain name for which your application has administrative authority.</p>"
-          }
-        },
-        "DomainList": {
-          "target": "com.amazonaws.rum#AppMonitorDomainList",
-          "traits": {
-            "smithy.api#documentation": "<p>\n         List the domain names for which your application has administrative authority. The <code>UpdateAppMonitor</code> allows either the domain or the domain list.\n      </p>"
-          }
-        },
-        "AppMonitorConfiguration": {
-          "target": "com.amazonaws.rum#AppMonitorConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>A structure that contains much of the configuration data for the app monitor. If you are using \n         Amazon Cognito for authorization, you must include this structure in your request, and it must include the ID of the \n         Amazon Cognito identity pool to use for authorization. If you don't include <code>AppMonitorConfiguration</code>, you must set up your own \n         authorization method. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html\">Authorize your application\n            to send data to Amazon Web Services</a>.</p>"
-          }
-        },
-        "CwLogEnabled": {
-          "target": "smithy.api#Boolean",
-          "traits": {
-            "smithy.api#documentation": "<p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM \n         sends a copy of this telemetry data to Amazon CloudWatch Logs\n         in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur\n         Amazon CloudWatch Logs charges.</p>"
-          }
-        },
-        "CustomEvents": {
-          "target": "com.amazonaws.rum#CustomEvents",
-          "traits": {
-            "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n         custom events. The default is for custom events to be <code>DISABLED</code>.</p>\n         <p>For more information about custom events, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
-          }
-        },
-        "DeobfuscationConfiguration": {
-          "target": "com.amazonaws.rum#DeobfuscationConfiguration",
-          "traits": {
-            "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can deobfuscate stack traces.\n      </p>"
-          }
-        }
-      }
-    },
-    "com.amazonaws.rum#UpdateAppMonitorResponse": {
-      "type": "structure",
-      "members": {}
-    },
-    "com.amazonaws.rum#UpdateRumMetricDefinition": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.rum#UpdateRumMetricDefinitionRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.rum#UpdateRumMetricDefinitionResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.rum#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.rum#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.rum#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.rum#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.rum#ServiceQuotaExceededException"
-        },
-        {
-          "target": "com.amazonaws.rum#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.rum#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Modifies one existing metric definition for CloudWatch RUM extended metrics. For \n         more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html\">BatchCreateRumMetricsDefinitions</a>.</p>",
-        "smithy.api#externalDocumentation": {
-          "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/UpdateRumMetricDefinitions.html"
-        },
-        "smithy.api#http": {
-          "code": 200,
-          "method": "PATCH",
-          "uri": "/rummetrics/{AppMonitorName}/metrics"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.rum#UpdateRumMetricDefinitionRequest": {
-      "type": "structure",
-      "members": {
-        "AppMonitorName": {
-          "target": "com.amazonaws.rum#AppMonitorName",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the CloudWatch RUM app monitor that sends these metrics.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {},
-            "smithy.api#resourceIdentifier": "Name"
-          }
-        },
-        "Destination": {
-          "target": "com.amazonaws.rum#MetricDestination",
-          "traits": {
-            "smithy.api#documentation": "<p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If\n         you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment \n         that will receive\n         the metrics and an IAM role that has permission to write to the experiment.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "DestinationArn": {
-          "target": "com.amazonaws.rum#DestinationArn",
-          "traits": {
-            "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter.</p>\n         <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this \n         experiment as a valid destination. For more information, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>"
-          }
-        },
-        "MetricDefinition": {
-          "target": "com.amazonaws.rum#MetricDefinitionRequest",
-          "traits": {
-            "smithy.api#documentation": "<p>A structure that contains the new definition that you want to use for this metric.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "MetricDefinitionId": {
-          "target": "com.amazonaws.rum#MetricDefinitionId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the metric definition to update.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      }
-    },
-    "com.amazonaws.rum#UpdateRumMetricDefinitionResponse": {
-      "type": "structure",
-      "members": {}
-    },
-    "com.amazonaws.rum#Url": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 1260
-        },
-        "smithy.api#pattern": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&*//=]*)"
-      }
-    },
-    "com.amazonaws.rum#UserDetails": {
-      "type": "structure",
-      "members": {
-        "userId": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the user for this user session. This ID is generated by RUM and does not include any \n      personally identifiable information about the user.</p>",
-            "smithy.api#length": {
-              "min": 36,
-              "max": 36
-            },
-            "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
-          }
-        },
-        "sessionId": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The session ID that the performance events are from.</p>",
-            "smithy.api#length": {
-              "min": 36,
-              "max": 36
-            },
-            "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A structure that contains information about the user session that this batch of events was collected from.</p>"
-      }
-    },
-    "com.amazonaws.rum#ValidationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>One of the arguments for the request is not valid.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.rum#ValueKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 280
-        }
-      }
-    },
     "com.amazonaws.rum#RUM": {
       "type": "service",
       "version": "2018-05-10",
@@ -3789,6 +3171,624 @@
             }
           ],
           "version": "1.0"
+        }
+      }
+    },
+    "com.amazonaws.rum#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "resourceName": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the resource that is associated with the error.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the resource that is associated with the error.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Resource not found.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.rum#RumEvent": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique ID for this event.</p>",
+            "smithy.api#length": {
+              "min": 36,
+              "max": 36
+            },
+            "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+            "smithy.api#required": {}
+          }
+        },
+        "timestamp": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The exact time that this event occurred.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON schema that denotes the type of event this is, such as a page load or a new session.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "metadata": {
+          "target": "com.amazonaws.rum#JsonValue",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata about this event, which contains a JSON serialization of the identity of the user for\n         this session. The user information comes from information such as the HTTP user-agent request header\n         and document interface.</p>"
+          }
+        },
+        "details": {
+          "target": "com.amazonaws.rum#JsonValue",
+          "traits": {
+            "smithy.api#documentation": "<p>A string containing details about the event.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure that contains the information for one performance event that RUM collects from a user session with your\n      application.</p>"
+      }
+    },
+    "com.amazonaws.rum#RumEventList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.rum#RumEvent"
+      }
+    },
+    "com.amazonaws.rum#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>This request exceeds a service quota.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402
+      }
+    },
+    "com.amazonaws.rum#SessionSampleRate": {
+      "type": "double",
+      "traits": {
+        "smithy.api#default": 0,
+        "smithy.api#range": {
+          "min": 0,
+          "max": 1
+        }
+      }
+    },
+    "com.amazonaws.rum#StateEnum": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "name": "CREATED",
+            "value": "CREATED"
+          },
+          {
+            "name": "DELETING",
+            "value": "DELETING"
+          },
+          {
+            "name": "ACTIVE",
+            "value": "ACTIVE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.rum#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+      }
+    },
+    "com.amazonaws.rum#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.rum#TagKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.rum#TagMap": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.rum#TagKey"
+      },
+      "value": {
+        "target": "com.amazonaws.rum#TagValue"
+      }
+    },
+    "com.amazonaws.rum#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.rum#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.rum#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.rum#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.rum#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.rum#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified CloudWatch RUM resource. Currently, \n       the only resources that \n       can be tagged app monitors.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n       permissions by granting a user\n       permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can use the <code>TagResource</code> action with a resource that already has tags. \n       If you specify a new tag key for the resource, \n       this tag is appended to the list of tags associated\n       with the alarm. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces\n       the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/tags/{ResourceArn}"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.rum#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.rum#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the CloudWatch RUM resource that you're adding tags to.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.rum#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of key-value pairs to associate with the resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.rum#TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.rum#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.rum#Telemetries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.rum#Telemetry"
+      }
+    },
+    "com.amazonaws.rum#Telemetry": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "errors",
+            "name": "ERRORS",
+            "documentation": "Includes JS error event plugin"
+          },
+          {
+            "value": "performance",
+            "name": "PERFORMANCE",
+            "documentation": "Includes navigation, paint, resource and web vital event plugins"
+          },
+          {
+            "value": "http",
+            "name": "HTTP",
+            "documentation": "Includes X-Ray Xhr and X-Ray Fetch plugin"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.rum#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "serviceCode": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the service that is associated with the error.</p>"
+          }
+        },
+        "quotaCode": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the service quota that was exceeded.</p>"
+          }
+        },
+        "retryAfterSeconds": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of a parameter in the request caused an error.</p>",
+            "smithy.api#httpHeader": "Retry-After"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request was throttled because of quota limits.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429,
+        "smithy.api#retryable": {
+          "throttling": true
+        }
+      }
+    },
+    "com.amazonaws.rum#TimeRange": {
+      "type": "structure",
+      "members": {
+        "After": {
+          "target": "com.amazonaws.rum#QueryTimestamp",
+          "traits": {
+            "smithy.api#default": 0,
+            "smithy.api#documentation": "<p>The beginning of the time range to retrieve performance events from.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Before": {
+          "target": "com.amazonaws.rum#QueryTimestamp",
+          "traits": {
+            "smithy.api#default": 0,
+            "smithy.api#documentation": "<p>The end of the time range to retrieve performance events from. If you omit this, the time \n      range extends to the time that this operation is performed.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure that defines the time range that you want to retrieve results from.</p>"
+      }
+    },
+    "com.amazonaws.rum#Token": {
+      "type": "string"
+    },
+    "com.amazonaws.rum#UnitLabel": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.rum#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.rum#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.rum#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.rum#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.rum#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.rum#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>",
+        "smithy.api#http": {
+          "code": 200,
+          "method": "DELETE",
+          "uri": "/tags/{ResourceArn}"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.rum#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.rum#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the CloudWatch RUM resource that you're removing tags from.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.rum#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of tag keys to remove from the resource.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.rum#UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.rum#UpdateAppMonitor": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.rum#UpdateAppMonitorRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.rum#UpdateAppMonitorResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.rum#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.rum#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.rum#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.rum#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.rum#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.rum#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the configuration of an existing app monitor. When you use this operation, only the parts of the app monitor\n         configuration that you specify in this operation are changed. For any parameters that you omit, the existing\n         values are kept.</p>\n         <p>You can't use this operation to change the tags of an existing app monitor. To change the tags of an existing app monitor, use\n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>\n         <p>To create a new app monitor, use <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_CreateAppMonitor.html\">CreateAppMonitor</a>.</p>\n         <p>After you update an app monitor, sign in to the CloudWatch RUM console to get \n         the updated JavaScript code snippet to add to your web application. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-find-code-snippet.html\">How do I find a code snippet\n            that I've already generated?</a>\n         </p>",
+        "smithy.api#http": {
+          "code": 200,
+          "method": "PATCH",
+          "uri": "/appmonitor/{Name}"
+        }
+      }
+    },
+    "com.amazonaws.rum#UpdateAppMonitorRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.rum#AppMonitorName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the app monitor to update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Domain": {
+          "target": "com.amazonaws.rum#AppMonitorDomain",
+          "traits": {
+            "smithy.api#documentation": "<p>The top-level internet domain name for which your application has administrative authority.</p>"
+          }
+        },
+        "DomainList": {
+          "target": "com.amazonaws.rum#AppMonitorDomainList",
+          "traits": {
+            "smithy.api#documentation": "<p>\n         List the domain names for which your application has administrative authority. The <code>UpdateAppMonitor</code> allows either the domain or the domain list.\n      </p>"
+          }
+        },
+        "AppMonitorConfiguration": {
+          "target": "com.amazonaws.rum#AppMonitorConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>A structure that contains much of the configuration data for the app monitor. If you are using \n         Amazon Cognito for authorization, you must include this structure in your request, and it must include the ID of the \n         Amazon Cognito identity pool to use for authorization. If you don't include <code>AppMonitorConfiguration</code>, you must set up your own \n         authorization method. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-get-started-authorization.html\">Authorize your application\n            to send data to Amazon Web Services</a>.</p>"
+          }
+        },
+        "CwLogEnabled": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM \n         sends a copy of this telemetry data to Amazon CloudWatch Logs\n         in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur\n         Amazon CloudWatch Logs charges.</p>"
+          }
+        },
+        "CustomEvents": {
+          "target": "com.amazonaws.rum#CustomEvents",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n         custom events. The default is for custom events to be <code>DISABLED</code>.</p>\n         <p>For more information about custom events, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
+          }
+        },
+        "DeobfuscationConfiguration": {
+          "target": "com.amazonaws.rum#DeobfuscationConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>\n         A structure that contains the configuration for how an app monitor can deobfuscate stack traces.\n      </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.rum#UpdateAppMonitorResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.rum#UpdateRumMetricDefinition": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.rum#UpdateRumMetricDefinitionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.rum#UpdateRumMetricDefinitionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.rum#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.rum#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.rum#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.rum#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.rum#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.rum#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.rum#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Modifies one existing metric definition for CloudWatch RUM extended metrics. For \n         more information about extended metrics, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html\">BatchCreateRumMetricsDefinitions</a>.</p>",
+        "smithy.api#externalDocumentation": {
+          "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/UpdateRumMetricDefinitions.html"
+        },
+        "smithy.api#http": {
+          "code": 200,
+          "method": "PATCH",
+          "uri": "/rummetrics/{AppMonitorName}/metrics"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.rum#UpdateRumMetricDefinitionRequest": {
+      "type": "structure",
+      "members": {
+        "AppMonitorName": {
+          "target": "com.amazonaws.rum#AppMonitorName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the CloudWatch RUM app monitor that sends these metrics.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {},
+            "smithy.api#resourceIdentifier": "Name"
+          }
+        },
+        "Destination": {
+          "target": "com.amazonaws.rum#MetricDestination",
+          "traits": {
+            "smithy.api#documentation": "<p>The destination to send the metrics to. Valid values are <code>CloudWatch</code> and <code>Evidently</code>. If\n         you specify <code>Evidently</code>, you must also specify the ARN of the CloudWatchEvidently experiment \n         that will receive\n         the metrics and an IAM role that has permission to write to the experiment.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "DestinationArn": {
+          "target": "com.amazonaws.rum#DestinationArn",
+          "traits": {
+            "smithy.api#documentation": "<p>This parameter is required if <code>Destination</code> is <code>Evidently</code>. If <code>Destination</code> is \n         <code>CloudWatch</code>, do not use this parameter.</p>\n         <p>This parameter specifies the ARN of the Evidently experiment that is to receive the metrics. You must have already defined this \n         experiment as a valid destination. For more information, see <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>"
+          }
+        },
+        "MetricDefinition": {
+          "target": "com.amazonaws.rum#MetricDefinitionRequest",
+          "traits": {
+            "smithy.api#documentation": "<p>A structure that contains the new definition that you want to use for this metric.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MetricDefinitionId": {
+          "target": "com.amazonaws.rum#MetricDefinitionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the metric definition to update.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.rum#UpdateRumMetricDefinitionResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.rum#Url": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1260
+        },
+        "smithy.api#pattern": "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&*//=]*)"
+      }
+    },
+    "com.amazonaws.rum#UserDetails": {
+      "type": "structure",
+      "members": {
+        "userId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the user for this user session. This ID is generated by RUM and does not include any \n      personally identifiable information about the user.</p>",
+            "smithy.api#length": {
+              "min": 36,
+              "max": 36
+            },
+            "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          }
+        },
+        "sessionId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The session ID that the performance events are from.</p>",
+            "smithy.api#length": {
+              "min": 36,
+              "max": 36
+            },
+            "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure that contains information about the user session that this batch of events was collected from.</p>"
+      }
+    },
+    "com.amazonaws.rum#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>One of the arguments for the request is not valid.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.rum#ValueKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 280
         }
       }
     }

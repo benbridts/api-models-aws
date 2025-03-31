@@ -2861,252 +2861,7 @@
         "smithy.api#documentation": "<p>Destination for scheduled query.</p>"
       }
     },
-    "com.amazonaws.timestreamquery#Type": {
-      "type": "structure",
-      "members": {
-        "ScalarType": {
-          "target": "com.amazonaws.timestreamquery#ScalarType",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates if the column is of type string, integer, Boolean, double, timestamp, date,\n            time. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/supported-data-types.html\">Supported data\n                types</a>.</p>"
-          }
-        },
-        "ArrayColumnInfo": {
-          "target": "com.amazonaws.timestreamquery#ColumnInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates if the column is an array.</p>"
-          }
-        },
-        "TimeSeriesMeasureValueColumnInfo": {
-          "target": "com.amazonaws.timestreamquery#ColumnInfo",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates if the column is a timeseries data type.</p>"
-          }
-        },
-        "RowColumnInfo": {
-          "target": "com.amazonaws.timestreamquery#ColumnInfoList",
-          "traits": {
-            "smithy.api#documentation": "<p>Indicates if the column is a row.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains the data type of a column in a query result set. The data type can be scalar\n            or complex. The supported scalar data types are integers, Boolean, string, double,\n            timestamp, date, time, and intervals. The supported complex data types are arrays, rows,\n            and timeseries.</p>"
-      }
-    },
-    "com.amazonaws.timestreamquery#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.timestreamquery#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.timestreamquery#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#ValidationException"
-        }
-      ],
-      "traits": {
-        "aws.api#clientDiscoveredEndpoint": {
-          "required": true
-        },
-        "smithy.api#documentation": "<p>Removes the association of tags from a Timestream query resource.</p>"
-      }
-    },
-    "com.amazonaws.timestreamquery#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceARN": {
-          "target": "com.amazonaws.timestreamquery#AmazonResourceName",
-          "traits": {
-            "smithy.api#documentation": "<p>The Timestream resource that the tags will be removed from. This value is an Amazon\n            Resource Name (ARN). </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.timestreamquery#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>A list of tags keys. Existing tags of the resource whose keys are members of this list\n            will be removed from the Timestream resource. </p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.timestreamquery#UntagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.timestreamquery#UpdateAccountSettings": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.timestreamquery#UpdateAccountSettingsRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.timestreamquery#UpdateAccountSettingsResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.timestreamquery#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#ValidationException"
-        }
-      ],
-      "traits": {
-        "aws.api#clientDiscoveredEndpoint": {
-          "required": true
-        },
-        "smithy.api#documentation": "<p>Transitions your account to use TCUs for query pricing and modifies the maximum query compute units that you've configured. If you reduce the value of <code>MaxQueryTCU</code> to a desired configuration, the new value can take up to 24 hours to be effective.</p>\n         <note>\n            <p>After you've transitioned your account to use TCUs for query pricing, you can't transition to using bytes scanned for query pricing.</p>\n         </note>",
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.timestreamquery#UpdateAccountSettingsRequest": {
-      "type": "structure",
-      "members": {
-        "MaxQueryTCU": {
-          "target": "com.amazonaws.timestreamquery#MaxQueryCapacity",
-          "traits": {
-            "smithy.api#documentation": "<p>The maximum number of compute units the service will use at any point in time to serve your queries. To run queries, you must set a minimum capacity of 4 TCU. You can set the maximum number of TCU in multiples of 4, for example, 4, 8, 16, 32, and so on. The maximum value supported for <code>MaxQueryTCU</code> is 1000. To request an increase to this soft limit, contact Amazon Web Services Support. For information about the default quota for maxQueryTCU, see Default quotas. This configuration is applicable only for on-demand usage of Timestream Compute Units (TCUs).</p>\n         <p>The maximum value supported for <code>MaxQueryTCU</code> is 1000. To request an increase to this soft limit, contact Amazon Web Services Support. For information about the default quota for <code>maxQueryTCU</code>, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.default\">Default quotas</a>.</p>"
-          }
-        },
-        "QueryPricingModel": {
-          "target": "com.amazonaws.timestreamquery#QueryPricingModel",
-          "traits": {
-            "smithy.api#documentation": "<p>The pricing model for queries in an account.</p>\n         <note>\n            <p>The <code>QueryPricingModel</code> parameter is used by several Timestream operations; however, the <code>UpdateAccountSettings</code> API operation doesn't recognize any values other than <code>COMPUTE_UNITS</code>.</p>\n         </note>"
-          }
-        },
-        "QueryCompute": {
-          "target": "com.amazonaws.timestreamquery#QueryComputeRequest",
-          "traits": {
-            "smithy.api#documentation": "<p>Modifies the query compute settings configured in your account, including the query pricing model and provisioned Timestream Compute Units (TCUs) in your account.</p>\n         <note>\n            <p>This API is idempotent, meaning that making the same request multiple times will have the same effect as making the request once.</p>\n         </note>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.timestreamquery#UpdateAccountSettingsResponse": {
-      "type": "structure",
-      "members": {
-        "MaxQueryTCU": {
-          "target": "com.amazonaws.timestreamquery#MaxQueryCapacity",
-          "traits": {
-            "smithy.api#documentation": "<p>The configured maximum number of compute units the service will use at any point in time to serve your queries.</p>"
-          }
-        },
-        "QueryPricingModel": {
-          "target": "com.amazonaws.timestreamquery#QueryPricingModel",
-          "traits": {
-            "smithy.api#documentation": "<p>The pricing model for an account.</p>"
-          }
-        },
-        "QueryCompute": {
-          "target": "com.amazonaws.timestreamquery#QueryComputeResponse",
-          "traits": {
-            "smithy.api#documentation": "<p>Confirms the updated account settings for querying data in your account.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.timestreamquery#UpdateScheduledQuery": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.timestreamquery#UpdateScheduledQueryRequest"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.timestreamquery#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.timestreamquery#ValidationException"
-        }
-      ],
-      "traits": {
-        "aws.api#clientDiscoveredEndpoint": {
-          "required": true
-        },
-        "smithy.api#documentation": "<p>Update a scheduled query.</p>"
-      }
-    },
-    "com.amazonaws.timestreamquery#UpdateScheduledQueryRequest": {
-      "type": "structure",
-      "members": {
-        "ScheduledQueryArn": {
-          "target": "com.amazonaws.timestreamquery#AmazonResourceName",
-          "traits": {
-            "smithy.api#documentation": "<p>ARN of the scheuled query.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "State": {
-          "target": "com.amazonaws.timestreamquery#ScheduledQueryState",
-          "traits": {
-            "smithy.api#documentation": "<p>State of the scheduled query. </p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.timestreamquery#ValidationException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.timestreamquery#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p> Invalid or malformed request. </p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.timestreamquery#TimestreamQuery": {
+    "com.amazonaws.timestreamquery#Timestream_20181101": {
       "type": "service",
       "version": "2018-11-01",
       "operations": [
@@ -3802,6 +3557,251 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.timestreamquery#Type": {
+      "type": "structure",
+      "members": {
+        "ScalarType": {
+          "target": "com.amazonaws.timestreamquery#ScalarType",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates if the column is of type string, integer, Boolean, double, timestamp, date,\n            time. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/supported-data-types.html\">Supported data\n                types</a>.</p>"
+          }
+        },
+        "ArrayColumnInfo": {
+          "target": "com.amazonaws.timestreamquery#ColumnInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates if the column is an array.</p>"
+          }
+        },
+        "TimeSeriesMeasureValueColumnInfo": {
+          "target": "com.amazonaws.timestreamquery#ColumnInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates if the column is a timeseries data type.</p>"
+          }
+        },
+        "RowColumnInfo": {
+          "target": "com.amazonaws.timestreamquery#ColumnInfoList",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates if the column is a row.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains the data type of a column in a query result set. The data type can be scalar\n            or complex. The supported scalar data types are integers, Boolean, string, double,\n            timestamp, date, time, and intervals. The supported complex data types are arrays, rows,\n            and timeseries.</p>"
+      }
+    },
+    "com.amazonaws.timestreamquery#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.timestreamquery#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.timestreamquery#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#ValidationException"
+        }
+      ],
+      "traits": {
+        "aws.api#clientDiscoveredEndpoint": {
+          "required": true
+        },
+        "smithy.api#documentation": "<p>Removes the association of tags from a Timestream query resource.</p>"
+      }
+    },
+    "com.amazonaws.timestreamquery#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceARN": {
+          "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Timestream resource that the tags will be removed from. This value is an Amazon\n            Resource Name (ARN). </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.timestreamquery#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of tags keys. Existing tags of the resource whose keys are members of this list\n            will be removed from the Timestream resource. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.timestreamquery#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.timestreamquery#UpdateAccountSettings": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.timestreamquery#UpdateAccountSettingsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.timestreamquery#UpdateAccountSettingsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.timestreamquery#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#ValidationException"
+        }
+      ],
+      "traits": {
+        "aws.api#clientDiscoveredEndpoint": {
+          "required": true
+        },
+        "smithy.api#documentation": "<p>Transitions your account to use TCUs for query pricing and modifies the maximum query compute units that you've configured. If you reduce the value of <code>MaxQueryTCU</code> to a desired configuration, the new value can take up to 24 hours to be effective.</p>\n         <note>\n            <p>After you've transitioned your account to use TCUs for query pricing, you can't transition to using bytes scanned for query pricing.</p>\n         </note>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.timestreamquery#UpdateAccountSettingsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxQueryTCU": {
+          "target": "com.amazonaws.timestreamquery#MaxQueryCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of compute units the service will use at any point in time to serve your queries. To run queries, you must set a minimum capacity of 4 TCU. You can set the maximum number of TCU in multiples of 4, for example, 4, 8, 16, 32, and so on. The maximum value supported for <code>MaxQueryTCU</code> is 1000. To request an increase to this soft limit, contact Amazon Web Services Support. For information about the default quota for maxQueryTCU, see Default quotas. This configuration is applicable only for on-demand usage of Timestream Compute Units (TCUs).</p>\n         <p>The maximum value supported for <code>MaxQueryTCU</code> is 1000. To request an increase to this soft limit, contact Amazon Web Services Support. For information about the default quota for <code>maxQueryTCU</code>, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.default\">Default quotas</a>.</p>"
+          }
+        },
+        "QueryPricingModel": {
+          "target": "com.amazonaws.timestreamquery#QueryPricingModel",
+          "traits": {
+            "smithy.api#documentation": "<p>The pricing model for queries in an account.</p>\n         <note>\n            <p>The <code>QueryPricingModel</code> parameter is used by several Timestream operations; however, the <code>UpdateAccountSettings</code> API operation doesn't recognize any values other than <code>COMPUTE_UNITS</code>.</p>\n         </note>"
+          }
+        },
+        "QueryCompute": {
+          "target": "com.amazonaws.timestreamquery#QueryComputeRequest",
+          "traits": {
+            "smithy.api#documentation": "<p>Modifies the query compute settings configured in your account, including the query pricing model and provisioned Timestream Compute Units (TCUs) in your account.</p>\n         <note>\n            <p>This API is idempotent, meaning that making the same request multiple times will have the same effect as making the request once.</p>\n         </note>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.timestreamquery#UpdateAccountSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "MaxQueryTCU": {
+          "target": "com.amazonaws.timestreamquery#MaxQueryCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The configured maximum number of compute units the service will use at any point in time to serve your queries.</p>"
+          }
+        },
+        "QueryPricingModel": {
+          "target": "com.amazonaws.timestreamquery#QueryPricingModel",
+          "traits": {
+            "smithy.api#documentation": "<p>The pricing model for an account.</p>"
+          }
+        },
+        "QueryCompute": {
+          "target": "com.amazonaws.timestreamquery#QueryComputeResponse",
+          "traits": {
+            "smithy.api#documentation": "<p>Confirms the updated account settings for querying data in your account.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.timestreamquery#UpdateScheduledQuery": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.timestreamquery#UpdateScheduledQueryRequest"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.timestreamquery#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#InvalidEndpointException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.timestreamquery#ValidationException"
+        }
+      ],
+      "traits": {
+        "aws.api#clientDiscoveredEndpoint": {
+          "required": true
+        },
+        "smithy.api#documentation": "<p>Update a scheduled query.</p>"
+      }
+    },
+    "com.amazonaws.timestreamquery#UpdateScheduledQueryRequest": {
+      "type": "structure",
+      "members": {
+        "ScheduledQueryArn": {
+          "target": "com.amazonaws.timestreamquery#AmazonResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the scheuled query.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "State": {
+          "target": "com.amazonaws.timestreamquery#ScheduledQueryState",
+          "traits": {
+            "smithy.api#documentation": "<p>State of the scheduled query. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.timestreamquery#ValidationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.timestreamquery#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> Invalid or malformed request. </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
       }
     }
   }

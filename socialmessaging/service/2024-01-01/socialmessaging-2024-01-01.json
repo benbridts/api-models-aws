@@ -1323,629 +1323,6 @@
         "smithy.api#output": {}
       }
     },
-    "com.amazonaws.socialmessaging#StringList": {
-      "type": "list",
-      "member": {
-        "target": "smithy.api#String"
-      }
-    },
-    "com.amazonaws.socialmessaging#Tag": {
-      "type": "structure",
-      "members": {
-        "key": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The tag key.</p>",
-            "smithy.api#length": {
-              "min": 1,
-              "max": 128
-            },
-            "smithy.api#required": {}
-          }
-        },
-        "value": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The tag value.</p>",
-            "smithy.api#length": {
-              "max": 256
-            }
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The tag for a resource.</p>"
-      }
-    },
-    "com.amazonaws.socialmessaging#TagList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.socialmessaging#Tag"
-      }
-    },
-    "com.amazonaws.socialmessaging#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.socialmessaging#TagResourceInput"
-      },
-      "output": {
-        "target": "com.amazonaws.socialmessaging#TagResourceOutput"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.socialmessaging#InternalServiceException"
-        },
-        {
-          "target": "com.amazonaws.socialmessaging#InvalidParametersException"
-        },
-        {
-          "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
-        }
-      ],
-      "traits": {
-        "aws.iam#conditionKeys": [
-          "aws:RequestTag/${TagKey}",
-          "aws:ResourceTag/${TagKey}",
-          "aws:TagKeys"
-        ],
-        "smithy.api#documentation": "<p>Adds or overwrites only the specified tags for the specified resource. When you specify\n         an existing tag key, the value is overwritten with the new value.</p>",
-        "smithy.api#http": {
-          "method": "POST",
-          "uri": "/v1/tags/tag-resource",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.socialmessaging#TagResourceInput": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "com.amazonaws.socialmessaging#Arn",
-          "traits": {
-            "aws.api#data": "tagging",
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to tag.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.socialmessaging#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags to add to the resource.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {},
-        "smithy.api#references": [
-          {
-            "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberResource",
-            "ids": {
-              "OriginationPhoneNumberId": "resourceArn"
-            }
-          },
-          {
-            "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountResource",
-            "ids": {
-              "WabaId": "resourceArn"
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.socialmessaging#TagResourceOutput": {
-      "type": "structure",
-      "members": {
-        "statusCode": {
-          "target": "smithy.api#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The status code of the tag resource operation.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.socialmessaging#ThrottledRequestException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.socialmessaging#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429,
-        "smithy.api#retryable": {}
-      }
-    },
-    "com.amazonaws.socialmessaging#TwoFactorPin": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 6
-        },
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.socialmessaging#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.socialmessaging#UntagResourceInput"
-      },
-      "output": {
-        "target": "com.amazonaws.socialmessaging#UntagResourceOutput"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.socialmessaging#InternalServiceException"
-        },
-        {
-          "target": "com.amazonaws.socialmessaging#InvalidParametersException"
-        },
-        {
-          "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
-        }
-      ],
-      "traits": {
-        "aws.iam#conditionKeys": [
-          "aws:ResourceTag/${TagKey}",
-          "aws:TagKeys"
-        ],
-        "smithy.api#documentation": "<p>Removes the specified tags from a resource. </p>",
-        "smithy.api#http": {
-          "method": "POST",
-          "uri": "/v1/tags/untag-resource",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.socialmessaging#UntagResourceInput": {
-      "type": "structure",
-      "members": {
-        "resourceArn": {
-          "target": "com.amazonaws.socialmessaging#Arn",
-          "traits": {
-            "aws.api#data": "tagging",
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to remove tags from.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "tagKeys": {
-          "target": "com.amazonaws.socialmessaging#StringList",
-          "traits": {
-            "smithy.api#documentation": "<p>The keys of the tags to remove from the resource.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {},
-        "smithy.api#references": [
-          {
-            "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberResource",
-            "ids": {
-              "OriginationPhoneNumberId": "resourceArn"
-            }
-          },
-          {
-            "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountResource",
-            "ids": {
-              "WabaId": "resourceArn"
-            }
-          }
-        ]
-      }
-    },
-    "com.amazonaws.socialmessaging#UntagResourceOutput": {
-      "type": "structure",
-      "members": {
-        "statusCode": {
-          "target": "smithy.api#Integer",
-          "traits": {
-            "smithy.api#documentation": "<p>The status code of the untag resource operation.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.socialmessaging#ValidationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.socialmessaging#ErrorMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request contains an invalid parameter value. </p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalization": {
-      "type": "structure",
-      "members": {
-        "id": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The unique identifier of the originating phone number associated with the media. Phone\n         number identifiers are formatted as\n         <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "twoFactorPin": {
-          "target": "com.amazonaws.socialmessaging#TwoFactorPin",
-          "traits": {
-            "smithy.api#documentation": "<p>The PIN to use for two-step verification. To reset your PIN follow the directions in\n         <a href=\"https://developers.facebook.com/docs/whatsapp/cloud-api/reference/two-step-verification/#updating-pin\">Updating PIN</a> in the <i>WhatsApp Business Platform Cloud API\n               Reference</i>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "dataLocalizationRegion": {
-          "target": "com.amazonaws.socialmessaging#IsoCountryCode",
-          "traits": {
-            "smithy.api#documentation": "<p>The two letter ISO region for the location of where Meta will store data.</p>\n         <p class=\"title\">\n            <b>Asia\u2013Pacific (APAC)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Australia <b>AU</b>\n               </p>\n            </li>\n            <li>\n               <p>Indonesia <b>ID</b>\n               </p>\n            </li>\n            <li>\n               <p>India <b>IN</b>\n               </p>\n            </li>\n            <li>\n               <p>Japan <b>JP</b>\n               </p>\n            </li>\n            <li>\n               <p>Singapore <b>SG</b>\n               </p>\n            </li>\n            <li>\n               <p>South Korea <b>KR</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Europe</b>\n         </p>\n         <ul>\n            <li>\n               <p>Germany <b>DE</b>\n               </p>\n            </li>\n            <li>\n               <p>Switzerland <b>CH</b>\n               </p>\n            </li>\n            <li>\n               <p>United Kingdom <b>GB</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Latin America (LATAM)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Brazil <b>BR</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Middle East and Africa (MEA)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Bahrain <b>BH</b>\n               </p>\n            </li>\n            <li>\n               <p>South Africa <b>ZA</b>\n               </p>\n            </li>\n            <li>\n               <p>United Arab Emirates <b>AE</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>North America (NORAM)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Canada <b>CA</b>\n               </p>\n            </li>\n         </ul>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.socialmessaging#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of key and value pair tags.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The registration details for a linked phone number.</p>"
-      }
-    },
-    "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalizationList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalization"
-      }
-    },
-    "com.amazonaws.socialmessaging#WabaSetupFinalization": {
-      "type": "structure",
-      "members": {
-        "id": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the linked WhatsApp Business Account, formatted as <code>waba-01234567890123456789012345678901</code>.</p>"
-          }
-        },
-        "eventDestinations": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestinations",
-          "traits": {
-            "smithy.api#documentation": "<p>The event destinations for the linked WhatsApp Business Account.</p>"
-          }
-        },
-        "tags": {
-          "target": "com.amazonaws.socialmessaging#TagList",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of key and value pair tags.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The registration details for a linked WhatsApp Business Account.</p>"
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestination": {
-      "type": "structure",
-      "members": {
-        "eventDestinationArn": {
-          "target": "com.amazonaws.socialmessaging#EventDestinationArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the event destination.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "roleArn": {
-          "target": "com.amazonaws.socialmessaging#RoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Identity and Access Management role\n         that is able to import phone numbers and write events.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains information on the event destination.</p>"
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestinations": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestination"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "max": 1
-        }
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppBusinessAccountId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 100
-        }
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppBusinessAccountLinkDate": {
-      "type": "timestamp"
-    },
-    "com.amazonaws.socialmessaging#WhatsAppBusinessAccountName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppDisplayPhoneNumber": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "max": 20
-        }
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppMediaId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 100
-        },
-        "smithy.api#pattern": "^[A-Za-z0-9]+$"
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppMessageBlob": {
-      "type": "blob",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 2048000
-        },
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppPhoneNumber": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 100
-        }
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberDetail": {
-      "type": "structure",
-      "members": {
-        "arn": {
-          "target": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the WhatsApp phone number.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "phoneNumber": {
-          "target": "com.amazonaws.socialmessaging#PhoneNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The phone number for sending WhatsApp.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "phoneNumberId": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
-          "traits": {
-            "smithy.api#documentation": "<p>The phone number ID. Phone number identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>. </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "metaPhoneNumberId": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The phone number ID from Meta.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "displayPhoneNumberName": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberName",
-          "traits": {
-            "smithy.api#documentation": "<p>The display name for this phone number.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "displayPhoneNumber": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppDisplayPhoneNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The phone number that appears in the recipients display.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "qualityRating": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberQualityRating",
-          "traits": {
-            "smithy.api#documentation": "<p>The quality rating of the phone number.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The details of your WhatsApp phone number.</p>"
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberDetailList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberDetail"
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 100
-        },
-        "smithy.api#pattern": "(^phone-number-id-.*$)|(^arn:.*:phone-number-id/[0-9a-zA-Z]+$)"
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberQualityRating": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "max": 10
-        }
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberSummary": {
-      "type": "structure",
-      "members": {
-        "arn": {
-          "target": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) for the phone number.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "phoneNumber": {
-          "target": "com.amazonaws.socialmessaging#PhoneNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The phone number associated with the Linked WhatsApp Business Account.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "phoneNumberId": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
-          "traits": {
-            "smithy.api#documentation": "<p>The phone number ID. Phone number identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>. </p>",
-            "smithy.api#required": {}
-          }
-        },
-        "metaPhoneNumberId": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The phone number ID from Meta.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "displayPhoneNumberName": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberName",
-          "traits": {
-            "smithy.api#documentation": "<p>The display name for this phone number.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "displayPhoneNumber": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppDisplayPhoneNumber",
-          "traits": {
-            "smithy.api#documentation": "<p>The phone number that appears in the recipients display.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "qualityRating": {
-          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberQualityRating",
-          "traits": {
-            "smithy.api#documentation": "<p>The quality rating of the phone number. This is from Meta.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The details of a linked phone number.</p>"
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberSummaryList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberSummary"
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppSetupFinalization": {
-      "type": "structure",
-      "members": {
-        "associateInProgressToken": {
-          "target": "com.amazonaws.socialmessaging#AssociateInProgressToken",
-          "traits": {
-            "smithy.api#documentation": "<p>An Amazon Web Services access token generated by <code>WhatsAppSignupCallback</code> and used by <code>WhatsAppSetupFinalization</code>.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "phoneNumbers": {
-          "target": "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalizationList",
-          "traits": {
-            "smithy.api#documentation": "<p>An array of WabaPhoneNumberSetupFinalization objects containing the details of each phone number associated with the WhatsApp Business Account.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "phoneNumberParent": {
-          "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
-          "traits": {
-            "smithy.api#documentation": "<p>Used to add a new phone number to an existing WhatsApp Business Account. This field can't be used when the <code>waba</code> field is present.</p>"
-          }
-        },
-        "waba": {
-          "target": "com.amazonaws.socialmessaging#WabaSetupFinalization",
-          "traits": {
-            "smithy.api#documentation": "<p>Used to create a new WhatsApp Business Account and add a phone number. This field can't be used when the <code>phoneNumberParent</code> field is present.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The details of linking a WhatsApp Business Account to your Amazon Web Services account.</p>"
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppSignupCallback": {
-      "type": "structure",
-      "members": {
-        "accessToken": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The access token for your WhatsApp Business Account. The <code>accessToken</code> value is provided by Meta.</p>",
-            "smithy.api#length": {
-              "max": 1000
-            },
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains the <code>accessToken</code> provided by Meta during signup.</p>"
-      }
-    },
-    "com.amazonaws.socialmessaging#WhatsAppSignupCallbackResult": {
-      "type": "structure",
-      "members": {
-        "associateInProgressToken": {
-          "target": "com.amazonaws.socialmessaging#AssociateInProgressToken",
-          "traits": {
-            "smithy.api#documentation": "<p>An Amazon Web Services access token generated by <code>WhatsAppSignupCallback</code> and used by <code>WhatsAppSetupFinalization</code>.</p>"
-          }
-        },
-        "linkedAccountsWithIncompleteSetup": {
-          "target": "com.amazonaws.socialmessaging#LinkedAccountWithIncompleteSetup",
-          "traits": {
-            "smithy.api#documentation": "<p>A LinkedWhatsAppBusinessAccountIdMetaData object map containing the details of any WhatsAppBusiness accounts that have incomplete setup.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Contains the results of WhatsAppSignupCallback.</p>"
-      }
-    },
     "com.amazonaws.socialmessaging#SocialMessaging": {
       "type": "service",
       "version": "2024-01-01",
@@ -2706,6 +2083,629 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.socialmessaging#StringList": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.socialmessaging#Tag": {
+      "type": "structure",
+      "members": {
+        "key": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The tag key.</p>",
+            "smithy.api#length": {
+              "min": 1,
+              "max": 128
+            },
+            "smithy.api#required": {}
+          }
+        },
+        "value": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The tag value.</p>",
+            "smithy.api#length": {
+              "max": 256
+            }
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The tag for a resource.</p>"
+      }
+    },
+    "com.amazonaws.socialmessaging#TagList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.socialmessaging#Tag"
+      }
+    },
+    "com.amazonaws.socialmessaging#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.socialmessaging#TagResourceInput"
+      },
+      "output": {
+        "target": "com.amazonaws.socialmessaging#TagResourceOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.socialmessaging#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+        },
+        {
+          "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+        }
+      ],
+      "traits": {
+        "aws.iam#conditionKeys": [
+          "aws:RequestTag/${TagKey}",
+          "aws:ResourceTag/${TagKey}",
+          "aws:TagKeys"
+        ],
+        "smithy.api#documentation": "<p>Adds or overwrites only the specified tags for the specified resource. When you specify\n         an existing tag key, the value is overwritten with the new value.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/v1/tags/tag-resource",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.socialmessaging#TagResourceInput": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.socialmessaging#Arn",
+          "traits": {
+            "aws.api#data": "tagging",
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to tag.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.socialmessaging#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to add to the resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {},
+        "smithy.api#references": [
+          {
+            "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberResource",
+            "ids": {
+              "OriginationPhoneNumberId": "resourceArn"
+            }
+          },
+          {
+            "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountResource",
+            "ids": {
+              "WabaId": "resourceArn"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.socialmessaging#TagResourceOutput": {
+      "type": "structure",
+      "members": {
+        "statusCode": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The status code of the tag resource operation.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.socialmessaging#ThrottledRequestException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.socialmessaging#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429,
+        "smithy.api#retryable": {}
+      }
+    },
+    "com.amazonaws.socialmessaging#TwoFactorPin": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 6
+        },
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.socialmessaging#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.socialmessaging#UntagResourceInput"
+      },
+      "output": {
+        "target": "com.amazonaws.socialmessaging#UntagResourceOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.socialmessaging#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.socialmessaging#InvalidParametersException"
+        },
+        {
+          "target": "com.amazonaws.socialmessaging#ThrottledRequestException"
+        }
+      ],
+      "traits": {
+        "aws.iam#conditionKeys": [
+          "aws:ResourceTag/${TagKey}",
+          "aws:TagKeys"
+        ],
+        "smithy.api#documentation": "<p>Removes the specified tags from a resource. </p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/v1/tags/untag-resource",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.socialmessaging#UntagResourceInput": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.socialmessaging#Arn",
+          "traits": {
+            "aws.api#data": "tagging",
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to remove tags from.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tagKeys": {
+          "target": "com.amazonaws.socialmessaging#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p>The keys of the tags to remove from the resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {},
+        "smithy.api#references": [
+          {
+            "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberResource",
+            "ids": {
+              "OriginationPhoneNumberId": "resourceArn"
+            }
+          },
+          {
+            "resource": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountResource",
+            "ids": {
+              "WabaId": "resourceArn"
+            }
+          }
+        ]
+      }
+    },
+    "com.amazonaws.socialmessaging#UntagResourceOutput": {
+      "type": "structure",
+      "members": {
+        "statusCode": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The status code of the untag resource operation.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.socialmessaging#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.socialmessaging#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request contains an invalid parameter value. </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalization": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the originating phone number associated with the media. Phone\n         number identifiers are formatted as\n         <code>phone-number-id-01234567890123456789012345678901</code>. Use\n         <a href=\"https://docs.aws.amazon.com/social-messaging/latest/APIReference/API_GetLinkedWhatsAppBusinessAccountPhoneNumber.html\">GetLinkedWhatsAppBusinessAccount</a> to find a phone number's\n         id.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "twoFactorPin": {
+          "target": "com.amazonaws.socialmessaging#TwoFactorPin",
+          "traits": {
+            "smithy.api#documentation": "<p>The PIN to use for two-step verification. To reset your PIN follow the directions in\n         <a href=\"https://developers.facebook.com/docs/whatsapp/cloud-api/reference/two-step-verification/#updating-pin\">Updating PIN</a> in the <i>WhatsApp Business Platform Cloud API\n               Reference</i>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "dataLocalizationRegion": {
+          "target": "com.amazonaws.socialmessaging#IsoCountryCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The two letter ISO region for the location of where Meta will store data.</p>\n         <p class=\"title\">\n            <b>Asia\u2013Pacific (APAC)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Australia <b>AU</b>\n               </p>\n            </li>\n            <li>\n               <p>Indonesia <b>ID</b>\n               </p>\n            </li>\n            <li>\n               <p>India <b>IN</b>\n               </p>\n            </li>\n            <li>\n               <p>Japan <b>JP</b>\n               </p>\n            </li>\n            <li>\n               <p>Singapore <b>SG</b>\n               </p>\n            </li>\n            <li>\n               <p>South Korea <b>KR</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Europe</b>\n         </p>\n         <ul>\n            <li>\n               <p>Germany <b>DE</b>\n               </p>\n            </li>\n            <li>\n               <p>Switzerland <b>CH</b>\n               </p>\n            </li>\n            <li>\n               <p>United Kingdom <b>GB</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Latin America (LATAM)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Brazil <b>BR</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Middle East and Africa (MEA)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Bahrain <b>BH</b>\n               </p>\n            </li>\n            <li>\n               <p>South Africa <b>ZA</b>\n               </p>\n            </li>\n            <li>\n               <p>United Arab Emirates <b>AE</b>\n               </p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>North America (NORAM)</b>\n         </p>\n         <ul>\n            <li>\n               <p>Canada <b>CA</b>\n               </p>\n            </li>\n         </ul>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.socialmessaging#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of key and value pair tags.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The registration details for a linked phone number.</p>"
+      }
+    },
+    "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalizationList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalization"
+      }
+    },
+    "com.amazonaws.socialmessaging#WabaSetupFinalization": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the linked WhatsApp Business Account, formatted as <code>waba-01234567890123456789012345678901</code>.</p>"
+          }
+        },
+        "eventDestinations": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestinations",
+          "traits": {
+            "smithy.api#documentation": "<p>The event destinations for the linked WhatsApp Business Account.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.socialmessaging#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of key and value pair tags.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The registration details for a linked WhatsApp Business Account.</p>"
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestination": {
+      "type": "structure",
+      "members": {
+        "eventDestinationArn": {
+          "target": "com.amazonaws.socialmessaging#EventDestinationArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the event destination.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "roleArn": {
+          "target": "com.amazonaws.socialmessaging#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Identity and Access Management role\n         that is able to import phone numbers and write events.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains information on the event destination.</p>"
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestinations": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.socialmessaging#WhatsAppBusinessAccountEventDestination"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "max": 1
+        }
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppBusinessAccountId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppBusinessAccountLinkDate": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.socialmessaging#WhatsAppBusinessAccountName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppDisplayPhoneNumber": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "max": 20
+        }
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppMediaId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        },
+        "smithy.api#pattern": "^[A-Za-z0-9]+$"
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppMessageBlob": {
+      "type": "blob",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048000
+        },
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppPhoneNumber": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberDetail": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the WhatsApp phone number.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "phoneNumber": {
+          "target": "com.amazonaws.socialmessaging#PhoneNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number for sending WhatsApp.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "phoneNumberId": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number ID. Phone number identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "metaPhoneNumberId": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number ID from Meta.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "displayPhoneNumberName": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberName",
+          "traits": {
+            "smithy.api#documentation": "<p>The display name for this phone number.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "displayPhoneNumber": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppDisplayPhoneNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number that appears in the recipients display.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "qualityRating": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberQualityRating",
+          "traits": {
+            "smithy.api#documentation": "<p>The quality rating of the phone number.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The details of your WhatsApp phone number.</p>"
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberDetailList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberDetail"
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        },
+        "smithy.api#pattern": "(^phone-number-id-.*$)|(^arn:.*:phone-number-id/[0-9a-zA-Z]+$)"
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberQualityRating": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberSummary": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.socialmessaging#LinkedWhatsAppPhoneNumberArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The full Amazon Resource Name (ARN) for the phone number.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "phoneNumber": {
+          "target": "com.amazonaws.socialmessaging#PhoneNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number associated with the Linked WhatsApp Business Account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "phoneNumberId": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberId",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number ID. Phone number identifiers are formatted as <code>phone-number-id-01234567890123456789012345678901</code>. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "metaPhoneNumberId": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number ID from Meta.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "displayPhoneNumberName": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberName",
+          "traits": {
+            "smithy.api#documentation": "<p>The display name for this phone number.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "displayPhoneNumber": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppDisplayPhoneNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number that appears in the recipients display.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "qualityRating": {
+          "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberQualityRating",
+          "traits": {
+            "smithy.api#documentation": "<p>The quality rating of the phone number. This is from Meta.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The details of a linked phone number.</p>"
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppPhoneNumberSummaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.socialmessaging#WhatsAppPhoneNumberSummary"
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppSetupFinalization": {
+      "type": "structure",
+      "members": {
+        "associateInProgressToken": {
+          "target": "com.amazonaws.socialmessaging#AssociateInProgressToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An Amazon Web Services access token generated by <code>WhatsAppSignupCallback</code> and used by <code>WhatsAppSetupFinalization</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "phoneNumbers": {
+          "target": "com.amazonaws.socialmessaging#WabaPhoneNumberSetupFinalizationList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of WabaPhoneNumberSetupFinalization objects containing the details of each phone number associated with the WhatsApp Business Account.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "phoneNumberParent": {
+          "target": "com.amazonaws.socialmessaging#LinkedWhatsAppBusinessAccountId",
+          "traits": {
+            "smithy.api#documentation": "<p>Used to add a new phone number to an existing WhatsApp Business Account. This field can't be used when the <code>waba</code> field is present.</p>"
+          }
+        },
+        "waba": {
+          "target": "com.amazonaws.socialmessaging#WabaSetupFinalization",
+          "traits": {
+            "smithy.api#documentation": "<p>Used to create a new WhatsApp Business Account and add a phone number. This field can't be used when the <code>phoneNumberParent</code> field is present.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The details of linking a WhatsApp Business Account to your Amazon Web Services account.</p>"
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppSignupCallback": {
+      "type": "structure",
+      "members": {
+        "accessToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The access token for your WhatsApp Business Account. The <code>accessToken</code> value is provided by Meta.</p>",
+            "smithy.api#length": {
+              "max": 1000
+            },
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains the <code>accessToken</code> provided by Meta during signup.</p>"
+      }
+    },
+    "com.amazonaws.socialmessaging#WhatsAppSignupCallbackResult": {
+      "type": "structure",
+      "members": {
+        "associateInProgressToken": {
+          "target": "com.amazonaws.socialmessaging#AssociateInProgressToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An Amazon Web Services access token generated by <code>WhatsAppSignupCallback</code> and used by <code>WhatsAppSetupFinalization</code>.</p>"
+          }
+        },
+        "linkedAccountsWithIncompleteSetup": {
+          "target": "com.amazonaws.socialmessaging#LinkedAccountWithIncompleteSetup",
+          "traits": {
+            "smithy.api#documentation": "<p>A LinkedWhatsAppBusinessAccountIdMetaData object map containing the details of any WhatsAppBusiness accounts that have incomplete setup.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains the results of WhatsAppSignupCallback.</p>"
       }
     }
   }

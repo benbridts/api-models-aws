@@ -14,6 +14,690 @@
         "smithy.api#httpError": 403
       }
     },
+    "com.amazonaws.cloudfrontkeyvaluestore#CloudFrontKeyValueStore": {
+      "type": "service",
+      "version": "2022-07-26",
+      "operations": [
+        {
+          "target": "com.amazonaws.cloudfrontkeyvaluestore#DeleteKey"
+        },
+        {
+          "target": "com.amazonaws.cloudfrontkeyvaluestore#DescribeKeyValueStore"
+        },
+        {
+          "target": "com.amazonaws.cloudfrontkeyvaluestore#GetKey"
+        },
+        {
+          "target": "com.amazonaws.cloudfrontkeyvaluestore#ListKeys"
+        },
+        {
+          "target": "com.amazonaws.cloudfrontkeyvaluestore#PutKey"
+        },
+        {
+          "target": "com.amazonaws.cloudfrontkeyvaluestore#UpdateKeys"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "CloudFront KeyValueStore",
+          "arnNamespace": "key-value-store",
+          "endpointPrefix": "cloudfront-keyvaluestore"
+        },
+        "aws.auth#sigv4": {
+          "name": "cloudfront-keyvaluestore"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p>Amazon CloudFront KeyValueStore Service to View and Update Data in a KVS Resource</p>",
+        "smithy.api#title": "Amazon CloudFront KeyValueStore",
+        "smithy.rules#endpointRuleSet": {
+          "version": "1.0",
+          "parameters": {
+            "KvsARN": {
+              "required": false,
+              "documentation": "The ARN of the Key Value Store",
+              "type": "String"
+            },
+            "Region": {
+              "builtIn": "AWS::Region",
+              "required": false,
+              "documentation": "The AWS region used to dispatch the request.",
+              "type": "String"
+            },
+            "UseFIPS": {
+              "builtIn": "AWS::UseFIPS",
+              "required": true,
+              "default": false,
+              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+              "type": "Boolean"
+            },
+            "Endpoint": {
+              "builtIn": "SDK::Endpoint",
+              "required": false,
+              "documentation": "Override the endpoint used to send this request",
+              "type": "String"
+            }
+          },
+          "rules": [
+            {
+              "conditions": [
+                {
+                  "fn": "booleanEquals",
+                  "argv": [
+                    {
+                      "ref": "UseFIPS"
+                    },
+                    false
+                  ]
+                }
+              ],
+              "rules": [
+                {
+                  "conditions": [
+                    {
+                      "fn": "isSet",
+                      "argv": [
+                        {
+                          "ref": "KvsARN"
+                        }
+                      ]
+                    }
+                  ],
+                  "rules": [
+                    {
+                      "conditions": [
+                        {
+                          "fn": "aws.parseArn",
+                          "argv": [
+                            {
+                              "ref": "KvsARN"
+                            }
+                          ],
+                          "assign": "parsedArn"
+                        }
+                      ],
+                      "rules": [
+                        {
+                          "conditions": [
+                            {
+                              "fn": "stringEquals",
+                              "argv": [
+                                {
+                                  "fn": "getAttr",
+                                  "argv": [
+                                    {
+                                      "ref": "parsedArn"
+                                    },
+                                    "service"
+                                  ]
+                                },
+                                "cloudfront"
+                              ]
+                            }
+                          ],
+                          "rules": [
+                            {
+                              "conditions": [
+                                {
+                                  "fn": "stringEquals",
+                                  "argv": [
+                                    {
+                                      "fn": "getAttr",
+                                      "argv": [
+                                        {
+                                          "ref": "parsedArn"
+                                        },
+                                        "region"
+                                      ]
+                                    },
+                                    ""
+                                  ]
+                                }
+                              ],
+                              "rules": [
+                                {
+                                  "conditions": [
+                                    {
+                                      "fn": "getAttr",
+                                      "argv": [
+                                        {
+                                          "ref": "parsedArn"
+                                        },
+                                        "resourceId[0]"
+                                      ],
+                                      "assign": "arnType"
+                                    }
+                                  ],
+                                  "rules": [
+                                    {
+                                      "conditions": [
+                                        {
+                                          "fn": "not",
+                                          "argv": [
+                                            {
+                                              "fn": "stringEquals",
+                                              "argv": [
+                                                {
+                                                  "ref": "arnType"
+                                                },
+                                                ""
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ],
+                                      "rules": [
+                                        {
+                                          "conditions": [
+                                            {
+                                              "fn": "stringEquals",
+                                              "argv": [
+                                                {
+                                                  "ref": "arnType"
+                                                },
+                                                "key-value-store"
+                                              ]
+                                            }
+                                          ],
+                                          "rules": [
+                                            {
+                                              "conditions": [
+                                                {
+                                                  "fn": "stringEquals",
+                                                  "argv": [
+                                                    {
+                                                      "fn": "getAttr",
+                                                      "argv": [
+                                                        {
+                                                          "ref": "parsedArn"
+                                                        },
+                                                        "partition"
+                                                      ]
+                                                    },
+                                                    "aws"
+                                                  ]
+                                                }
+                                              ],
+                                              "rules": [
+                                                {
+                                                  "conditions": [
+                                                    {
+                                                      "fn": "isSet",
+                                                      "argv": [
+                                                        {
+                                                          "ref": "Region"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ],
+                                                  "rules": [
+                                                    {
+                                                      "conditions": [
+                                                        {
+                                                          "fn": "aws.partition",
+                                                          "argv": [
+                                                            {
+                                                              "ref": "Region"
+                                                            }
+                                                          ],
+                                                          "assign": "partitionResult"
+                                                        }
+                                                      ],
+                                                      "rules": [
+                                                        {
+                                                          "conditions": [
+                                                            {
+                                                              "fn": "stringEquals",
+                                                              "argv": [
+                                                                {
+                                                                  "fn": "getAttr",
+                                                                  "argv": [
+                                                                    {
+                                                                      "ref": "partitionResult"
+                                                                    },
+                                                                    "name"
+                                                                  ]
+                                                                },
+                                                                "{parsedArn#partition}"
+                                                              ]
+                                                            }
+                                                          ],
+                                                          "rules": [
+                                                            {
+                                                              "conditions": [
+                                                                {
+                                                                  "fn": "isSet",
+                                                                  "argv": [
+                                                                    {
+                                                                      "ref": "Endpoint"
+                                                                    }
+                                                                  ]
+                                                                }
+                                                              ],
+                                                              "rules": [
+                                                                {
+                                                                  "conditions": [
+                                                                    {
+                                                                      "fn": "parseURL",
+                                                                      "argv": [
+                                                                        {
+                                                                          "ref": "Endpoint"
+                                                                        }
+                                                                      ],
+                                                                      "assign": "url"
+                                                                    }
+                                                                  ],
+                                                                  "rules": [
+                                                                    {
+                                                                      "conditions": [],
+                                                                      "endpoint": {
+                                                                        "url": "{url#scheme}://{parsedArn#accountId}.{url#authority}{url#path}",
+                                                                        "properties": {
+                                                                          "authSchemes": [
+                                                                            {
+                                                                              "name": "sigv4a",
+                                                                              "signingName": "cloudfront-keyvaluestore",
+                                                                              "signingRegionSet": [
+                                                                                "*"
+                                                                              ]
+                                                                            }
+                                                                          ]
+                                                                        },
+                                                                        "headers": {}
+                                                                      },
+                                                                      "type": "endpoint"
+                                                                    }
+                                                                  ],
+                                                                  "type": "tree"
+                                                                },
+                                                                {
+                                                                  "conditions": [],
+                                                                  "error": "Provided endpoint is not a valid URL",
+                                                                  "type": "error"
+                                                                }
+                                                              ],
+                                                              "type": "tree"
+                                                            },
+                                                            {
+                                                              "conditions": [],
+                                                              "endpoint": {
+                                                                "url": "https://{parsedArn#accountId}.cloudfront-kvs.global.api.aws",
+                                                                "properties": {
+                                                                  "authSchemes": [
+                                                                    {
+                                                                      "name": "sigv4a",
+                                                                      "signingName": "cloudfront-keyvaluestore",
+                                                                      "signingRegionSet": [
+                                                                        "*"
+                                                                      ]
+                                                                    }
+                                                                  ]
+                                                                },
+                                                                "headers": {}
+                                                              },
+                                                              "type": "endpoint"
+                                                            }
+                                                          ],
+                                                          "type": "tree"
+                                                        },
+                                                        {
+                                                          "conditions": [],
+                                                          "error": "Client was configured for partition `{partitionResult#name}` but Kvs ARN has `{parsedArn#partition}`",
+                                                          "type": "error"
+                                                        }
+                                                      ],
+                                                      "type": "tree"
+                                                    }
+                                                  ],
+                                                  "type": "tree"
+                                                },
+                                                {
+                                                  "conditions": [
+                                                    {
+                                                      "fn": "isSet",
+                                                      "argv": [
+                                                        {
+                                                          "ref": "Endpoint"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ],
+                                                  "rules": [
+                                                    {
+                                                      "conditions": [
+                                                        {
+                                                          "fn": "parseURL",
+                                                          "argv": [
+                                                            {
+                                                              "ref": "Endpoint"
+                                                            }
+                                                          ],
+                                                          "assign": "url"
+                                                        }
+                                                      ],
+                                                      "rules": [
+                                                        {
+                                                          "conditions": [],
+                                                          "endpoint": {
+                                                            "url": "{url#scheme}://{parsedArn#accountId}.{url#authority}{url#path}",
+                                                            "properties": {
+                                                              "authSchemes": [
+                                                                {
+                                                                  "name": "sigv4a",
+                                                                  "signingName": "cloudfront-keyvaluestore",
+                                                                  "signingRegionSet": [
+                                                                    "*"
+                                                                  ]
+                                                                }
+                                                              ]
+                                                            },
+                                                            "headers": {}
+                                                          },
+                                                          "type": "endpoint"
+                                                        }
+                                                      ],
+                                                      "type": "tree"
+                                                    },
+                                                    {
+                                                      "conditions": [],
+                                                      "error": "Provided endpoint is not a valid URL",
+                                                      "type": "error"
+                                                    }
+                                                  ],
+                                                  "type": "tree"
+                                                },
+                                                {
+                                                  "conditions": [],
+                                                  "endpoint": {
+                                                    "url": "https://{parsedArn#accountId}.cloudfront-kvs.global.api.aws",
+                                                    "properties": {
+                                                      "authSchemes": [
+                                                        {
+                                                          "name": "sigv4a",
+                                                          "signingName": "cloudfront-keyvaluestore",
+                                                          "signingRegionSet": [
+                                                            "*"
+                                                          ]
+                                                        }
+                                                      ]
+                                                    },
+                                                    "headers": {}
+                                                  },
+                                                  "type": "endpoint"
+                                                }
+                                              ],
+                                              "type": "tree"
+                                            },
+                                            {
+                                              "conditions": [],
+                                              "error": "CloudFront-KeyValueStore is not supported in partition `{parsedArn#partition}`",
+                                              "type": "error"
+                                            }
+                                          ],
+                                          "type": "tree"
+                                        },
+                                        {
+                                          "conditions": [],
+                                          "error": "ARN resource type is invalid. Expected `key-value-store`, found: `{arnType}`",
+                                          "type": "error"
+                                        }
+                                      ],
+                                      "type": "tree"
+                                    },
+                                    {
+                                      "conditions": [],
+                                      "error": "No resource type found in the KVS ARN. Resource type must be `key-value-store`.",
+                                      "type": "error"
+                                    }
+                                  ],
+                                  "type": "tree"
+                                },
+                                {
+                                  "conditions": [],
+                                  "error": "No resource type found in the KVS ARN. Resource type must be `key-value-store`.",
+                                  "type": "error"
+                                }
+                              ],
+                              "type": "tree"
+                            },
+                            {
+                              "conditions": [],
+                              "error": "Provided ARN must be a global resource ARN. Found: `{parsedArn#region}`",
+                              "type": "error"
+                            }
+                          ],
+                          "type": "tree"
+                        },
+                        {
+                          "conditions": [],
+                          "error": "Provided ARN is not a valid CloudFront Service ARN. Found: `{parsedArn#service}`",
+                          "type": "error"
+                        }
+                      ],
+                      "type": "tree"
+                    },
+                    {
+                      "conditions": [],
+                      "error": "KVS ARN must be a valid ARN",
+                      "type": "error"
+                    }
+                  ],
+                  "type": "tree"
+                },
+                {
+                  "conditions": [],
+                  "error": "KVS ARN must be provided to use this service",
+                  "type": "error"
+                }
+              ],
+              "type": "tree"
+            },
+            {
+              "conditions": [],
+              "error": "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore.",
+              "type": "error"
+            }
+          ]
+        },
+        "smithy.rules#endpointTests": {
+          "testCases": [
+            {
+              "documentation": "FIPS should error",
+              "expect": {
+                "error": "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."
+              },
+              "params": {
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "KVS ARN must be provided to use this service",
+              "expect": {
+                "error": "KVS ARN must be provided to use this service"
+              }
+            },
+            {
+              "documentation": "KVS ARN must be a valid ARN",
+              "expect": {
+                "error": "KVS ARN must be a valid ARN"
+              },
+              "params": {
+                "KvsARN": "not-a-valid-arn"
+              }
+            },
+            {
+              "documentation": "Provided ARN was not a valid CloudFront Service ARN. Found: `notcloudfront`",
+              "expect": {
+                "error": "Provided ARN is not a valid CloudFront Service ARN. Found: `notcloudfront`"
+              },
+              "params": {
+                "KvsARN": "arn:aws:notcloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+              }
+            },
+            {
+              "documentation": "Provided ARN must be a global resource ARN. Found: `us-west-2`",
+              "expect": {
+                "error": "Provided ARN must be a global resource ARN. Found: `us-west-2`"
+              },
+              "params": {
+                "KvsARN": "arn:aws:cloudfront:us-west-2:123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+              }
+            },
+            {
+              "documentation": "ARN resource type is invalid. Expected `key-value-store`, found: `some-other-resource-type`",
+              "expect": {
+                "error": "ARN resource type is invalid. Expected `key-value-store`, found: `some-other-resource-type`"
+              },
+              "params": {
+                "KvsARN": "arn:aws:cloudfront::123456789012:some-other-resource-type/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+              }
+            },
+            {
+              "documentation": "CloudFront-KeyValueStore is not supported in partition `aws-cn`",
+              "expect": {
+                "error": "CloudFront-KeyValueStore is not supported in partition `aws-cn`"
+              },
+              "params": {
+                "KvsARN": "arn:aws-cn:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+              }
+            },
+            {
+              "documentation": "CloudFront-KeyValueStore is not supported in partition `aws-us-gov`",
+              "expect": {
+                "error": "CloudFront-KeyValueStore is not supported in partition `aws-us-gov`"
+              },
+              "params": {
+                "KvsARN": "arn:aws-us-gov:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+              }
+            },
+            {
+              "documentation": "Valid account based endpoint",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "signingName": "cloudfront-keyvaluestore",
+                        "name": "sigv4a",
+                        "signingRegionSet": [
+                          "*"
+                        ]
+                      }
+                    ]
+                  },
+                  "url": "https://123456789012.cloudfront-kvs.global.api.aws"
+                }
+              },
+              "params": {
+                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
+              }
+            },
+            {
+              "documentation": "Valid account based endpoint, with SDK region",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "signingName": "cloudfront-keyvaluestore",
+                        "name": "sigv4a",
+                        "signingRegionSet": [
+                          "*"
+                        ]
+                      }
+                    ]
+                  },
+                  "url": "https://123456789012.cloudfront-kvs.global.api.aws"
+                }
+              },
+              "params": {
+                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                "Region": "us-west-2"
+              }
+            },
+            {
+              "documentation": "Valid ARN, different partition, should error",
+              "expect": {
+                "error": "Client was configured for partition `aws-cn` but Kvs ARN has `aws`"
+              },
+              "params": {
+                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                "Region": "cn-north-1"
+              }
+            },
+            {
+              "documentation": "Valid account based endpoint with FIPS, should error",
+              "expect": {
+                "error": "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."
+              },
+              "params": {
+                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                "Region": "us-east-1",
+                "UseFIPS": true
+              }
+            },
+            {
+              "documentation": "Custom sdk endpoint override",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "signingName": "cloudfront-keyvaluestore",
+                        "name": "sigv4a",
+                        "signingRegionSet": [
+                          "*"
+                        ]
+                      }
+                    ]
+                  },
+                  "url": "https://123456789012.my-override.example.com"
+                }
+              },
+              "params": {
+                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                "Region": "us-east-1",
+                "Endpoint": "https://my-override.example.com"
+              }
+            },
+            {
+              "documentation": "Custom sdk endpoint override with path and http",
+              "expect": {
+                "endpoint": {
+                  "properties": {
+                    "authSchemes": [
+                      {
+                        "signingName": "cloudfront-keyvaluestore",
+                        "name": "sigv4a",
+                        "signingRegionSet": [
+                          "*"
+                        ]
+                      }
+                    ]
+                  },
+                  "url": "http://123456789012.my-override.example.com/custom-path"
+                }
+              },
+              "params": {
+                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                "Endpoint": "http://my-override.example.com/custom-path"
+              }
+            },
+            {
+              "documentation": "Custom override with different partition should error",
+              "expect": {
+                "error": "Client was configured for partition `aws-us-gov` but Kvs ARN has `aws`"
+              },
+              "params": {
+                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
+                "Region": "us-gov-east-1",
+                "Endpoint": "https://my-override.example.com"
+              }
+            }
+          ],
+          "version": "1.0"
+        }
+      }
+    },
     "com.amazonaws.cloudfrontkeyvaluestore#ConflictException": {
       "type": "structure",
       "members": {
@@ -1024,690 +1708,6 @@
       "type": "string",
       "traits": {
         "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.cloudfrontkeyvaluestore#CloudFrontKeyValueStore": {
-      "type": "service",
-      "version": "2022-07-26",
-      "operations": [
-        {
-          "target": "com.amazonaws.cloudfrontkeyvaluestore#DeleteKey"
-        },
-        {
-          "target": "com.amazonaws.cloudfrontkeyvaluestore#DescribeKeyValueStore"
-        },
-        {
-          "target": "com.amazonaws.cloudfrontkeyvaluestore#GetKey"
-        },
-        {
-          "target": "com.amazonaws.cloudfrontkeyvaluestore#ListKeys"
-        },
-        {
-          "target": "com.amazonaws.cloudfrontkeyvaluestore#PutKey"
-        },
-        {
-          "target": "com.amazonaws.cloudfrontkeyvaluestore#UpdateKeys"
-        }
-      ],
-      "traits": {
-        "aws.api#service": {
-          "sdkId": "CloudFront KeyValueStore",
-          "arnNamespace": "key-value-store",
-          "endpointPrefix": "cloudfront-keyvaluestore"
-        },
-        "aws.auth#sigv4": {
-          "name": "cloudfront-keyvaluestore"
-        },
-        "aws.protocols#restJson1": {},
-        "smithy.api#documentation": "<p>Amazon CloudFront KeyValueStore Service to View and Update Data in a KVS Resource</p>",
-        "smithy.api#title": "Amazon CloudFront KeyValueStore",
-        "smithy.rules#endpointRuleSet": {
-          "version": "1.0",
-          "parameters": {
-            "KvsARN": {
-              "required": false,
-              "documentation": "The ARN of the Key Value Store",
-              "type": "String"
-            },
-            "Region": {
-              "builtIn": "AWS::Region",
-              "required": false,
-              "documentation": "The AWS region used to dispatch the request.",
-              "type": "String"
-            },
-            "UseFIPS": {
-              "builtIn": "AWS::UseFIPS",
-              "required": true,
-              "default": false,
-              "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-              "type": "Boolean"
-            },
-            "Endpoint": {
-              "builtIn": "SDK::Endpoint",
-              "required": false,
-              "documentation": "Override the endpoint used to send this request",
-              "type": "String"
-            }
-          },
-          "rules": [
-            {
-              "conditions": [
-                {
-                  "fn": "booleanEquals",
-                  "argv": [
-                    {
-                      "ref": "UseFIPS"
-                    },
-                    false
-                  ]
-                }
-              ],
-              "rules": [
-                {
-                  "conditions": [
-                    {
-                      "fn": "isSet",
-                      "argv": [
-                        {
-                          "ref": "KvsARN"
-                        }
-                      ]
-                    }
-                  ],
-                  "rules": [
-                    {
-                      "conditions": [
-                        {
-                          "fn": "aws.parseArn",
-                          "argv": [
-                            {
-                              "ref": "KvsARN"
-                            }
-                          ],
-                          "assign": "parsedArn"
-                        }
-                      ],
-                      "rules": [
-                        {
-                          "conditions": [
-                            {
-                              "fn": "stringEquals",
-                              "argv": [
-                                {
-                                  "fn": "getAttr",
-                                  "argv": [
-                                    {
-                                      "ref": "parsedArn"
-                                    },
-                                    "service"
-                                  ]
-                                },
-                                "cloudfront"
-                              ]
-                            }
-                          ],
-                          "rules": [
-                            {
-                              "conditions": [
-                                {
-                                  "fn": "stringEquals",
-                                  "argv": [
-                                    {
-                                      "fn": "getAttr",
-                                      "argv": [
-                                        {
-                                          "ref": "parsedArn"
-                                        },
-                                        "region"
-                                      ]
-                                    },
-                                    ""
-                                  ]
-                                }
-                              ],
-                              "rules": [
-                                {
-                                  "conditions": [
-                                    {
-                                      "fn": "getAttr",
-                                      "argv": [
-                                        {
-                                          "ref": "parsedArn"
-                                        },
-                                        "resourceId[0]"
-                                      ],
-                                      "assign": "arnType"
-                                    }
-                                  ],
-                                  "rules": [
-                                    {
-                                      "conditions": [
-                                        {
-                                          "fn": "not",
-                                          "argv": [
-                                            {
-                                              "fn": "stringEquals",
-                                              "argv": [
-                                                {
-                                                  "ref": "arnType"
-                                                },
-                                                ""
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ],
-                                      "rules": [
-                                        {
-                                          "conditions": [
-                                            {
-                                              "fn": "stringEquals",
-                                              "argv": [
-                                                {
-                                                  "ref": "arnType"
-                                                },
-                                                "key-value-store"
-                                              ]
-                                            }
-                                          ],
-                                          "rules": [
-                                            {
-                                              "conditions": [
-                                                {
-                                                  "fn": "stringEquals",
-                                                  "argv": [
-                                                    {
-                                                      "fn": "getAttr",
-                                                      "argv": [
-                                                        {
-                                                          "ref": "parsedArn"
-                                                        },
-                                                        "partition"
-                                                      ]
-                                                    },
-                                                    "aws"
-                                                  ]
-                                                }
-                                              ],
-                                              "rules": [
-                                                {
-                                                  "conditions": [
-                                                    {
-                                                      "fn": "isSet",
-                                                      "argv": [
-                                                        {
-                                                          "ref": "Region"
-                                                        }
-                                                      ]
-                                                    }
-                                                  ],
-                                                  "rules": [
-                                                    {
-                                                      "conditions": [
-                                                        {
-                                                          "fn": "aws.partition",
-                                                          "argv": [
-                                                            {
-                                                              "ref": "Region"
-                                                            }
-                                                          ],
-                                                          "assign": "partitionResult"
-                                                        }
-                                                      ],
-                                                      "rules": [
-                                                        {
-                                                          "conditions": [
-                                                            {
-                                                              "fn": "stringEquals",
-                                                              "argv": [
-                                                                {
-                                                                  "fn": "getAttr",
-                                                                  "argv": [
-                                                                    {
-                                                                      "ref": "partitionResult"
-                                                                    },
-                                                                    "name"
-                                                                  ]
-                                                                },
-                                                                "{parsedArn#partition}"
-                                                              ]
-                                                            }
-                                                          ],
-                                                          "rules": [
-                                                            {
-                                                              "conditions": [
-                                                                {
-                                                                  "fn": "isSet",
-                                                                  "argv": [
-                                                                    {
-                                                                      "ref": "Endpoint"
-                                                                    }
-                                                                  ]
-                                                                }
-                                                              ],
-                                                              "rules": [
-                                                                {
-                                                                  "conditions": [
-                                                                    {
-                                                                      "fn": "parseURL",
-                                                                      "argv": [
-                                                                        {
-                                                                          "ref": "Endpoint"
-                                                                        }
-                                                                      ],
-                                                                      "assign": "url"
-                                                                    }
-                                                                  ],
-                                                                  "rules": [
-                                                                    {
-                                                                      "conditions": [],
-                                                                      "endpoint": {
-                                                                        "url": "{url#scheme}://{parsedArn#accountId}.{url#authority}{url#path}",
-                                                                        "properties": {
-                                                                          "authSchemes": [
-                                                                            {
-                                                                              "name": "sigv4a",
-                                                                              "signingName": "cloudfront-keyvaluestore",
-                                                                              "signingRegionSet": [
-                                                                                "*"
-                                                                              ]
-                                                                            }
-                                                                          ]
-                                                                        },
-                                                                        "headers": {}
-                                                                      },
-                                                                      "type": "endpoint"
-                                                                    }
-                                                                  ],
-                                                                  "type": "tree"
-                                                                },
-                                                                {
-                                                                  "conditions": [],
-                                                                  "error": "Provided endpoint is not a valid URL",
-                                                                  "type": "error"
-                                                                }
-                                                              ],
-                                                              "type": "tree"
-                                                            },
-                                                            {
-                                                              "conditions": [],
-                                                              "endpoint": {
-                                                                "url": "https://{parsedArn#accountId}.cloudfront-kvs.global.api.aws",
-                                                                "properties": {
-                                                                  "authSchemes": [
-                                                                    {
-                                                                      "name": "sigv4a",
-                                                                      "signingName": "cloudfront-keyvaluestore",
-                                                                      "signingRegionSet": [
-                                                                        "*"
-                                                                      ]
-                                                                    }
-                                                                  ]
-                                                                },
-                                                                "headers": {}
-                                                              },
-                                                              "type": "endpoint"
-                                                            }
-                                                          ],
-                                                          "type": "tree"
-                                                        },
-                                                        {
-                                                          "conditions": [],
-                                                          "error": "Client was configured for partition `{partitionResult#name}` but Kvs ARN has `{parsedArn#partition}`",
-                                                          "type": "error"
-                                                        }
-                                                      ],
-                                                      "type": "tree"
-                                                    }
-                                                  ],
-                                                  "type": "tree"
-                                                },
-                                                {
-                                                  "conditions": [
-                                                    {
-                                                      "fn": "isSet",
-                                                      "argv": [
-                                                        {
-                                                          "ref": "Endpoint"
-                                                        }
-                                                      ]
-                                                    }
-                                                  ],
-                                                  "rules": [
-                                                    {
-                                                      "conditions": [
-                                                        {
-                                                          "fn": "parseURL",
-                                                          "argv": [
-                                                            {
-                                                              "ref": "Endpoint"
-                                                            }
-                                                          ],
-                                                          "assign": "url"
-                                                        }
-                                                      ],
-                                                      "rules": [
-                                                        {
-                                                          "conditions": [],
-                                                          "endpoint": {
-                                                            "url": "{url#scheme}://{parsedArn#accountId}.{url#authority}{url#path}",
-                                                            "properties": {
-                                                              "authSchemes": [
-                                                                {
-                                                                  "name": "sigv4a",
-                                                                  "signingName": "cloudfront-keyvaluestore",
-                                                                  "signingRegionSet": [
-                                                                    "*"
-                                                                  ]
-                                                                }
-                                                              ]
-                                                            },
-                                                            "headers": {}
-                                                          },
-                                                          "type": "endpoint"
-                                                        }
-                                                      ],
-                                                      "type": "tree"
-                                                    },
-                                                    {
-                                                      "conditions": [],
-                                                      "error": "Provided endpoint is not a valid URL",
-                                                      "type": "error"
-                                                    }
-                                                  ],
-                                                  "type": "tree"
-                                                },
-                                                {
-                                                  "conditions": [],
-                                                  "endpoint": {
-                                                    "url": "https://{parsedArn#accountId}.cloudfront-kvs.global.api.aws",
-                                                    "properties": {
-                                                      "authSchemes": [
-                                                        {
-                                                          "name": "sigv4a",
-                                                          "signingName": "cloudfront-keyvaluestore",
-                                                          "signingRegionSet": [
-                                                            "*"
-                                                          ]
-                                                        }
-                                                      ]
-                                                    },
-                                                    "headers": {}
-                                                  },
-                                                  "type": "endpoint"
-                                                }
-                                              ],
-                                              "type": "tree"
-                                            },
-                                            {
-                                              "conditions": [],
-                                              "error": "CloudFront-KeyValueStore is not supported in partition `{parsedArn#partition}`",
-                                              "type": "error"
-                                            }
-                                          ],
-                                          "type": "tree"
-                                        },
-                                        {
-                                          "conditions": [],
-                                          "error": "ARN resource type is invalid. Expected `key-value-store`, found: `{arnType}`",
-                                          "type": "error"
-                                        }
-                                      ],
-                                      "type": "tree"
-                                    },
-                                    {
-                                      "conditions": [],
-                                      "error": "No resource type found in the KVS ARN. Resource type must be `key-value-store`.",
-                                      "type": "error"
-                                    }
-                                  ],
-                                  "type": "tree"
-                                },
-                                {
-                                  "conditions": [],
-                                  "error": "No resource type found in the KVS ARN. Resource type must be `key-value-store`.",
-                                  "type": "error"
-                                }
-                              ],
-                              "type": "tree"
-                            },
-                            {
-                              "conditions": [],
-                              "error": "Provided ARN must be a global resource ARN. Found: `{parsedArn#region}`",
-                              "type": "error"
-                            }
-                          ],
-                          "type": "tree"
-                        },
-                        {
-                          "conditions": [],
-                          "error": "Provided ARN is not a valid CloudFront Service ARN. Found: `{parsedArn#service}`",
-                          "type": "error"
-                        }
-                      ],
-                      "type": "tree"
-                    },
-                    {
-                      "conditions": [],
-                      "error": "KVS ARN must be a valid ARN",
-                      "type": "error"
-                    }
-                  ],
-                  "type": "tree"
-                },
-                {
-                  "conditions": [],
-                  "error": "KVS ARN must be provided to use this service",
-                  "type": "error"
-                }
-              ],
-              "type": "tree"
-            },
-            {
-              "conditions": [],
-              "error": "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore.",
-              "type": "error"
-            }
-          ]
-        },
-        "smithy.rules#endpointTests": {
-          "testCases": [
-            {
-              "documentation": "FIPS should error",
-              "expect": {
-                "error": "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."
-              },
-              "params": {
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "KVS ARN must be provided to use this service",
-              "expect": {
-                "error": "KVS ARN must be provided to use this service"
-              }
-            },
-            {
-              "documentation": "KVS ARN must be a valid ARN",
-              "expect": {
-                "error": "KVS ARN must be a valid ARN"
-              },
-              "params": {
-                "KvsARN": "not-a-valid-arn"
-              }
-            },
-            {
-              "documentation": "Provided ARN was not a valid CloudFront Service ARN. Found: `notcloudfront`",
-              "expect": {
-                "error": "Provided ARN is not a valid CloudFront Service ARN. Found: `notcloudfront`"
-              },
-              "params": {
-                "KvsARN": "arn:aws:notcloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
-              }
-            },
-            {
-              "documentation": "Provided ARN must be a global resource ARN. Found: `us-west-2`",
-              "expect": {
-                "error": "Provided ARN must be a global resource ARN. Found: `us-west-2`"
-              },
-              "params": {
-                "KvsARN": "arn:aws:cloudfront:us-west-2:123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
-              }
-            },
-            {
-              "documentation": "ARN resource type is invalid. Expected `key-value-store`, found: `some-other-resource-type`",
-              "expect": {
-                "error": "ARN resource type is invalid. Expected `key-value-store`, found: `some-other-resource-type`"
-              },
-              "params": {
-                "KvsARN": "arn:aws:cloudfront::123456789012:some-other-resource-type/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
-              }
-            },
-            {
-              "documentation": "CloudFront-KeyValueStore is not supported in partition `aws-cn`",
-              "expect": {
-                "error": "CloudFront-KeyValueStore is not supported in partition `aws-cn`"
-              },
-              "params": {
-                "KvsARN": "arn:aws-cn:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
-              }
-            },
-            {
-              "documentation": "CloudFront-KeyValueStore is not supported in partition `aws-us-gov`",
-              "expect": {
-                "error": "CloudFront-KeyValueStore is not supported in partition `aws-us-gov`"
-              },
-              "params": {
-                "KvsARN": "arn:aws-us-gov:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
-              }
-            },
-            {
-              "documentation": "Valid account based endpoint",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "signingName": "cloudfront-keyvaluestore",
-                        "name": "sigv4a",
-                        "signingRegionSet": [
-                          "*"
-                        ]
-                      }
-                    ]
-                  },
-                  "url": "https://123456789012.cloudfront-kvs.global.api.aws"
-                }
-              },
-              "params": {
-                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba"
-              }
-            },
-            {
-              "documentation": "Valid account based endpoint, with SDK region",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "signingName": "cloudfront-keyvaluestore",
-                        "name": "sigv4a",
-                        "signingRegionSet": [
-                          "*"
-                        ]
-                      }
-                    ]
-                  },
-                  "url": "https://123456789012.cloudfront-kvs.global.api.aws"
-                }
-              },
-              "params": {
-                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
-                "Region": "us-west-2"
-              }
-            },
-            {
-              "documentation": "Valid ARN, different partition, should error",
-              "expect": {
-                "error": "Client was configured for partition `aws-cn` but Kvs ARN has `aws`"
-              },
-              "params": {
-                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
-                "Region": "cn-north-1"
-              }
-            },
-            {
-              "documentation": "Valid account based endpoint with FIPS, should error",
-              "expect": {
-                "error": "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore."
-              },
-              "params": {
-                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
-                "Region": "us-east-1",
-                "UseFIPS": true
-              }
-            },
-            {
-              "documentation": "Custom sdk endpoint override",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "signingName": "cloudfront-keyvaluestore",
-                        "name": "sigv4a",
-                        "signingRegionSet": [
-                          "*"
-                        ]
-                      }
-                    ]
-                  },
-                  "url": "https://123456789012.my-override.example.com"
-                }
-              },
-              "params": {
-                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
-                "Region": "us-east-1",
-                "Endpoint": "https://my-override.example.com"
-              }
-            },
-            {
-              "documentation": "Custom sdk endpoint override with path and http",
-              "expect": {
-                "endpoint": {
-                  "properties": {
-                    "authSchemes": [
-                      {
-                        "signingName": "cloudfront-keyvaluestore",
-                        "name": "sigv4a",
-                        "signingRegionSet": [
-                          "*"
-                        ]
-                      }
-                    ]
-                  },
-                  "url": "http://123456789012.my-override.example.com/custom-path"
-                }
-              },
-              "params": {
-                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
-                "Endpoint": "http://my-override.example.com/custom-path"
-              }
-            },
-            {
-              "documentation": "Custom override with different partition should error",
-              "expect": {
-                "error": "Client was configured for partition `aws-us-gov` but Kvs ARN has `aws`"
-              },
-              "params": {
-                "KvsARN": "arn:aws:cloudfront::123456789012:key-value-store/my-first-kvs-e10b1dce4f394248811e77167e0451ba",
-                "Region": "us-gov-east-1",
-                "Endpoint": "https://my-override.example.com"
-              }
-            }
-          ],
-          "version": "1.0"
-        }
       }
     }
   }

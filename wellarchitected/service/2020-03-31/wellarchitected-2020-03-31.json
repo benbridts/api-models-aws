@@ -10020,609 +10020,7 @@
         "smithy.api#documentation": "<p>The differences between the base and latest versions of the lens.</p>"
       }
     },
-    "com.amazonaws.wellarchitected#Workload": {
-      "type": "structure",
-      "members": {
-        "WorkloadId": {
-          "target": "com.amazonaws.wellarchitected#WorkloadId"
-        },
-        "WorkloadArn": {
-          "target": "com.amazonaws.wellarchitected#WorkloadArn"
-        },
-        "WorkloadName": {
-          "target": "com.amazonaws.wellarchitected#WorkloadName"
-        },
-        "Description": {
-          "target": "com.amazonaws.wellarchitected#WorkloadDescription"
-        },
-        "Environment": {
-          "target": "com.amazonaws.wellarchitected#WorkloadEnvironment"
-        },
-        "UpdatedAt": {
-          "target": "com.amazonaws.wellarchitected#Timestamp"
-        },
-        "AccountIds": {
-          "target": "com.amazonaws.wellarchitected#WorkloadAccountIds"
-        },
-        "AwsRegions": {
-          "target": "com.amazonaws.wellarchitected#WorkloadAwsRegions"
-        },
-        "NonAwsRegions": {
-          "target": "com.amazonaws.wellarchitected#WorkloadNonAwsRegions"
-        },
-        "ArchitecturalDesign": {
-          "target": "com.amazonaws.wellarchitected#WorkloadArchitecturalDesign"
-        },
-        "ReviewOwner": {
-          "target": "com.amazonaws.wellarchitected#WorkloadReviewOwner"
-        },
-        "ReviewRestrictionDate": {
-          "target": "com.amazonaws.wellarchitected#Timestamp"
-        },
-        "IsReviewOwnerUpdateAcknowledged": {
-          "target": "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged",
-          "traits": {
-            "smithy.api#documentation": "<p>Flag indicating whether the workload owner has acknowledged that the <i>Review\n                owner</i> field is required.</p>\n         <p>If a <b>Review owner</b> is not added to the workload within\n            60 days of acknowledgement, access to the workload is restricted until an owner is\n            added.</p>"
-          }
-        },
-        "IndustryType": {
-          "target": "com.amazonaws.wellarchitected#WorkloadIndustryType"
-        },
-        "Industry": {
-          "target": "com.amazonaws.wellarchitected#WorkloadIndustry"
-        },
-        "Notes": {
-          "target": "com.amazonaws.wellarchitected#Notes"
-        },
-        "ImprovementStatus": {
-          "target": "com.amazonaws.wellarchitected#WorkloadImprovementStatus"
-        },
-        "RiskCounts": {
-          "target": "com.amazonaws.wellarchitected#RiskCounts"
-        },
-        "PillarPriorities": {
-          "target": "com.amazonaws.wellarchitected#WorkloadPillarPriorities"
-        },
-        "Lenses": {
-          "target": "com.amazonaws.wellarchitected#WorkloadLenses"
-        },
-        "Owner": {
-          "target": "com.amazonaws.wellarchitected#AwsAccountId"
-        },
-        "ShareInvitationId": {
-          "target": "com.amazonaws.wellarchitected#ShareInvitationId",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID assigned to the share invitation.</p>"
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.wellarchitected#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>The tags associated with the workload.</p>"
-          }
-        },
-        "DiscoveryConfig": {
-          "target": "com.amazonaws.wellarchitected#WorkloadDiscoveryConfig",
-          "traits": {
-            "smithy.api#documentation": "<p>Discovery configuration associated to the workload.</p>"
-          }
-        },
-        "Applications": {
-          "target": "com.amazonaws.wellarchitected#WorkloadApplications",
-          "traits": {
-            "smithy.api#documentation": "<p>List of AppRegistry application ARNs associated to the workload.</p>"
-          }
-        },
-        "Profiles": {
-          "target": "com.amazonaws.wellarchitected#WorkloadProfiles",
-          "traits": {
-            "smithy.api#documentation": "<p>Profile associated with a workload.</p>"
-          }
-        },
-        "PrioritizedRiskCounts": {
-          "target": "com.amazonaws.wellarchitected#RiskCounts"
-        },
-        "JiraConfiguration": {
-          "target": "com.amazonaws.wellarchitected#WorkloadJiraConfigurationOutput",
-          "traits": {
-            "smithy.api#documentation": "<p>Jira configuration for a specific workload.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A workload return object.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadAccountIds": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.wellarchitected#AwsAccountId"
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The list of Amazon Web Services account IDs associated with the workload.</p>",
-        "smithy.api#length": {
-          "min": 0,
-          "max": 100
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadApplications": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.wellarchitected#ApplicationArn"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 1
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadArchitecturalDesign": {
-      "type": "string",
-      "traits": {
-        "smithy.api#documentation": "<p>The URL of the architectural design for the workload.</p>",
-        "smithy.api#length": {
-          "min": 0,
-          "max": 2048
-        },
-        "smithy.api#pattern": "^(|(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*)$"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadArn": {
-      "type": "string",
-      "traits": {
-        "smithy.api#documentation": "<p>The ARN for the workload.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadAwsRegions": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.wellarchitected#AwsRegion"
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The list of Amazon Web Services Regions associated with the workload, for example,\n                <code>us-east-2</code>, or <code>ca-central-1</code>.</p>",
-        "smithy.api#length": {
-          "min": 0,
-          "max": 50
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadDescription": {
-      "type": "string",
-      "traits": {
-        "smithy.api#documentation": "<p>The description for the workload.</p>",
-        "smithy.api#length": {
-          "min": 3,
-          "max": 250
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadDiscoveryConfig": {
-      "type": "structure",
-      "members": {
-        "TrustedAdvisorIntegrationStatus": {
-          "target": "com.amazonaws.wellarchitected#TrustedAdvisorIntegrationStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>Discovery integration status in respect to Trusted Advisor for the workload.</p>"
-          }
-        },
-        "WorkloadResourceDefinition": {
-          "target": "com.amazonaws.wellarchitected#WorkloadResourceDefinition",
-          "traits": {
-            "smithy.api#documentation": "<p>The mode to use for identifying resources associated with the workload.</p>\n         <p>You can specify <code>WORKLOAD_METADATA</code>, <code>APP_REGISTRY</code>, or both.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Discovery configuration associated to the workload.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadEnvironment": {
-      "type": "enum",
-      "members": {
-        "PRODUCTION": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "PRODUCTION"
-          }
-        },
-        "PREPRODUCTION": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "PREPRODUCTION"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The environment for the workload.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadId": {
-      "type": "string",
-      "traits": {
-        "smithy.api#documentation": "<p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>",
-        "smithy.api#length": {
-          "min": 32,
-          "max": 32
-        },
-        "smithy.api#pattern": "^[0-9a-f]{32}$"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadImprovementStatus": {
-      "type": "enum",
-      "members": {
-        "NOT_APPLICABLE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "NOT_APPLICABLE"
-          }
-        },
-        "NOT_STARTED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "NOT_STARTED"
-          }
-        },
-        "IN_PROGRESS": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "IN_PROGRESS"
-          }
-        },
-        "COMPLETE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "COMPLETE"
-          }
-        },
-        "RISK_ACKNOWLEDGED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "RISK_ACKNOWLEDGED"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The improvement status for a workload.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadIndustry": {
-      "type": "string",
-      "traits": {
-        "smithy.api#documentation": "<p>The industry for the workload.</p>",
-        "smithy.api#length": {
-          "min": 0,
-          "max": 100
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadIndustryType": {
-      "type": "string",
-      "traits": {
-        "smithy.api#documentation": "<p>The industry type for the workload.</p>\n         <p>If specified, must be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Agriculture</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Automobile</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Defense</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Design and Engineering</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Digital Advertising</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Education</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Environmental Protection</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Financial Services</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Gaming</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>General Public Services</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Healthcare</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Hospitality</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>InfoTech</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Justice and Public Safety</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Life Sciences</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Manufacturing</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Media & Entertainment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Mining & Resources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Oil & Gas</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Power & Utilities</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Professional Services</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Real Estate & Construction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Retail & Wholesale</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Social Protection</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Telecommunications</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Travel, Transportation & Logistics</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Other</code>\n               </p>\n            </li>\n         </ul>",
-        "smithy.api#length": {
-          "min": 0,
-          "max": 100
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadIssueManagementStatus": {
-      "type": "enum",
-      "members": {
-        "ENABLED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "ENABLED"
-          }
-        },
-        "DISABLED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "DISABLED"
-          }
-        },
-        "INHERIT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "INHERIT"
-          }
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadJiraConfigurationInput": {
-      "type": "structure",
-      "members": {
-        "IssueManagementStatus": {
-          "target": "com.amazonaws.wellarchitected#WorkloadIssueManagementStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>Workload-level: Jira issue management status.</p>"
-          }
-        },
-        "IssueManagementType": {
-          "target": "com.amazonaws.wellarchitected#IssueManagementType",
-          "traits": {
-            "smithy.api#documentation": "<p>Workload-level: Jira issue management type.</p>"
-          }
-        },
-        "JiraProjectKey": {
-          "target": "com.amazonaws.wellarchitected#JiraProjectKey",
-          "traits": {
-            "smithy.api#documentation": "<p>Workload-level: Jira project key to sync workloads to.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Workload-level: Input for the Jira configuration.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadJiraConfigurationOutput": {
-      "type": "structure",
-      "members": {
-        "IssueManagementStatus": {
-          "target": "com.amazonaws.wellarchitected#WorkloadIssueManagementStatus",
-          "traits": {
-            "smithy.api#documentation": "<p>Workload-level: Jira issue management status.</p>"
-          }
-        },
-        "IssueManagementType": {
-          "target": "com.amazonaws.wellarchitected#IssueManagementType",
-          "traits": {
-            "smithy.api#documentation": "<p>Workload-level: Jira issue management type.</p>"
-          }
-        },
-        "JiraProjectKey": {
-          "target": "com.amazonaws.wellarchitected#JiraProjectKey",
-          "traits": {
-            "smithy.api#documentation": "<p>Workload-level: Jira project key to sync workloads to.</p>"
-          }
-        },
-        "StatusMessage": {
-          "target": "com.amazonaws.wellarchitected#StatusMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>Workload-level: Status message on configuration of the Jira integration.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Workload-level: Output configuration of the Jira integration.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadLenses": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.wellarchitected#LensAlias"
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The list of lenses associated with the workload. Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>\n         <p>If a review template that specifies lenses is applied to the workload, those lenses are applied\n        to the workload in addition to these lenses.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadName": {
-      "type": "string",
-      "traits": {
-        "smithy.api#documentation": "<p>The name of the workload.</p>\n         <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization\n            are ignored when checking for uniqueness.</p>",
-        "smithy.api#length": {
-          "min": 3,
-          "max": 100
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadNamePrefix": {
-      "type": "string",
-      "traits": {
-        "smithy.api#documentation": "<p>An optional string added to the beginning of each workload name returned in the\n            results.</p>",
-        "smithy.api#length": {
-          "min": 0,
-          "max": 100
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadNonAwsRegion": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 3,
-          "max": 25
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadNonAwsRegions": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.wellarchitected#WorkloadNonAwsRegion"
-      },
-      "traits": {
-        "smithy.api#documentation": "<p> The list of non-Amazon Web Services Regions associated with the workload.</p>",
-        "smithy.api#length": {
-          "min": 0,
-          "max": 5
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadPillarPriorities": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.wellarchitected#PillarId"
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The priorities of the pillars, which are used to order items in the improvement plan.\n            Each pillar is represented by its <a>PillarReviewSummary$PillarId</a>.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadProfile": {
-      "type": "structure",
-      "members": {
-        "ProfileArn": {
-          "target": "com.amazonaws.wellarchitected#ProfileArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The profile ARN.</p>"
-          }
-        },
-        "ProfileVersion": {
-          "target": "com.amazonaws.wellarchitected#ProfileVersion",
-          "traits": {
-            "smithy.api#documentation": "<p>The profile version.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The profile associated with a workload.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadProfileArns": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.wellarchitected#ProfileArn"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 1
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadProfiles": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.wellarchitected#WorkloadProfile"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 1
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadResourceDefinition": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.wellarchitected#DefinitionType"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadReviewOwner": {
-      "type": "string",
-      "traits": {
-        "smithy.api#documentation": "<p>The review owner of the workload. The name, email address, or identifier for the\n            primary group or individual that owns the workload review process.</p>",
-        "smithy.api#length": {
-          "min": 3,
-          "max": 255
-        }
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadShare": {
-      "type": "structure",
-      "members": {
-        "ShareId": {
-          "target": "com.amazonaws.wellarchitected#ShareId"
-        },
-        "SharedBy": {
-          "target": "com.amazonaws.wellarchitected#AwsAccountId"
-        },
-        "SharedWith": {
-          "target": "com.amazonaws.wellarchitected#SharedWith"
-        },
-        "PermissionType": {
-          "target": "com.amazonaws.wellarchitected#PermissionType"
-        },
-        "Status": {
-          "target": "com.amazonaws.wellarchitected#ShareStatus"
-        },
-        "WorkloadName": {
-          "target": "com.amazonaws.wellarchitected#WorkloadName"
-        },
-        "WorkloadId": {
-          "target": "com.amazonaws.wellarchitected#WorkloadId"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A workload share return object.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadShareSummaries": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.wellarchitected#WorkloadShareSummary"
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A list of workload share summaries.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadShareSummary": {
-      "type": "structure",
-      "members": {
-        "ShareId": {
-          "target": "com.amazonaws.wellarchitected#ShareId"
-        },
-        "SharedWith": {
-          "target": "com.amazonaws.wellarchitected#SharedWith"
-        },
-        "PermissionType": {
-          "target": "com.amazonaws.wellarchitected#PermissionType"
-        },
-        "Status": {
-          "target": "com.amazonaws.wellarchitected#ShareStatus"
-        },
-        "StatusMessage": {
-          "target": "com.amazonaws.wellarchitected#StatusMessage",
-          "traits": {
-            "smithy.api#documentation": "<p>Optional message to compliment the Status field.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A workload share summary return object.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadSummaries": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.wellarchitected#WorkloadSummary"
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A list of workload summaries.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WorkloadSummary": {
-      "type": "structure",
-      "members": {
-        "WorkloadId": {
-          "target": "com.amazonaws.wellarchitected#WorkloadId"
-        },
-        "WorkloadArn": {
-          "target": "com.amazonaws.wellarchitected#WorkloadArn"
-        },
-        "WorkloadName": {
-          "target": "com.amazonaws.wellarchitected#WorkloadName"
-        },
-        "Owner": {
-          "target": "com.amazonaws.wellarchitected#AwsAccountId"
-        },
-        "UpdatedAt": {
-          "target": "com.amazonaws.wellarchitected#Timestamp"
-        },
-        "Lenses": {
-          "target": "com.amazonaws.wellarchitected#WorkloadLenses"
-        },
-        "RiskCounts": {
-          "target": "com.amazonaws.wellarchitected#RiskCounts"
-        },
-        "ImprovementStatus": {
-          "target": "com.amazonaws.wellarchitected#WorkloadImprovementStatus"
-        },
-        "Profiles": {
-          "target": "com.amazonaws.wellarchitected#WorkloadProfiles",
-          "traits": {
-            "smithy.api#documentation": "<p>Profile associated with a workload.</p>"
-          }
-        },
-        "PrioritizedRiskCounts": {
-          "target": "com.amazonaws.wellarchitected#RiskCounts"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A workload summary return object.</p>"
-      }
-    },
-    "com.amazonaws.wellarchitected#WellArchitected": {
+    "com.amazonaws.wellarchitected#WellArchitectedApiServiceLambda": {
       "type": "service",
       "version": "2020-03-31",
       "operations": [
@@ -11706,6 +11104,608 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.wellarchitected#Workload": {
+      "type": "structure",
+      "members": {
+        "WorkloadId": {
+          "target": "com.amazonaws.wellarchitected#WorkloadId"
+        },
+        "WorkloadArn": {
+          "target": "com.amazonaws.wellarchitected#WorkloadArn"
+        },
+        "WorkloadName": {
+          "target": "com.amazonaws.wellarchitected#WorkloadName"
+        },
+        "Description": {
+          "target": "com.amazonaws.wellarchitected#WorkloadDescription"
+        },
+        "Environment": {
+          "target": "com.amazonaws.wellarchitected#WorkloadEnvironment"
+        },
+        "UpdatedAt": {
+          "target": "com.amazonaws.wellarchitected#Timestamp"
+        },
+        "AccountIds": {
+          "target": "com.amazonaws.wellarchitected#WorkloadAccountIds"
+        },
+        "AwsRegions": {
+          "target": "com.amazonaws.wellarchitected#WorkloadAwsRegions"
+        },
+        "NonAwsRegions": {
+          "target": "com.amazonaws.wellarchitected#WorkloadNonAwsRegions"
+        },
+        "ArchitecturalDesign": {
+          "target": "com.amazonaws.wellarchitected#WorkloadArchitecturalDesign"
+        },
+        "ReviewOwner": {
+          "target": "com.amazonaws.wellarchitected#WorkloadReviewOwner"
+        },
+        "ReviewRestrictionDate": {
+          "target": "com.amazonaws.wellarchitected#Timestamp"
+        },
+        "IsReviewOwnerUpdateAcknowledged": {
+          "target": "com.amazonaws.wellarchitected#IsReviewOwnerUpdateAcknowledged",
+          "traits": {
+            "smithy.api#documentation": "<p>Flag indicating whether the workload owner has acknowledged that the <i>Review\n                owner</i> field is required.</p>\n         <p>If a <b>Review owner</b> is not added to the workload within\n            60 days of acknowledgement, access to the workload is restricted until an owner is\n            added.</p>"
+          }
+        },
+        "IndustryType": {
+          "target": "com.amazonaws.wellarchitected#WorkloadIndustryType"
+        },
+        "Industry": {
+          "target": "com.amazonaws.wellarchitected#WorkloadIndustry"
+        },
+        "Notes": {
+          "target": "com.amazonaws.wellarchitected#Notes"
+        },
+        "ImprovementStatus": {
+          "target": "com.amazonaws.wellarchitected#WorkloadImprovementStatus"
+        },
+        "RiskCounts": {
+          "target": "com.amazonaws.wellarchitected#RiskCounts"
+        },
+        "PillarPriorities": {
+          "target": "com.amazonaws.wellarchitected#WorkloadPillarPriorities"
+        },
+        "Lenses": {
+          "target": "com.amazonaws.wellarchitected#WorkloadLenses"
+        },
+        "Owner": {
+          "target": "com.amazonaws.wellarchitected#AwsAccountId"
+        },
+        "ShareInvitationId": {
+          "target": "com.amazonaws.wellarchitected#ShareInvitationId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID assigned to the share invitation.</p>"
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.wellarchitected#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags associated with the workload.</p>"
+          }
+        },
+        "DiscoveryConfig": {
+          "target": "com.amazonaws.wellarchitected#WorkloadDiscoveryConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Discovery configuration associated to the workload.</p>"
+          }
+        },
+        "Applications": {
+          "target": "com.amazonaws.wellarchitected#WorkloadApplications",
+          "traits": {
+            "smithy.api#documentation": "<p>List of AppRegistry application ARNs associated to the workload.</p>"
+          }
+        },
+        "Profiles": {
+          "target": "com.amazonaws.wellarchitected#WorkloadProfiles",
+          "traits": {
+            "smithy.api#documentation": "<p>Profile associated with a workload.</p>"
+          }
+        },
+        "PrioritizedRiskCounts": {
+          "target": "com.amazonaws.wellarchitected#RiskCounts"
+        },
+        "JiraConfiguration": {
+          "target": "com.amazonaws.wellarchitected#WorkloadJiraConfigurationOutput",
+          "traits": {
+            "smithy.api#documentation": "<p>Jira configuration for a specific workload.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A workload return object.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadAccountIds": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.wellarchitected#AwsAccountId"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The list of Amazon Web Services account IDs associated with the workload.</p>",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadApplications": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.wellarchitected#ApplicationArn"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 1
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadArchitecturalDesign": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>The URL of the architectural design for the workload.</p>",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^(|(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*)$"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>The ARN for the workload.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadAwsRegions": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.wellarchitected#AwsRegion"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The list of Amazon Web Services Regions associated with the workload, for example,\n                <code>us-east-2</code>, or <code>ca-central-1</code>.</p>",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadDescription": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>The description for the workload.</p>",
+        "smithy.api#length": {
+          "min": 3,
+          "max": 250
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadDiscoveryConfig": {
+      "type": "structure",
+      "members": {
+        "TrustedAdvisorIntegrationStatus": {
+          "target": "com.amazonaws.wellarchitected#TrustedAdvisorIntegrationStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Discovery integration status in respect to Trusted Advisor for the workload.</p>"
+          }
+        },
+        "WorkloadResourceDefinition": {
+          "target": "com.amazonaws.wellarchitected#WorkloadResourceDefinition",
+          "traits": {
+            "smithy.api#documentation": "<p>The mode to use for identifying resources associated with the workload.</p>\n         <p>You can specify <code>WORKLOAD_METADATA</code>, <code>APP_REGISTRY</code>, or both.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Discovery configuration associated to the workload.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadEnvironment": {
+      "type": "enum",
+      "members": {
+        "PRODUCTION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "PRODUCTION"
+          }
+        },
+        "PREPRODUCTION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "PREPRODUCTION"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The environment for the workload.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>",
+        "smithy.api#length": {
+          "min": 32,
+          "max": 32
+        },
+        "smithy.api#pattern": "^[0-9a-f]{32}$"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadImprovementStatus": {
+      "type": "enum",
+      "members": {
+        "NOT_APPLICABLE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "NOT_APPLICABLE"
+          }
+        },
+        "NOT_STARTED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "NOT_STARTED"
+          }
+        },
+        "IN_PROGRESS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "IN_PROGRESS"
+          }
+        },
+        "COMPLETE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "COMPLETE"
+          }
+        },
+        "RISK_ACKNOWLEDGED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "RISK_ACKNOWLEDGED"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The improvement status for a workload.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadIndustry": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>The industry for the workload.</p>",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadIndustryType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>The industry type for the workload.</p>\n         <p>If specified, must be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Agriculture</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Automobile</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Defense</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Design and Engineering</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Digital Advertising</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Education</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Environmental Protection</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Financial Services</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Gaming</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>General Public Services</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Healthcare</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Hospitality</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>InfoTech</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Justice and Public Safety</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Life Sciences</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Manufacturing</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Media & Entertainment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Mining & Resources</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Oil & Gas</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Power & Utilities</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Professional Services</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Real Estate & Construction</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Retail & Wholesale</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Social Protection</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Telecommunications</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Travel, Transportation & Logistics</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Other</code>\n               </p>\n            </li>\n         </ul>",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadIssueManagementStatus": {
+      "type": "enum",
+      "members": {
+        "ENABLED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "ENABLED"
+          }
+        },
+        "DISABLED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DISABLED"
+          }
+        },
+        "INHERIT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "INHERIT"
+          }
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadJiraConfigurationInput": {
+      "type": "structure",
+      "members": {
+        "IssueManagementStatus": {
+          "target": "com.amazonaws.wellarchitected#WorkloadIssueManagementStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Workload-level: Jira issue management status.</p>"
+          }
+        },
+        "IssueManagementType": {
+          "target": "com.amazonaws.wellarchitected#IssueManagementType",
+          "traits": {
+            "smithy.api#documentation": "<p>Workload-level: Jira issue management type.</p>"
+          }
+        },
+        "JiraProjectKey": {
+          "target": "com.amazonaws.wellarchitected#JiraProjectKey",
+          "traits": {
+            "smithy.api#documentation": "<p>Workload-level: Jira project key to sync workloads to.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Workload-level: Input for the Jira configuration.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadJiraConfigurationOutput": {
+      "type": "structure",
+      "members": {
+        "IssueManagementStatus": {
+          "target": "com.amazonaws.wellarchitected#WorkloadIssueManagementStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>Workload-level: Jira issue management status.</p>"
+          }
+        },
+        "IssueManagementType": {
+          "target": "com.amazonaws.wellarchitected#IssueManagementType",
+          "traits": {
+            "smithy.api#documentation": "<p>Workload-level: Jira issue management type.</p>"
+          }
+        },
+        "JiraProjectKey": {
+          "target": "com.amazonaws.wellarchitected#JiraProjectKey",
+          "traits": {
+            "smithy.api#documentation": "<p>Workload-level: Jira project key to sync workloads to.</p>"
+          }
+        },
+        "StatusMessage": {
+          "target": "com.amazonaws.wellarchitected#StatusMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>Workload-level: Status message on configuration of the Jira integration.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Workload-level: Output configuration of the Jira integration.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadLenses": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.wellarchitected#LensAlias"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The list of lenses associated with the workload. Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>\n         <p>If a review template that specifies lenses is applied to the workload, those lenses are applied\n        to the workload in addition to these lenses.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>The name of the workload.</p>\n         <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization\n            are ignored when checking for uniqueness.</p>",
+        "smithy.api#length": {
+          "min": 3,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadNamePrefix": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>An optional string added to the beginning of each workload name returned in the\n            results.</p>",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadNonAwsRegion": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 3,
+          "max": 25
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadNonAwsRegions": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.wellarchitected#WorkloadNonAwsRegion"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> The list of non-Amazon Web Services Regions associated with the workload.</p>",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 5
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadPillarPriorities": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.wellarchitected#PillarId"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The priorities of the pillars, which are used to order items in the improvement plan.\n            Each pillar is represented by its <a>PillarReviewSummary$PillarId</a>.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadProfile": {
+      "type": "structure",
+      "members": {
+        "ProfileArn": {
+          "target": "com.amazonaws.wellarchitected#ProfileArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The profile ARN.</p>"
+          }
+        },
+        "ProfileVersion": {
+          "target": "com.amazonaws.wellarchitected#ProfileVersion",
+          "traits": {
+            "smithy.api#documentation": "<p>The profile version.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The profile associated with a workload.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadProfileArns": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.wellarchitected#ProfileArn"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 1
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadProfiles": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.wellarchitected#WorkloadProfile"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 1
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadResourceDefinition": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.wellarchitected#DefinitionType"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadReviewOwner": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>The review owner of the workload. The name, email address, or identifier for the\n            primary group or individual that owns the workload review process.</p>",
+        "smithy.api#length": {
+          "min": 3,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadShare": {
+      "type": "structure",
+      "members": {
+        "ShareId": {
+          "target": "com.amazonaws.wellarchitected#ShareId"
+        },
+        "SharedBy": {
+          "target": "com.amazonaws.wellarchitected#AwsAccountId"
+        },
+        "SharedWith": {
+          "target": "com.amazonaws.wellarchitected#SharedWith"
+        },
+        "PermissionType": {
+          "target": "com.amazonaws.wellarchitected#PermissionType"
+        },
+        "Status": {
+          "target": "com.amazonaws.wellarchitected#ShareStatus"
+        },
+        "WorkloadName": {
+          "target": "com.amazonaws.wellarchitected#WorkloadName"
+        },
+        "WorkloadId": {
+          "target": "com.amazonaws.wellarchitected#WorkloadId"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A workload share return object.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadShareSummaries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.wellarchitected#WorkloadShareSummary"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A list of workload share summaries.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadShareSummary": {
+      "type": "structure",
+      "members": {
+        "ShareId": {
+          "target": "com.amazonaws.wellarchitected#ShareId"
+        },
+        "SharedWith": {
+          "target": "com.amazonaws.wellarchitected#SharedWith"
+        },
+        "PermissionType": {
+          "target": "com.amazonaws.wellarchitected#PermissionType"
+        },
+        "Status": {
+          "target": "com.amazonaws.wellarchitected#ShareStatus"
+        },
+        "StatusMessage": {
+          "target": "com.amazonaws.wellarchitected#StatusMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>Optional message to compliment the Status field.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A workload share summary return object.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadSummaries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.wellarchitected#WorkloadSummary"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A list of workload summaries.</p>"
+      }
+    },
+    "com.amazonaws.wellarchitected#WorkloadSummary": {
+      "type": "structure",
+      "members": {
+        "WorkloadId": {
+          "target": "com.amazonaws.wellarchitected#WorkloadId"
+        },
+        "WorkloadArn": {
+          "target": "com.amazonaws.wellarchitected#WorkloadArn"
+        },
+        "WorkloadName": {
+          "target": "com.amazonaws.wellarchitected#WorkloadName"
+        },
+        "Owner": {
+          "target": "com.amazonaws.wellarchitected#AwsAccountId"
+        },
+        "UpdatedAt": {
+          "target": "com.amazonaws.wellarchitected#Timestamp"
+        },
+        "Lenses": {
+          "target": "com.amazonaws.wellarchitected#WorkloadLenses"
+        },
+        "RiskCounts": {
+          "target": "com.amazonaws.wellarchitected#RiskCounts"
+        },
+        "ImprovementStatus": {
+          "target": "com.amazonaws.wellarchitected#WorkloadImprovementStatus"
+        },
+        "Profiles": {
+          "target": "com.amazonaws.wellarchitected#WorkloadProfiles",
+          "traits": {
+            "smithy.api#documentation": "<p>Profile associated with a workload.</p>"
+          }
+        },
+        "PrioritizedRiskCounts": {
+          "target": "com.amazonaws.wellarchitected#RiskCounts"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A workload summary return object.</p>"
       }
     }
   }

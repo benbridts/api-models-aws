@@ -511,256 +511,7 @@
         "smithy.api#httpError": 429
       }
     },
-    "com.amazonaws.route53recoverycluster#UpdateRoutingControlState": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.route53recoverycluster#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#EndpointTemporarilyUnavailableException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Set the state of the routing control to reroute traffic. You can set the value to ON or\n\t\t\tOFF. When the state is ON, traffic flows to a cell. When the state is OFF, traffic does not\n\t\t\tflow.</p>\n         <p>With Route 53 ARC, you can add safety rules for routing controls, which are safeguards for routing \n\t\t\t\tcontrol state updates that help prevent unexpected outcomes, like fail open traffic routing. However, \n\t\t\t\tthere are scenarios when you might want to bypass the routing control safeguards that are enforced with \n\t\t\t\tsafety rules that you've configured. For example, you might want to fail over quickly for disaster recovery, \n\t\t\t\tand one or more safety rules might be unexpectedly preventing you from updating a routing control state to \n\t\t\t\treroute traffic. In a \"break glass\" scenario like this, you can override one or more safety rules to change \n\t\t\t\ta routing control state and fail over your application.</p>\n         <p>The <code>SafetyRulesToOverride</code> property enables you override one or more safety rules and \n\t\t\t\tupdate routing control states. For more information, see \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html\">\n\t\t\t\t\tOverride safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n         <p>\n            <i>You must specify Regional endpoints when you work with API cluster operations \n\t\t\t\tto get or update routing control states in Route 53 ARC.</i>\n         </p>\n         <p>To see a code example for getting a routing control state, including accessing Regional cluster endpoints\n\t\t\t\tin sequence, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/service_code_examples_actions.html\">API examples</a>\n\t\t\t\tin the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html\">\n\t\t\t\t\tViewing and updating routing control states</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html\">Working with routing controls overall</a>\n               </p>\n            </li>\n         </ul>"
-      }
-    },
-    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateEntries": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateEntry"
-      }
-    },
-    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateEntry": {
-      "type": "structure",
-      "members": {
-        "RoutingControlArn": {
-          "target": "com.amazonaws.route53recoverycluster#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a routing control state entry.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "RoutingControlState": {
-          "target": "com.amazonaws.route53recoverycluster#RoutingControlState",
-          "traits": {
-            "smithy.api#documentation": "<p>The routing control state in a set of routing control state entries.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A routing control state entry.</p>"
-      }
-    },
-    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateRequest": {
-      "type": "structure",
-      "members": {
-        "RoutingControlArn": {
-          "target": "com.amazonaws.route53recoverycluster#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the routing control that you want to update the state for.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "RoutingControlState": {
-          "target": "com.amazonaws.route53recoverycluster#RoutingControlState",
-          "traits": {
-            "smithy.api#documentation": "<p>The state of the routing control. You can set the value to ON or OFF.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "SafetyRulesToOverride": {
-          "target": "com.amazonaws.route53recoverycluster#Arns",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the safety rules that you want to override when you're updating the state of\n\t\t\ta routing control. You can override one safety rule or multiple safety rules by including one or more ARNs, separated \n\t\t\tby commas.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html\">\n\t\t\tOverride safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStates": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStatesRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStatesResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.route53recoverycluster#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#EndpointTemporarilyUnavailableException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#ServiceLimitExceededException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.route53recoverycluster#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Set multiple routing control states. You can set the value for each state to be ON or OFF.\n\t\t\tWhen the state is ON, traffic flows to a cell. When it's OFF, traffic does not\n\t\t\tflow.</p>\n         <p>With Route 53 ARC, you can add safety rules for routing controls, which are safeguards for routing \n\t\t\t\tcontrol state updates that help prevent unexpected outcomes, like fail open traffic routing. However, \n\t\t\t\tthere are scenarios when you might want to bypass the routing control safeguards that are enforced with \n\t\t\t\tsafety rules that you've configured. For example, you might want to fail over quickly for disaster recovery, \n\t\t\t\tand one or more safety rules might be unexpectedly preventing you from updating a routing control state to \n\t\t\t\treroute traffic. In a \"break glass\" scenario like this, you can override one or more safety rules to change \n\t\t\t\ta routing control state and fail over your application.</p>\n         <p>The <code>SafetyRulesToOverride</code> property enables you override one or more safety rules and \n\t\t\t\tupdate routing control states. For more information, see \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html\">\n\t\t\t\t\tOverride safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n         <p>\n            <i>You must specify Regional endpoints when you work with API cluster operations \n\t\t\t\tto get or update routing control states in Route 53 ARC.</i>\n         </p>\n         <p>To see a code example for getting a routing control state, including accessing Regional cluster endpoints\n\t\t\t\tin sequence, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/service_code_examples_actions.html\">API examples</a>\n\t\t\t\tin the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html\">\n\t\t\t\t\tViewing and updating routing control states</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html\">Working with routing controls overall</a>\n               </p>\n            </li>\n         </ul>"
-      }
-    },
-    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStatesRequest": {
-      "type": "structure",
-      "members": {
-        "UpdateRoutingControlStateEntries": {
-          "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateEntries",
-          "traits": {
-            "smithy.api#documentation": "<p>A set of routing control entries that you want to update.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "SafetyRulesToOverride": {
-          "target": "com.amazonaws.route53recoverycluster#Arns",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the safety rules that you want to override when you're updating routing\n\t\t\tcontrol states. You can override one safety rule or multiple safety rules by including one or more ARNs, separated \n\t\t\tby commas.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html\">\n\t\t\tOverride safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStatesResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.route53recoverycluster#ValidationException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "com.amazonaws.route53recoverycluster#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        },
-        "reason": {
-          "target": "com.amazonaws.route53recoverycluster#ValidationExceptionReason"
-        },
-        "fields": {
-          "target": "com.amazonaws.route53recoverycluster#ValidationExceptionFieldList"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>There was a validation error on the request.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.route53recoverycluster#ValidationExceptionField": {
-      "type": "structure",
-      "members": {
-        "name": {
-          "target": "com.amazonaws.route53recoverycluster#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The field that had the validation exception.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "message": {
-          "target": "com.amazonaws.route53recoverycluster#String",
-          "traits": {
-            "smithy.api#documentation": "<p>Information about the validation exception.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>There was a validation error on the request.</p>"
-      }
-    },
-    "com.amazonaws.route53recoverycluster#ValidationExceptionFieldList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53recoverycluster#ValidationExceptionField"
-      },
-      "traits": {
-        "smithy.api#documentation": "The fields that caused the error, if applicable"
-      }
-    },
-    "com.amazonaws.route53recoverycluster#ValidationExceptionReason": {
-      "type": "enum",
-      "members": {
-        "UNKNOWN_OPERATION": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "unknownOperation"
-          }
-        },
-        "CANNOT_PARSE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "cannotParse"
-          }
-        },
-        "FIELD_VALIDATION_FAILED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "fieldValidationFailed"
-          }
-        },
-        "OTHER": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "other"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "Reason the request failed validation"
-      }
-    },
-    "com.amazonaws.route53recoverycluster#Route53RecoveryCluster": {
+    "com.amazonaws.route53recoverycluster#ToggleCustomerAPI": {
       "type": "service",
       "version": "2019-12-02",
       "operations": [
@@ -1419,6 +1170,255 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.route53recoverycluster#UpdateRoutingControlState": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.route53recoverycluster#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#EndpointTemporarilyUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Set the state of the routing control to reroute traffic. You can set the value to ON or\n\t\t\tOFF. When the state is ON, traffic flows to a cell. When the state is OFF, traffic does not\n\t\t\tflow.</p>\n         <p>With Route 53 ARC, you can add safety rules for routing controls, which are safeguards for routing \n\t\t\t\tcontrol state updates that help prevent unexpected outcomes, like fail open traffic routing. However, \n\t\t\t\tthere are scenarios when you might want to bypass the routing control safeguards that are enforced with \n\t\t\t\tsafety rules that you've configured. For example, you might want to fail over quickly for disaster recovery, \n\t\t\t\tand one or more safety rules might be unexpectedly preventing you from updating a routing control state to \n\t\t\t\treroute traffic. In a \"break glass\" scenario like this, you can override one or more safety rules to change \n\t\t\t\ta routing control state and fail over your application.</p>\n         <p>The <code>SafetyRulesToOverride</code> property enables you override one or more safety rules and \n\t\t\t\tupdate routing control states. For more information, see \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html\">\n\t\t\t\t\tOverride safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n         <p>\n            <i>You must specify Regional endpoints when you work with API cluster operations \n\t\t\t\tto get or update routing control states in Route 53 ARC.</i>\n         </p>\n         <p>To see a code example for getting a routing control state, including accessing Regional cluster endpoints\n\t\t\t\tin sequence, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/service_code_examples_actions.html\">API examples</a>\n\t\t\t\tin the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html\">\n\t\t\t\t\tViewing and updating routing control states</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html\">Working with routing controls overall</a>\n               </p>\n            </li>\n         </ul>"
+      }
+    },
+    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateEntries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateEntry"
+      }
+    },
+    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateEntry": {
+      "type": "structure",
+      "members": {
+        "RoutingControlArn": {
+          "target": "com.amazonaws.route53recoverycluster#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a routing control state entry.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RoutingControlState": {
+          "target": "com.amazonaws.route53recoverycluster#RoutingControlState",
+          "traits": {
+            "smithy.api#documentation": "<p>The routing control state in a set of routing control state entries.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A routing control state entry.</p>"
+      }
+    },
+    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateRequest": {
+      "type": "structure",
+      "members": {
+        "RoutingControlArn": {
+          "target": "com.amazonaws.route53recoverycluster#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the routing control that you want to update the state for.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RoutingControlState": {
+          "target": "com.amazonaws.route53recoverycluster#RoutingControlState",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of the routing control. You can set the value to ON or OFF.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SafetyRulesToOverride": {
+          "target": "com.amazonaws.route53recoverycluster#Arns",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the safety rules that you want to override when you're updating the state of\n\t\t\ta routing control. You can override one safety rule or multiple safety rules by including one or more ARNs, separated \n\t\t\tby commas.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html\">\n\t\t\tOverride safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStates": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStatesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStatesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.route53recoverycluster#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#EndpointTemporarilyUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#ServiceLimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.route53recoverycluster#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Set multiple routing control states. You can set the value for each state to be ON or OFF.\n\t\t\tWhen the state is ON, traffic flows to a cell. When it's OFF, traffic does not\n\t\t\tflow.</p>\n         <p>With Route 53 ARC, you can add safety rules for routing controls, which are safeguards for routing \n\t\t\t\tcontrol state updates that help prevent unexpected outcomes, like fail open traffic routing. However, \n\t\t\t\tthere are scenarios when you might want to bypass the routing control safeguards that are enforced with \n\t\t\t\tsafety rules that you've configured. For example, you might want to fail over quickly for disaster recovery, \n\t\t\t\tand one or more safety rules might be unexpectedly preventing you from updating a routing control state to \n\t\t\t\treroute traffic. In a \"break glass\" scenario like this, you can override one or more safety rules to change \n\t\t\t\ta routing control state and fail over your application.</p>\n         <p>The <code>SafetyRulesToOverride</code> property enables you override one or more safety rules and \n\t\t\t\tupdate routing control states. For more information, see \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html\">\n\t\t\t\t\tOverride safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n         <p>\n            <i>You must specify Regional endpoints when you work with API cluster operations \n\t\t\t\tto get or update routing control states in Route 53 ARC.</i>\n         </p>\n         <p>To see a code example for getting a routing control state, including accessing Regional cluster endpoints\n\t\t\t\tin sequence, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/service_code_examples_actions.html\">API examples</a>\n\t\t\t\tin the Amazon Route 53 Application Recovery Controller Developer Guide.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html\">\n\t\t\t\t\tViewing and updating routing control states</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html\">Working with routing controls overall</a>\n               </p>\n            </li>\n         </ul>"
+      }
+    },
+    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStatesRequest": {
+      "type": "structure",
+      "members": {
+        "UpdateRoutingControlStateEntries": {
+          "target": "com.amazonaws.route53recoverycluster#UpdateRoutingControlStateEntries",
+          "traits": {
+            "smithy.api#documentation": "<p>A set of routing control entries that you want to update.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SafetyRulesToOverride": {
+          "target": "com.amazonaws.route53recoverycluster#Arns",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) for the safety rules that you want to override when you're updating routing\n\t\t\tcontrol states. You can override one safety rule or multiple safety rules by including one or more ARNs, separated \n\t\t\tby commas.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html\">\n\t\t\tOverride safety rules to reroute traffic</a> in the Amazon Route 53 Application Recovery Controller Developer Guide.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.route53recoverycluster#UpdateRoutingControlStatesResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.route53recoverycluster#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.route53recoverycluster#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "reason": {
+          "target": "com.amazonaws.route53recoverycluster#ValidationExceptionReason"
+        },
+        "fields": {
+          "target": "com.amazonaws.route53recoverycluster#ValidationExceptionFieldList"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>There was a validation error on the request.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.route53recoverycluster#ValidationExceptionField": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.route53recoverycluster#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The field that had the validation exception.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.route53recoverycluster#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the validation exception.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>There was a validation error on the request.</p>"
+      }
+    },
+    "com.amazonaws.route53recoverycluster#ValidationExceptionFieldList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53recoverycluster#ValidationExceptionField"
+      },
+      "traits": {
+        "smithy.api#documentation": "The fields that caused the error, if applicable"
+      }
+    },
+    "com.amazonaws.route53recoverycluster#ValidationExceptionReason": {
+      "type": "enum",
+      "members": {
+        "UNKNOWN_OPERATION": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "unknownOperation"
+          }
+        },
+        "CANNOT_PARSE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "cannotParse"
+          }
+        },
+        "FIELD_VALIDATION_FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "fieldValidationFailed"
+          }
+        },
+        "OTHER": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "other"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "Reason the request failed validation"
       }
     }
   }

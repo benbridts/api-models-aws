@@ -1175,629 +1175,7 @@
         "smithy.api#output": {}
       }
     },
-    "com.amazonaws.ssmquicksetup#QuickSetupTypeList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.ssmquicksetup#QuickSetupTypeOutput"
-      }
-    },
-    "com.amazonaws.ssmquicksetup#QuickSetupTypeOutput": {
-      "type": "structure",
-      "members": {
-        "Type": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of the Quick Setup configuration.</p>"
-          }
-        },
-        "LatestVersion": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The latest version number of the configuration.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Information about the Quick Setup type.</p>"
-      }
-    },
-    "com.amazonaws.ssmquicksetup#ResourceNotFoundException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The resource couldn't be found. Check the ID or name and try again.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 404
-      }
-    },
-    "com.amazonaws.ssmquicksetup#ServiceSettings": {
-      "type": "structure",
-      "members": {
-        "ExplorerEnablingRoleArn": {
-          "target": "com.amazonaws.ssmquicksetup#IAMRoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The IAM role used to enable Explorer.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Settings configured for Quick Setup.</p>"
-      }
-    },
-    "com.amazonaws.ssmquicksetup#Status": {
-      "type": "enum",
-      "members": {
-        "INITIALIZING": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "INITIALIZING"
-          }
-        },
-        "DEPLOYING": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "DEPLOYING"
-          }
-        },
-        "SUCCEEDED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "SUCCEEDED"
-          }
-        },
-        "DELETING": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "DELETING"
-          }
-        },
-        "STOPPING": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "STOPPING"
-          }
-        },
-        "FAILED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "FAILED"
-          }
-        },
-        "STOPPED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "STOPPED"
-          }
-        },
-        "DELETE_FAILED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "DELETE_FAILED"
-          }
-        },
-        "STOP_FAILED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "STOP_FAILED"
-          }
-        },
-        "NONE": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "NONE"
-          }
-        }
-      }
-    },
-    "com.amazonaws.ssmquicksetup#StatusDetails": {
-      "type": "map",
-      "key": {
-        "target": "smithy.api#String"
-      },
-      "value": {
-        "target": "smithy.api#String"
-      }
-    },
-    "com.amazonaws.ssmquicksetup#StatusSummariesList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.ssmquicksetup#StatusSummary"
-      }
-    },
-    "com.amazonaws.ssmquicksetup#StatusSummary": {
-      "type": "structure",
-      "members": {
-        "StatusType": {
-          "target": "com.amazonaws.ssmquicksetup#StatusType",
-          "traits": {
-            "smithy.api#documentation": "<p>The type of a status summary.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Status": {
-          "target": "com.amazonaws.ssmquicksetup#Status",
-          "traits": {
-            "smithy.api#documentation": "<p>The current status.</p>"
-          }
-        },
-        "StatusMessage": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>When applicable, returns an informational message relevant to the current status\n                  and status type of the status summary object. We don't recommend implementing\n                  parsing logic around this value since the messages returned can vary in\n                  format.</p>"
-          }
-        },
-        "LastUpdatedAt": {
-          "target": "smithy.api#Timestamp",
-          "traits": {
-            "smithy.api#documentation": "<p>The datetime stamp when the status was last updated.</p>",
-            "smithy.api#required": {},
-            "smithy.api#timestampFormat": "date-time"
-          }
-        },
-        "StatusDetails": {
-          "target": "com.amazonaws.ssmquicksetup#StatusDetails",
-          "traits": {
-            "smithy.api#documentation": "<p>Details about the status.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>A summarized description of the status.</p>"
-      }
-    },
-    "com.amazonaws.ssmquicksetup#StatusType": {
-      "type": "enum",
-      "members": {
-        "DEPLOYMENT": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "Deployment"
-          }
-        },
-        "ASYNC_EXECUTIONS": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "AsyncExecutions"
-          }
-        }
-      }
-    },
-    "com.amazonaws.ssmquicksetup#TagEntry": {
-      "type": "structure",
-      "members": {
-        "Key": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The key for the tag.</p>",
-            "smithy.api#length": {
-              "min": 1,
-              "max": 128
-            },
-            "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
-          }
-        },
-        "Value": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The value for the tag.</p>",
-            "smithy.api#length": {
-              "max": 256
-            },
-            "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Key-value pairs of metadata.</p>",
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#TagKeys": {
-      "type": "list",
-      "member": {
-        "target": "smithy.api#String"
-      }
-    },
-    "com.amazonaws.ssmquicksetup#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssmquicksetup#TagResourceInput"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Assigns key-value pairs of metadata to Amazon Web Services resources.</p>",
-        "smithy.api#http": {
-          "code": 200,
-          "method": "PUT",
-          "uri": "/tags/{ResourceArn}"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#TagResourceInput": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the resource to tag.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.ssmquicksetup#TagsMap",
-          "traits": {
-            "smithy.api#documentation": "<p>Key-value pairs of metadata to assign to the resource.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#Tags": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.ssmquicksetup#TagEntry"
-      },
-      "traits": {
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#TagsMap": {
-      "type": "map",
-      "key": {
-        "target": "smithy.api#String",
-        "traits": {
-          "smithy.api#length": {
-            "min": 1,
-            "max": 128
-          },
-          "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
-        }
-      },
-      "value": {
-        "target": "smithy.api#String",
-        "traits": {
-          "smithy.api#length": {
-            "max": 256
-          },
-          "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
-        }
-      },
-      "traits": {
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#ThrottlingException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request or operation exceeds the maximum allowed request rate per Amazon Web Services account and Amazon Web Services Region.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429,
-        "smithy.api#retryable": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssmquicksetup#UntagResourceInput"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Removes tags from the specified resource.</p>",
-        "smithy.api#http": {
-          "code": 200,
-          "method": "DELETE",
-          "uri": "/tags/{ResourceArn}"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#UntagResourceInput": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the resource to remove tags from.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.ssmquicksetup#TagKeys",
-          "traits": {
-            "smithy.api#documentation": "<p>The keys of the tags to remove from the resource.</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#UpdateConfigurationDefinition": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssmquicksetup#UpdateConfigurationDefinitionInput"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates a Quick Setup configuration definition.</p>",
-        "smithy.api#http": {
-          "code": 200,
-          "method": "PUT",
-          "uri": "/configurationDefinition/{ManagerArn}/{Id}"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#UpdateConfigurationDefinitionInput": {
-      "type": "structure",
-      "members": {
-        "ManagerArn": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the configuration manager associated with the definition to\n                  update.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#pattern": "^arn:aws:ssm-quicksetup:([^:]+):(\\d{12}):configuration-manager/[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
-            "smithy.api#required": {}
-          }
-        },
-        "Id": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the configuration definition you want to update.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#pattern": "^[a-z0-9-]{1,20}$",
-            "smithy.api#required": {}
-          }
-        },
-        "TypeVersion": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The version of the Quick Setup type to use.</p>",
-            "smithy.api#pattern": "^\\d{1,3}(\\.\\d{1,3})?$|^LATEST$"
-          }
-        },
-        "Parameters": {
-          "target": "com.amazonaws.ssmquicksetup#ConfigurationParametersMap",
-          "traits": {
-            "smithy.api#documentation": "<p>The parameters for the configuration definition type.</p>"
-          }
-        },
-        "LocalDeploymentExecutionRoleName": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the IAM role used to deploy local\n                  configurations.</p>",
-            "smithy.api#pattern": "^[\\w+=,.@-]{1,64}$"
-          }
-        },
-        "LocalDeploymentAdministrationRoleArn": {
-          "target": "com.amazonaws.ssmquicksetup#IAMRoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the IAM role used to administrate local configuration\n                  deployments.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#UpdateConfigurationManager": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssmquicksetup#UpdateConfigurationManagerInput"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates a Quick Setup configuration manager.</p>",
-        "smithy.api#http": {
-          "code": 200,
-          "method": "PUT",
-          "uri": "/configurationManager/{ManagerArn}"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#UpdateConfigurationManagerInput": {
-      "type": "structure",
-      "members": {
-        "ManagerArn": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ARN of the configuration manager.</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#pattern": "^arn:aws:ssm-quicksetup:([^:]+):(\\d{12}):configuration-manager/[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
-            "smithy.api#required": {}
-          }
-        },
-        "Name": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A name for the configuration manager.</p>",
-            "smithy.api#pattern": "^[ A-Za-z0-9._-]{0,120}$"
-          }
-        },
-        "Description": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>A description of the configuration manager.</p>",
-            "smithy.api#pattern": "^.{0,512}$"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#UpdateServiceSettings": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.ssmquicksetup#UpdateServiceSettingsInput"
-      },
-      "output": {
-        "target": "smithy.api#Unit"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#InternalServerException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.ssmquicksetup#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>Updates settings configured for Quick Setup.</p>",
-        "smithy.api#http": {
-          "code": 200,
-          "method": "PUT",
-          "uri": "/serviceSettings"
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#UpdateServiceSettingsInput": {
-      "type": "structure",
-      "members": {
-        "ExplorerEnablingRoleArn": {
-          "target": "com.amazonaws.ssmquicksetup#IAMRoleArn",
-          "traits": {
-            "smithy.api#documentation": "<p>The IAM role used to enable Explorer.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.ssmquicksetup#ValidationException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request is invalid. Verify the values provided for the request parameters are\n                  accurate.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.ssmquicksetup#SSMQuickSetup": {
+    "com.amazonaws.ssmquicksetup#QuickSetup": {
       "type": "service",
       "version": "2018-05-10",
       "operations": [
@@ -2538,6 +1916,628 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.ssmquicksetup#QuickSetupTypeList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ssmquicksetup#QuickSetupTypeOutput"
+      }
+    },
+    "com.amazonaws.ssmquicksetup#QuickSetupTypeOutput": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the Quick Setup configuration.</p>"
+          }
+        },
+        "LatestVersion": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The latest version number of the configuration.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about the Quick Setup type.</p>"
+      }
+    },
+    "com.amazonaws.ssmquicksetup#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The resource couldn't be found. Check the ID or name and try again.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.ssmquicksetup#ServiceSettings": {
+      "type": "structure",
+      "members": {
+        "ExplorerEnablingRoleArn": {
+          "target": "com.amazonaws.ssmquicksetup#IAMRoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The IAM role used to enable Explorer.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Settings configured for Quick Setup.</p>"
+      }
+    },
+    "com.amazonaws.ssmquicksetup#Status": {
+      "type": "enum",
+      "members": {
+        "INITIALIZING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "INITIALIZING"
+          }
+        },
+        "DEPLOYING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DEPLOYING"
+          }
+        },
+        "SUCCEEDED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SUCCEEDED"
+          }
+        },
+        "DELETING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DELETING"
+          }
+        },
+        "STOPPING": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "STOPPING"
+          }
+        },
+        "FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "FAILED"
+          }
+        },
+        "STOPPED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "STOPPED"
+          }
+        },
+        "DELETE_FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "DELETE_FAILED"
+          }
+        },
+        "STOP_FAILED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "STOP_FAILED"
+          }
+        },
+        "NONE": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "NONE"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ssmquicksetup#StatusDetails": {
+      "type": "map",
+      "key": {
+        "target": "smithy.api#String"
+      },
+      "value": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.ssmquicksetup#StatusSummariesList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ssmquicksetup#StatusSummary"
+      }
+    },
+    "com.amazonaws.ssmquicksetup#StatusSummary": {
+      "type": "structure",
+      "members": {
+        "StatusType": {
+          "target": "com.amazonaws.ssmquicksetup#StatusType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of a status summary.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.ssmquicksetup#Status",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status.</p>"
+          }
+        },
+        "StatusMessage": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>When applicable, returns an informational message relevant to the current status\n                  and status type of the status summary object. We don't recommend implementing\n                  parsing logic around this value since the messages returned can vary in\n                  format.</p>"
+          }
+        },
+        "LastUpdatedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The datetime stamp when the status was last updated.</p>",
+            "smithy.api#required": {},
+            "smithy.api#timestampFormat": "date-time"
+          }
+        },
+        "StatusDetails": {
+          "target": "com.amazonaws.ssmquicksetup#StatusDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Details about the status.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A summarized description of the status.</p>"
+      }
+    },
+    "com.amazonaws.ssmquicksetup#StatusType": {
+      "type": "enum",
+      "members": {
+        "DEPLOYMENT": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "Deployment"
+          }
+        },
+        "ASYNC_EXECUTIONS": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "AsyncExecutions"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ssmquicksetup#TagEntry": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The key for the tag.</p>",
+            "smithy.api#length": {
+              "min": 1,
+              "max": 128
+            },
+            "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
+          }
+        },
+        "Value": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The value for the tag.</p>",
+            "smithy.api#length": {
+              "max": 256
+            },
+            "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Key-value pairs of metadata.</p>",
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#TagKeys": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.ssmquicksetup#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssmquicksetup#TagResourceInput"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Assigns key-value pairs of metadata to Amazon Web Services resources.</p>",
+        "smithy.api#http": {
+          "code": 200,
+          "method": "PUT",
+          "uri": "/tags/{ResourceArn}"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#TagResourceInput": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource to tag.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.ssmquicksetup#TagsMap",
+          "traits": {
+            "smithy.api#documentation": "<p>Key-value pairs of metadata to assign to the resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#Tags": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ssmquicksetup#TagEntry"
+      },
+      "traits": {
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#TagsMap": {
+      "type": "map",
+      "key": {
+        "target": "smithy.api#String",
+        "traits": {
+          "smithy.api#length": {
+            "min": 1,
+            "max": 128
+          },
+          "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
+        }
+      },
+      "value": {
+        "target": "smithy.api#String",
+        "traits": {
+          "smithy.api#length": {
+            "max": 256
+          },
+          "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]+$"
+        }
+      },
+      "traits": {
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request or operation exceeds the maximum allowed request rate per Amazon Web Services account and Amazon Web Services Region.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429,
+        "smithy.api#retryable": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssmquicksetup#UntagResourceInput"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes tags from the specified resource.</p>",
+        "smithy.api#http": {
+          "code": 200,
+          "method": "DELETE",
+          "uri": "/tags/{ResourceArn}"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#UntagResourceInput": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource to remove tags from.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.ssmquicksetup#TagKeys",
+          "traits": {
+            "smithy.api#documentation": "<p>The keys of the tags to remove from the resource.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#UpdateConfigurationDefinition": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssmquicksetup#UpdateConfigurationDefinitionInput"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a Quick Setup configuration definition.</p>",
+        "smithy.api#http": {
+          "code": 200,
+          "method": "PUT",
+          "uri": "/configurationDefinition/{ManagerArn}/{Id}"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#UpdateConfigurationDefinitionInput": {
+      "type": "structure",
+      "members": {
+        "ManagerArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the configuration manager associated with the definition to\n                  update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#pattern": "^arn:aws:ssm-quicksetup:([^:]+):(\\d{12}):configuration-manager/[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+            "smithy.api#required": {}
+          }
+        },
+        "Id": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the configuration definition you want to update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#pattern": "^[a-z0-9-]{1,20}$",
+            "smithy.api#required": {}
+          }
+        },
+        "TypeVersion": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the Quick Setup type to use.</p>",
+            "smithy.api#pattern": "^\\d{1,3}(\\.\\d{1,3})?$|^LATEST$"
+          }
+        },
+        "Parameters": {
+          "target": "com.amazonaws.ssmquicksetup#ConfigurationParametersMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The parameters for the configuration definition type.</p>"
+          }
+        },
+        "LocalDeploymentExecutionRoleName": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the IAM role used to deploy local\n                  configurations.</p>",
+            "smithy.api#pattern": "^[\\w+=,.@-]{1,64}$"
+          }
+        },
+        "LocalDeploymentAdministrationRoleArn": {
+          "target": "com.amazonaws.ssmquicksetup#IAMRoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the IAM role used to administrate local configuration\n                  deployments.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#UpdateConfigurationManager": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssmquicksetup#UpdateConfigurationManagerInput"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a Quick Setup configuration manager.</p>",
+        "smithy.api#http": {
+          "code": 200,
+          "method": "PUT",
+          "uri": "/configurationManager/{ManagerArn}"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#UpdateConfigurationManagerInput": {
+      "type": "structure",
+      "members": {
+        "ManagerArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the configuration manager.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#pattern": "^arn:aws:ssm-quicksetup:([^:]+):(\\d{12}):configuration-manager/[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A name for the configuration manager.</p>",
+            "smithy.api#pattern": "^[ A-Za-z0-9._-]{0,120}$"
+          }
+        },
+        "Description": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the configuration manager.</p>",
+            "smithy.api#pattern": "^.{0,512}$"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#UpdateServiceSettings": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ssmquicksetup#UpdateServiceSettingsInput"
+      },
+      "output": {
+        "target": "smithy.api#Unit"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ssmquicksetup#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ssmquicksetup#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates settings configured for Quick Setup.</p>",
+        "smithy.api#http": {
+          "code": 200,
+          "method": "PUT",
+          "uri": "/serviceSettings"
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#UpdateServiceSettingsInput": {
+      "type": "structure",
+      "members": {
+        "ExplorerEnablingRoleArn": {
+          "target": "com.amazonaws.ssmquicksetup#IAMRoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The IAM role used to enable Explorer.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.ssmquicksetup#ValidationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request is invalid. Verify the values provided for the request parameters are\n                  accurate.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
       }
     }
   }

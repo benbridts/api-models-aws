@@ -195,165 +195,7 @@
         "smithy.api#sensitive": {}
       }
     },
-    "com.amazonaws.eksauth#ExpiredTokenException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The specified Kubernetes service account token is expired.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.eksauth#InternalServerException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>These errors are usually caused by a server-side issue.</p>",
-        "smithy.api#error": "server",
-        "smithy.api#httpError": 500
-      }
-    },
-    "com.amazonaws.eksauth#InvalidParameterException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The specified parameter is invalid. Review the available parameters for the API\n            request.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.eksauth#InvalidRequestException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>This exception is thrown if the request contains a semantic error. The precise meaning\n            will depend on the API, and will be documented in the error message.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.eksauth#InvalidTokenException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The specified Kubernetes service account token is invalid.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 400
-      }
-    },
-    "com.amazonaws.eksauth#JwtToken": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1
-        },
-        "smithy.api#pattern": "^[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+$",
-        "smithy.api#sensitive": {}
-      }
-    },
-    "com.amazonaws.eksauth#PodIdentityAssociation": {
-      "type": "structure",
-      "members": {
-        "associationArn": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the EKS Pod Identity association.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "associationId": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The ID of the association.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>Amazon EKS Pod Identity associations provide the ability to manage credentials for your applications, similar to the way that Amazon EC2 instance profiles provide credentials to Amazon EC2 instances.</p>"
-      }
-    },
-    "com.amazonaws.eksauth#ResourceNotFoundException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The specified resource could not be found.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 404
-      }
-    },
-    "com.amazonaws.eksauth#ServiceUnavailableException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The service is unavailable. Back off and retry the operation.</p>",
-        "smithy.api#error": "server",
-        "smithy.api#httpError": 503
-      }
-    },
-    "com.amazonaws.eksauth#Subject": {
-      "type": "structure",
-      "members": {
-        "namespace": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Kubernetes namespace inside the cluster to create the association in. The\n            service account and the pods that use the service account must be in this\n            namespace.</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "serviceAccount": {
-          "target": "smithy.api#String",
-          "traits": {
-            "smithy.api#documentation": "<p>The name of the Kubernetes service account inside the cluster to associate the IAM\n            credentials with.</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>An object containing the name of the Kubernetes service account inside the cluster to\n            associate the IAM credentials with.</p>"
-      }
-    },
-    "com.amazonaws.eksauth#ThrottlingException": {
-      "type": "structure",
-      "members": {
-        "message": {
-          "target": "smithy.api#String"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>The request was denied because your request rate is too high. Reduce the frequency of requests.</p>",
-        "smithy.api#error": "client",
-        "smithy.api#httpError": 429
-      }
-    },
-    "com.amazonaws.eksauth#EKSAuth": {
+    "com.amazonaws.eksauth#EKSAuthFrontend": {
       "type": "service",
       "version": "2023-11-26",
       "operations": [
@@ -740,6 +582,164 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.eksauth#ExpiredTokenException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified Kubernetes service account token is expired.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.eksauth#InternalServerException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>These errors are usually caused by a server-side issue.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.eksauth#InvalidParameterException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified parameter is invalid. Review the available parameters for the API\n            request.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.eksauth#InvalidRequestException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>This exception is thrown if the request contains a semantic error. The precise meaning\n            will depend on the API, and will be documented in the error message.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.eksauth#InvalidTokenException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified Kubernetes service account token is invalid.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.eksauth#JwtToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1
+        },
+        "smithy.api#pattern": "^[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+$",
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.eksauth#PodIdentityAssociation": {
+      "type": "structure",
+      "members": {
+        "associationArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the EKS Pod Identity association.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "associationId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the association.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Amazon EKS Pod Identity associations provide the ability to manage credentials for your applications, similar to the way that Amazon EC2 instance profiles provide credentials to Amazon EC2 instances.</p>"
+      }
+    },
+    "com.amazonaws.eksauth#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified resource could not be found.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.eksauth#ServiceUnavailableException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The service is unavailable. Back off and retry the operation.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 503
+      }
+    },
+    "com.amazonaws.eksauth#Subject": {
+      "type": "structure",
+      "members": {
+        "namespace": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Kubernetes namespace inside the cluster to create the association in. The\n            service account and the pods that use the service account must be in this\n            namespace.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "serviceAccount": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Kubernetes service account inside the cluster to associate the IAM\n            credentials with.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object containing the name of the Kubernetes service account inside the cluster to\n            associate the IAM credentials with.</p>"
+      }
+    },
+    "com.amazonaws.eksauth#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request was denied because your request rate is too high. Reduce the frequency of requests.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
       }
     }
   }

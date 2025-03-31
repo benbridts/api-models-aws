@@ -1509,348 +1509,6 @@
     "com.amazonaws.route53profiles#Rfc3339Timestamp": {
       "type": "timestamp"
     },
-    "com.amazonaws.route53profiles#ShareStatus": {
-      "type": "enum",
-      "members": {
-        "NOT_SHARED": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "NOT_SHARED"
-          }
-        },
-        "SHARED_WITH_ME": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "SHARED_WITH_ME"
-          }
-        },
-        "SHARED_BY_ME": {
-          "target": "smithy.api#Unit",
-          "traits": {
-            "smithy.api#enumValue": "SHARED_BY_ME"
-          }
-        }
-      }
-    },
-    "com.amazonaws.route53profiles#String": {
-      "type": "string"
-    },
-    "com.amazonaws.route53profiles#Tag": {
-      "type": "structure",
-      "members": {
-        "Key": {
-          "target": "com.amazonaws.route53profiles#TagKey",
-          "traits": {
-            "smithy.api#documentation": "<p>\n  Key associated with the <code>Tag</code>.\n</p>",
-            "smithy.api#required": {}
-          }
-        },
-        "Value": {
-          "target": "com.amazonaws.route53profiles#TagValue",
-          "traits": {
-            "smithy.api#documentation": "<p>\nValue for the Tag.\n</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>\nTag for the Profile.\n</p>"
-      }
-    },
-    "com.amazonaws.route53profiles#TagKey": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 1,
-          "max": 128
-        }
-      }
-    },
-    "com.amazonaws.route53profiles#TagKeyList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53profiles#TagKey"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.route53profiles#TagList": {
-      "type": "list",
-      "member": {
-        "target": "com.amazonaws.route53profiles#Tag"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.route53profiles#TagMap": {
-      "type": "map",
-      "key": {
-        "target": "com.amazonaws.route53profiles#TagKey"
-      },
-      "value": {
-        "target": "com.amazonaws.route53profiles#TagValue"
-      },
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 200
-        }
-      }
-    },
-    "com.amazonaws.route53profiles#TagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.route53profiles#TagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.route53profiles#TagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.route53profiles#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>\n  Adds one or more tags to a specified resource.\n</p>",
-        "smithy.api#http": {
-          "uri": "/tags/{ResourceArn}",
-          "method": "POST",
-          "code": 204
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.route53profiles#TagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.route53profiles#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>\n  The Amazon Resource Name (ARN) for the resource that you want to add tags to. \n</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "Tags": {
-          "target": "com.amazonaws.route53profiles#TagMap",
-          "traits": {
-            "smithy.api#documentation": "<p>\n  The tags that you want to add to the specified resource.\n</p>",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.route53profiles#TagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.route53profiles#TagValue": {
-      "type": "string",
-      "traits": {
-        "smithy.api#length": {
-          "min": 0,
-          "max": 256
-        }
-      }
-    },
-    "com.amazonaws.route53profiles#ThrottlingException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.route53profiles#ExceptionMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>\n  The request was throttled. Try again in a few minutes.\n</p>",
-        "smithy.api#error": "client"
-      }
-    },
-    "com.amazonaws.route53profiles#UntagResource": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.route53profiles#UntagResourceRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.route53profiles#UntagResourceResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.route53profiles#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>\n  Removes one or more tags from a specified resource.\n</p>",
-        "smithy.api#http": {
-          "uri": "/tags/{ResourceArn}",
-          "method": "DELETE",
-          "code": 204
-        },
-        "smithy.api#idempotent": {}
-      }
-    },
-    "com.amazonaws.route53profiles#UntagResourceRequest": {
-      "type": "structure",
-      "members": {
-        "ResourceArn": {
-          "target": "com.amazonaws.route53profiles#Arn",
-          "traits": {
-            "smithy.api#documentation": "<p>\n  The Amazon Resource Name (ARN) for the resource that you want to remove tags from.\n</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "TagKeys": {
-          "target": "com.amazonaws.route53profiles#TagKeyList",
-          "traits": {
-            "smithy.api#documentation": "<p>\n  The tags that you want to remove to the specified resource.\n</p>",
-            "smithy.api#httpQuery": "tagKeys",
-            "smithy.api#required": {}
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.route53profiles#UntagResourceResponse": {
-      "type": "structure",
-      "members": {},
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.route53profiles#UpdateProfileResourceAssociation": {
-      "type": "operation",
-      "input": {
-        "target": "com.amazonaws.route53profiles#UpdateProfileResourceAssociationRequest"
-      },
-      "output": {
-        "target": "com.amazonaws.route53profiles#UpdateProfileResourceAssociationResponse"
-      },
-      "errors": [
-        {
-          "target": "com.amazonaws.route53profiles#AccessDeniedException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#ConflictException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#InternalServiceErrorException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#InvalidParameterException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#LimitExceededException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#ResourceNotFoundException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#ThrottlingException"
-        },
-        {
-          "target": "com.amazonaws.route53profiles#ValidationException"
-        }
-      ],
-      "traits": {
-        "smithy.api#documentation": "<p>\nUpdates the specified Route 53 Profile resourse association.\n</p>",
-        "smithy.api#http": {
-          "method": "PATCH",
-          "uri": "/profileresourceassociation/{ProfileResourceAssociationId}",
-          "code": 200
-        }
-      }
-    },
-    "com.amazonaws.route53profiles#UpdateProfileResourceAssociationRequest": {
-      "type": "structure",
-      "members": {
-        "ProfileResourceAssociationId": {
-          "target": "com.amazonaws.route53profiles#ResourceId",
-          "traits": {
-            "smithy.api#documentation": "<p>\nID of the resource association.\n</p>",
-            "smithy.api#httpLabel": {},
-            "smithy.api#required": {}
-          }
-        },
-        "Name": {
-          "target": "com.amazonaws.route53profiles#Name",
-          "traits": {
-            "smithy.api#documentation": "<p>\nName of the resource association.\n</p>"
-          }
-        },
-        "ResourceProperties": {
-          "target": "com.amazonaws.route53profiles#ResourceProperties",
-          "traits": {
-            "smithy.api#documentation": "<p>\n  If you are adding a DNS Firewall rule group, include also a priority. The priority indicates the processing order for the rule groups, starting with the priority assinged the lowest value.\n  </p>\n         <p>The allowed values for priority are between 100 and 9900.</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#input": {}
-      }
-    },
-    "com.amazonaws.route53profiles#UpdateProfileResourceAssociationResponse": {
-      "type": "structure",
-      "members": {
-        "ProfileResourceAssociation": {
-          "target": "com.amazonaws.route53profiles#ProfileResourceAssociation",
-          "traits": {
-            "smithy.api#documentation": "<p>\n  Information about the <code>UpdateProfileResourceAssociation</code> request, including a status message.\n</p>"
-          }
-        }
-      },
-      "traits": {
-        "smithy.api#output": {}
-      }
-    },
-    "com.amazonaws.route53profiles#ValidationException": {
-      "type": "structure",
-      "members": {
-        "Message": {
-          "target": "com.amazonaws.route53profiles#ExceptionMessage"
-        }
-      },
-      "traits": {
-        "smithy.api#documentation": "<p>\n  You have provided an invalid command.\n</p>",
-        "smithy.api#error": "client"
-      }
-    },
     "com.amazonaws.route53profiles#Route53Profiles": {
       "type": "service",
       "version": "2018-05-10",
@@ -2604,6 +2262,348 @@
           ],
           "version": "1.0"
         }
+      }
+    },
+    "com.amazonaws.route53profiles#ShareStatus": {
+      "type": "enum",
+      "members": {
+        "NOT_SHARED": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "NOT_SHARED"
+          }
+        },
+        "SHARED_WITH_ME": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SHARED_WITH_ME"
+          }
+        },
+        "SHARED_BY_ME": {
+          "target": "smithy.api#Unit",
+          "traits": {
+            "smithy.api#enumValue": "SHARED_BY_ME"
+          }
+        }
+      }
+    },
+    "com.amazonaws.route53profiles#String": {
+      "type": "string"
+    },
+    "com.amazonaws.route53profiles#Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "target": "com.amazonaws.route53profiles#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>\n  Key associated with the <code>Tag</code>.\n</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.route53profiles#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>\nValue for the Tag.\n</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\nTag for the Profile.\n</p>"
+      }
+    },
+    "com.amazonaws.route53profiles#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        }
+      }
+    },
+    "com.amazonaws.route53profiles#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53profiles#TagKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.route53profiles#TagList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.route53profiles#Tag"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.route53profiles#TagMap": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.route53profiles#TagKey"
+      },
+      "value": {
+        "target": "com.amazonaws.route53profiles#TagValue"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.route53profiles#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.route53profiles#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.route53profiles#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.route53profiles#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n  Adds one or more tags to a specified resource.\n</p>",
+        "smithy.api#http": {
+          "uri": "/tags/{ResourceArn}",
+          "method": "POST",
+          "code": 204
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.route53profiles#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.route53profiles#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>\n  The Amazon Resource Name (ARN) for the resource that you want to add tags to. \n</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.route53profiles#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>\n  The tags that you want to add to the specified resource.\n</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.route53profiles#TagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.route53profiles#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.route53profiles#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.route53profiles#ExceptionMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n  The request was throttled. Try again in a few minutes.\n</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.route53profiles#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.route53profiles#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.route53profiles#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.route53profiles#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n  Removes one or more tags from a specified resource.\n</p>",
+        "smithy.api#http": {
+          "uri": "/tags/{ResourceArn}",
+          "method": "DELETE",
+          "code": 204
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.route53profiles#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.route53profiles#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>\n  The Amazon Resource Name (ARN) for the resource that you want to remove tags from.\n</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.route53profiles#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>\n  The tags that you want to remove to the specified resource.\n</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.route53profiles#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.route53profiles#UpdateProfileResourceAssociation": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.route53profiles#UpdateProfileResourceAssociationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.route53profiles#UpdateProfileResourceAssociationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.route53profiles#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#InternalServiceErrorException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.route53profiles#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\nUpdates the specified Route 53 Profile resourse association.\n</p>",
+        "smithy.api#http": {
+          "method": "PATCH",
+          "uri": "/profileresourceassociation/{ProfileResourceAssociationId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.route53profiles#UpdateProfileResourceAssociationRequest": {
+      "type": "structure",
+      "members": {
+        "ProfileResourceAssociationId": {
+          "target": "com.amazonaws.route53profiles#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>\nID of the resource association.\n</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.route53profiles#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>\nName of the resource association.\n</p>"
+          }
+        },
+        "ResourceProperties": {
+          "target": "com.amazonaws.route53profiles#ResourceProperties",
+          "traits": {
+            "smithy.api#documentation": "<p>\n  If you are adding a DNS Firewall rule group, include also a priority. The priority indicates the processing order for the rule groups, starting with the priority assinged the lowest value.\n  </p>\n         <p>The allowed values for priority are between 100 and 9900.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#input": {}
+      }
+    },
+    "com.amazonaws.route53profiles#UpdateProfileResourceAssociationResponse": {
+      "type": "structure",
+      "members": {
+        "ProfileResourceAssociation": {
+          "target": "com.amazonaws.route53profiles#ProfileResourceAssociation",
+          "traits": {
+            "smithy.api#documentation": "<p>\n  Information about the <code>UpdateProfileResourceAssociation</code> request, including a status message.\n</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#output": {}
+      }
+    },
+    "com.amazonaws.route53profiles#ValidationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.route53profiles#ExceptionMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n  You have provided an invalid command.\n</p>",
+        "smithy.api#error": "client"
       }
     }
   }
