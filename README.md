@@ -1,17 +1,10 @@
-## My Project
+# ❗ <ins>DISCLAIMER</ins> ❗
 
-TODO: Fill this README out!
+This repository is NOT updated daily, and therefore SHOULD NOT be treated as the definitive source of truth for AWS APIs. 
 
-Be sure to:
+Use at your own risk.
 
-* Change the title in this README
-* Edit your repository description on GitHub
 
-## Security
+# AWS API Models
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
-
-## License
-
-This project is licensed under the Apache-2.0 License.
-
+This repository contains Smithy models (in the JSON AST form) for all public AWS API services.
