@@ -20,7 +20,7 @@ client SDKs from API models. At AWS, we use Smithy extensively to model our serv
 of the AWS SDKs and CLIs.
 
 AWS API models can be helpful for a variety of uses cases such as building custom SDKs/CLIs SDKs for use with AWS or
-generating MCP server implementations for interacting with LLMs and AWS services. 
+implementing MCP servers to interact with AWS services.
 
 
 ## Directory Structure
@@ -30,9 +30,7 @@ The AWS models repository contains:
 * One top-level directory per service
     * Top-level service directories are named using the `<sdk-id>` of the service, where `<sdk-id>` is the value of the
     model's [`sdkId`](https://smithy.io/2.0/aws/aws-core.html#sdkid), lowercased and with spaces converted to hyphens
-* Each service directory contains one directory per major-version of the service
-    * Major-version directory names are determined using the
-    [version property](https://smithy.io/2.0/spec/service-types.html#service) of the service shape
+* Each service directory contains one directory per `<version>` of the service, where `<version>` is the value of the service shape's [version property](https://smithy.io/2.0/spec/service-types.html#service)
 * Contained within a service-version directory, a model file named `<sdk-id>-<version>.json` will be present
 
 
@@ -43,5 +41,5 @@ We invite you to learn more about the AWS preferred API modeling language at [sm
 
 ## License
 
- This project is licensed under the [Apache-2.0 License](LICENSE). 
+This project is licensed under the [Apache-2.0 License](LICENSE). 
 
